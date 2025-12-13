@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class ProductVariant extends Model
+{
+  use HasFactory;
+
+  protected $table = 'product_variants';
+  protected $primaryKey = 'id_variant';
+
+  protected $fillable = [
+    'id_product',
+    'sku',
+    'harga',
+    'stok',
+  ];
+
+  protected function casts(): array
+  {
+    return [
+      'harga' => 'decimal:2',
+    ];
+  }
+
+  public function product()
+  {
+    return $this->belongsTo(Product::class, 'id_product', 'id_product');
+  }
+
+  public function specs()
+  {
+    return $this->hasMany(ProductVariantSpec::class, 'id_variant', 'id_variant');
+  }
+}

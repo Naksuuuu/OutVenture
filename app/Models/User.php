@@ -17,12 +17,17 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    protected $table = 'users';
+    protected $primaryKey = 'id_user';
+
     protected $fillable = [
         'nama_lengkap',
-        'no_tlp',
+        'no_telepon',
         'alamat',
         'email',
         'password',
+        'role',
     ];
 
     /**
@@ -46,5 +51,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'id_user', 'id_user');
     }
 }
