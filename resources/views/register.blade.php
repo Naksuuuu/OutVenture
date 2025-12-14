@@ -28,8 +28,8 @@
         </div>
 
         <div>
-            <label for="notelp">No Telp:</label>
-            <input type="tel" id="notelp" name="no_tlp" required>
+            <label for="no_telepon">No Telp:</label>
+            <input type="tel" id="no_telepon" name="no_telepon" required>
         </div>
 
         <div>
