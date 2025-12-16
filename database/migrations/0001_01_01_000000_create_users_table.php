@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('alamat');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('role')->default('user');
+            $table->enum('role', ['user', 'admin'])->default('user');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -50,4 +50,3 @@ return new class extends Migration
         Schema::dropIfExists('sessions');
     }
 };
-

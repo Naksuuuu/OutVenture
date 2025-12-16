@@ -26,7 +26,7 @@
             </div>
         @endif
 
-        <form action="{{ route('login') }}" method="POST">
+        <form action="{{ route('auth.login') }}" method="POST">
             @csrf
             <div>
                 <label for="email">Email:</label>
@@ -41,7 +41,7 @@
             <button type="submit">Login</button>
         </form>
 
-        <p>Belum punya akun? <a href="{{ route('register') }}">Daftar di sini</a></p>
+        <p>Belum punya akun? <a href="{{ route('auth.show.register') }}">Daftar di sini</a></p>
     </div>
 </body>
 
