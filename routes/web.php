@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-});
+})->middleware('auth')->name('dashboard');
 
 
 // Route untuk register - middleware guest (hanya untuk yang belum login)

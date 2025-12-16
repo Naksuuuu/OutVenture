@@ -10,6 +10,7 @@
 <body>
     <div class="container">
         <h1>Selamat Datang, {{ Auth::user()->nama_lengkap }}!</h1>
+        {{-- {{ dd(Auth::check(), Auth::user()) }} --}}
 
         <hr>
 
