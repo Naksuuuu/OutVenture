@@ -11,7 +11,7 @@ class RegisterController extends Controller
 {
     public function showRegistrationForm()
     {
-        return view('register');
+        return view('auth.register');
     }
 
     public function register(Request $request)
@@ -35,6 +35,6 @@ class RegisterController extends Controller
         ]);
 
         // Redirect ke halaman login setelah registrasi sukses
-        return redirect('/login')->with('success', 'Registrasi berhasil! Silakan login.');
+        return redirect()->route('auth.show.login')->with('success', 'Registrasi berhasil! Silakan login.');
     }
 }

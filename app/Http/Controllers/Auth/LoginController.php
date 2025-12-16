@@ -12,7 +12,7 @@ class LoginController extends Controller
 {
     public function showLoginForm()
     {
-        return view('login');
+        return view('auth.login');
     }
 
     public function login(Request $request)
@@ -28,14 +28,17 @@ class LoginController extends Controller
             // Perbarui session ID (keamanan)
             $request->session()->regenerate();
 
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.dashboard');
+            }
             // Arahkan ke dashboard
-            return redirect()->route('dashboard');
+            return redirect()->route('home');
         }
 
         // Login Gagal
         return back()->withErrors([
             'email' => 'Email atau password salah.',
-            
+
         ]);
     }
 
@@ -44,6 +47,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect()->route('auth.show.login');
     }
 }
