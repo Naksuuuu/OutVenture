@@ -10,7 +10,7 @@ class ProductVariant extends Model
   use HasFactory;
 
   protected $table = 'product_variants';
-  protected $primaryKey = 'id_variant';
+  protected $primaryKey = 'id';
 
   protected $fillable = [
     'id_product',
@@ -28,11 +28,11 @@ class ProductVariant extends Model
 
   public function product()
   {
-    return $this->belongsTo(Product::class, 'id_product', 'id_product');
+    return $this->belongsTo(Product::class, 'id_product', 'id');
   }
 
   public function specs()
   {
-    return $this->hasMany(ProductVariantSpec::class, 'id_variant', 'id_variant');
+    return $this->hasMany(ProductVariantSpec::class, 'id_variant', 'id');
   }
 }

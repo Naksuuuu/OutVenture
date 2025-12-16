@@ -10,7 +10,7 @@ class OrderItem extends Model
   use HasFactory;
 
   protected $table = 'order_items';
-  protected $primaryKey = 'id_order_item';
+  protected $primaryKey = 'id';
 
   protected $fillable = [
     'id_order',
@@ -31,11 +31,11 @@ class OrderItem extends Model
 
   public function order()
   {
-    return $this->belongsTo(Order::class, 'id_order', 'id_order');
+    return $this->belongsTo(Order::class, 'id_order', 'id');
   }
 
   public function variant()
   {
-    return $this->belongsTo(ProductVariant::class, 'id_variant', 'id_variant');
+    return $this->belongsTo(ProductVariant::class, 'id_variant', 'id');
   }
 }

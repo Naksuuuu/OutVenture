@@ -10,7 +10,7 @@ class Attribute extends Model
   use HasFactory;
 
   protected $table = 'attributes';
-  protected $primaryKey = 'id_attribute';
+  protected $primaryKey = 'id';
 
   protected $fillable = [
     'nama_attribute',
@@ -18,6 +18,6 @@ class Attribute extends Model
 
   public function specs()
   {
-    return $this->hasMany(ProductVariantSpec::class, 'id_attribute', 'id_attribute');
+    return $this->hasMany(ProductVariantSpec::class, 'id_attribute', 'id');
   }
 }

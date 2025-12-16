@@ -10,7 +10,7 @@ class Order extends Model
   use HasFactory;
 
   protected $table = 'orders';
-  protected $primaryKey = 'id_order';
+  protected $primaryKey = 'id';
 
   protected $fillable = [
     'id_user',
@@ -30,11 +30,11 @@ class Order extends Model
 
   public function user()
   {
-    return $this->belongsTo(User::class, 'id_user', 'id_user');
+    return $this->belongsTo(User::class, 'id_user', 'id');
   }
 
   public function items()
   {
-    return $this->hasMany(OrderItem::class, 'id_order', 'id_order');
+    return $this->hasMany(OrderItem::class, 'id_order', 'id');
   }
 }
