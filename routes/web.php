@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -26,4 +27,8 @@ Route::name('auth.')->group(function () {
             Route::post('/register', 'register')->name('register');
         });
     });
+});
+
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('dashboard', [Dashboard::class, 'index'])->name('dashboard');
 });
