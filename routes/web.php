@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -34,3 +35,8 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', [Dashboard::class, 'index'])->name('dashboard');
     Route::resource('products', ProductsController::class);
 });
+
+// Google OAuth Routes
+Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.login');
+Route::get('auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
+Route::get('auth/google/logout', [GoogleController::class, 'logout'])->name('google.logout');
