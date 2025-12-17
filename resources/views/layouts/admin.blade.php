@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Aplikasi Laravel')</title>
-    @vite('resources/css/app.css')
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        /* Tetap pertahankan transisi CSS */
+        .transition-width { transition: width 0.3s ease; }
+        .transition-margin { transition: margin-left 0.3s ease; }
+    </style>
+    @livewireStyles 
 </head>
+<body class="bg-gray-100">
 
-<body>
+    <livewire:sidebar/>
 
-    @include('components.admin.sidebar')
-    @include('components.admin.navbar')
-    <main class="w-full min-h-screen flex justify-center items-center p-4">
-        @yield('content')
-    </main>
+    <div 
+        @class([
+            'transition-margin',
+            // Gunakan Livewire state untuk menentukan margin
+            'ml-20' => session('sidebar_collapsed', false), // Jika collapsed
+            'ml-64' => !session('sidebar_collapsed', false), // Jika normal
+        ])
+    >
+        @include('components.admin.navbar')
+        
+        <main class="min-h-screen">
+            @yield('content')
+        </main>
+    </div>
 
-
+    @livewireScripts
 </body>
-
 </html>
