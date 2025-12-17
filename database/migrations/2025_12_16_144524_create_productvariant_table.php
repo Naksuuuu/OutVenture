@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('productvariant', function (Blueprint $table) {
+        Schema::create('ProductVariant', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_product')->constrained('product')->onDelete('cascade');
+            $table->foreignId('id_product')->constrained('Product')->onDelete('cascade');
             $table->string('sku');
             $table->decimal('harga', 10, 2);
             $table->integer('stok');

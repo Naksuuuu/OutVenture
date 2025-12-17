@@ -9,7 +9,7 @@ class Product extends Model
 {
   use HasFactory;
 
-  protected $table = 'products';
+  protected $table = 'Product';
   protected $primaryKey = 'id';
 
   protected $fillable = [
@@ -17,6 +17,7 @@ class Product extends Model
     'nama_product',
     'brand',
     'deskripsi',
+
   ];
 
   public function category()

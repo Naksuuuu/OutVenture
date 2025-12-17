@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order', function (Blueprint $table) {
+        Schema::create('Order', function (Blueprint $table) {
             $table->id();
             $table->dateTime('tgl_order');
+            $table->foreignId('id_user')->constrained('User')->onDelete('cascade');
             $table->decimal('total_harga', 10, 2);
             $table->integer('status_pembayaran');
             $table->timestamps();

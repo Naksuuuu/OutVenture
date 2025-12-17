@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('productvariantspec', function (Blueprint $table) {
+        Schema::create('ProductVariantSpec', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_variant')->constrained('productvariant')->onDelete('cascade');
-            $table->foreignId('id_attribute')->constrained('attributes')->onDelete('cascade');
+            $table->foreignId('id_variant')->constrained('ProductVariant')->onDelete('cascade');
+            $table->foreignId('id_attribute')->constrained('Attribute')->onDelete('cascade');
             $table->string('value');
             $table->timestamps();
         });

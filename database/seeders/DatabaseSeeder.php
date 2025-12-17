@@ -16,6 +16,17 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+        $this->call([
+            AttributeSeeder::class,
+            CategorySeeder::class,
+            ProductSeeder::class,
+            ProductVariantSeeder::class,
+            ProductVariantSpecSeeder::class,
+            UserSeeder::class,
+            OrderSeeder::class,
+            OrderItemSeeder::class,
+
+        ]);
 
         User::create([
             'nama_lengkap' => 'nama User',

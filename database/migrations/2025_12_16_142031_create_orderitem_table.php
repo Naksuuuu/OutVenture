@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('orderitem', function (Blueprint $table) {
+        Schema::create('OrderItem', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_order')->constrained('orders')->onDelete('cascade');
-            $table->foreignId('id_variant')->constrained('product_variants')->onDelete('cascade');
+            $table->foreignId('id_order')->constrained('Order')->onDelete('cascade');
+            $table->foreignId('id_variant')->constrained('ProductVariant')->onDelete('cascade');
             $table->dateTime('tgl_order');
             $table->decimal('harga', 10, 2);
             $table->integer('quantity');
