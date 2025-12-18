@@ -1,33 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        /* Tetap pertahankan transisi CSS */
-        .transition-width { transition: width 0.3s ease; }
-        .transition-margin { transition: margin-left 0.3s ease; }
-    </style>
-    @livewireStyles 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@yield('title', 'Aplikasi Laravel')</title>
+    @vite('resources/css/app.css')
+    @livewireStyles
 </head>
+
 <body class="bg-gray-100">
 
-    <livewire:sidebar/>
+    <livewire:admin.sidebar />
 
-    <div 
-        @class([
-            'transition-margin',
-            // Gunakan Livewire state untuk menentukan margin
-            'ml-20' => session('sidebar_collapsed', false), // Jika collapsed
-            'ml-64' => !session('sidebar_collapsed', false), // Jika normal
-        ])
-    >
+    <div x-data="{ isCollapsed: @json(session('sidebar_collapsed', false)) }" @sidebar-toggled.window="isCollapsed = $event.detail.isCollapsed"
+        :class="isCollapsed ? 'ml-20' : 'ml-64'" class="transition-margin duration-300">
         @include('components.admin.navbar')
-        
-        <main class="min-h-screen">
+
+        <main class="min-h-screen w-full">
             @yield('content')
         </main>
     </div>
 
     @livewireScripts
 </body>
+
 </html>
