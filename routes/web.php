@@ -11,7 +11,9 @@ Route::get('/', function () {
     return view('public.home');
 })->name('home');
 
-
+Route::get('products', function () {
+    return view('public.products.index');
+});
 
 Route::name('auth.')->group(function () {
     Route::controller(LoginController::class)->group(function () {
