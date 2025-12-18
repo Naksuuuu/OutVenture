@@ -31,8 +31,8 @@ Route::name('auth.')->group(function () {
     });
 });
 
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
-    Route::get('dashboard', [Dashboard::class, 'index'])->name('dashboard');
+Route::middleware('auth')->prefix('dashboard')->name('admin.')->group(function () {
+    Route::get('/', [Dashboard::class, 'index'])->name('dashboard');
     Route::resource('products', ProductsController::class);
 });
 

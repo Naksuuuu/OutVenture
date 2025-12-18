@@ -11,7 +11,7 @@
 <body>
 
     @include('components.public.navbar')
-    <main class="w-full min-h-screen flex justify-center items-center p-4">
+    <main class="w-full min-h-screen flex flex-col items-center gap-20">
         @yield('content')
     </main>
     @include('components.public.footer')
