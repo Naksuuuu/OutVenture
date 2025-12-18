@@ -1,149 +1,117 @@
-@extends('layouts.app')
+ @php
+     $categories = [
+         ['name' => 'TENDA', 'image' => 'images/tenda.jpg'],
+         ['name' => 'SEPATU', 'image' => 'images/sepatuhiking.jpg'],
+         ['name' => 'MATRAS', 'image' => 'images/matras.jpg'],
+         ['name' => 'TAS', 'image' => 'images/tas.jpg'],
+         ['name' => 'JAKET', 'image' => 'images/gorpcore.jpg'],
+         ['name' => 'TOPI', 'image' => 'images/topi.jpg'],
+         ['name' => 'KOMPOR', 'image' => 'images/kompor.jpg'],
+         ['name' => 'KURSI LIPAT', 'image' => 'images/kursilipat.jpg'],
+         ['name' => 'SLEEPING BAG', 'image' => 'images/sleepingbag.jpg'],
+         ['name' => 'MEJA LIPAT', 'image' => 'images/mejalipat.jpg'],
+     ];
+ @endphp
 
-{{-- Menetapkan Judul Halaman --}}
-@section('title', 'Home')
+ @extends('layouts.app')
 
-@section('content')
+ @section('title', 'Home')
 
-    {{-- Container utama, membatasi lebar agar konten terpusat (Sesuai Desain Figma) --}}
-    {{-- Max-w-6xl dipilih karena cocok untuk tampilan desktop yang tidak terlalu lebar --}}
-    <div class="container mx-auto max-w-6xl px-4 pt-4">
+ @section('content')
+     <div class="text-center w-full md:h-[600px] relative">
+         <img src="{{ asset('images/herosection/herotent.jpg') }}" alt="Banner Tenda"
+             class="absolute -z-10 h-full w-full  object-cover ">
+         <div class="relative p-10 flex flex-col items-center md:items-start md:justify-end w-full h-full bg-black/20">
+             <a href="#" class="text-2xl md:text-4xl font-semibold tracking-tight text-white">OUTVENTURE</a>
+             <div class="mt-4 space-x-2">
+                 <button class="group relative h-9 font-semibold overflow-hidden rounded-md bg-white px-4">
+                     <div class="flex h-9 w-fit items-center transition-transform duration-300 group-hover:-translate-y-9">
+                         CONSINA
+                     </div>
+                     <div class="flex h-9 w-fit items-center transition-transform duration-300 group-hover:-translate-y-9">
+                         CONSINA
+                     </div>
 
-       {{-- 0. NAVIGASI ATAS UTAMA (PRODUK, KATEGORI, BRAND PILIHAN, SETTINGS) --}}
+                 </button>
+                 <button class="group relative h-9 font-semibold overflow-hidden rounded-md bg-black/70 text-white px-4">
+                     <div class="flex h-9 items-center transition-transform duration-300 group-hover:-translate-y-9">
+                         LIHAT SEMUA PRODUK
+                     </div>
+                     <div class="flex h-9 items-center transition-transform duration-300 group-hover:-translate-y-9">
+                         LIHAT SEMUA PRODUK
+                     </div>
+                 </button>
 
-{{-- Header OUTVENTURE (Logo/Branding) --}}
-<div class="text-center pt-4 pb-2">
-    <h3 class="text-3xl font-bold uppercase tracking-widest text-gray-800">OUTVENTURE</h3>
-</div>
-
-{{-- Link Navigasi Utama (Baris di bawah Logo) --}}
-<div class="flex justify-center items-center py-4 border-b border-gray-100 mb-8">
-    <nav class="flex space-x-10 text-sm font-bold text-gray-700 tracking-wider">
-        <a href="#" class="hover:text-black uppercase">PRODUK</a>
-        <a href="#" class="hover:text-black uppercase">KATEGORI</a>
-        <a href="#" class="hover:text-black uppercase">BRAND PILIHAN</a>
-        <a href="#" class="hover:text-black uppercase">SETTINGS</a>
-    </nav>
-</div>
-
-
-        {{-- 1. BANNER BESAR (FOTO TENDA YANG GEDEE) --}}
-        <div class="text-center mb-10">
-            <img 
-                src="{{ asset('images/fototendagede.jpg') }}" 
-                alt="Banner Tenda" 
-                class="w-full h-[450px] object-cover rounded-lg shadow-xl"
-            >
-        </div>
-
-
-        {{-- 2. DAFTAR PRODUK KATEGORI --}}
-        <div class="mb-12">
-            
-            {{-- BARIS TOMBOL HITAM (PRODUK TENDA & SEMUA PRODUK) --}}
-            {{-- Menggunakan Flex untuk menempatkan dua tombol berdampingan --}}
-            <div class="flex space-x-2 mb-6">
-                
-                {{-- Tombol SEMMUA PRODUK --}}
-                <a href="#" class="bg-black text-white font-bold text-sm uppercase px-6 py-3 tracking-wider hover:bg-gray-800 transition duration-200">
-                    SEMUA PRODUK
-                </a>
-            </div>
-            
-            {{-- Kategori Ikon berada di bawah tombol --}}
-            <h3 class="text-xl font-bold uppercase mb-4 tracking-tight hidden">SEMUA PRODUK</h3>
-            
-            {{-- Menggunakan GRID untuk penempatan 10 item yang presisi --}}
-            <div class="grid grid-cols-5 md:grid-cols-10 gap-y-4 gap-x-2">
-                
-                {{-- Data Kategori Produk (10 Item) --}}
-                @php
-                    $categories = [
-                        ['name' => 'TENDA', 'image' => 'images/tenda.jpg'],
-                        ['name' => 'SEPATU', 'image' => 'images/sepatuhiking.jpg'],
-                        ['name' => 'MATRAS', 'image' => 'images/matras.jpg'],
-                        ['name' => 'TAS', 'image' => 'images/tas.jpg'],
-                        ['name' => 'JAKET', 'image' => 'images/gorpcore.jpg'],
-                        ['name' => 'TOPI', 'image' => 'images/topi.jpg'],
-                        ['name' => 'KOMPOR', 'image' => 'images/kompor.jpg'],
-                        ['name' => 'KURSI LIPAT', 'image' => 'images/kursilipat.jpg'],
-                        ['name' => 'SLEEPING BAG', 'image' => 'images/sleepingbag.jpg'],
-                        ['name' => 'MEJA LIPAT', 'image' => 'images/mejalipat.jpg'],
-                    ];
-                @endphp
-
-                @foreach ($categories as $category)
-                    <div class="text-center"> 
-                        <a href="#" class="block no-underline text-gray-800 hover:text-black">
-                            <img src="{{ asset($category['image']) }}" alt="{{ $category['name'] }}" 
-                                 class="mx-auto w-16 h-16 rounded-full object-cover shadow-sm border border-gray-100"
-                            >
-                            <p class="mt-2 text-[10px] uppercase font-medium">{{ $category['name'] }}</p>
-                        </a>
-                    </div>
-                @endforeach
-            </div>
-        </div>
+             </div>
+         </div>
+     </div>
 
 
-        {{-- 3. BRAND PILIHAN --}}
-        <div class="mb-12">
-            <h3 class="text-xl font-bold uppercase mb-4 tracking-tight">BRAND PILIHAN</h3>
-            
-            {{-- Menggunakan Flexbox untuk 3 card yang sejajar --}}
-            <div class="flex flex-wrap -mx-2">
-                
-                {{-- Data Brand Pilihan (3 Item) --}}
-                @php
-                    // Pastikan jalur gambar ini BENAR
-                    $brands = [
-                        ['name' => 'THE NORTH FACE', 'image' => 'images/thenorthface.jpg'],
-                        ['name' => 'EIGER', 'image' => 'images/taseiger.jpg'],
-                        ['name' => 'CONSINA', 'image' => 'images/sepatuconsina.jpg'],
-                    ];
-                @endphp
+     <div class="w-full px-4 md:px-10">
+         <div class="flex w-full overflow-x-auto  flex-nowrap justify-between gap-10 scrollbar-hide ">
+             @foreach ($categories as $category)
+                 <div class="flex flex-col items-center gap-2">
+                     <img src="{{ asset($category['image']) }}" alt="{{ $category['name'] }}"
+                         class="mx-auto object-cover max-w-30 ">
 
-                @foreach ($brands as $brand)
-                    {{-- Brand Card: Lebar 1/3 di desktop --}}
-                    <div class="w-full md:w-1/3 px-2 mb-4">
-                        <div class="relative text-white rounded-lg overflow-hidden shadow-lg group">
-                            
-                            {{-- GAMBAR BRAND --}}
-                            {{-- Perhatikan h-80 (tinggi) --}}
-                            <img src="{{ asset($brand['image']) }}" class="w-full h-80 object-cover opacity-80 group-hover:opacity-90 transition duration-300" alt="{{ $brand['name'] }}">
-                            
-                            {{-- OVERLAY DAN KONTEN (sudah diperbaiki) --}}
-                            <div class="absolute inset-0 p-6 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end">
-                                {{-- Judul --}}
-                                <h5 class="text-2xl font-bold uppercase text-white mb-3">{{ $brand['name'] }}</h5>
-                                
-                                {{-- Tombol BELI SEKARANG --}}
-                                <a href="#" class="inline-block border border-white text-white text-sm font-medium px-4 py-2 w-fit hover:bg-white hover:text-black transition duration-300">
-                                    BELI SEKARANG &rarr;
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
+                     <p class="uppercase font-medium tracking-tight">{{ $category['name'] }}</p>
+                 </div>
+             @endforeach
+         </div>
+     </div>
+
+     <div class="w-full px-4 md:px-10">
+         <h3 class="text-xl font-bold uppercase mb-4 tracking-tight">BRAND PILIHAN</h3>
+         <div class="flex flex-wrap group/brands">
+             @php
+                 $brands = [
+                     ['name' => 'THE NORTH FACE', 'image' => 'images/thenorthface.jpg'],
+                     ['name' => 'EIGER', 'image' => 'images/taseiger.jpg'],
+                     ['name' => 'CONSINA', 'image' => 'images/sepatuconsina.jpg'],
+                     ['name' => 'CONSINA', 'image' => 'images/sepatuconsina.jpg'],
+                 ];
+             @endphp
+             @foreach ($brands as $brand)
+                 <div
+                     class="w-full lg:w-1/4 md:w-1/2 px-2 mb-6 lg:mb-0 transition-all duration-300 delay-150 lg:group-hover/brands:w-[22%] lg:hover:!w-[34%]">
+                     <div class="relative text-white rounded-lg overflow-hidden shadow-lg group">
+
+                         {{-- GAMBAR BRAND --}}
+                         <img src="{{ asset($brand['image']) }}"
+                             class="w-full h-80 object-cover opacity-80 group-hover:opacity-90 transition duration-300"
+                             alt="{{ $brand['name'] }}">
+
+                         {{-- OVERLAY DAN KONTEN --}}
+                         <div
+                             class="absolute inset-0 p-6 bg-gradient-to-t from-black/60 to-black/10 flex flex-col justify-end">
+                             <h5 class="text-2xl font-bold uppercase text-white mb-3">{{ $brand['name'] }}</h5>
+                             <a href="#"
+                                 class="inline-block border border-white text-white text-sm font-medium px-4 py-2 w-fit hover:bg-white hover:text-black transition duration-300">
+                                 BELI SEKARANG &rarr;
+                             </a>
+                         </div>
+                     </div>
+                 </div>
+             @endforeach
+         </div>
+     </div>
 
 
-        {{-- 4. Logout Form --}}
-        @auth
-        <form action="{{ route('logout') }}" method="POST" class="mt-8">
-            @csrf
-            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded transition duration-300">
-                Logout
-            </button>
-        </form>
-        @endauth
-    </div>
+     <div class="w-full px-2.5 bg-slate-100">
+         tes
+     </div>
 
-    {{-- 5. FOOTER (Kode yang diminta) --}}
-    {{-- Diletakkan di luar div container utama agar membentang penuh di bg-gray-100, --}}
-    {{-- tetapi kontennya tetap dibatasi oleh max-w-6xl di dalamnya. --}}
 
-   
-    
-@endsection
+
+
+
+
+ @endsection
+
+
+ {{-- <div class="flex space-x-2 mb-6">
+            <a href="#"
+                class="bg-black text-white font-bold text-sm uppercase px-6 py-3 tracking-wider hover:bg-gray-800 transition duration-200">
+                SEMUA PRODUK
+            </a>
+        </div> --}}

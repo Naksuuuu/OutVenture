@@ -28,7 +28,7 @@ class LoginController extends Controller
             // Perbarui session ID (keamanan)
             $request->session()->regenerate();
 
-            if (Auth::user()->role === 'admin') {
+            if (Auth::User()->role === 'admin') {
                 return redirect()->route('admin.dashboard');
             }
             // Arahkan ke dashboard
