@@ -25,9 +25,19 @@
 
             <div class="lg:col-span-5 flex flex-col pt-4 lg:pt-0">
                 <span class="text-[12px] font-bold text-black tracking-widest uppercase mb-1">THE NORTH FACE</span>
-                <h1 class="text-2xl md:text-3xl font-bold leading-tight text-black mb-6 uppercase tracking-tighter">
+                <h1 class="text-2xl md:text-3xl font-bold leading-tight text-black mb-4 uppercase tracking-tighter">
                     Men Mountain Light Triclimate® GORE-TEX® Jacket
                 </h1>
+
+                <div class="mb-8 flex flex-col gap-1">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl font-bold text-black">Rp 2.965.000</span>
+                        {{-- <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg> --}}
+                    </div>
+                </div>
 
                 <div class="mb-8">
                     <span class="text-[11px] font-bold uppercase mb-3 block">Colour:
@@ -63,15 +73,6 @@
 
                     <p class="text-[11px] text-gray-500 mt-3 italic">Catatan Ukuran: Model ini ukurannya besar. Pilih ukuran
                         yang lebih kecil untuk ukuran yang paling pas.</p>
-
-                    {{-- <button
-                        class="w-full border border-black mt-4 py-3 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-gray-50 transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                        </svg>
-                        Not Sure? Use Our Size Finder
-                    </button> --}}
                 </div>
 
                 <div class="space-y-3 mb-10">
