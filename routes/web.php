@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Dashboard;
-use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\GoogleController;
@@ -35,7 +35,7 @@ Route::name('auth.')->group(function () {
 
 Route::middleware('auth')->prefix('dashboard')->name('admin.')->group(function () {
     Route::get('/', [Dashboard::class, 'index'])->name('dashboard');
-    Route::resource('products', ProductsController::class);
+    Route::resource('products', ProductController::class);
 });
 
 // Google OAuth Routes
