@@ -15,6 +15,14 @@ Route::get('products', function () {
     return view('public.products.index');
 });
 
+Route::get('testing', function () {
+    return view('public.products.show');
+});
+
+Route::get('user', function () {
+    return view('user.profile');
+});
+
 Route::name('auth.')->group(function () {
     Route::controller(LoginController::class)->group(function () {
         Route::middleware('guest')->group(function () {
