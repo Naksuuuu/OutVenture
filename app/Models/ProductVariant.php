@@ -14,20 +14,21 @@ class ProductVariant extends Model
 
   protected $fillable = [
     'id_product',
+    'id_color',
     'sku',
 
   ];
 
-  protected function casts(): array
-  {
-    return [
-      'harga' => 'decimal:2',
-    ];
-  }
+
 
   public function product()
   {
     return $this->belongsTo(Product::class, 'id_product', 'id');
+  }
+
+  public function color()
+  {
+    return $this->belongsTo(Color::class, 'id_color', 'id');
   }
 
   public function specs()
