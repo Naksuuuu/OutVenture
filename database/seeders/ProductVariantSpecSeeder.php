@@ -13,6 +13,10 @@ class ProductVariantSpecSeeder extends Seeder
      */
     public function run(): void
     {
-        ProductVariantSpec::factory()->count(50)->create();
+        // ProductVariantSpec::create([
+        //     'id_variant' => 1,
+        //     'id_size' => 1,
+        //     'value' => 'Large',
+        // ]);
     }
 }

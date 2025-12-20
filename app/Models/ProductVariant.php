@@ -15,8 +15,7 @@ class ProductVariant extends Model
   protected $fillable = [
     'id_product',
     'sku',
-    'harga',
-    'stok',
+
   ];
 
   protected function casts(): array

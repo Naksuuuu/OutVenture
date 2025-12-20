@@ -19,11 +19,11 @@ class OrderItemFactory extends Factory
     public function definition(): array
     {
         return [
-            'id_order' => Order::factory(),
-            'id_variant' => ProductVariant::factory(),
-            'quantity' => fake()->numberBetween(1, 5),
-            'harga' => fake()->randomFloat(2, 5, 500),
-            'tgl_order' => fake()->dateTimeBetween('-1 month', 'now'),
+            // 'id_order' => Order::factory(),
+            // 'id_variant' => ProductVariant::factory(),
+            // 'quantity' => fake()->numberBetween(1, 5),
+            // 'harga' => fake()->randomFloat(2, 5, 500),
+            // 'tgl_order' => fake()->dateTimeBetween('-1 month', 'now'),
         ];
     }
 }

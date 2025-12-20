@@ -18,10 +18,10 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            'total_harga' => fake()->randomFloat(2, 10, 1000),
-            'status_pembayaran' => fake()->randomElement(['pending', 'processing', 'completed', 'cancelled']),
-            'id_user' => User::factory(),
-            'tgl_order' => fake()->dateTimeBetween('-1 month', 'now'),
+            // 'total_harga' => fake()->randomFloat(2, 10, 1000),
+            // 'status_pembayaran' => fake()->randomElement(['pending', 'processing', 'completed', 'cancelled']),
+            // 'id_user' => User::factory(),
+            // 'tgl_order' => fake()->dateTimeBetween('-1 month', 'now'),
         ];
     }
 }

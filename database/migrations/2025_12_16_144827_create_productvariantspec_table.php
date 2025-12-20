@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('ProductVariantSpec', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_variant')->constrained('ProductVariant')->onDelete('cascade');
-            $table->foreignId('id_attribute')->constrained('Attribute')->onDelete('cascade');
-            $table->string('value');
+            $table->foreignId('id_size')->constrained('Size')->onDelete('cascade');
+            $table->decimal('harga', 10, 2);
+            $table->integer('stok');
             $table->timestamps();
         });
     }
@@ -25,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('productvariantspec');
+        Schema::dropIfExists('ProductVariantSpec');
     }
 };
