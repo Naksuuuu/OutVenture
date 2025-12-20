@@ -14,11 +14,16 @@ class Category extends Model
   protected $primaryKey = 'id';
 
   protected $fillable = [
-    'name_category',
+    'nama_category',
   ];
 
   public function products()
   {
     return $this->hasMany(Product::class, 'id_category', 'id');
+  }
+
+  public function sizes()
+  {
+    return $this->hasMany(Size::class, 'id_category', 'id');
   }
 }

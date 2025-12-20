@@ -14,8 +14,9 @@ class ProductVariantSpec extends Model
 
   protected $fillable = [
     'id_variant',
-    'id_attribute',
-    'value',
+    'id_size',
+    'harga',
+    'stok',
   ];
 
   public function variant()
@@ -23,8 +24,8 @@ class ProductVariantSpec extends Model
     return $this->belongsTo(ProductVariant::class, 'id_variant', 'id');
   }
 
-  public function attribute()
+  public function size()
   {
-    return $this->belongsTo(Attribute::class, 'id_attribute', 'id');
+    return $this->belongsTo(Size::class, 'id_size', 'id');
   }
 }
