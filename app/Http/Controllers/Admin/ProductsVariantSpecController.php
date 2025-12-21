@@ -8,7 +8,7 @@ use App\Models\ProductVariant;
 use App\Models\ProductVariantSpec;
 use Illuminate\Http\Request;
 
-class ProductsVariantSpecContoller extends Controller
+class ProductsVariantSpecController extends Controller
 {
   /**
    * Store a newly created resource in storage.

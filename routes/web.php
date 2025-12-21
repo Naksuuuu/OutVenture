@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Admin\Dashboard;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProductsVariantSpecContoller;
+use App\Http\Controllers\Admin\ProductsVariantSpecController;
 use App\Http\Controllers\Admin\ProductVarianController;
 
 
@@ -55,9 +57,12 @@ Route::middleware('auth')->prefix('dashboard')->name('admin.')->group(function (
     Route::delete('products/{product}/variants/{variant}', [ProductVarianController::class, 'destroy'])->name('products.variants.destroy');
 
     // Product Variant Specification Routes
-    Route::post('products/{product}/variants/{variant}/specs', [ProductsVariantSpecContoller::class, 'store'])->name('products.variants.specs.store');
-    Route::put('products/{product}/variants/{variant}/specs/{spec}', [ProductsVariantSpecContoller::class, 'update'])->name('products.variants.specs.update');
-    Route::delete('products/{product}/variants/{variant}/specs/{spec}', [ProductsVariantSpecContoller::class, 'destroy'])->name('products.variants.specs.destroy');
+    Route::post('products/{product}/variants/{variant}/specs', [ProductsVariantSpecController::class, 'store'])->name('products.variants.specs.store');
+    Route::put('products/{product}/variants/{variant}/specs/{spec}', [ProductsVariantSpecController::class, 'update'])->name('products.variants.specs.update');
+    Route::delete('products/{product}/variants/{variant}/specs/{spec}', [ProductsVariantSpecController::class, 'destroy'])->name('products.variants.specs.destroy');
+
+    // Category Management Routes
+    Route::resource('categories', CategoryController::class);
 });
 
 // Google OAuth Routes
