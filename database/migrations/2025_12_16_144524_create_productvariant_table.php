@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_product')->constrained('Product')->onDelete('cascade');
             $table->foreignId('id_color')->constrained('Color')->onDelete('cascade');
-            $table->string('sku');
             $table->timestamps();
         });
     }

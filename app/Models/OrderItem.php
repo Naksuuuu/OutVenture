@@ -14,7 +14,7 @@ class OrderItem extends Model
 
   protected $fillable = [
     'id_order',
-    'id_variant',
+    'id_variant_spec',
     'tgl_order',
     'quantity',
     'harga',
@@ -34,8 +34,8 @@ class OrderItem extends Model
     return $this->belongsTo(Order::class, 'id_order', 'id');
   }
 
-  public function variant()
+  public function variantSpec()
   {
-    return $this->belongsTo(ProductVariant::class, 'id_variant', 'id');
+    return $this->belongsTo(ProductVariantSpec::class, 'id_variant_spec', 'id');
   }
 }
