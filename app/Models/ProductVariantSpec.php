@@ -15,6 +15,7 @@ class ProductVariantSpec extends Model
   protected $fillable = [
     'id_variant',
     'id_size',
+    'sku',
     'harga',
     'stok',
   ];
