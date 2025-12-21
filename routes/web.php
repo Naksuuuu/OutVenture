@@ -1,8 +1,13 @@
 <?php
 
 use App\Http\Controllers\Admin\Dashboard;
+<<<<<<< Updated upstream
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+=======
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Public\ProductController as PublicProductController;
+>>>>>>> Stashed changes
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\GoogleController;
@@ -16,9 +21,7 @@ Route::get('/', function () {
     return view('public.home');
 })->name('home');
 
-Route::get('products', function () {
-    return view('public.products.index');
-});
+Route::get('products', [PublicProductController::class, 'index'])->name('products.index');
 
 Route::get('testing', function () {
     return view('public.products.show');
@@ -48,8 +51,8 @@ Route::name('auth.')->group(function () {
 
 Route::middleware('auth')->prefix('dashboard')->name('admin.')->group(function () {
     Route::get('/', [Dashboard::class, 'index'])->name('dashboard');
-    Route::resource('products', ProductController::class);
-    Route::get('products/sizes/{category}', [ProductController::class, 'getSizesByCategory'])->name('products.sizes');
+    Route::resource('products', AdminProductController::class);
+    Route::get('products/sizes/{category}', [AdminProductController::class, 'getSizesByCategory'])->name('products.sizes');
 
     // Product Variant Routes -> use ProductVarianController
     Route::post('products/{product}/variants', [ProductVarianController::class, 'store'])->name('products.variants.store');
