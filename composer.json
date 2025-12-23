@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "afatmustafa/blade-hugeicons": "^1.0",
         "blade-ui-kit/blade-heroicons": "^2.6",
         "codeat3/blade-bytesize-icons": "^1.6",
         "codeat3/blade-eos-icons": "^1.15",
