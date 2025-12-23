@@ -118,7 +118,7 @@
                         </h2>
                     </div>
 
-                    <livewire:admin.variant-create :product="$product" />
+                    <livewire:admin.variant.create :product="$product" />
 
                 </div>
 
@@ -139,7 +139,7 @@
                                             {{ $variant->color->nama_warna ?? 'Tanpa Warna' }}
                                         </span>
                                     </div>
-                                    <livewire:admin.spec-create :product="$product" :variant="$variant" :key="'spec-create-' . $variant->id" />
+                                    <livewire:admin.spec.create :product="$product" :variant="$variant" :key="'spec-create-' . $variant->id" />
                                 </div>
 
 
@@ -184,10 +184,10 @@
                                                     </td>
                                                     <td class="px-4 py-3 text-right">
                                                         <div class="flex items-center justify-center gap-3">
-                                                            <livewire:admin.spec-edit :spec="$spec"
+                                                            <livewire:admin.spec.edit :spec="$spec"
                                                                 :product="$product" :variant="$variant" :key="'spec-edit-' . $spec->id" />
 
-                                                            <livewire:admin.spec-delete :spec="$spec"
+                                                            <livewire:admin.spec.delete :spec="$spec"
                                                                 :variant="$variant" :key="'spec-delete-' . $spec->id" />
                                                         </div>
                                                     </td>
