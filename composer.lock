@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2996b172a6a918711841cfccc96228bc",
+    "content-hash": "b2b2f2abd3272e0362defb57e7b4954f",
     "packages": [
         {
             "name": "afatmustafa/blade-hugeicons",
