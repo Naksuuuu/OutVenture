@@ -33,8 +33,7 @@ class Index extends Component
     $query = Category::query();
 
     if ($this->search) {
-      $query->where('name_category', 'like', '%' . $this->search . '%')
-        ->orWhere('description', 'like', '%' . $this->search . '%');
+      $query->where('nama_category', 'like', '%' . $this->search . '%');
     }
 
     $categories = $query->withCount('products')->paginate(10);

@@ -11,6 +11,7 @@
     "require": {
         "php": "^8.2",
         "afatmustafa/blade-hugeicons": "^1.0",
+        "andreiio/blade-remix-icon": "^3.7",
         "blade-ui-kit/blade-heroicons": "^2.6",
         "codeat3/blade-bytesize-icons": "^1.6",
         "codeat3/blade-eos-icons": "^1.15",
@@ -20,7 +21,7 @@
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.7",
         "mallardduck/blade-boxicons": "^2.4",
-        "owenvoke/blade-fontawesome": "*"
+        "owenvoke/blade-fontawesome": "^3.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
