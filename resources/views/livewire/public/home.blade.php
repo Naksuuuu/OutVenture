@@ -156,8 +156,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9Z"/><path d="M11 3 8 9l4 13 4-13-3-6"/><path d="M2 9h20"/></svg>
             </div>
             <div>
-                <h4 class="text-xs font-bold uppercase tracking-wider">Authentic & Rare</h4>
-                <p class="text-[10px] text-gray-500 uppercase">Genuine, exclusive sneakers</p>
+                <h4 class="text-xs font-bold uppercase tracking-wider">TRUSTED GEAR </h4>
+                <p class="text-[10px] text-gray-500 uppercase">MENYEDIAKAN UNIT ORIGINAL YANG TERUJI DI ALAM LIAR</p>
             </div>
         </div>
         <div class="flex items-center gap-4 p-6 justify-center">
@@ -165,8 +165,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z"/></svg>
             </div>
             <div>
-                <h4 class="text-xs font-bold uppercase tracking-wider">Luxury Focus</h4>
-                <p class="text-[10px] text-gray-500 uppercase">Premium fashion-meets-culture</p>
+                <h4 class="text-xs font-bold uppercase tracking-wider">ELITE QUALITY</h4>
+                <p class="text-[10px] text-gray-500 uppercase">STANDAR EKSPEDISI DENGAN MATERIAL TERBAIK DI KELASNYA</p>
             </div>
         </div>
         <div class="flex items-center gap-4 p-6 justify-center">
@@ -174,8 +174,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="5" y="5" rx="2"/><path d="M5 9h14"/><path d="M9 5v14"/></svg>
             </div>
             <div>
-                <h4 class="text-xs font-bold uppercase tracking-wider">Omnichannel</h4>
-                <p class="text-[10px] text-gray-500 uppercase">Online + retail presence</p>
+                <h4 class="text-xs font-bold uppercase tracking-wider">AUTHORIZED HUB</h4>
+                <p class="text-[10px] text-gray-500 uppercase">SALURAN RESMI BERBAGAI BRAND OUTDOOR TERNAMA DALAM SATU PLATFORM</p>
             </div>
         </div>
         <div class="flex items-center gap-4 p-6 justify-center">
@@ -183,8 +183,8 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
             </div>
             <div>
-                <h4 class="text-xs font-bold uppercase tracking-wider">Community-First</h4>
-                <p class="text-[10px] text-gray-500 uppercase">Content & cultural events</p>
+                <h4 class="text-xs font-bold uppercase tracking-wider">EXPLORER HUB</h4>
+                <p class="text-[10px] text-gray-500 uppercase">RUANG KOLABORASI DAN EDUKASI BAGI PARA PENJELAJAH</p>
             </div>
         </div>
     </div>
@@ -192,9 +192,9 @@
 
 <div class="w-full px-4 md:px-10 mt-10">
     <div class="flex justify-between items-end mb-8 border-b border-gray-100 pb-4">
-        <h2 class="text-3xl font-black uppercase tracking-tighter italic">Just Dropped</h2>
+        <h2 class="text-3xl font-black uppercase tracking-tighter">KOLEKSI TERBARU</h2>
         <a href="#" class="group flex items-center gap-2 bg-black text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
-            Shop The Collection
+            LIHAT SEMUA PRODUK
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
             </svg>
