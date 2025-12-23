@@ -1,71 +1,68 @@
 <?php
 
-use App\Http\Controllers\Admin\Dashboard;
-<<<<<<< Updated upstream
-use App\Http\Controllers\Admin\ProductController;
-use App\Http\Controllers\Admin\CategoryController;
-=======
-use App\Http\Controllers\Admin\ProductController as AdminProductController;
-use App\Http\Controllers\Public\ProductController as PublicProductController;
->>>>>>> Stashed changes
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\ProductsVariantSpecContoller;
-use App\Http\Controllers\Admin\ProductsVariantSpecController;
-use App\Http\Controllers\Admin\ProductVarianController;
+use Illuminate\Support\Facades\Auth;
+
+use App\Livewire\Admin\Product\Index as DashboardProductIndex;
+use App\Livewire\Admin\Product\Edit as DashboardProductEdit;
+use App\Livewire\Admin\Product\Create as DashboardProductCreate;
 
 
-Route::get('/', function () {
-    return view('public.home');
-})->name('home');
+use App\Livewire\Admin\Category\Index as DashboardCategoryIndex;
+use App\Livewire\Admin\Category\Create as DashboardCategoryCreate;
+use App\Livewire\Admin\Category\Edit as DashboardCategoryEdit;
 
-Route::get('products', [PublicProductController::class, 'index'])->name('products.index');
 
-Route::get('testing', function () {
-    return view('public.products.show');
+use App\Livewire\Public\Product\Index as PublicProductIndex;
+use App\Livewire\Public\Product\Show as PublicProductShow;
+
+// Public Routes - Livewire
+Route::get('/', App\Livewire\Public\Home::class)->name('home');
+Route::get('products', PublicProductIndex::class)->name('products.index');
+Route::get('products/{id}', PublicProductShow::class)->name('products.show');
+
+// User Profile
+Route::middleware('auth')->group(function () {
+    Route::get('user/profile', App\Livewire\User\Profile::class)->name('user.profile');
 });
 
-Route::get('user', function () {
-    return view('user.profile');
+// Auth Routes - Livewire
+Route::name('auth.')->middleware('guest')->group(function () {
+    Route::get('/login', App\Livewire\Auth\Login::class)->name('login');
+    Route::get('/register', App\Livewire\Auth\Register::class)->name('register');
 });
 
-Route::name('auth.')->group(function () {
-    Route::controller(LoginController::class)->group(function () {
-        Route::middleware('guest')->group(function () {
-            Route::get('/login', 'showLoginForm')->name('show.login');
-            Route::post('/login', 'login')->name('login');
-        });
+Route::post('/logout', function () {
+    Auth::logout();
+    request()->session()->invalidate();
+    request()->session()->regenerateToken();
+    return redirect()->route('auth.login');
+})->middleware('auth')->name('auth.logout');
 
-        Route::post('/logout', 'logout')->middleware('auth')->name('logout');
-    });
-
-    Route::controller(RegisterController::class)->group(function () {
-        Route::middleware('guest')->group(function () {
-            Route::get('/register', 'showRegistrationForm')->name('show.register');
-            Route::post('/register', 'register')->name('register');
-        });
-    });
-});
-
+// Admin Routes - Livewire
 Route::middleware('auth')->prefix('dashboard')->name('admin.')->group(function () {
-    Route::get('/', [Dashboard::class, 'index'])->name('dashboard');
-    Route::resource('products', AdminProductController::class);
-    Route::get('products/sizes/{category}', [AdminProductController::class, 'getSizesByCategory'])->name('products.sizes');
+    Route::get('/', App\Livewire\Admin\Dashboard::class)->name('dashboard');
 
-    // Product Variant Routes -> use ProductVarianController
-    Route::post('products/{product}/variants', [ProductVarianController::class, 'store'])->name('products.variants.store');
-    Route::put('products/{product}/variants/{variant}', [ProductVarianController::class, 'update'])->name('products.variants.update');
-    Route::delete('products/{product}/variants/{variant}', [ProductVarianController::class, 'destroy'])->name('products.variants.destroy');
+    // Products Management
+    Route::get('products', DashboardProductIndex::class)->name('products.index');
+    Route::get('products/create', DashboardProductCreate::class)->name('products.create');
+    Route::get('products/{productId}/edit', DashboardProductEdit::class)->name('products.edit');
+
+    // Product Variant Routes - Keep controllers for API-like operations
+    // Route::post('products/{product}/variants', [ProductVarianController::class, 'store'])->name('products.variants.store');
+    // Route::put('products/{product}/variants/{variant}', [ProductVarianController::class, 'update'])->name('products.variants.update');
+    // Route::delete('products/{product}/variants/{variant}', [ProductVarianController::class, 'destroy'])->name('products.variants.destroy');
 
     // Product Variant Specification Routes
-    Route::post('products/{product}/variants/{variant}/specs', [ProductsVariantSpecController::class, 'store'])->name('products.variants.specs.store');
-    Route::put('products/{product}/variants/{variant}/specs/{spec}', [ProductsVariantSpecController::class, 'update'])->name('products.variants.specs.update');
-    Route::delete('products/{product}/variants/{variant}/specs/{spec}', [ProductsVariantSpecController::class, 'destroy'])->name('products.variants.specs.destroy');
+    // Route::post('products/{product}/variants/{variant}/specs', [ProductsVariantSpecController::class, 'store'])->name('products.variants.specs.store');
+    // Route::put('products/{product}/variants/{variant}/specs/{spec}', [ProductsVariantSpecController::class, 'update'])->name('products.variants.specs.update');
+    // Route::delete('products/{product}/variants/{variant}/specs/{spec}', [ProductsVariantSpecController::class, 'destroy'])->name('products.variants.specs.destroy');
 
-    // Category Management Routes
-    Route::resource('categories', CategoryController::class);
+    // Categories Management
+    Route::get('categories', DashboardCategoryIndex::class)->name('categories.index');
+    Route::get('categories/create', DashboardCategoryCreate::class)->name('categories.create');
+    Route::get('categories/{categoryId}/edit', DashboardCategoryEdit::class)->name('categories.edit');
 });
 
 // Google OAuth Routes
