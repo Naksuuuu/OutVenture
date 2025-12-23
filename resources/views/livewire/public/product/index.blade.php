@@ -1,20 +1,3 @@
- {{-- @php
-     $categories = [
-         ['name' => 'TENDA', 'image' => 'storage/tenda.jpg'],
-         ['name' => 'SEPATU', 'image' => 'storage/sepatuhiking.jpg'],
-         ['name' => 'MATRAS', 'image' => 'storage/matras.jpg'],
-         ['name' => 'TAS', 'image' => 'storage/tas.jpg'],
-         ['name' => 'JAKET', 'image' => 'storage/gorpcore.jpg'],
-         ['name' => 'TOPI', 'image' => 'storage/topi.jpg'],
-         ['name' => 'KOMPOR', 'image' => 'storage/kompor.jpg'],
-         ['name' => 'KURSI LIPAT', 'image' => 'storage/kursilipat.jpg'],
-         ['name' => 'SLEEPING BAG', 'image' => 'storage/sleepingbag.jpg'],
-         ['name' => 'MEJA LIPAT', 'image' => 'storage/mejalipat.jpg'],
-     ];
- @endphp --}}
-
-
-
 
  <div class="w-full flex flex-col items-center gap-20">
 
@@ -43,45 +26,7 @@
          <h3 class="text-xl font-bold uppercase mb-6 tracking-tight">PRODUK TERBARU</h3>
 
          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-             {{-- @php
-             $products = [
-                 [
-                     'name' => 'Men Mountain Light Triclimate® GORE-TEX® Jacket',
-                     'brand' => 'THE NORTH FACE',
-                     'price' => '1.299.000',
-                     'image' => 'images/jakettnf.jpg',
-                     'is_sale' => true,
-                 ],
-                 [
-                     'name' => 'Men Antora Jacket—Print',
-                     'brand' => 'THE NORTH FACE',
-                     'price' => '1.299.000',
-                     'image' => 'images/jakettnf2.jpg',
-                     'is_sale' => true,
-                 ],
-                 [
-                     'name' => 'Men Glacier Fleece Vest',
-                     'brand' => 'THE NORTH FACE',
-                     'price' => '1.299.000',
-                     'image' => 'images/vesttnf.jpg',
-                     'is_sale' => true,
-                 ],
-                 [
-                     'name' => 'Men Classic Down Jacket',
-                     'brand' => 'THE NORTH FACE',
-                     'price' => '1.299.000',
-                     'image' => 'images/jakettnf3.jpg',
-                     'is_sale' => true,
-                 ],
-                 [
-                     'name' => 'Men TNF™ Performance Fleece SW Pants',
-                     'brand' => 'THE NORTH FACE',
-                     'price' => '1.299.000',
-                     'image' => 'images/celanatnf.jpg',
-                     'is_sale' => true,
-                 ],
-             ];
-         @endphp --}}
+            
 
              @foreach ($products as $product)
                  <a href="{{ route('products.show', $product->id) }}" wire:navigate class="flex flex-col">
