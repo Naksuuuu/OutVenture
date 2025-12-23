@@ -15,16 +15,16 @@
 
 {{-- @php
     $categories = [
-        ['name' => 'TENDA', 'image' => 'images/tenda.jpg'],
-        ['name' => 'SEPATU', 'image' => 'images/sepatuhiking.jpg'],
-        ['name' => 'MATRAS', 'image' => 'images/matras.jpg'],
-        ['name' => 'TAS', 'image' => 'images/tas.jpg'],
-        ['name' => 'JAKET', 'image' => 'images/gorpcore.jpg'],
-        ['name' => 'TOPI', 'image' => 'images/topi.jpg'],
-        ['name' => 'KOMPOR', 'image' => 'images/kompor.jpg'],
-        ['name' => 'KURSI LIPAT', 'image' => 'images/kursilipat.jpg'],
-        ['name' => 'SLEEPING BAG', 'image' => 'images/sleepingbag.jpg'],
-        ['name' => 'MEJA LIPAT', 'image' => 'images/mejalipat.jpg'],
+        ['name' => 'TENDA', 'image' => 'storage/tenda.jpg'],
+        ['name' => 'SEPATU', 'image' => 'storage/sepatuhiking.jpg'],
+        ['name' => 'MATRAS', 'image' => 'storage/matras.jpg'],
+        ['name' => 'TAS', 'image' => 'storage/tas.jpg'],
+        ['name' => 'JAKET', 'image' => 'storage/gorpcore.jpg'],
+        ['name' => 'TOPI', 'image' => 'storage/topi.jpg'],
+        ['name' => 'KOMPOR', 'image' => 'storage/kompor.jpg'],
+        ['name' => 'KURSI LIPAT', 'image' => 'storage/kursilipat.jpg'],
+        ['name' => 'SLEEPING BAG', 'image' => 'storage/sleepingbag.jpg'],
+        ['name' => 'MEJA LIPAT', 'image' => 'storage/mejalipat.jpg'],
     ];
 @endphp --}}
 
@@ -35,7 +35,7 @@
 <div class="w-full flex flex-col items-center gap-20">
 
     <div class="text-center w-full md:h-[600px] relative">
-        <img src="{{ asset('images/herosection/herotent.jpg') }}" alt="Banner Tenda"
+        <img src="{{ asset('storage/herosection/herotent.jpg') }}" alt="Banner Tenda"
             class="absolute -z-10 h-full w-full  object-cover ">
         <div class="relative p-10 flex flex-col items-center md:items-start md:justify-end w-full h-full bg-black/20">
             <a href="#" class="text-2xl md:text-4xl font-semibold tracking-tight text-white">OUTVENTURE</a>
@@ -83,10 +83,10 @@
         <div class="flex flex-wrap group/brands">
             {{-- @php
                 $brands = [
-                    ['name' => 'THE NORTH FACE', 'image' => 'images/thenorthface.jpg'],
-                    ['name' => 'EIGER', 'image' => 'images/taseiger.jpg'],
-                    ['name' => 'CONSINA', 'image' => 'images/sepatuconsina.jpg'],
-                    ['name' => 'CONSINA', 'image' => 'images/sepatuconsina.jpg'],
+                    ['name' => 'THE NORTH FACE', 'image' => 'storage/thenorthface.jpg'],
+                    ['name' => 'EIGER', 'image' => 'storage/taseiger.jpg'],
+                    ['name' => 'CONSINA', 'image' => 'storage/sepatuconsina.jpg'],
+                    ['name' => 'CONSINA', 'image' => 'storage/sepatuconsina.jpg'],
                 ];
             @endphp --}}
             @foreach ($brands as $brand)

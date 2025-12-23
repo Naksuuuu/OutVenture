@@ -6,7 +6,7 @@
 
             <div class="lg:col-span-7">
                 <div class="relative bg-[#f2f2ed] aspect-[4/5] w-full overflow-hidden">
-                    <img src="{{ asset('images/jakettnf.jpg') }}" alt="Product Image" class="w-full h-full object-cover">
+                    <img src="{{ asset('storage/jakettnf.jpg') }}" alt="Product Image" class="w-full h-full object-cover">
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
                     </span>
                     <div class="flex gap-2">
                         <button class="w-16 h-20 border-2 border-black p-1">
-                            <img src="{{ asset('images/jakettnf.jpg') }}"
+                            <img src="{{ asset('storage/jakettnf.jpg') }}"
                                 class="w-full h-full object-cover bg-[#f2f2ed]">
                         </button>
                     </div>

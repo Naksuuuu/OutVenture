@@ -1,15 +1,15 @@
  {{-- @php
      $categories = [
-         ['name' => 'TENDA', 'image' => 'images/tenda.jpg'],
-         ['name' => 'SEPATU', 'image' => 'images/sepatuhiking.jpg'],
-         ['name' => 'MATRAS', 'image' => 'images/matras.jpg'],
-         ['name' => 'TAS', 'image' => 'images/tas.jpg'],
-         ['name' => 'JAKET', 'image' => 'images/gorpcore.jpg'],
-         ['name' => 'TOPI', 'image' => 'images/topi.jpg'],
-         ['name' => 'KOMPOR', 'image' => 'images/kompor.jpg'],
-         ['name' => 'KURSI LIPAT', 'image' => 'images/kursilipat.jpg'],
-         ['name' => 'SLEEPING BAG', 'image' => 'images/sleepingbag.jpg'],
-         ['name' => 'MEJA LIPAT', 'image' => 'images/mejalipat.jpg'],
+         ['name' => 'TENDA', 'image' => 'storage/tenda.jpg'],
+         ['name' => 'SEPATU', 'image' => 'storage/sepatuhiking.jpg'],
+         ['name' => 'MATRAS', 'image' => 'storage/matras.jpg'],
+         ['name' => 'TAS', 'image' => 'storage/tas.jpg'],
+         ['name' => 'JAKET', 'image' => 'storage/gorpcore.jpg'],
+         ['name' => 'TOPI', 'image' => 'storage/topi.jpg'],
+         ['name' => 'KOMPOR', 'image' => 'storage/kompor.jpg'],
+         ['name' => 'KURSI LIPAT', 'image' => 'storage/kursilipat.jpg'],
+         ['name' => 'SLEEPING BAG', 'image' => 'storage/sleepingbag.jpg'],
+         ['name' => 'MEJA LIPAT', 'image' => 'storage/mejalipat.jpg'],
      ];
  @endphp --}}
 
@@ -86,7 +86,7 @@
              @foreach ($products as $product)
                  <a href="{{ route('products.show', $product->id) }}" wire:navigate class="flex flex-col">
                      <div class="relative aspect-[4/5] bg-[#f2f2ed] mb-3 overflow-hidden">
-                         <img src="{{ asset('images/jakettnf2.jpg') }}" alt="{{ $product->nama_product }}"
+                         <img src="{{ asset('storage/jakettnf2.jpg') }}" alt="{{ $product->nama_product }}"
                              class="w-full h-full object-cover">
                      </div>
 
