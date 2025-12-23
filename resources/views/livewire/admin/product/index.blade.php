@@ -51,7 +51,7 @@
                             </td>
                             <td class="px-6 py-4">
                                 <div class="flex justify-center items-center gap-2">
-                                    <a href="{{ route('admin.products.edit', $product) }}"
+                                    <a href="{{ route('admin.products.edit', $product) }}" wire:navigate
                                         class="inline-flex items-center justify-center px-4 py-1.5 text-[11px] font-bold text-indigo-600 bg-white border border-indigo-200 rounded-md hover:bg-indigo-50 transition-all uppercase tracking-wider">
                                         Edit
                                     </a>

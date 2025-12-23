@@ -1,14 +1,24 @@
 <nav class="mb-4 px-4">
 
+
+
     <div class="text-center pt-4">
         <a href="{{ route('home') }}" wire:navigate
             class="text-3xl font-bold uppercase tracking-widest text-gray-800">OUTVENTURE</a>
     </div>
 
-    <div class="w-full flex mt-2 justify-between text-sm font-bold text-gray-700 tracking-wider">
+    <div class="relative w-full flex mt-2 p-6 justify-between text-sm font-bold text-gray-700 tracking-wider">
+        <div class="w-full bg-white flex justify-center  absolute z-20">
+            <form action="">
+                <input type="text"
+                    class="w-full rounded-md border border-gray-300 bg-white px-3 py-1 text-sm shadow-sm placeholder-gray-400
+                    focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
+                    placeholder="Search">
+            </form>
+        </div>
         <div class="w-[10%] relative">
-            <div class="absolute bg-black w-full h-full">
-                ws
+            <div class="absolute bg-transparent w-full h-full cursor-text">
+
             </div>
             <form action="">
                 <input type="text"
