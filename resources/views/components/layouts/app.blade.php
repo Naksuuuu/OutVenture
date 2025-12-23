@@ -17,6 +17,12 @@
     </main>
     <livewire:public.template.footer />
     @livewireScripts
+
+    @if (session('success'))
+        <div class="fixed bottom-10 right-10 p-4 bg-green-500 text-white rounded-lg shadow-lg max-w-sm">
+            {{ session('success') }}
+        </div>
+    @endif
 </body>
 
 </html>

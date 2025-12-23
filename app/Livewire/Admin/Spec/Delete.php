@@ -34,7 +34,7 @@ class Delete extends Component
         $this->dispatch('spec-events');
         $this->isOpen = false;
 
-        $this->dispatch('show-alert', message: 'Spesifikasi berhasil dihapus!');
+        session()->flash('success', 'Spesifikasi berhasil dihapus!');
     }
 
 

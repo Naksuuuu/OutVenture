@@ -7,12 +7,10 @@ use App\Models\Category;
 
 class Create extends Component
 {
-  public $name_category = '';
-  public $description = '';
+  public $nama_category = '';
 
   protected $rules = [
-    'name_category' => 'required|string|max:255',
-    'description' => 'nullable|string',
+    'nama_category' => 'required|string|max:255'
   ];
 
   public function save()
@@ -20,8 +18,7 @@ class Create extends Component
     $this->validate();
 
     Category::create([
-      'name_category' => $this->name_category,
-      'description' => $this->description,
+      'nama_category' => $this->nama_category,
     ]);
 
     session()->flash('success', 'Category created successfully!');

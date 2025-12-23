@@ -23,7 +23,7 @@ class Edit extends Component
     protected $rules = [
         'id_size' => 'required|exists:Size,id',
         'harga' => 'required|numeric|min:0',
-        'sku' => 'required|string|max:100|unique:ProductVariantSpec,sku',
+        'sku' => 'required|string|max:100',
         'stok' => 'required|integer|min:0',
     ];
 
@@ -44,7 +44,7 @@ class Edit extends Component
 
         $this->validate();
 
-        ProductVariantSpec::update([
+        ProductVariantSpec::where('id', $this->spec->id)->update([
             'id_variant' => $this->variant->id,
             'id_size' => $this->id_size,
             'harga' => $this->harga,

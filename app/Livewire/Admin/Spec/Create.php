@@ -51,7 +51,7 @@ class Create extends Component
         $this->reset(['id_size', 'harga', 'sku', 'stok']);
         $this->isOpen = false;
 
-        $this->dispatch('show-alert', message: 'Spesifikasi berhasil ditambahkan!');
+        session()->flash('success', 'Spesifikasi berhasil ditambahkan!');
     }
 
 

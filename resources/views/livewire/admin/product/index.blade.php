@@ -45,7 +45,7 @@
                             </td>
                             <td class="px-6 py-4 text-center">
                                 <span
-                                    class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold {{ $product->category ? 'bg-indigo-50 text-indigo-700 border border-indigo-100' : 'bg-gray-50 text-gray-400 border border-gray-100' }}">
+                                    class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold {{ $product->category ? 'bg-indigo-50 text-green-700 border border-indigo-100' : 'bg-gray-50 text-gray-400 border border-gray-100' }}">
                                     {{ $product->category->nama_category ?? 'TANPA KATEGORI' }}
                                 </span>
                             </td>
@@ -53,14 +53,14 @@
                                 <div class="flex justify-center items-center gap-2">
                                     <a href="{{ route('admin.products.edit', $product) }}" wire:navigate
                                         class="inline-flex items-center justify-center px-4 py-1.5 text-[11px] font-bold text-indigo-600 bg-white border border-indigo-200 rounded-md hover:bg-indigo-50 transition-all uppercase tracking-wider">
-                                        Edit
+                                        <x-bxs-edit class="w-4 h-4" />
                                     </a>
                                     <form action="" method="POST" class="inline">
                                         @csrf @method('DELETE')
                                         <button type="submit"
                                             class="inline-flex items-center justify-center px-4 py-1.5 text-[11px] font-bold text-red-600 bg-white border border-red-200 rounded-md hover:bg-red-50 transition-all uppercase tracking-wider"
                                             onclick="return confirm('Hapus produk?')">
-                                            Hapus
+                                            <x-eos-delete class="w-4 h-4" />
                                         </button>
                                     </form>
                                 </div>

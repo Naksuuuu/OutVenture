@@ -8,19 +8,16 @@ use App\Models\Category;
 class Edit extends Component
 {
   public $category;
-  public $name_category;
-  public $description;
+  public $nama_category;
 
   protected $rules = [
-    'name_category' => 'required|string|max:255',
-    'description' => 'nullable|string',
+    'nama_category' => 'required|string|max:255'
   ];
 
   public function mount($categoryId)
   {
     $this->category = Category::findOrFail($categoryId);
-    $this->name_category = $this->category->name_category;
-    $this->description = $this->category->description;
+    $this->nama_category = $this->category->nama_category;
   }
 
   public function update()
@@ -28,8 +25,7 @@ class Edit extends Component
     $this->validate();
 
     $this->category->update([
-      'name_category' => $this->name_category,
-      'description' => $this->description,
+      'nama_category' => $this->nama_category
     ]);
 
     session()->flash('success', 'Category updated successfully!');

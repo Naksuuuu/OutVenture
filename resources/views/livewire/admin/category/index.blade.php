@@ -26,27 +26,18 @@
                     <div>
 
                         <h3 class="text-xl font-bold text-gray-800 group-hover:text-emerald-600 transition">
-                            {{ $category->name_category }}</h3>
-                        <p class="text-gray-400 text-sm mt-1 leading-relaxed">
-                            {{ Str::limit($category->description, 60) }}</p>
+                            {{ $category->nama_category }}</h3>
                     </div>
                     <div class="flex gap-2">
-
                         <a href="{{ route('admin.categories.edit', $category->id) }}"
-                            class="p-2 text-gray-400 hover:text-emerald-500 hover:bg-emerald-50 rounded-lg transition">
-                            ✏️
+                            class="inline-flex items-center justify-center px-4 py-1.5 text-[11px] font-bold text-indigo-600 bg-white border border-indigo-200 rounded-md hover:bg-indigo-50 transition-all uppercase tracking-wider">
+                            <x-bxs-edit class="w-4 h-4" />
                         </a>
 
-
-                        {{-- <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST"
-                            onsubmit="return confirm('Hapus kategori ini?')">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit"
-                                class="p-2 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition">
-                                🗑️
-                            </button>
-                        </form> --}}
+                        <button wire:click="deleteCategory({{ $category->id }})" wire:confirm="Hapus kategori ini?"
+                            class="inline-flex items-center justify-center px-4 py-1.5 text-[11px] font-bold text-red-600 bg-white border border-red-200 rounded-md hover:bg-red-50 transition-all uppercase tracking-wider">
+                            <x-eos-delete class="w-4 h-4" />
+                        </button>
                     </div>
                 </div>
 
@@ -54,7 +45,6 @@
                     <span class="text-emerald-600 font-bold text-sm bg-emerald-50 px-3 py-1 rounded-full">
                         {{ $category->products_count ?? 0 }} Products
                     </span>
-                    <span class="text-gray-300 text-xs font-medium">ID: #{{ $category->id }}</span>
                 </div>
             </div>
         @endforeach

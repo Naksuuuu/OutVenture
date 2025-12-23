@@ -18,7 +18,9 @@
         "laravel/framework": "^12.0",
         "laravel/socialite": "^5.24",
         "laravel/tinker": "^2.10.1",
-        "livewire/livewire": "^3.7"
+        "livewire/livewire": "^3.7",
+        "mallardduck/blade-boxicons": "^2.4",
+        "owenvoke/blade-fontawesome": "*"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
