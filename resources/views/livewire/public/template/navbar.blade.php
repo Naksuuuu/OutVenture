@@ -8,14 +8,14 @@
     </div>
 
     <div class="relative w-full flex mt-2 p-6 justify-between text-sm font-bold text-gray-700 tracking-wider">
-        <div class="w-full bg-white flex justify-center  absolute z-20">
+        {{-- <div class="w-full bg-white flex justify-center  absolute z-20">
             <form action="">
                 <input type="text"
                     class="w-full rounded-md border border-gray-300 bg-white px-3 py-1 text-sm shadow-sm placeholder-gray-400
                     focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
                     placeholder="Search">
             </form>
-        </div>
+        </div> --}}
         <div class="w-[10%] relative">
             <div class="absolute bg-transparent w-full h-full cursor-text">
 
@@ -55,7 +55,7 @@
                     </form>
                 </div>
             </div>
-            <a href="#" class="hover:text-black uppercase relative">
+            <a href="{{ route('user.orders.index') }}" class="hover:text-black uppercase relative">
                 <x-bytesize-cart class="w-5 h-5" />
                 <span
                     class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">

@@ -25,6 +25,7 @@ Route::get('products/{id}', PublicProductShow::class)->name('products.show');
 // User Profile
 Route::middleware('auth')->group(function () {
     Route::get('user/profile', App\Livewire\User\Profile::class)->name('user.profile');
+    Route::get('user/orders', App\Livewire\User\Order\Index::class)->name('user.orders.index');
 });
 
 // Auth Routes - Livewire

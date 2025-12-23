@@ -44,11 +44,11 @@
 
         {{-- Logo Pembayaran (Terpusat) --}}
         <div class="text-center py-3 flex justify-center items-center space-x-4">
-            <img src="{{ asset('images/logobca.jpg') }}" alt="BCA" class="h-6">
-            <img src="{{ asset('images/logomandiri.jpg') }}" alt="Mandiri" class="h-6">
-            <img src="{{ asset('images/logoqris.jpg') }}" alt="QRIS" class="h-6">
-            <img src="{{ asset('images/logogopay.jpg') }}" alt="Gopay" class="h-6">
-            <img src="{{ asset('images/logodana.jpg') }}" alt="Dana" class="h-6">
+            <img src="{{ asset('storage/logobca.jpg') }}" alt="BCA" class="h-6">
+            <img src="{{ asset('storage/logomandiri.jpg') }}" alt="Mandiri" class="h-6">
+            <img src="{{ asset('storage/logoqris.jpg') }}" alt="QRIS" class="h-6">
+            <img src="{{ asset('storage/logogopay.jpg') }}" alt="Gopay" class="h-6">
+            <img src="{{ asset('storage/logodana.jpg') }}" alt="Dana" class="h-6">
         </div>
 
         <p class="text-center text-gray-500 text-xs mt-6">
