@@ -7,16 +7,19 @@
             class="text-3xl font-bold uppercase tracking-widest text-gray-800">OUTVENTURE</a>
     </div>
 
-    <div class="relative w-full flex mt-2 p-6 justify-between text-sm font-bold text-gray-700 tracking-wider">
-        {{-- <div class="w-full bg-white flex justify-center  absolute z-20">
-            <form action="">
-                <input type="text"
+    <div x-data="{ open: false }" x-effect="if (open) { $nextTick(() => { $refs.searchInput.focus() }) }"
+        class="relative w-full h-8 flex mt-2 justify-between text-sm font-bold text-gray-700 tracking-wider">
+        <div x-show="open"
+            class="w-full left-0 -top-2  bg-white flex justify-center items-center h-10 gap-2 absolute z-20">
+            <form action="" class="w-[80%]">
+                <input type="text" x-ref="searchInput"
                     class="w-full rounded-md border border-gray-300 bg-white px-3 py-1 text-sm shadow-sm placeholder-gray-400
                     focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
                     placeholder="Search">
             </form>
-        </div> --}}
-        <div class="w-[10%] relative">
+            <x-hugeicons-cancel-01 class="w-6 h-6" @click="open = false" />
+        </div>
+        <div class="w-[10%] relative" @click="open = !open">
             <div class="absolute bg-transparent w-full h-full cursor-text">
 
             </div>
@@ -64,4 +67,6 @@
             </a>
         </div>
     </div>
+    </div>
+
 </nav>
