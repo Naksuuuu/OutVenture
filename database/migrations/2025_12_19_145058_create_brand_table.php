@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('nama_brand');
             $table->string('image')->nullable()->default(null);
             $table->string('wide_image')->nullable()->default(null);
+            $table->string('logo')->nullable()->default(null);
+            $table->boolean('is_trusted')->default(false);
             $table->timestamps();
         });
     }
