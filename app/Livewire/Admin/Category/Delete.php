@@ -2,20 +2,17 @@
 
 namespace App\Livewire\Admin\Category;
 
+use App\Models\Category;
 use Livewire\Component;
 
 class Delete extends Component
 {
 
     public $category;
-    public $nama_category;
-    public $categoryId;
-    
-    public function mount($categoryId)
+
+    public function mount($category)
     {
-        $this->categoryId = $categoryId;
-        $this->category = \App\Models\Category::findOrFail($categoryId);
-        $this->nama_category = $this->category->nama_category;
+        $this->category = Category::findOrFail($category);
     }
     public function delete()
     {

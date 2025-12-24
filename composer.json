@@ -10,20 +10,14 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "afatmustafa/blade-hugeicons": "^1.0",
-        "andreiio/blade-remix-icon": "^3.7",
-        "blade-ui-kit/blade-heroicons": "^2.6",
-        "codeat3/blade-bytesize-icons": "^1.6",
-        "codeat3/blade-eos-icons": "^1.15",
-        "codeat3/blade-uiw-icons": "^1.6",
         "laravel/framework": "^12.0",
         "laravel/socialite": "^5.24",
         "laravel/tinker": "^2.10.1",
         "livewire/livewire": "^3.7",
-        "mallardduck/blade-boxicons": "^2.4",
-        "owenvoke/blade-fontawesome": "^3.0"
+        "mallardduck/blade-lucide-icons": "^1.26"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.16",
         "fakerphp/faker": "^1.23",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.24",

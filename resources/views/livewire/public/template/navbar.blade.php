@@ -17,11 +17,10 @@
                     focus:border-black focus:outline-none focus:ring-1 focus:ring-black"
                     placeholder="Search">
             </form>
-            <x-hugeicons-cancel-01 class="w-6 h-6" @click="open = false" />
+            <x-lucide-x @click="open = false" />
         </div>
         <div class="w-[10%] relative" @click="open = !open">
             <div class="absolute bg-transparent w-full h-full cursor-text">
-
             </div>
             <form action="">
                 <input type="text"
@@ -41,8 +40,9 @@
 
                 <button @click="open = !open" @click.away="open = false"
                     class="flex items-center gap-2 hover:text-black uppercase cursor-pointer">
-                    <x-uiw-user class="w-5 h-5" />
-                    <x-uiw-up class="w-3 h-3 transition-transform duration-200" x-bind:class="{ 'rotate-180': open }" />
+                    <x-lucide-user-round />
+                    <x-lucide-chevron-up class="w-3 h-3 transition-transform duration-200"
+                        x-bind:class="{ 'rotate-180': open }" />
                 </button>
 
                 <div x-show="open" @click.away="open = false" @mouseleave="open = false" x-transition
@@ -59,14 +59,13 @@
                 </div>
             </div>
             <a href="{{ route('user.orders.index') }}" class="hover:text-black uppercase relative">
-                <x-bytesize-cart class="w-5 h-5" />
+                <x-lucide-shopping-cart />
                 <span
                     class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
                     1
                 </span>
             </a>
         </div>
-    </div>
     </div>
 
 </nav>

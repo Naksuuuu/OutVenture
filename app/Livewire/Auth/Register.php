@@ -17,9 +17,9 @@ class Register extends Component
 
   protected $rules = [
     'nama_lengkap' => 'required|string|max:255',
-    'no_telepon' => 'required|string|max:15|unique:User,no_telepon',
+    'no_telepon' => 'required|string|max:15|unique:users,no_telepon',
     'alamat' => 'required|string|max:255',
-    'email' => 'required|string|email|max:255|unique:User,email',
+    'email' => 'required|string|email|max:255|unique:users,email',
     'password' => 'required|string|min:8|confirmed',
   ];
 

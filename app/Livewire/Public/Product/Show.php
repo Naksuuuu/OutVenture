@@ -11,7 +11,12 @@ class Show extends Component
 
   public function mount($id)
   {
-    $this->product = Product::with(['category', 'variants', 'brand'])->findOrFail($id);
+    $this->product = Product::with([
+      'category', 
+      'brand',
+      'variants.color',
+      'variants.specs.size'
+    ])->findOrFail($id);
   }
 
   public function render()

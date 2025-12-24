@@ -7,7 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Color;
-use App\Models\Size;
+use App\Models\SizeValue;
 use App\Models\ProductVariant;
 use App\Models\ProductVariantSpec;
 
@@ -92,7 +92,7 @@ class Edit extends Component
     $categories = Category::all();
     $brands = Brand::all();
     $colors = Color::all();
-    $sizes = Size::where('id_category', $this->product->id_category)->get();
+    $sizes = SizeValue::where('id_size_group', $this->product->category->id_size_group)->get();
 
     return view('livewire.admin.product.edit', [
       'categories' => $categories,

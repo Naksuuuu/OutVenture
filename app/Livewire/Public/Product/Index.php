@@ -28,17 +28,41 @@ class Index extends Component
 
   public function render()
   {
-    $query = Product::with(['category', 'variants.specs', 'brand'])->whereHas('variants', function ($variant) {
-      $variant->whereHas('specs');
-    });
+    $query = Product::query()
+      ->with([
+        'category:id,nama_category',
+        'brand:id,nama_brand',
+        'variants:id,id_product,id_color,image'
+      ])
+      ->whereExists(function ($subquery) {
+        $subquery->select(\DB::raw(1))
+          ->from('product_variants')
+          ->whereColumn('product_variants.id_product', 'products.id')
+          ->whereExists(function ($specQuery) {
+            $specQuery->select(\DB::raw(1))
+              ->from('product_variant_specs')
+              ->whereColumn('product_variant_specs.id_variant', 'product_variants.id');
+          });
+      });
 
     if ($this->category) {
       $query->whereHas('category', function ($q) {
-        $q->where('name_category', $this->category);
+        $q->where('nama_category', $this->category);
       });
     }
 
     $products = $query->orderBy('id', 'desc')->paginate(12);
+
+    // Load specs untuk produk yang sudah di-paginate saja
+    $products->load(['variants.specs:id,id_variant,harga,stok']);
+
+    // Hitung harga minimum untuk setiap produk
+    $products->getCollection()->transform(function ($product) {
+      $allSpecs = $product->variants->flatMap->specs;
+      $product->min_price = $allSpecs->isNotEmpty() ? $allSpecs->min('harga') : 0;
+      $product->variants_count = $product->variants->count();
+      return $product;
+    });
 
     return view('livewire.public.product.index', [
       'products' => $products

@@ -16,7 +16,7 @@ class Create extends Component
     public $isOpen;
 
     protected $rules = [
-        'id_color' => 'required|exists:Color,id',
+        'id_color' => 'required|exists:colors,id',
     ];
 
 

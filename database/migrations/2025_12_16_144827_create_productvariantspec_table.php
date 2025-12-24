@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ProductVariantSpec', function (Blueprint $table) {
+        Schema::create('product_variant_specs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_variant')->constrained('ProductVariant')->onDelete('cascade');
-            $table->foreignId('id_size')->constrained('Size')->onDelete('cascade');
+            $table->foreignId('id_variant')->constrained('product_variants')->onDelete('cascade');
+            $table->foreignId('id_size_value')->constrained('size_values')->onDelete('cascade');
             $table->string('sku')->unique();
             $table->decimal('harga', 10, 2);
             $table->integer('stok');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ProductVariantSpec');
+        Schema::dropIfExists('product_variant_specs');
     }
 };

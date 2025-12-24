@@ -10,7 +10,8 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\ProductVariantSpec;
-use App\Models\Size;
+use App\Models\SizeGroup;
+use App\Models\SizeValue;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -57,7 +58,7 @@ class DatabaseSeeder extends Seeder
             Color::create($color);
         }
 
-        // 1. Categories + Sizes (list-based to preserve semua size)
+        // 1. Categories + SizeGroups + SizeValues (list-based to preserve semua size)
         $categories = [
             ['id' => 1, 'nama_category' => 'Tenda', 'sizes' => ['2 Orang', '4 Orang', '6 Orang']],
             ['id' => 2, 'nama_category' => 'Sepatu', 'sizes' => ['38', '39', '40', '41', '42', '43']],
@@ -70,20 +71,29 @@ class DatabaseSeeder extends Seeder
         ];
 
         $categoryIdMap = [];
-        $sizeLookup = [];
+        $sizeLookup = []; // [category_id => [label => size_value_id]]
 
         foreach ($categories as $category) {
+            // create a size group for this category
+            $group = SizeGroup::create([
+                'nama_group' => $category['nama_category'] . ' sizes',
+            ]);
+
+            // create category and attach size_group
             $categoryModel = Category::create([
                 'id' => $category['id'],
                 'nama_category' => $category['nama_category'],
+                'id_size_group' => $group->id,
             ]);
 
             $categoryIdMap[$category['id']] = $categoryModel->id;
 
+            $sort = 1;
             foreach ($category['sizes'] as $sizeLabel) {
-                $sizeModel = Size::create([
+                $sizeModel = SizeValue::create([
+                    'id_size_group' => $group->id,
                     'label_size' => $sizeLabel,
-                    'id_category' => $categoryModel->id,
+                    'sort_order' => $sort++,
                 ]);
 
                 $sizeLookup[$categoryModel->id][$sizeLabel] = $sizeModel->id;
@@ -305,9 +315,9 @@ class DatabaseSeeder extends Seeder
                 ]);
 
                 foreach ($variant['specs'] ?? [] as $spec) {
-                    $sizeId = Size::where('id_category', $productModel->id_category)
-                        ->where('label_size', $spec['size_label'])
-                        ->value('id');
+                    $sizeId = SizeValue::whereHas('group', function($q) use ($productModel) {
+                        $q->where('id', $productModel->category->id_size_group);
+                    })->where('label_size', $spec['size_label'])->value('id');
 
                     // Generate SKU: PREFIX-SIZE (contoh: SPT-TRL-BLU-40)
                     $sizeForSku = str_replace(' ', '', $spec['size_label']);
@@ -315,7 +325,7 @@ class DatabaseSeeder extends Seeder
 
                     ProductVariantSpec::create([
                         'id_variant' => $variantModel->id,
-                        'id_size' => $sizeId,
+                        'id_size_value' => $sizeId,
                         'sku' => $sku,
                         'harga' => $spec['harga'],
                         'stok' => $spec['stok'],
@@ -460,7 +470,8 @@ class DatabaseSeeder extends Seeder
         $this->command->info('   - Categories: ' . Category::count());
         $this->command->info('   - Brands: ' . Brand::count());
         $this->command->info('   - Colors: ' . Color::count());
-        $this->command->info('   - Sizes: ' . Size::count());
+        $this->command->info('   - Size Groups: ' . SizeGroup::count());
+        $this->command->info('   - Size Values: ' . SizeValue::count());
         $this->command->info('   - Products: ' . Product::count());
         $this->command->info('   - Product Variants: ' . ProductVariant::count());
         $this->command->info('   - Product Variant Specs: ' . ProductVariantSpec::count());

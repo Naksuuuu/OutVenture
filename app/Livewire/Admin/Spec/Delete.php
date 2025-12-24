@@ -5,7 +5,6 @@ namespace App\Livewire\Admin\Spec;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\ProductVariantSpec;
-use App\Models\Size;
 use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 

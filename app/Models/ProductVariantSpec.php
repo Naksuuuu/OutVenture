@@ -8,13 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ProductVariantSpec extends Model
 {
   use HasFactory;
-
-  protected $table = 'ProductVariantSpec';
+  protected $table = 'product_variant_specs';
   protected $primaryKey = 'id';
 
   protected $fillable = [
     'id_variant',
-    'id_size',
+    'id_size_value',
     'sku',
     'harga',
     'stok',
@@ -27,6 +26,11 @@ class ProductVariantSpec extends Model
 
   public function size()
   {
-    return $this->belongsTo(Size::class, 'id_size', 'id');
+    return $this->belongsTo(SizeValue::class, 'id_size_value', 'id');
+  }
+
+  public function orderItems()
+  {
+    return $this->hasMany(OrderItem::class, 'id_variant_spec', 'id');
   }
 }

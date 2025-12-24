@@ -10,24 +10,26 @@ use App\Models\Brand;
 class Create extends Component
 {
   public $nama_product = '';
-  public $brand = '';
+  public $id_brand = '';
   public $deskripsi = '';
   public $id_category = '';
 
   protected $rules = [
     'nama_product' => 'required|string|max:255',
-    'brand' => 'required|string|max:255',
+    'id_brand' => 'required|exists:brands,id',
     'deskripsi' => 'nullable|string',
     'id_category' => 'required|exists:categories,id',
   ];
 
-  public function save()
+  public function saveProduct()
   {
+
+
     $this->validate();
 
     Product::create([
       'nama_product' => $this->nama_product,
-      'brand' => $this->brand,
+      'id_brand' => $this->id_brand,
       'deskripsi' => $this->deskripsi,
       'id_category' => $this->id_category,
     ]);
@@ -40,9 +42,11 @@ class Create extends Component
   public function render()
   {
     $categories = Category::all();
+    $brands = Brand::all();
 
     return view('livewire.admin.product.create', [
-      'categories' => $categories
+      'categories' => $categories,
+      'brands' => $brands,
     ])->layout('components.layouts.admin', ['title' => 'Create Product']);
   }
 }
