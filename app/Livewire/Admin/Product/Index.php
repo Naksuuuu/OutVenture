@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Product;
 
 use Livewire\Component;
+use Illuminate\Support\Facades\Cache;
 use Livewire\WithPagination;
 use App\Models\Product;
 
@@ -48,10 +49,16 @@ class Index extends Component
       $query->where('nama_product', 'like', '%' . $this->search . '%');
     }
 
-    $products = $query->paginate(12);
+    $cacheKey = 'admin_products_total_' . md5($this->search . '|' . $this->category);
+    $totalProducts = Cache::remember($cacheKey, 10, function () use ($query) {
+      return $query->toBase()->getCountForPagination();
+    });
+
+    $products = $query->simplePaginate(12);
 
     return view('livewire.admin.product.index', [
-      'products' => $products
+      'products' => $products,
+      'totalProducts' => $totalProducts,
     ])->layout('components.layouts.admin', ['title' => 'Products Management']);
   }
 }

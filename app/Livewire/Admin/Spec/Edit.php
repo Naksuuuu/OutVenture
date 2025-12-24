@@ -5,7 +5,7 @@ namespace App\Livewire\Admin\Spec;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\ProductVariantSpec;
-use App\Models\Size;
+use App\Models\SizeValue;
 use Livewire\Component;
 
 class Edit extends Component
@@ -14,14 +14,14 @@ class Edit extends Component
     public $spec;
     public $product;
     public $variant;
-    public $id_size;
+    public $id_size_value;
     public $harga;
     public $sku;
     public $stok;
     public $isOpen;
 
     protected $rules = [
-        'id_size' => 'required|exists:Size,id',
+        'id_size_value' => 'required|exists:size_values,id',
         'harga' => 'required|numeric|min:0',
         'sku' => 'required|string|max:100',
         'stok' => 'required|integer|min:0',
@@ -34,7 +34,7 @@ class Edit extends Component
         $this->variant = $variant;
         $this->product = $product;
         $this->sku = $this->spec->sku;
-        $this->id_size = $this->spec->id_size;
+        $this->id_size_value = $this->spec->id_size_value;
         $this->harga = $this->spec->harga;
         $this->stok = $this->spec->stok;
     }
@@ -46,7 +46,7 @@ class Edit extends Component
 
         ProductVariantSpec::where('id', $this->spec->id)->update([
             'id_variant' => $this->variant->id,
-            'id_size' => $this->id_size,
+            'id_size_value' => $this->id_size_value,
             'harga' => $this->harga,
             'sku' => strtoupper($this->sku),
             'stok' => $this->stok,
@@ -63,7 +63,7 @@ class Edit extends Component
     public function render()
     {
         return view('livewire.admin.spec.edit', [
-            'sizes' => Size::where('id_category', $this->product->id_category)->get(),
+            'sizes' => SizeValue::where('id_size_group', $this->product->category->id_size_group)->get(),
         ]);
     }
 }

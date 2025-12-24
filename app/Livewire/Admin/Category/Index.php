@@ -4,15 +4,15 @@ namespace App\Livewire\Admin\Category;
 
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Url; // Tambahkan ini
 use App\Models\Category;
 
 class Index extends Component
 {
   use WithPagination;
 
+  #[Url(history: true, keep: true)]
   public $search = '';
-
-  protected $queryString = ['search'];
 
   public function updatingSearch()
   {
@@ -30,13 +30,13 @@ class Index extends Component
 
   public function render()
   {
-    $query = Category::query();
-
-    if ($this->search) {
-      $query->where('nama_category', 'like', '%' . $this->search . '%');
-    }
-
-    $categories = $query->withCount('products')->paginate(10);
+    $categories = Category::query()
+      ->when($this->search, function ($query) {
+        $query->where('nama_category', 'like', '%' . $this->search . '%');
+      })
+      ->withCount('products')
+      ->latest() // Selalu urutkan agar user tidak bingung data baru di mana
+      ->simplePaginate(10);
 
     return view('livewire.admin.category.index', [
       'categories' => $categories

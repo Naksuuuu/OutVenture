@@ -13,7 +13,7 @@
             'bg-green-500 text-black shadow-md' => $activeRoute === 'admin.dashboard',
             'text-gray-800 hover:bg-gray-300' => $activeRoute !== 'admin.dashboard',
         ])>
-            <x-eos-home class="h-6 w-6 fill-current shrink-0" />
+            <x-lucide-layout-dashboard class="shrink-0" />
             <span @class(['transition-all duration-400', 'hidden' => $isCollapsed])>Dashboard</span>
         </a>
 
@@ -27,7 +27,7 @@
                 $activeRoute,
                 'admin.products'),
         ])>
-            <x-heroicon-o-shopping-bag class="h-6 w-6 shrink-0" />
+            <x-lucide-handbag class=" shrink-0" />
             <span @class(['hidden' => $isCollapsed])>Products</span>
         </a>
 
@@ -41,8 +41,35 @@
                 $activeRoute,
                 'admin.categories'),
         ])>
-            <x-heroicon-o-squares-2x2 class="h-6 w-6 shrink-0" />
+            <x-lucide-library-big class=" shrink-0" />
             <span @class(['hidden' => $isCollapsed])>Categories</span>
+        </a>
+
+        <a href="{{ route('admin.brands.index') }}" wire:navigate @class([
+            'flex items-center space-x-3 p-3 rounded-lg font-semibold',
+            'bg-green-500 text-black shadow-md' => str_starts_with(
+                $activeRoute,
+                'admin.brands'),
+            'text-gray-800 hover:bg-gray-300' => !str_starts_with(
+                $activeRoute,
+                'admin.brands'),
+        ])>
+            <x-lucide-library-big class=" shrink-0" />
+            <span @class(['hidden' => $isCollapsed])>Brands</span>
+        </a>
+
+
+        <a href="{{ route('admin.sizes.index') }}" wire:navigate @class([
+            'flex items-center space-x-3 p-3 rounded-lg font-semibold',
+            'bg-green-500 text-black shadow-md' => str_starts_with(
+                $activeRoute,
+                'admin.sizes'),
+            'text-gray-800 hover:bg-gray-300' => !str_starts_with(
+                $activeRoute,
+                'admin.sizes'),
+        ])>
+            <x-lucide-library-big class="fill-current shrink-0" />
+            <span @class(['hidden' => $isCollapsed])>Sizes</span>
         </a>
     </div>
 </aside>

@@ -11,10 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Size', function (Blueprint $table) {
+        Schema::create('size_values', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_size_group')->constrained('size_groups')->onDelete('cascade');
             $table->string('label_size');
-            $table->foreignId('id_category')->constrained('Category')->onDelete('cascade')->nullable();
+            $table->integer('sort_order')->default(0);
             $table->timestamps();
         });
     }
@@ -24,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Size');
+        Schema::dropIfExists('size_values');
     }
 };

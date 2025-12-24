@@ -12,15 +12,23 @@ use App\Livewire\Admin\Product\Create as DashboardProductCreate;
 use App\Livewire\Admin\Category\Index as DashboardCategoryIndex;
 use App\Livewire\Admin\Category\Create as DashboardCategoryCreate;
 use App\Livewire\Admin\Category\Edit as DashboardCategoryEdit;
+use App\Livewire\Admin\Category\Show as DashboardCategoryShow;
+
+use App\Livewire\Admin\Brand\Index as DashboardBrandIndex;
+use App\Livewire\Admin\Size\Index as DashboardSizeIndex;
 
 
 use App\Livewire\Public\Product\Index as PublicProductIndex;
+use App\Livewire\Public\Brand\Index as PublicBrandIndex;
 use App\Livewire\Public\Product\Show as PublicProductShow;
+
 
 // Public Routes - Livewire
 Route::get('/', App\Livewire\Public\Home::class)->name('home');
 Route::get('products', PublicProductIndex::class)->name('products.index');
 Route::get('products/{id}', PublicProductShow::class)->name('products.show');
+
+Route::get('brands', PublicBrandIndex::class)->name('brands.index');
 
 // User Profile
 Route::middleware('auth')->group(function () {
@@ -42,7 +50,7 @@ Route::post('/logout', function () {
 })->middleware('auth')->name('auth.logout');
 
 // Admin Routes - Livewire
-Route::middleware('auth')->prefix('dashboard')->name('admin.')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group(function () {
     Route::get('/', App\Livewire\Admin\Dashboard::class)->name('dashboard');
 
     // Products Management
@@ -50,20 +58,17 @@ Route::middleware('auth')->prefix('dashboard')->name('admin.')->group(function (
     Route::get('products/create', DashboardProductCreate::class)->name('products.create');
     Route::get('products/{productId}/edit', DashboardProductEdit::class)->name('products.edit');
 
-    // Product Variant Routes - Keep controllers for API-like operations
-    // Route::post('products/{product}/variants', [ProductVarianController::class, 'store'])->name('products.variants.store');
-    // Route::put('products/{product}/variants/{variant}', [ProductVarianController::class, 'update'])->name('products.variants.update');
-    // Route::delete('products/{product}/variants/{variant}', [ProductVarianController::class, 'destroy'])->name('products.variants.destroy');
-
-    // Product Variant Specification Routes
-    // Route::post('products/{product}/variants/{variant}/specs', [ProductsVariantSpecController::class, 'store'])->name('products.variants.specs.store');
-    // Route::put('products/{product}/variants/{variant}/specs/{spec}', [ProductsVariantSpecController::class, 'update'])->name('products.variants.specs.update');
-    // Route::delete('products/{product}/variants/{variant}/specs/{spec}', [ProductsVariantSpecController::class, 'destroy'])->name('products.variants.specs.destroy');
-
     // Categories Management
     Route::get('categories', DashboardCategoryIndex::class)->name('categories.index');
     Route::get('categories/create', DashboardCategoryCreate::class)->name('categories.create');
     Route::get('categories/{categoryId}/edit', DashboardCategoryEdit::class)->name('categories.edit');
+    Route::get('categories/{categoryId}/show', DashboardCategoryShow::class)->name('categories.show');
+
+    // Brands Management
+    Route::get('brands', DashboardBrandIndex::class)->name('brands.index');
+
+    // Size Management
+    Route::get('sizes', DashboardSizeIndex::class)->name('sizes.index');
 });
 
 // Google OAuth Routes

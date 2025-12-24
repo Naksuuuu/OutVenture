@@ -12,12 +12,6 @@
 
     <div class="mx-auto">
 
-        <nav class="flex mb-4 text-sm text-slate-500 space-x-2" aria-label="Breadcrumb">
-            <span>Produk</span>
-            <span>/</span>
-            <span class="text-indigo-600 font-medium">Edit Produk</span>
-        </nav>
-
         <div
             class="bg-white rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-slate-100 overflow-hidden">
 
@@ -204,7 +198,7 @@
         </div>
 
         <div class="bg-slate-50/80 px-8 py-6 flex items-center justify-center border-t border-slate-100">
-            <button type="button" onclick="window.history.back();"
+            <a href="{{ route('admin.products.index') }}" wire:navigate
                 class="text-slate-500 hover:text-slate-800 text-sm font-bold uppercase tracking-widest transition-colors flex items-center group">
                 <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none"
                     stroke="currentColor" viewBox="0 0 24 24">
@@ -213,7 +207,7 @@
                     </path>
                 </svg>
                 Kembali
-            </button>
+            </a>
         </div>
     </div>
 
