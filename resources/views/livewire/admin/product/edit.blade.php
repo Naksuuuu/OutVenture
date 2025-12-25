@@ -7,9 +7,6 @@
         </div>
     @endif
 
-
-
-
     <div class="mx-auto">
 
         <div
