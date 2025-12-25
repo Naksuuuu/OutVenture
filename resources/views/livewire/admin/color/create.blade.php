@@ -17,15 +17,15 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold tracking-tight text-slate-800">
-                            Edit Warna</h1>
-                        <p class="text-sm text-slate-500 mt-1">{{ $color->nama_warna }}</p>
+                            Tambah Warna Baru</h1>
+                        <p class="text-sm text-slate-500 mt-1">Buat warna produk baru</p>
                     </div>
                 </div>
             </div>
 
             <div class="p-8 md:p-10 space-y-10">
 
-                <form wire:submit.prevent="update">
+                <form wire:submit.prevent="save">
                     <section>
                         <div class="flex items-center space-x-2 mb-6">
                             <span class="text-indigo-600 font-bold text-lg">01</span>
@@ -40,7 +40,7 @@
                                     class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Nama
                                     Warna
                                 </label>
-                                <input wire:model="nama_warna" type="text" placeholder="Contoh: Merah, Biru, Hijau"
+                                <input wire:model.live="nama_warna" type="text" placeholder="Contoh: Merah, Biru, Hijau"
                                     class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium">
                                 @error('nama_warna')
                                     <span
@@ -86,6 +86,9 @@
                                         <p class="text-xs text-slate-500">{{ $colorHex }}</p>
                                     </div>
                                 </div>
+                                <p class="text-xs text-slate-500 mt-2">
+                                    <span class="font-bold">Warna yang didukung:</span> Merah, Biru, Hijau, Kuning, Orange, Ungu, Pink, Coklat, Hitam, Putih, Abu-abu, Silver, Gold, Navy, Maroon, Tosca, Cream
+                                </p>
                             </div>
                         </div>
                     </section>
@@ -93,7 +96,7 @@
                     <div class="flex items-center justify-end px-8 py-6 mt-8">
                         <button type="submit"
                             class="bg-black/80 cursor-pointer hover:bg-black text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
-                            Simpan Perubahan
+                            Simpan Warna
                         </button>
                     </div>
                 </form>
