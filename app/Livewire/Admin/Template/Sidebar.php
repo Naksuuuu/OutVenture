@@ -59,6 +59,12 @@ class Sidebar extends Component
                 'label' => 'Sizes',
                 'matchExact' => false,
             ],
+            [
+                'route' => 'admin.orders.index',
+                'icon' => 'receipt',
+                'label' => 'Orders',
+                'matchExact' => false,
+            ],
         ];
     }
 
