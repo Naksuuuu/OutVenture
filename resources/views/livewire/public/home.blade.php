@@ -65,7 +65,7 @@
 
         <div class="flex w-full overflow-x-auto px-10 flex-nowrap gap-10 lg:gap-20 scrollbar-hide">
 
-            @foreach ($categories as $category)
+            @forelse ($categories as $category)
                 <div class="flex flex-col items-center gap-2 min-w-[120px]">
                     @if ($category->image)
                         <div class="w-30 h-30 lg:w-40 lg:h-40 bg-gray-200 rounded-lg flex items-center justify-center">
@@ -85,7 +85,11 @@
                     <p class="uppercase font-medium tracking-tight text-center">{{ $category->nama_category }}</p>
 
                 </div>
-            @endforeach
+            @empty
+                <div class="w-full text-center py-12">
+                    <p class="text-gray-500">Belum ada kategori</p>
+                </div>
+            @endforelse
 
         </div>
 
@@ -112,13 +116,13 @@
 
 
 
-            @foreach ($brands as $brand)
+
+            @forelse ($brands as $brand)
                 <div
                     class="w-full lg:w-1/4 md:w-1/2 px-2 mb-6 lg:mb-0 transition-all duration-300 delay-150 lg:group-hover/brands:w-[22%] lg:hover:!w-[34%]">
 
                     <div class="relative text-white rounded-lg overflow-hidden shadow-lg group">
 
-                        {{-- GAMBAR BRAND --}}
                         @if ($brand->image)
                             <img src="{{ asset('storage/' . $brand->image) }}"
                                 class="w-full h-80 object-cover opacity-80 group-hover:opacity-90 transition duration-300"
@@ -134,7 +138,6 @@
                             </div>
                         @endif
 
-                        {{-- OVERLAY DAN KONTEN --}}
                         <div
                             class="absolute inset-0 p-6 bg-gradient-to-t from-black/60 to-black/10 flex flex-col justify-end">
 
@@ -152,7 +155,14 @@
                     </div>
 
                 </div>
-            @endforeach
+            @empty
+                <div class="w-full text-center py-12">
+                    <p class="text-gray-500">Belum ada brand pilihan</p>
+                </div>
+            @endforelse
+
+
+
 
         </div>
 
