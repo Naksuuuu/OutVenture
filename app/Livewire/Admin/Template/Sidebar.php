@@ -65,6 +65,12 @@ class Sidebar extends Component
                 'label' => 'Orders',
                 'matchExact' => false,
             ],
+            [
+                'route' => 'admin.colors.index',
+                'icon' => 'paint-bucket',
+                'label' => 'Colors',
+                'matchExact' => false,
+            ],
         ];
     }
 
