@@ -1,119 +1,129 @@
-<div class="py-12 px-4 sm:px-6">
-    <div class="mx-auto">
+<div class="py-12 px-4 sm:px-6 bg-slate-50/50 min-h-screen">
+    <div class="max-w-4xl mx-auto">
 
-        <div
-            class="bg-white rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-slate-100 overflow-hidden">
-
-            <div
-                class="glass-header px-8 py-8 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div class="flex items-center space-x-4">
-                    <div
-                        class="w-12 h-12 bg-black rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                            </path>
+        <div class="bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+            
+            <div class="px-10 py-10 border-b border-slate-50 bg-slate-900 text-white relative">
+                <div class="relative z-10 flex items-center gap-6">
+                    <div class="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/20 rotate-3 transition-transform hover:rotate-0">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"></path>
                         </svg>
                     </div>
                     <div>
-                        <h1 class="text-2xl font-bold tracking-tight text-slate-800">
-                            Tambah Category</h1>
-                        <p class="text-sm text-slate-500 mt-1">Isi Formulir Dibawah untuk menambahkan category baru</p>
+                        <h1 class="text-3xl font-black tracking-tight uppercase italic">Tambah Kategori</h1>
+                        <p class="text-slate-400 font-medium mt-1">Lengkapi formulir di bawah untuk memperluas katalog OutVenture.</p>
                     </div>
+                </div>
+                <div class="absolute top-0 right-0 p-8 opacity-10">
+                    <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"></path>
+                    </svg>
                 </div>
             </div>
 
-            <div class="p-8 md:p-10 space-y-10">
+            <div class="p-8 md:p-12">
+                <form wire:submit.prevent="save" class="space-y-10">
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        
+                        <div class="space-y-8">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-black text-sm text-sans">01</span>
+                                <h2 class="font-black text-slate-800 uppercase tracking-widest text-xs">Informasi Dasar</h2>
+                            </div>
 
-                <form wire:submit.prevent="save">
-                    <section>
-                        <div class="flex items-center space-x-2 mb-6">
-                            <span class="text-indigo-600 font-bold text-lg">01</span>
-                            <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">
-                                Informasi Category
-                            </h2>
+                            <div class="group">
+                                <label class="block text-[11px] font-black text-slate-400 uppercase mb-3 tracking-[0.2em] group-focus-within:text-emerald-500 transition-colors">
+                                    Nama Kategori
+                                </label>
+                                <input wire:model="nama_category" type="text" placeholder="Contoh: Tenda Camping"
+                                    class="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-emerald-500 transition-all font-bold placeholder:text-slate-300">
+                                @error('nama_category') 
+                                    <span class="text-rose-500 text-[10px] mt-2 font-black uppercase block tracking-tight">{{ $message }}</span> 
+                                @enderror
+                            </div>
+
+                            <div class="group">
+                                <label class="block text-[11px] font-black text-slate-400 uppercase mb-3 tracking-[0.2em] group-focus-within:text-emerald-500 transition-colors">
+                                    Kelompok Ukuran
+                                </label>
+                                <div class="relative">
+                                    <select wire:model="id_size_group"
+                                        class="w-full bg-slate-50 border-none rounded-2xl px-6 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-emerald-500 transition-all font-bold cursor-pointer appearance-none">
+                                        <option value="">Pilih Size Group</option>
+                                        @foreach ($sizes as $size)
+                                            <option value="{{ $size->id }}">{{ $size->nama_group }}</option>
+                                        @endforeach
+                                    </select>
+                                    <div class="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-slate-400">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                    </div>
+                                </div>
+                                @error('id_size_group') 
+                                    <span class="text-rose-500 text-[10px] mt-2 font-black uppercase block tracking-tight">{{ $message }}</span> 
+                                @enderror
+                            </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                            <div class="md:col-span-4">
-                                <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Nama
-                                    Category
-                                </label>
-                                <input wire:model="nama_category" type="text"
-                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium">
-                                @error('nama_category')
-                                    <span
-                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="md:col-span-4">
-                                <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Kategori</label>
-                                <select wire:model="id_size_group"
-                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 appearance-none font-medium cursor-pointer">
-                                    <option value="" selected>Pilih Size Group</option>
-                                    @foreach ($sizes as $size)
-                                        <option value="{{ $size->id }}">
-                                            {{ $size->nama_group }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('id_size_group')
-                                    <span
-                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="md:col-span-4">
-                                <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Image
-                                </label>
-                                <input wire:model="image" type="file"
-                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium">
-                                @error('image')
-                                    <span
-                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
-                                @enderror
+                        <div class="space-y-8">
+                            <div class="flex items-center gap-3 mb-2">
+                                <span class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-black text-sm text-sans">02</span>
+                                <h2 class="font-black text-slate-800 uppercase tracking-widest text-xs">Visual Kategori</h2>
                             </div>
 
-                            @if ($image)
-                                Photo Preview:
-                                <img src="{{ $image->temporaryUrl() }}" style="width: 200px;">
-                            @endif
+                            <div class="relative group">
+                                <label class="block text-[11px] font-black text-slate-400 uppercase mb-3 tracking-[0.2em]">Upload Foto</label>
+                                <div class="aspect-square rounded-[2.5rem] bg-slate-50 border-2 border-dashed border-slate-200 flex flex-col items-center justify-center overflow-hidden transition-all group-hover:border-emerald-400 relative">
+                                    
+                                    @if ($image)
+                                        <img src="{{ $image->temporaryUrl() }}" class="w-full h-full object-cover">
+                                        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <p class="text-white font-black text-xs uppercase tracking-widest">Ganti Gambar</p>
+                                        </div>
+                                    @else
+                                        <div class="flex flex-col items-center p-6 text-center">
+                                            <svg class="w-12 h-12 text-slate-200 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Seret file atau klik untuk memilih</p>
+                                        </div>
+                                    @endif
 
-                            <div wire:loading wire:target="image">Mengunggah...</div>
+                                    <input type="file" wire:model="image" class="absolute inset-0 opacity-0 cursor-pointer">
+                                </div>
+
+                                <div wire:loading wire:target="image" class="absolute inset-0 bg-white/90 flex flex-col items-center justify-center rounded-[2.5rem] z-20">
+                                    <div class="w-8 h-8 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+                                    <p class="mt-4 text-[10px] font-black text-emerald-600 uppercase animate-pulse">Sedang Mengunggah...</p>
+                                </div>
+                            </div>
+                            @error('image') 
+                                <span class="text-rose-500 text-[10px] font-black uppercase block mt-2 tracking-tight">{{ $message }}</span> 
+                            @enderror
                         </div>
-                    </section>
+                    </div>
 
-                    <div class="flex items-center justify-end px-8 py-6" wire:loading.attr="disabled">
+                    <div class="flex items-center justify-between pt-10 border-t border-slate-50" wire:loading.attr="disabled">
+                        <a href="{{ route('admin.categories.index') }}" wire:navigate
+                            class="text-slate-400 hover:text-slate-900 text-[11px] font-black uppercase tracking-[0.2em] transition-colors flex items-center group">
+                            <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                            Kembali
+                        </a>
+                        
                         <button type="submit"
-                            class="bg-black/80 hover:bg-black text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
-                            Tmabah Category
+                            class="bg-emerald-600 hover:bg-slate-900 text-white px-10 py-5 rounded-2xl font-black text-xs shadow-xl shadow-emerald-100 transition-all active:scale-95 uppercase italic tracking-widest">
+                            Simpan Kategori Baru
                         </button>
                     </div>
                 </form>
-
-
-
-
-
-            </div>
-
-            <div class="bg-slate-50/80 px-8 py-6 flex items-center border-t border-slate-100">
-                <a href="{{ route('admin.categories.index') }}" wire:navigate
-                    class="text-slate-500 hover:text-slate-800 text-sm font-bold uppercase tracking-widest transition-colors flex items-center group">
-                    <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18">
-                        </path>
-                    </svg>
-                    Kembali
-                </a>
             </div>
         </div>
 
-        <p class="mt-8 text-center text-slate-400 text-xs tracking-wide uppercase">
-            &copy; 2025 Praktikum Web &bull; Management System
+        <p class="mt-8 text-center text-slate-400 text-[10px] font-black tracking-widest uppercase italic">
+            &copy; 2025 OutVenture &bull; Katalog Management System
         </p>
     </div>
+</div>
