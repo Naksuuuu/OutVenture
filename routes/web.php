@@ -106,3 +106,6 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group
 Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
 Route::get('auth/google/logout', [GoogleController::class, 'logout'])->name('google.logout');
+
+
+

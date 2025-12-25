@@ -32,7 +32,7 @@
         <div class="w-[80%] flex justify-center items-center gap-10">
             <a href="{{ route('home') }}" wire:navigate class="hover:text-black uppercase">home</a>
             <a href="{{ route('products.index') }}" wire:navigate class="hover:text-black uppercase">PRODUK</a>
-            <a href="#" wire:navigate class="hover:text-black uppercase">BRAND PILIHAN</a>
+            <a href="{{ route('brands.index') }}" wire:navigate class="hover:text-black uppercase">BRAND PILIHAN</a>
         </div>
         <div class="w-[10%] flex items-center gap-6">
 
