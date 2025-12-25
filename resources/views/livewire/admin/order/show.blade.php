@@ -13,8 +13,8 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold tracking-tight text-slate-800">
-                            Order Details</h1>
-                        <p class="text-sm text-slate-500 mt-1">Order #{{ $order->id }}</p>
+                            Detail Pesanan</h1>
+                        <p class="text-sm text-slate-500 mt-1">Pesanan #{{ $order->id }}</p>
                     </div>
                 </div>
                 <div>
@@ -22,13 +22,13 @@
                         <span
                             class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-100 text-emerald-800">
                             <x-lucide-check-circle class="w-4 h-4 mr-2" />
-                            Paid
+                            Lunas
                         </span>
                     @elseif ($order->status_pembayaran === 'pending')
                         <span
                             class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold bg-yellow-100 text-yellow-800">
                             <x-lucide-clock class="w-4 h-4 mr-2" />
-                            Pending
+                            Menunggu
                         </span>
                     @else
                         <span
@@ -46,14 +46,14 @@
                     <div class="flex items-center space-x-2 mb-6">
                         <span class="text-indigo-600 font-bold text-lg">01</span>
                         <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">
-                            Customer Information
+                            Informasi Pelanggan
                         </h2>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <p class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">
-                                Customer Name
+                                Nama Pelanggan
                             </p>
                             <div
                                 class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner">
@@ -73,7 +73,7 @@
 
                         <div>
                             <p class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">
-                                Order Date
+                                Tanggal Pesanan
                             </p>
                             <div
                                 class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner">
@@ -83,7 +83,7 @@
 
                         <div>
                             <p class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">
-                                Payment Status
+                                Status Pembayaran
                             </p>
                             <div
                                 class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner font-semibold">
@@ -97,7 +97,7 @@
                     <div class="flex items-center space-x-2 mb-6">
                         <span class="text-indigo-600 font-bold text-lg">02</span>
                         <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">
-                            Order Items
+                            Item Pesanan
                         </h2>
                     </div>
 
@@ -108,27 +108,27 @@
                                     <tr>
                                         <th
                                             class="px-6 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                            Product
+                                            Produk
                                         </th>
                                         <th
                                             class="px-6 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                            Variant
+                                            Varian
                                         </th>
                                         <th
                                             class="px-6 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                            Size
+                                            Ukuran
                                         </th>
                                         <th
                                             class="px-6 py-4 text-left text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                            Color
+                                            Warna
                                         </th>
                                         <th
                                             class="px-6 py-4 text-center text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                            Quantity
+                                            Jumlah
                                         </th>
                                         <th
                                             class="px-6 py-4 text-right text-xs font-bold text-slate-700 uppercase tracking-wider">
-                                            Price
+                                            Harga
                                         </th>
                                         <th
                                             class="px-6 py-4 text-right text-xs font-bold text-slate-700 uppercase tracking-wider">
@@ -208,7 +208,7 @@
                     <div class="flex items-center space-x-2 mb-6">
                         <span class="text-indigo-600 font-bold text-lg">03</span>
                         <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">
-                            Order Summary
+                            Ringkasan Pesanan
                         </h2>
                     </div>
 
@@ -219,7 +219,7 @@
                                     <x-lucide-shopping-bag class="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Total Items
+                                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Total Item
                                     </p>
                                     <p class="text-2xl font-bold text-indigo-900">{{ $order->items->sum('quantity') }}
                                     </p>
@@ -233,7 +233,7 @@
                                     <x-lucide-package class="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Product Types
+                                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Jenis Produk
                                     </p>
                                     <p class="text-2xl font-bold text-emerald-900">{{ $order->items->count() }}</p>
                                 </div>
@@ -246,7 +246,7 @@
                                     <x-lucide-wallet class="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                    <p class="text-xs font-bold text-amber-600 uppercase tracking-wider">Total Amount
+                                    <p class="text-xs font-bold text-amber-600 uppercase tracking-wider">Total Jumlah
                                     </p>
                                     <p class="text-2xl font-bold text-amber-900">
                                         Rp {{ number_format($order->total_harga, 0, ',', '.') }}
@@ -268,7 +268,7 @@
                             d="M10 19l-7-7m0 0l7-7m-7 7h18">
                         </path>
                     </svg>
-                    Back to Orders
+                    Kembali ke Daftar Pesanan
                 </a>
             </div>
         </div>

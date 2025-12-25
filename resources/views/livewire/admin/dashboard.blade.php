@@ -1,12 +1,13 @@
 <div class="p-8 bg-gray-50/50 min-h-screen font-sans">
     <div class="mb-10 flex justify-between items-end">
         <div>
-            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Dashboard</h2>
-            <p class="text-gray-500 mt-1">Welcome back! {{ Auth::user()->nama_lengkap }}, Here's what's happening with
-                your store today.</p>
+            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Dasbor</h2>
+            <p class="text-gray-500 mt-1">Selamat datang kembali! {{ Auth::user()->nama_lengkap }}, Berikut yang terjadi
+                dengan
+                toko Anda hari ini.</p>
         </div>
         <div class="hidden md:block">
-            <span class="text-sm font-medium text-gray-400">Last updated: {{ now()->format('d M Y, H:i') }}</span>
+            <span class="text-sm font-medium text-gray-400">Terakhir diperbarui: {{ now()->format('d M Y, H:i') }}</span>
         </div>
     </div>
 
@@ -18,7 +19,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Products</p>
+                <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Produk</p>
                 <h3 class="text-3xl font-bold text-gray-800 mt-1">{{ $totalProducts }}</h3>
             </div>
         </div>
@@ -34,7 +35,7 @@
                 </div>
             </div>
             <div class="mt-4">
-                <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Categories</p>
+                <p class="text-sm font-medium text-gray-500 uppercase tracking-wider">Total Kategori</p>
                 <h3 class="text-3xl font-bold text-gray-800 mt-1">{{ $totalCategories }}</h3>
             </div>
         </div>
@@ -70,7 +71,7 @@
         <div class="lg:col-span-1 space-y-8">
             <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
                 <div class="flex items-center justify-between mb-6">
-                    <h3 class="text-lg font-bold text-gray-900">Best Selling</h3>
+                    <h3 class="text-lg font-bold text-gray-900">Paling Laris</h3>
                 </div>
                 <div class="space-y-5">
                     @forelse ($bestSellingProducts as $productVariant)
@@ -111,7 +112,7 @@
         </div>
 
         <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
-            <h3 class="text-lg font-bold text-gray-900 mb-6">Notifications</h3>
+            <h3 class="text-lg font-bold text-gray-900 mb-6">Notifikasi</h3>
             <div class="space-y-4">
                 <div class="flex items-start p-4 bg-red-50/50 rounded-xl border border-red-100">
                     <div
@@ -119,8 +120,8 @@
                         ⚠️
                     </div>
                     <div>
-                        <p class="text-sm font-bold text-red-800">Low Stock Alert</p>
-                        <p class="text-xs text-red-600/80 mt-0.5">3 items are running out of stock.</p>
+                        <p class="text-sm font-bold text-red-800">Peringatan Stok Rendah</p>
+                        <p class="text-xs text-red-600/80 mt-0.5">3 item hampir habis.</p>
                     </div>
                 </div>
                 <div class="flex items-start p-4 bg-emerald-50/50 rounded-xl border border-emerald-100">
@@ -129,7 +130,7 @@
                         <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                     </div>
                     <div>
-                        <p class="text-sm font-bold text-emerald-800">New Order</p>
+                        <p class="text-sm font-bold text-emerald-800">Pesanan Baru</p>
                         <p class="text-xs text-emerald-600/80 mt-0.5">Order #1294 received just now.</p>
                     </div>
                 </div>
@@ -141,8 +142,8 @@
         <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
             <div class="flex items-center justify-between mb-8">
                 <div>
-                    <h3 class="text-lg font-bold text-gray-900">Sales Overview</h3>
-                    <p class="text-xs text-gray-500">Monthly sales performance</p>
+                    <h3 class="text-lg font-bold text-gray-900">Ikhtisar Penjualan</h3>
+                    <p class="text-xs text-gray-500">Performa penjualan bulanan</p>
                 </div>
                 <select class="text-xs border-gray-200 rounded-lg bg-gray-50 text-gray-600 outline-none p-1">
                     <option>Last 6 Months</option>
@@ -155,7 +156,7 @@
                         data: {
                             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                             datasets: [{
-                                label: 'Sales',
+                                label: 'Penjualan',
                                 data: @js($salesData),
                                 backgroundColor: '#10b981',
                                 hoverBackgroundColor: '#059669',
@@ -184,8 +185,8 @@
         <div class="bg-white p-6 rounded-2xl border border-gray-200 shadow-sm">
             <div class="flex items-center justify-between mb-8">
                 <div>
-                    <h3 class="text-lg font-bold text-gray-900">Revenue Trend</h3>
-                    <p class="text-xs text-gray-500">Revenue growth over time</p>
+                    <h3 class="text-lg font-bold text-gray-900">Tren Pendapatan</h3>
+                    <p class="text-xs text-gray-500">Pertumbuhan pendapatan seiring waktu</p>
                 </div>
             </div>
             <div wire:ignore x-data="{
@@ -195,7 +196,7 @@
                         data: {
                             labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                             datasets: [{
-                                label: 'Revenue',
+                                label: 'Pendapatan',
                                 data: @js($revenueData),
                                 borderColor: '#10b981',
                                 backgroundColor: (context) => {

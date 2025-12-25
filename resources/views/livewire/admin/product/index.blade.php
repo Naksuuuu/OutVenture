@@ -9,8 +9,8 @@
     <div class="mx-auto">
         <div class="flex items-center justify-between mb-8">
             <div>
-                <h1 class="text-2xl font-bold text-gray-900">Products Management</h1>
-                <p class="text-sm text-gray-500 mt-1">Total {{ $totalProducts ?? $products->count() }} products in
+                <h1 class="text-2xl font-bold text-gray-900">Manajemen Produk</h1>
+                <p class="text-sm text-gray-500 mt-1">Total {{ $totalProducts ?? $products->count() }} produk di
                     database.</p>
             </div>
 
@@ -19,14 +19,14 @@
                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-indigo-500">
                         <x-lucide-search class="w-5 h-5" />
                     </span>
-                    <input type="text" wire:model.live.debounce="search" placeholder="Search products..."
+                    <input type="text" wire:model.live.debounce="search" placeholder="Cari produk..."
                         class="w-64 pl-10 pr-4 py-2.5 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-indigo-700 shadow-sm">
                 </div>
-                
+
                 <a href="{{ route('admin.products.create') }}" wire:navigate
                     class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-sm">
                     <x-lucide-plus class="w-5 h-5" />
-                    Add Product
+                    Tambah Produk
                 </a>
             </div>
         </div>
@@ -35,16 +35,16 @@
             <table class="w-full text-left table-fixed border-collapse">
                 <thead>
                     <tr class="bg-gray-50 border-b border-gray-200">
-                        <th class="w-[40%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Product
-                            Information</th>
-                        <th class="w-[20%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Brand
+                        <th class="w-[40%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Informasi
+                            Produk</th>
+                        <th class="w-[20%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Merek
                         </th>
                         <th
                             class="w-[20%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider text-center">
-                            Category</th>
+                            Kategori</th>
                         <th
                             class="w-[20%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider text-center">
-                            Actions</th>
+                            Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-100">
@@ -76,7 +76,7 @@
                                         @csrf @method('DELETE')
                                         <button type="submit"
                                             class="inline-flex items-center justify-center px-4 py-1.5 text-[11px] font-bold text-red-600 bg-white border border-red-200 rounded-md hover:bg-red-50 transition-all uppercase tracking-wider"
-                                            onclick="return confirm('Delete product?')">
+                                            onclick="return confirm('Hapus produk?')">
                                             <x-lucide-trash class="w-4 h-4" />
                                         </button>
                                     </form>
@@ -85,7 +85,8 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-6 py-12 text-center text-gray-400 text-sm italic">No products
+                            <td colspan="4" class="px-6 py-12 text-center text-gray-400 text-sm italic">Tidak ada
+                                produk
                                 available yet.</td>
                         </tr>
                     @endforelse

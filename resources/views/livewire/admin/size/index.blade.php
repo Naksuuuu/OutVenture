@@ -9,8 +9,8 @@
     <div class="mx-auto">
         <div class="flex items-center justify-between mb-8">
             <div>
-                <h1 class="text-2xl font-bold text-gray-900">Size Groups Management</h1>
-                <p class="text-sm text-gray-500 mt-1">Manage size groups and their values for product categories.</p>
+                <h1 class="text-2xl font-bold text-gray-900">Manajemen Grup Ukuran</h1>
+                <p class="text-sm text-gray-500 mt-1">Kelola grup ukuran dan nilainya untuk kategori produk.</p>
             </div>
 
             <div class="flex items-center gap-3">
@@ -18,14 +18,14 @@
                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-indigo-500">
                         <x-lucide-search class="w-5 h-5" />
                     </span>
-                    <input type="text" wire:model.live.debounce="search" placeholder="Search size groups..."
+                    <input type="text" wire:model.live.debounce="search" placeholder="Cari grup ukuran..."
                         class="w-64 pl-10 pr-4 py-2.5 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-indigo-700 shadow-sm">
                 </div>
 
                 <a href="{{ route('admin.sizes.create') }}" wire:navigate
                     class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-sm">
                     <x-lucide-plus class="w-5 h-5" />
-                    Add Size Group
+                    Tambah Grup Ukuran
                 </a>
             </div>
         </div>
@@ -35,18 +35,18 @@
                 <thead>
                     <tr class="bg-gray-50 border-b border-gray-200">
                         <th class="w-[30%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                            Size Group Name
+                            Nama Grup Ukuran
                         </th>
                         <th class="w-[40%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                            Size Values
+                            Nilai Ukuran
                         </th>
                         <th
                             class="w-[15%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider text-center">
-                            Categories
+                            Kategori
                         </th>
                         <th
                             class="w-[15%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider text-center">
-                            Actions
+                            Aksi
                         </th>
                     </tr>
                 </thead>
@@ -107,7 +107,7 @@
                     @empty
                         <tr>
                             <td colspan="4" class="px-6 py-12 text-center text-gray-400 text-sm italic">
-                                No size groups available yet.
+                                Belum ada grup ukuran.
                             </td>
                         </tr>
                     @endforelse

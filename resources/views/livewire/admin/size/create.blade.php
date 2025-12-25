@@ -16,8 +16,9 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold tracking-tight text-slate-800">
-                            Create Size Group</h1>
-                        <p class="text-sm text-slate-500 mt-1">Add a new size group with multiple size values</p>
+                            Buat Grup Ukuran</h1>
+                        <p class="text-sm text-slate-500 mt-1">Tambahkan grup ukuran baru dengan beberapa nilai ukuran
+                        </p>
                     </div>
                 </div>
             </div>
@@ -108,7 +109,8 @@
 
                             @if (empty($sizeValues))
                                 <div class="text-center py-8 text-slate-400">
-                                    <p class="text-sm italic">No size values added yet. Click "Add Value" to start.</p>
+                                    <p class="text-sm italic">Belum ada nilai ukuran. Klik "Tambah Nilai" untuk memulai.
+                                    </p>
                                 </div>
                             @endif
                         </div>
@@ -117,7 +119,7 @@
                     <div class="flex items-center justify-end px-8 py-6 mt-8">
                         <button type="submit"
                             class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
-                            Save Size Group
+                            Simpan Grup Ukuran
                         </button>
                     </div>
                 </form>
@@ -133,7 +135,7 @@
                             d="M10 19l-7-7m0 0l7-7m-7 7h18">
                         </path>
                     </svg>
-                    Back to List
+                    Kembali
                 </a>
             </div>
         </div>

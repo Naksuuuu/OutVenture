@@ -1,8 +1,8 @@
 <div class="p-8 bg-gray-50/50 min-h-screen">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
-            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Orders Management</h2>
-            <p class="text-gray-500 mt-1">View and manage all customer orders</p>
+            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Manajemen Pesanan</h2>
+            <p class="text-gray-500 mt-1">Lihat dan kelola semua pesanan pelanggan</p>
         </div>
 
         <div class="flex items-center gap-3 w-full md:w-auto">
@@ -10,7 +10,8 @@
                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
                     <x-lucide-search class="w-4 h-4" />
                 </span>
-                <input type="text" wire:model.live.debounce="search" placeholder="Search by ID or customer..."
+                <input type="text" wire:model.live.debounce="search"
+                    placeholder="Cari berdasarkan ID atau pelanggan..."
                     class="w-full pl-10 pr-4 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white shadow-sm transition-all">
             </div>
         </div>
@@ -22,25 +23,25 @@
                 <thead class="bg-gray-50 border-b border-gray-200">
                     <tr>
                         <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                            Order ID
+                            ID Pesanan
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                            Customer
+                            Pelanggan
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                            Order Date
+                            Tanggal Pesanan
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                            Total Items
+                            Total Item
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                            Total Price
+                            Total Harga
                         </th>
                         <th class="px-6 py-4 text-left text-xs font-bold text-gray-600 uppercase tracking-wider">
-                            Payment Status
+                            Status Pembayaran
                         </th>
                         <th class="px-6 py-4 text-center text-xs font-bold text-gray-600 uppercase tracking-wider">
-                            Actions
+                            Aksi
                         </th>
                     </tr>
                 </thead>
@@ -79,13 +80,13 @@
                                     <span
                                         class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
                                         <x-lucide-check-circle class="w-3 h-3 mr-1" />
-                                        Paid
+                                        Lunas
                                     </span>
                                 @elseif ($order->status_pembayaran === 'pending')
                                     <span
                                         class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">
                                         <x-lucide-clock class="w-3 h-3 mr-1" />
-                                        Pending
+                                        Menunggu
                                     </span>
                                 @else
                                     <span
@@ -99,7 +100,7 @@
                                 <a href="{{ route('admin.orders.show', $order->id) }}" wire:navigate
                                     class="inline-flex items-center px-3 py-1.5 bg-gray-900 hover:bg-gray-800 text-white text-xs font-semibold rounded-lg transition-all shadow-sm">
                                     <x-lucide-eye class="w-3.5 h-3.5 mr-1.5" />
-                                    View Details
+                                    Lihat Detail
                                 </a>
                             </td>
                         </tr>
@@ -108,9 +109,10 @@
                             <td colspan="7" class="px-6 py-12 text-center">
                                 <div class="flex flex-col items-center justify-center">
                                     <x-lucide-package-open class="w-16 h-16 text-gray-300 mb-4" />
-                                    <p class="text-gray-500 font-medium">No orders found</p>
-                                    <p class="text-sm text-gray-400 mt-1">Orders will appear here when customers make
-                                        purchases</p>
+                                    <p class="text-gray-500 font-medium">Tidak ada pesanan</p>
+                                    <p class="text-sm text-gray-400 mt-1">Pesanan akan muncul di sini ketika pelanggan
+                                        melakukan
+                                        pembelian</p>
                                 </div>
                             </td>
                         </tr>

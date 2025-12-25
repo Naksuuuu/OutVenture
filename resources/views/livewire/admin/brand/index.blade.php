@@ -1,8 +1,8 @@
 <div class="p-8 bg-gray-50/50 min-h-screen">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
-            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Brands</h2>
-            <p class="text-gray-500 mt-1">Manage and organize your product brands</p>
+            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Merek</h2>
+            <p class="text-gray-500 mt-1">Kelola dan atur merek produk Anda</p>
         </div>
 
         <div class="flex items-center gap-3 w-full md:w-auto">
@@ -10,14 +10,14 @@
                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
                     <x-lucide-search class="w-4 h-4" />
                 </span>
-                <input type="text" wire:model.live.debounce="search" placeholder="Search brands..."
+                <input type="text" wire:model.live.debounce="search" placeholder="Cari merek..."
                     class="w-full pl-10 pr-4 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white shadow-sm transition-all">
             </div>
 
             <a href="{{ route('admin.brands.create') }}" wire:navigate
                 class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white px-5 py-2 rounded-xl font-semibold text-sm transition-all shadow-sm">
                 <x-lucide-plus class="w-5 h-5" />
-                <span>Add New</span>
+                <span>Tambah Baru</span>
             </a>
         </div>
     </div>
@@ -55,14 +55,14 @@
                         <div class="flex items-center text-gray-500">
                             <x-lucide-handbag class="w-3.5 h-3.5 mr-1.5" />
                             <span class="text-xs font-medium uppercase tracking-wider">
-                                {{ $brand->products_count ?? 0 }} Total Products
+                                {{ $brand->products_count ?? 0 }} Total Produk
                             </span>
                         </div>
                         @if ($brand->is_trusted)
                             <div class="flex items-center text-emerald-600 mt-1">
                                 <x-lucide-badge-check class="w-3.5 h-3.5 mr-1.5" />
                                 <span class="text-xs font-medium uppercase tracking-wider">
-                                    Trusted Brand
+                                    Merek Terpercaya
                                 </span>
                             </div>
                         @endif
