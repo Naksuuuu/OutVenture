@@ -25,7 +25,7 @@
 
             <div class="p-8 md:p-10 space-y-10">
 
-                <form>
+                <form wire:submit.prevent="update">
                     <section>
                         <div class="flex items-center space-x-2 mb-6">
                             <span class="text-indigo-600 font-bold text-lg">01</span>

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Livewire\Admin\Product\Index as DashboardProductIndex;
 use App\Livewire\Admin\Product\Edit as DashboardProductEdit;
 use App\Livewire\Admin\Product\Create as DashboardProductCreate;
+use App\Livewire\Admin\Product\Show as DashboardProductShow;
 
 
 use App\Livewire\Admin\Category\Index as DashboardCategoryIndex;
@@ -67,6 +68,7 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group
     Route::get('products', DashboardProductIndex::class)->name('products.index');
     Route::get('products/create', DashboardProductCreate::class)->name('products.create');
     Route::get('products/{productId}/edit', DashboardProductEdit::class)->name('products.edit');
+    Route::get('products/{productId}/show', DashboardProductShow::class)->name('products.show');
 
     // Categories Management
     Route::get('categories', DashboardCategoryIndex::class)->name('categories.index');
