@@ -12,10 +12,13 @@
 <body>
 
     <livewire:public.template.navbar />
+
     <main class="w-full min-h-screen ">
         {{ $slot }}
     </main>
+
     <livewire:public.template.footer />
+
     @livewireScripts
 
     @if (session('success'))
@@ -23,6 +26,7 @@
             {{ session('success') }}
         </div>
     @endif
+
 </body>
 
 </html>
