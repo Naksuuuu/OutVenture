@@ -47,14 +47,14 @@
                          <div>
                              <label
                                  class="block text-[11px] font-bold text-slate-500 uppercase mb-2 tracking-widest text-left">Ukuran</label>
-                             <select wire:model="id_size"
-                                 class="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 font-bold text-sm @error('id_size') ring-2 ring-red-500/50 @enderror">
+                             <select wire:model="id_size_value"
+                                 class="w-full bg-slate-50 border-none rounded-xl px-4 py-3 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 font-bold text-sm @error('id_size_value') ring-2 ring-red-500/50 @enderror">
                                  <option value="" selected>Pilih ukuran</option>
                                  @foreach ($sizes as $size)
                                      <option value="{{ $size->id }}">{{ $size->label_size }}</option>
                                  @endforeach
                              </select>
-                             @error('id_size')
+                             @error('id_size_value')
                                  <span class="text-red-500 text-[10px] font-bold mt-1 ml-1">{{ $message }}</span>
                              @enderror
                          </div>

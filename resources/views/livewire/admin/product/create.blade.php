@@ -19,8 +19,8 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold tracking-tight text-slate-800">
-                            Tambah Produk</h1>
-                        <p class="text-sm text-slate-500 mt-1">Isi formulir di bawah untuk menambahkan produk baru.
+                            Create Product</h1>
+                        <p class="text-sm text-slate-500 mt-1">Fill in the form below to add a new product.
                     </div>
                 </div>
             </div>
@@ -32,18 +32,22 @@
                         <div class="flex items-center space-x-2 mb-6">
                             <span class="text-indigo-600 font-bold text-lg">01</span>
                             <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">
-                                Informasi Produk
+                                Product Information
                             </h2>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                             <div class="md:col-span-4">
                                 <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Nama
-                                    Lengkap Produk</label>
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Product
+                                    Name</label>
                                 <input type="text" wire:model="nama_product"
                                     class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium"
-                                    placeholder="Contoh: Jaket Waterproof GORE-TEX">
+                                    placeholder="e.g., GORE-TEX Waterproof Jacket">
+                                @error('nama_product')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="md:col-span-2">
@@ -57,28 +61,40 @@
                                             {{ $brand->nama_brand }}</option>
                                     @endforeach
                                 </select>
+                                @error('id_brand')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="md:col-span-2">
                                 <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Kategori</label>
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Category</label>
                                 <select wire:model="id_category"
                                     class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 appearance-none font-medium cursor-pointer">
-                                    <option value="" disabled>Pilih Category</option>
+                                    <option value="" disabled>Select Category</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">
                                             {{ $category->nama_category }}
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('id_category')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="md:col-span-4">
                                 <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Deskripsi
-                                    Singkat</label>
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Short
+                                    Description</label>
                                 <textarea wire:model="deskripsi" rows="4"
                                     class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 font-medium"></textarea>
+                                @error('deskripsi')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </section>
@@ -86,7 +102,7 @@
                     <div class="flex items-center justify-end px-8 py-6">
                         <button type="submit" wire:loading.attr="disabled"
                             class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
-                            Tambah Produk
+                            Save Product
                         </button>
                     </div>
 

@@ -82,48 +82,13 @@
                             @endif
 
                             <div wire:loading wire:target="image">Mengunggah...</div>
-
-                            {{-- <div class="md:col-span-2">
-                            <label
-                                class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Brand</label>
-                            <select wire:model="id_brand"
-                                class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 appearance-none font-medium cursor-pointer">
-                                <option value="" disabled>Pilih Brand</option>
-                                @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}">
-                                        {{ $brand->nama_brand }}</option>
-                                @endforeach
-                            </select>
-                        </div> --}}
-
-                            {{-- <div class="md:col-span-2">
-                            <label
-                                class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Kategori</label>
-                            <select wire:model="id_category"
-                                class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 appearance-none font-medium cursor-pointer">
-                                <option value="" disabled>Pilih Category</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">
-                                        {{ $category->nama_category }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div> --}}
-
-                            {{-- <div class="md:col-span-4">
-                            <label
-                                class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Deskripsi
-                                Singkat</label>
-                            <textarea wire:model="deskripsi" rows="4"
-                                class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 font-medium"></textarea>
-                        </div> --}}
                         </div>
                     </section>
 
                     <div class="flex items-center justify-end px-8 py-6" wire:loading.attr="disabled">
                         <button type="submit"
-                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
-                            Simpan Perubahan Produk
+                            class="bg-black/80 hover:bg-black text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
+                            Tmabah Category
                         </button>
                     </div>
                 </form>

@@ -26,11 +26,21 @@ class Create extends Component
   {
     $this->validate();
 
-    Category::create([
-      'nama_category' => $this->nama_category,
-      'id_size_group' => $this->id_size_group,
-      'image' => $this->image->store('categories', 'public'),
-    ]);
+
+    if ($this->image) {
+      Category::create([
+        'nama_category' => $this->nama_category,
+        'id_size_group' => $this->id_size_group,
+        'image' => $this->image->store('categories', 'public'),
+      ]);
+    } else {
+      Category::create([
+        'nama_category' => $this->nama_category,
+        'id_size_group' => $this->id_size_group,
+        'image' => null,
+      ]);
+    }
+
 
     session()->flash('success', 'Category created successfully!');
 

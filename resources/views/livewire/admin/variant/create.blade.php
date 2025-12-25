@@ -28,7 +28,7 @@
                     @endforeach
                 </select>
                 @error('id_color')
-                    <span class="text-red-500 text-xs">{{ $message }}</span>
+                    <span class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
                 @enderror
                 {{-- Tambah field lain yang dibutuhkan storeVariant --}}
                 <div class="flex justify-end gap-2">
