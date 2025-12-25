@@ -5,6 +5,7 @@ namespace App\Livewire\Public;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductVariant;
 use Livewire\Component;
 
 class Home extends Component
@@ -20,19 +21,13 @@ class Home extends Component
       ->orderBy('products_count', 'desc')
       ->get();
 
-    $latestProducts = Product::with(['brand', 'category', 'variants.specs'])
-      ->has('variants') // Hanya produk yang punya variant
-      ->whereHas('variants.specs') // Variant harus punya spec
-      ->withCount('variants')
+    $latestProducts = ProductVariant::with(['product.brand', 'product.category', 'color', 'specs'])
+      ->whereHas('product')
+      ->whereHas('specs')
       ->latest()
       ->limit(10)
-      ->get()
-      ->map(function ($product) {
-        // Calculate minimum price from all variant specs
-        $minPrice = $product->variants->flatMap->specs->min('harga');
-        $product->min_price = $minPrice ?? 0;
-        return $product;
-      });
+      ->get();
+
 
     return view('livewire.public.home', [
       'brands' => $brands,
