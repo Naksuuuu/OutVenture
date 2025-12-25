@@ -61,19 +61,28 @@
 
 
 
-    <div class="w-full px-4 md:px-10">
+    <div class="w-full px-4 md:px-10 ">
 
-        <div class="flex w-full overflow-x-auto  flex-nowrap justify-between gap-10 scrollbar-hide ">
+        <div class="flex w-full overflow-x-auto px-10 flex-nowrap gap-10 lg:gap-20 scrollbar-hide">
 
             @foreach ($categories as $category)
-                <div class="flex flex-col items-center gap-2">
+                <div class="flex flex-col items-center gap-2 min-w-[120px]">
+                    @if ($category->image)
+                        <div class="w-30 h-30 lg:w-40 lg:h-40 bg-gray-200 rounded-lg flex items-center justify-center">
+                            <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->nama_category }}"
+                                class="mx-auto object-cover w-full h-full rounded-lg">
+                        </div>
+                    @else
+                        <div class="w-30 h-30 lg:w-40 lg:h-40 bg-gray-200 rounded-lg flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 text-gray-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                    @endif
 
-                    <img src="{{ asset($category['image']) }}" alt="{{ $category['name'] }}"
-                        class="mx-auto object-cover max-w-30 ">
-
-
-
-                    <p class="uppercase font-medium tracking-tight">{{ $category['name'] }}</p>
+                    <p class="uppercase font-medium tracking-tight text-center">{{ $category->nama_category }}</p>
 
                 </div>
             @endforeach
@@ -86,7 +95,18 @@
 
     <div class="w-full px-4 md:px-10">
 
-        <h3 class="text-xl font-bold uppercase mb-4 tracking-tight">BRAND PILIHAN</h3>
+        <div class="flex justify-between items-end mb-8 border-b border-gray-100 pb-4">
+            <h2 class="text-3xl font-black uppercase tracking-tighter">BRAND PILIHAN</h2>
+            <a href="{{ route('products.index') }}" wire:navigate
+                class="group flex items-center gap-2 bg-black text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
+                LIHAT SEMUA BRAND
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:translate-x-1"
+                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+            </a>
+        </div>
 
         <div class="flex flex-wrap group/brands">
 
@@ -98,28 +118,33 @@
 
                     <div class="relative text-white rounded-lg overflow-hidden shadow-lg group">
 
-
-
                         {{-- GAMBAR BRAND --}}
-
-                        <img src="{{ asset($brand['image']) }}"
-                            class="w-full h-80 object-cover opacity-80 group-hover:opacity-90 transition duration-300"
-                            alt="{{ $brand['name'] }}">
-
-
+                        @if ($brand->image)
+                            <img src="{{ asset('storage/' . $brand->image) }}"
+                                class="w-full h-80 object-cover opacity-80 group-hover:opacity-90 transition duration-300"
+                                alt="{{ $brand->nama_brand }}">
+                        @else
+                            <div
+                                class="w-full h-80 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-gray-500" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        @endif
 
                         {{-- OVERLAY DAN KONTEN --}}
-
                         <div
                             class="absolute inset-0 p-6 bg-gradient-to-t from-black/60 to-black/10 flex flex-col justify-end">
 
-                            <h5 class="text-2xl font-bold uppercase text-white mb-3">{{ $brand['name'] }}</h5>
+                            <h5 class="text-2xl font-bold uppercase text-white mb-3">{{ $brand->nama_brand }}</h5>
+
+
 
                             <a href="#"
                                 class="inline-block border border-white text-white text-sm font-medium px-4 py-2 w-fit hover:bg-white hover:text-black transition duration-300">
-
                                 BELI SEKARANG &rarr;
-
                             </a>
 
                         </div>
@@ -198,16 +223,17 @@
                 </div>
                 <div>
                     <h4 class="text-xs font-bold uppercase tracking-wider">EXPLORER HUB</h4>
-                    <p class="text-[10px] text-gray-500 uppercase">RUANG KOLABORASI DAN EDUKASI BAGI PARA PENJELAJAH</p>
+                    <p class="text-[10px] text-gray-500 uppercase">RUANG KOLABORASI DAN EDUKASI BAGI PARA PENJELAJAH
+                    </p>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="w-full px-4 md:px-10 mt-10">
+    <div class="w-full px-4 md:px-10 mb-10">
         <div class="flex justify-between items-end mb-8 border-b border-gray-100 pb-4">
             <h2 class="text-3xl font-black uppercase tracking-tighter">KOLEKSI TERBARU</h2>
-            <a href="#"
+            <a href="{{ route('products.index') }}" wire:navigate
                 class="group flex items-center gap-2 bg-black text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
                 LIHAT SEMUA PRODUK
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform group-hover:translate-x-1"
@@ -218,27 +244,49 @@
             </a>
         </div>
 
-        {{-- <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
-        @foreach ($products as $product)
-            <div class="flex flex-col gap-3 group cursor-pointer">
-                <div class="relative aspect-[4/5] bg-[#F3F3F3] overflow-hidden">
-                    @if ($product['on_sale'])
-                        <span class="absolute top-3 left-3 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded-sm z-10">SALE</span>
-                    @endif
-                    <img src="{{ asset($product['image']) }}" alt="{{ $product['name'] }}" 
-                         class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500">
-                </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            @forelse ($latestProducts as $product)
+                <a href="{{ route('products.show', $product->id) }}" wire:navigate class="flex flex-col">
+                    <div class="relative aspect-[4/5] bg-[#f2f2ed] mb-3 overflow-hidden">
+                        @if ($product->variants->first() && $product->variants->first()->image)
+                            <img src="{{ asset('storage/' . $product->variants->first()->image) }}"
+                                alt="{{ $product->nama_product }}" class="w-full h-full object-cover">
+                        @else
+                            <div class="w-full h-full flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-24 w-24 text-gray-300"
+                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                        @endif
+                    </div>
 
-                <div class="flex flex-col gap-1">
-                    <img src="{{ asset($product['brand_logo']) }}" class="h-4 w-fit object-contain mb-1" alt="brand">
-                    <h3 class="text-sm font-bold leading-tight uppercase tracking-tight group-hover:underline">
-                        {{ $product['name'] }}
-                    </h3>
-                    <p class="text-xs text-gray-500">{{ $product['info'] ?? 'Available in multiple sizes' }}</p>
+                    <div class="flex flex-col">
+                        <span class="text-[10px] font-bold text-black tracking-tight uppercase mb-0.5">
+                            {{ $product->brand->nama_brand ?? 'Brand' }}
+                        </span>
+
+                        <h4 class="text-[13px] font-medium leading-tight text-black mb-1 uppercase tracking-tighter">
+                            {{ $product->nama_product }}
+                        </h4>
+
+                        <p class="text-[11px] text-gray-500 mb-1">Available in
+                            {{ $product->variants_count ?? $product->variants->count() }}
+                            Variants</p>
+
+                        <div class="text-[13px] font-bold">
+                            <span class="text-gray-500 mr-1 font-normal">From</span>
+                            {{ Number::currency($product->min_price, 'IDR', 'id', precision: 0) }}
+                        </div>
+                    </div>
+                </a>
+            @empty
+                <div class="col-span-full text-center py-12">
+                    <p class="text-gray-500">Belum ada produk tersedia</p>
                 </div>
-            </div>
-        @endforeach
-    </div> --}}
+            @endforelse
+        </div>
     </div>
 
 
