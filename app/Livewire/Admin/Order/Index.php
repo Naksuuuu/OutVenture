@@ -5,14 +5,24 @@ namespace App\Livewire\Admin\Order;
 use App\Models\Order;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Livewire\Attributes\Url;
 
 class Index extends Component
 {
     use WithPagination;
 
+    #[Url(history: true, keep: true)]
     public $search = '';
 
+    #[Url(history: true, keep: true)]
+    public $sortBy = 'latest'; // latest, oldest
+
     public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingSortBy()
     {
         $this->resetPage();
     }
@@ -27,7 +37,12 @@ class Index extends Component
                             ->orWhere('email', 'like', '%' . $this->search . '%');
                     });
             })
-            ->orderBy('tgl_order', 'desc')
+            ->when($this->sortBy === 'latest', function ($query) {
+                $query->orderBy('tgl_order', 'desc');
+            })
+            ->when($this->sortBy === 'oldest', function ($query) {
+                $query->orderBy('tgl_order', 'asc');
+            })
             ->paginate(15);
 
         return view('livewire.admin.order.index', [
