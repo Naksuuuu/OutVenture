@@ -25,6 +25,28 @@
 
             <div class="p-8 md:p-10 space-y-10">
 
+                @if ($isUsedInVariants)
+                    <div class="bg-red-50 border-l-4 border-red-400 p-5 rounded-lg">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-red-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            </svg>
+                            <div>
+                                <h3 class="text-sm font-bold text-red-800">Warna Tidak Dapat Diubah</h3>
+                                <p class="text-sm text-red-700 mt-1">
+                                    Warna ini sedang digunakan pada <span class="font-bold">{{ $variantsCount }} varian produk</span> dan tidak dapat diubah untuk menjaga konsistensi data.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
+                @error('used_in_variants')
+                    <div class="bg-red-50 border border-red-200 text-red-700 px-5 py-4 rounded-lg">
+                        {{ $message }}
+                    </div>
+                @enderror
+
                 <form wire:submit.prevent="update">
                     <section>
                         <div class="flex items-center space-x-2 mb-6">
@@ -40,9 +62,28 @@
                                     class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Nama
                                     Warna
                                 </label>
-                                <input wire:model="nama_warna" type="text" placeholder="Contoh: Merah, Biru, Hijau"
-                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium">
+                                <input wire:model.live="nama_warna" type="text" placeholder="Contoh: Merah, Biru, Hijau"
+                                    {{ $isUsedInVariants ? 'disabled' : '' }}
+                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium {{ $isUsedInVariants ? 'opacity-60 cursor-not-allowed' : '' }}">
                                 @error('nama_warna')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Kode Hex Warna
+                                </label>
+                                <div class="flex gap-3">
+                                    <input wire:model.live="hex_code" type="color"
+                                        {{ $isUsedInVariants ? 'disabled' : '' }}
+                                        class="w-20 h-14 bg-white border-2 border-slate-200 rounded-2xl cursor-pointer {{ $isUsedInVariants ? 'opacity-60 cursor-not-allowed' : '' }}">
+                                    <input wire:model.live="hex_code" type="text" placeholder="#000000"
+                                        {{ $isUsedInVariants ? 'disabled' : '' }}
+                                        class="flex-1 bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium {{ $isUsedInVariants ? 'opacity-60 cursor-not-allowed' : '' }}">
+                                </div>
+                                @error('hex_code')
                                     <span
                                         class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
                                 @enderror
@@ -54,36 +95,12 @@
                                     Warna
                                 </label>
                                 <div class="flex items-center gap-4 bg-slate-50 rounded-2xl px-5 py-4 shadow-inner">
-                                    @php
-                                        $colorMap = [
-                                            'merah' => '#DC2626',
-                                            'biru' => '#2563EB',
-                                            'hijau' => '#16A34A',
-                                            'kuning' => '#EAB308',
-                                            'orange' => '#F97316',
-                                            'ungu' => '#9333EA',
-                                            'pink' => '#EC4899',
-                                            'coklat' => '#92400E',
-                                            'hitam' => '#000000',
-                                            'putih' => '#FFFFFF',
-                                            'abu-abu' => '#6B7280',
-                                            'abu' => '#6B7280',
-                                            'silver' => '#C0C0C0',
-                                            'gold' => '#FFD700',
-                                            'navy' => '#000080',
-                                            'maroon' => '#800000',
-                                            'tosca' => '#40E0D0',
-                                            'cream' => '#FFFDD0',
-                                        ];
-                                        $key = strtolower(trim($nama_warna ?? ''));
-                                        $colorHex = $colorMap[$key] ?? strtolower($nama_warna ?? '#cccccc');
-                                    @endphp
                                     <div class="w-16 h-16 rounded-full border-4 border-white shadow-lg"
-                                        style="background-color: {{ $colorHex }};">
+                                        style="background-color: {{ $hex_code ?? '#000000' }};">
                                     </div>
                                     <div>
                                         <p class="text-sm font-bold text-slate-800">{{ $nama_warna ?: 'Nama warna' }}</p>
-                                        <p class="text-xs text-slate-500">{{ $colorHex }}</p>
+                                        <p class="text-xs text-slate-500">{{ $hex_code ?? '#000000' }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -91,9 +108,10 @@
                     </section>
 
                     <div class="flex items-center justify-end px-8 py-6 mt-8">
-                        <button type="submit"
-                            class="bg-black/80 cursor-pointer hover:bg-black text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
-                            Simpan Perubahan
+                        <button type="submit" 
+                            {{ $isUsedInVariants ? 'disabled' : '' }}
+                            class="bg-black/80 cursor-pointer hover:bg-black text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95 {{ $isUsedInVariants ? 'opacity-50 cursor-not-allowed' : '' }}">
+                            {{ $isUsedInVariants ? 'Tidak Dapat Diubah' : 'Simpan Perubahan' }}
                         </button>
                     </div>
                 </form>

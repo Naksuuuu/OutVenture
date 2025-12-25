@@ -69,10 +69,13 @@
                             <td class="px-6 py-4">
                                 <div class="flex items-center gap-3">
                                     <div class="w-8 h-8 rounded-full border-2 border-gray-200 shadow-sm"
-                                        style="background-color: {{ $this->getColorHex($color->nama_warna) }};"
+                                        style="background-color: {{ $color->hex_code }};"
                                         title="{{ $color->nama_warna }}">
                                     </div>
-                                    <span class="text-sm font-bold text-gray-800">{{ $color->nama_warna }}</span>
+                                    <div>
+                                        <span class="text-sm font-bold text-gray-800">{{ $color->nama_warna }}</span>
+                                        <span class="block text-xs text-gray-500">{{ $color->hex_code }}</span>
+                                    </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4 text-center">

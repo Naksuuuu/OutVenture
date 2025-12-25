@@ -40,9 +40,45 @@
                                     class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Nama
                                     Warna
                                 </label>
-                                <input wire:model.live="nama_warna" type="text" placeholder="Contoh: Merah, Biru, Hijau"
-                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium">
+                                <input wire:model.live.debounce.150ms="nama_warna" type="text" placeholder="Contoh: Merah, Biru, Hijau"
+                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium {{ $existingColorName ? 'ring-2 ring-red-400' : '' }}">
+                                
+                                @if ($existingColorName)
+                                    <div class="mt-2 flex items-center gap-2 text-red-600 text-xs">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="font-bold">Warna "{{ $existingColorName->nama_warna }}" sudah ada!</span>
+                                    </div>
+                                @endif
+                                
                                 @error('nama_warna')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="md:col-span-2">
+                                <label
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Kode Hex Warna
+                                </label>
+                                <div class="flex gap-3">
+                                    <input wire:model.live="hex_code" type="color"
+                                        class="w-20 h-14 bg-white border-2 border-slate-200 rounded-2xl cursor-pointer {{ $existingColorHex ? 'ring-2 ring-red-400' : '' }}">
+                                    <input wire:model.live="hex_code" type="text" placeholder="#000000"
+                                        class="flex-1 bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium {{ $existingColorHex ? 'ring-2 ring-red-400' : '' }}">
+                                </div>
+                                
+                                @if ($existingColorHex)
+                                    <div class="mt-2 flex items-center gap-2 text-red-600 text-xs">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                        </svg>
+                                        <span class="font-bold">Kode hex "{{ $existingColorHex->hex_code }}" sudah digunakan oleh "{{ $existingColorHex->nama_warna }}"!</span>
+                                    </div>
+                                @endif
+                                
+                                @error('hex_code')
                                     <span
                                         class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
                                 @enderror
@@ -54,49 +90,23 @@
                                     Warna
                                 </label>
                                 <div class="flex items-center gap-4 bg-slate-50 rounded-2xl px-5 py-4 shadow-inner">
-                                    @php
-                                        $colorMap = [
-                                            'merah' => '#DC2626',
-                                            'biru' => '#2563EB',
-                                            'hijau' => '#16A34A',
-                                            'kuning' => '#EAB308',
-                                            'orange' => '#F97316',
-                                            'ungu' => '#9333EA',
-                                            'pink' => '#EC4899',
-                                            'coklat' => '#92400E',
-                                            'hitam' => '#000000',
-                                            'putih' => '#FFFFFF',
-                                            'abu-abu' => '#6B7280',
-                                            'abu' => '#6B7280',
-                                            'silver' => '#C0C0C0',
-                                            'gold' => '#FFD700',
-                                            'navy' => '#000080',
-                                            'maroon' => '#800000',
-                                            'tosca' => '#40E0D0',
-                                            'cream' => '#FFFDD0',
-                                        ];
-                                        $key = strtolower(trim($nama_warna ?? ''));
-                                        $colorHex = $colorMap[$key] ?? strtolower($nama_warna ?? '#cccccc');
-                                    @endphp
                                     <div class="w-16 h-16 rounded-full border-4 border-white shadow-lg"
-                                        style="background-color: {{ $colorHex }};">
+                                        style="background-color: {{ $hex_code ?? '#000000' }};">
                                     </div>
                                     <div>
                                         <p class="text-sm font-bold text-slate-800">{{ $nama_warna ?: 'Nama warna' }}</p>
-                                        <p class="text-xs text-slate-500">{{ $colorHex }}</p>
+                                        <p class="text-xs text-slate-500">{{ $hex_code ?? '#000000' }}</p>
                                     </div>
                                 </div>
-                                <p class="text-xs text-slate-500 mt-2">
-                                    <span class="font-bold">Warna yang didukung:</span> Merah, Biru, Hijau, Kuning, Orange, Ungu, Pink, Coklat, Hitam, Putih, Abu-abu, Silver, Gold, Navy, Maroon, Tosca, Cream
-                                </p>
                             </div>
                         </div>
                     </section>
 
                     <div class="flex items-center justify-end px-8 py-6 mt-8">
                         <button type="submit"
-                            class="bg-black/80 cursor-pointer hover:bg-black text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
-                            Simpan Warna
+                            {{ ($existingColorName || $existingColorHex) ? 'disabled' : '' }}
+                            class="bg-black/80 cursor-pointer hover:bg-black text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95 {{ ($existingColorName || $existingColorHex) ? 'opacity-50 cursor-not-allowed' : '' }}">
+                            {{ ($existingColorName || $existingColorHex) ? 'Warna Sudah Ada' : 'Simpan Warna' }}
                         </button>
                     </div>
                 </form>
