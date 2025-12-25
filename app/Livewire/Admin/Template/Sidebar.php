@@ -26,8 +26,52 @@ class Sidebar extends Component
         $this->dispatch('sidebar-toggled', isCollapsed: $this->isCollapsed);
     }
 
+    public function getMenuItems()
+    {
+        return [
+            [
+                'route' => 'admin.dashboard',
+                'icon' => 'layout-dashboard',
+                'label' => 'Dashboard',
+                'matchExact' => true,
+            ],
+            [
+                'route' => 'admin.products.index',
+                'icon' => 'handbag',
+                'label' => 'Products',
+                'matchExact' => false,
+            ],
+            [
+                'route' => 'admin.categories.index',
+                'icon' => 'library-big',
+                'label' => 'Categories',
+                'matchExact' => false,
+            ],
+            [
+                'route' => 'admin.brands.index',
+                'icon' => 'award',
+                'label' => 'Brands',
+                'matchExact' => false,
+            ],
+            [
+                'route' => 'admin.sizes.index',
+                'icon' => 'ruler',
+                'label' => 'Sizes',
+                'matchExact' => false,
+            ],
+            [
+                'route' => 'admin.orders.index',
+                'icon' => 'receipt',
+                'label' => 'Orders',
+                'matchExact' => false,
+            ],
+        ];
+    }
+
     public function render()
     {
-        return view('livewire.admin.template.sidebar');
+        return view('livewire.admin.template.sidebar', [
+            'menuItems' => $this->getMenuItems()
+        ]);
     }
 }

@@ -48,7 +48,7 @@ class Create extends Component
         ]);
 
         $this->dispatch('spec-events');
-        $this->reset(['id_size', 'harga', 'sku', 'stok']);
+        $this->reset(['id_size_value', 'harga', 'sku', 'stok']);
         $this->isOpen = false;
 
         session()->flash('success', 'Spesifikasi berhasil ditambahkan!');

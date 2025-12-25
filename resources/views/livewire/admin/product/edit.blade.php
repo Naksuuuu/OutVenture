@@ -19,7 +19,7 @@
                 class="glass-header px-8 py-8 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div class="flex items-center space-x-4">
                     <div
-                        class="w-12 h-12 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
+                        class="w-12 h-12 bg-black rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
                         <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
@@ -28,7 +28,7 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold tracking-tight text-slate-800">
-                            Edit Data Produk</h1>
+                            Edit Product</h1>
                         <p class="text-slate-500 text-sm italic">
                             {{ $product->nama_product }}</p>
                     </div>
@@ -42,18 +42,22 @@
                         <div class="flex items-center space-x-2 mb-6">
                             <span class="text-indigo-600 font-bold text-lg">01</span>
                             <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">
-                                Informasi Produk
+                                Product Information
                             </h2>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div class="md:col-span-3">
                                 <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Nama
-                                    Lengkap Produk</label>
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Product
+                                    Name</label>
                                 <input type="text" wire:model="nama_product"
                                     class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium"
-                                    placeholder="Contoh: Jaket Waterproof GORE-TEX">
+                                    placeholder="e.g., GORE-TEX Waterproof Jacket">
+                                @error('nama_product')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="md:col-span-1">
@@ -67,11 +71,15 @@
                                             {{ $brand->nama_brand }}</option>
                                     @endforeach
                                 </select>
+                                @error('id_brand')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="md:col-span-1">
                                 <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Kategori</label>
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Category</label>
                                 <select wire:model="id_category"
                                     class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 appearance-none font-medium cursor-pointer">
                                     @foreach ($categories as $category)
@@ -81,14 +89,22 @@
                                         </option>
                                     @endforeach
                                 </select>
+                                @error('id_category')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="md:col-span-3">
                                 <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Deskripsi
-                                    Singkat</label>
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Short
+                                    Description</label>
                                 <textarea wire:model="deskripsi" rows="4"
                                     class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 font-medium">{{ $product->deskripsi }}</textarea>
+                                @error('deskripsi')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
                     </section>
@@ -97,7 +113,7 @@
                     <div class="flex items-center justify-end px-8 py-6">
                         <button type="submit"
                             class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
-                            Simpan Perubahan Produk
+                            Save Product Changes
                         </button>
                     </div>
             </form>
@@ -108,7 +124,7 @@
                     <div class="flex items-center space-x-2">
                         <span class="text-indigo-600 font-bold text-lg">02</span>
                         <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">
-                            Detail Varian & Spesifikasi h
+                            Variants & Specifications
                         </h2>
                     </div>
 
@@ -125,13 +141,26 @@
                                 class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden group hover:border-indigo-300 transition-all duration-300">
 
                                 <div
-                                    class="bg-slate-50/80 px-6 py-3 border-b border-slate-100 flex items-center justify-between">
-                                    <div class="flex items-center space-x-2">
-                                        <span
-                                            class="text-xs font-bold text-slate-500 uppercase tracking-widest">Warna:</span>
-                                        <span class="text-sm font-black text-slate-800 uppercase tracking-wide">
-                                            {{ $variant->color->nama_warna ?? 'Tanpa Warna' }}
-                                        </span>
+                                    class="bg-slate-50/80 px-6 py-4 border-b border-slate-100 flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        @if ($variant->image)
+                                            <img src="{{ asset('storage/' . $variant->image) }}"
+                                                class="w-16 h-16 object-cover rounded-lg border-2 border-slate-200 shadow-sm"
+                                                alt="{{ $variant->color->nama_warna ?? 'Variant' }}">
+                                        @else
+                                            <div
+                                                class="w-16 h-16 bg-slate-200 rounded-lg border-2 border-slate-200 flex items-center justify-center">
+                                                <x-lucide-image class="w-8 h-8 text-slate-400" />
+                                            </div>
+                                        @endif
+                                        <div>
+                                            <span
+                                                class="text-xs font-bold text-slate-500 uppercase tracking-widest">Color:</span>
+                                            <span
+                                                class="text-sm font-black text-slate-800 uppercase tracking-wide block">
+                                                {{ $variant->color->nama_warna ?? 'No Color' }}
+                                            </span>
+                                        </div>
                                     </div>
                                     <livewire:admin.spec.create :product="$product" :variant="$variant" :key="'spec-create-' . $variant->id" />
                                 </div>

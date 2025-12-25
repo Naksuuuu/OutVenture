@@ -2,34 +2,42 @@
 
 namespace App\Livewire\Public;
 
+use App\Models\Brand;
+use App\Models\Category;
+use App\Models\Product;
 use Livewire\Component;
 
 class Home extends Component
 {
-
-  public $brands = [
-    ['name' => 'THE NORTH FACE', 'image' => 'storage/thenorthface.jpg'],
-    ['name' => 'EIGER', 'image' => 'storage/taseiger.jpg'],
-    ['name' => 'CONSINA', 'image' => 'storage/sepatuconsina.jpg'],
-    ['name' => 'CONSINA', 'image' => 'storage/sepatuconsina.jpg'],
-  ];
-
-  public $categories = [
-    ['name' => 'TENDA', 'image' => 'storage/tenda.jpg'],
-    ['name' => 'SEPATU', 'image' => 'storage/sepatuhiking.jpg'],
-    ['name' => 'MATRAS', 'image' => 'storage/matras.jpg'],
-    ['name' => 'TAS', 'image' => 'storage/tas.jpg'],
-    ['name' => 'JAKET', 'image' => 'storage/gorpcore.jpg'],
-    ['name' => 'TOPI', 'image' => 'storage/topi.jpg'],
-    ['name' => 'KOMPOR', 'image' => 'storage/kompor.jpg'],
-    ['name' => 'KURSI LIPAT', 'image' => 'storage/kursilipat.jpg'],
-    ['name' => 'SLEEPING BAG', 'image' => 'storage/sleepingbag.jpg'],
-    ['name' => 'MEJA LIPAT', 'image' => 'storage/mejalipat.jpg'],
-  ];
-
   public function render()
   {
-    return view('livewire.public.home')
-      ->layout('components.layouts.app', ['title' => 'Outventure - Home']);
+    $brands = Brand::withCount('products')
+      ->orderBy('is_trusted', 'desc')
+      ->limit(4)
+      ->get();
+
+    $categories = Category::withCount('products')
+      ->orderBy('products_count', 'desc')
+      ->get();
+
+    $latestProducts = Product::with(['brand', 'category', 'variants.specs'])
+      ->has('variants') // Hanya produk yang punya variant
+      ->whereHas('variants.specs') // Variant harus punya spec
+      ->withCount('variants')
+      ->latest()
+      ->limit(10)
+      ->get()
+      ->map(function ($product) {
+        // Calculate minimum price from all variant specs
+        $minPrice = $product->variants->flatMap->specs->min('harga');
+        $product->min_price = $minPrice ?? 0;
+        return $product;
+      });
+
+    return view('livewire.public.home', [
+      'brands' => $brands,
+      'categories' => $categories,
+      'latestProducts' => $latestProducts,
+    ])->layout('components.layouts.app', ['title' => 'Outventure - Home']);
   }
 }

@@ -15,7 +15,17 @@ use App\Livewire\Admin\Category\Edit as DashboardCategoryEdit;
 use App\Livewire\Admin\Category\Show as DashboardCategoryShow;
 
 use App\Livewire\Admin\Brand\Index as DashboardBrandIndex;
+use App\Livewire\Admin\Brand\Create as DashboardBrandCreate;
+use App\Livewire\Admin\Brand\Edit as DashboardBrandEdit;
+use App\Livewire\Admin\Brand\Show as DashboardBrandShow;
+
 use App\Livewire\Admin\Size\Index as DashboardSizeIndex;
+use App\Livewire\Admin\Size\Create as DashboardSizeCreate;
+use App\Livewire\Admin\Size\Edit as DashboardSizeEdit;
+use App\Livewire\Admin\Size\Show as DashboardSizeShow;
+
+use App\Livewire\Admin\Order\Index as DashboardOrderIndex;
+use App\Livewire\Admin\Order\Show as DashboardOrderShow;
 
 
 use App\Livewire\Public\Product\Index as PublicProductIndex;
@@ -66,9 +76,19 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group
 
     // Brands Management
     Route::get('brands', DashboardBrandIndex::class)->name('brands.index');
+    Route::get('brands/create', DashboardBrandCreate::class)->name('brands.create');
+    Route::get('brands/{brandId}/edit', DashboardBrandEdit::class)->name('brands.edit');
+    Route::get('brands/{brandId}/show', DashboardBrandShow::class)->name('brands.show');
 
     // Size Management
     Route::get('sizes', DashboardSizeIndex::class)->name('sizes.index');
+    Route::get('sizes/create', DashboardSizeCreate::class)->name('sizes.create');
+    Route::get('sizes/{sizeGroupId}/edit', DashboardSizeEdit::class)->name('sizes.edit');
+    Route::get('sizes/{sizeGroupId}/show', DashboardSizeShow::class)->name('sizes.show');
+
+    // Orders Management
+    Route::get('orders', DashboardOrderIndex::class)->name('orders.index');
+    Route::get('orders/{id}/show', DashboardOrderShow::class)->name('orders.show');
 });
 
 // Google OAuth Routes

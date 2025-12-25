@@ -1,7 +1,7 @@
 <div class="bg-gray-50 min-h-screen p-8">
 
     @if (session('success'))
-        <div class="fixed bottom-10 right-10 p-6 w-fit bg-green-400/90 rounded-lg border border-green-400 mb-2">
+        <div class="fixed bottom-10 right-10 p-6 w-fit bg-green-400/90 rounded-lg border border-green-400 mb-2 z-50">
             {{ session('success') }}
         </div>
     @endif
@@ -10,24 +10,25 @@
         <div class="flex items-center justify-between mb-8">
             <div>
                 <h1 class="text-2xl font-bold text-gray-900">Manajemen Produk</h1>
-                <p class="text-sm text-gray-500 mt-1">Total {{ $totalProducts ?? $products->count() }} produk dalam
+                <p class="text-sm text-gray-500 mt-1">Total {{ $totalProducts ?? $products->count() }} produk di
                     database.</p>
             </div>
 
-            <div class="max-w-md w-160">
+            <div class="flex items-center gap-3">
                 <div class="relative">
-                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-white"><x-lucide-search
-                            class="w-5 h-5 text-indigo-500" /></span>
-
-                    <input type="text" wire:model.debounce.500ms="search" placeholder="Cari produk..."
-                        class="w-full pl-10 pr-4 py-2.5 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-indigo-700 shadow-sm">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-indigo-500">
+                        <x-lucide-search class="w-5 h-5" />
+                    </span>
+                    <input type="text" wire:model.live.debounce="search" placeholder="Cari produk..."
+                        class="w-64 pl-10 pr-4 py-2.5 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-indigo-700 shadow-sm">
                 </div>
+
+                <a href="{{ route('admin.products.create') }}" wire:navigate
+                    class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-sm">
+                    <x-lucide-plus class="w-5 h-5" />
+                    Tambah Produk
+                </a>
             </div>
-            <a href="{{ route('admin.products.create') }}" wire:navigate
-                class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg font-semibold text-sm transition-all shadow-sm">
-                <x-lucide-plus class="w-5 h-5" />
-                Tambah Produk
-            </a>
         </div>
 
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
@@ -36,7 +37,7 @@
                     <tr class="bg-gray-50 border-b border-gray-200">
                         <th class="w-[40%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Informasi
                             Produk</th>
-                        <th class="w-[20%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Brand
+                        <th class="w-[20%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Merek
                         </th>
                         <th
                             class="w-[20%] px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider text-center">
@@ -57,12 +58,12 @@
                             </td>
                             <td class="px-6 py-4">
                                 <span
-                                    class="text-sm text-gray-600">{{ $product->brand->nama_brand ?? 'Tanpa Brand' }}</span>
+                                    class="text-sm text-gray-600">{{ $product->brand->nama_brand ?? 'No Brand' }}</span>
                             </td>
                             <td class="px-6 py-4 text-center">
                                 <span
-                                    class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold {{ $product->category ? 'bg-indigo-50 text-green-700 border border-indigo-100' : 'bg-gray-50 text-gray-400 border border-gray-100' }}">
-                                    {{ $product->category->nama_category ?? 'TANPA KATEGORI' }}
+                                    class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold {{ $product->category ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-gray-50 text-gray-400 border border-gray-100' }}">
+                                    {{ $product->category->nama_category ?? 'NO CATEGORY' }}
                                 </span>
                             </td>
                             <td class="px-6 py-4">
@@ -84,8 +85,9 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="4" class="px-6 py-12 text-center text-gray-400 text-sm italic">Data produk
-                                belum tersedia.</td>
+                            <td colspan="4" class="px-6 py-12 text-center text-gray-400 text-sm italic">Tidak ada
+                                produk
+                                available yet.</td>
                         </tr>
                     @endforelse
                 </tbody>

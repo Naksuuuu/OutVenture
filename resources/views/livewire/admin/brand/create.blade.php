@@ -17,20 +17,20 @@
                     </div>
                     <div>
                         <h1 class="text-2xl font-bold tracking-tight text-slate-800">
-                            Edit Category</h1>
-                        <p class="text-sm text-slate-500 mt-1">{{ $category->nama_category }}</p>
+                            Tambah Brand</h1>
+                        <p class="text-sm text-slate-500 mt-1">Isi Formulir Dibawah untuk menambahkan brand baru</p>
                     </div>
                 </div>
             </div>
 
             <div class="p-8 md:p-10 space-y-10">
 
-                <form>
+                <form wire:submit.prevent="save">
                     <section>
                         <div class="flex items-center space-x-2 mb-6">
                             <span class="text-indigo-600 font-bold text-lg">01</span>
                             <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">
-                                Informasi Category
+                                Informasi Brand
                             </h2>
                         </div>
 
@@ -38,96 +38,125 @@
                             <div class="md:col-span-4">
                                 <label
                                     class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Nama
-                                    Category
+                                    Brand
                                 </label>
-                                <input wire:model="nama_category" type="text"
+                                <input wire:model="nama_brand" type="text"
                                     class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium">
-                                @error('nama_category')
-                                    <span
-                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="md:col-span-4">
-                                <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Kategori</label>
-                                <select wire:model="id_size_group"
-                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 appearance-none font-medium cursor-pointer">
-                                    <option value="" selected>Pilih Size Group</option>
-                                    @foreach ($sizes as $size)
-                                        <option value="{{ $size->id }}"
-                                            {{ $category->id_size_group == $size->id ? 'selected' : '' }}>
-                                            {{ $size->nama_group }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('id_size_group')
-                                    <span
-                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div class="md:col-span-4">
-                                <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">New
-                                    Image
-                                </label>
-                                <input wire:model="new_image" type="file"
-                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium">
-                                @error('new_image')
+                                @error('nama_brand')
                                     <span
                                         class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
                                 @enderror
                             </div>
 
-                            @if ($new_image)
+                            <div class="md:col-span-4">
+                                <label
+                                    class="flex items-center gap-2 text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider cursor-pointer">
+                                    <input wire:model="is_trusted" type="checkbox"
+                                        class="w-5 h-5 text-indigo-600 bg-slate-50 border-none rounded focus:ring-2 focus:ring-indigo-500/20">
+                                    <span>Trusted Brand</span>
+                                </label>
+                                @error('is_trusted')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="md:col-span-4">
+                                <label
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Image
+                                </label>
+                                <input wire:model="image" type="file"
+                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium">
+                                @error('image')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            @if ($image)
                                 <div class="md:col-span-2">
                                     <p class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">
-                                        New Image
+                                        Photo Preview:
                                     </p>
-
-                                    <img src="{{ $new_image->temporaryUrl() }}"
+                                    <img src="{{ $image->temporaryUrl() }}"
                                         class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium"
-                                        alt="{{ $category->nama_category }}">
+                                        style="max-width: 200px;">
                                 </div>
                             @endif
 
-                            <div class="md:col-span-2">
-                                <p class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">
-                                    Image
-                                </p>
+                            <div wire:loading wire:target="image" class="md:col-span-4">
+                                <p class="text-indigo-600 text-sm font-medium">Mengunggah...</p>
+                            </div>
 
-                                @if ($category->image)
-                                    <img src="{{ asset('storage/' . $category->image) }}"
+                            <div class="md:col-span-4">
+                                <label
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Wide
+                                    Image
+                                </label>
+                                <input wire:model="wide_image" type="file"
+                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium">
+                                @error('wide_image')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            @if ($wide_image)
+                                <div class="md:col-span-2">
+                                    <p class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">
+                                        Wide Image Preview:
+                                    </p>
+                                    <img src="{{ $wide_image->temporaryUrl() }}"
                                         class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium"
-                                        alt="{{ $category->nama_category }}">
-                                @elseif (!$category->image)
-                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        style="max-width: 200px;">
+                                </div>
+                            @endif
+
+                            <div wire:loading wire:target="wide_image" class="md:col-span-4">
+                                <p class="text-indigo-600 text-sm font-medium">Mengunggah...</p>
+                            </div>
+
+                            <div class="md:col-span-4">
+                                <label
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Logo
+                                </label>
+                                <input wire:model="logo" type="file"
+                                    class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium">
+                                @error('logo')
+                                    <span
+                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            @if ($logo)
+                                <div class="md:col-span-2">
+                                    <p class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">
+                                        Logo Preview:
+                                    </p>
+                                    <img src="{{ $logo->temporaryUrl() }}"
                                         class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium"
-                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                    </svg>
-                                @endif
+                                        style="max-width: 200px;">
+                                </div>
+                            @endif
+
+                            <div wire:loading wire:target="logo" class="md:col-span-4">
+                                <p class="text-indigo-600 text-sm font-medium">Mengunggah...</p>
                             </div>
                         </div>
                     </section>
 
-                    <div class="flex items-center justify-end px-8 py-6">
+                    <div class="flex items-center justify-end px-8 py-6" wire:loading.attr="disabled">
                         <button type="submit"
-                            class="bg-black/80 cursor-pointer hover:bg-black text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
-                            Simpan Perubahan Produk
+                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
+                            Simpan Perubahan Brand
                         </button>
                     </div>
                 </form>
 
-
-
-
-
-
             </div>
 
             <div class="bg-slate-50/80 px-8 py-6 flex items-center border-t border-slate-100">
-                <a href="{{ route('admin.categories.index') }}" wire:navigate
+                <a href="{{ route('admin.brands.index') }}" wire:navigate
                     class="text-slate-500 hover:text-slate-800 text-sm font-bold uppercase tracking-widest transition-colors flex items-center group">
                     <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none"
                         stroke="currentColor" viewBox="0 0 24 24">
@@ -144,3 +173,4 @@
             &copy; 2025 Praktikum Web &bull; Management System
         </p>
     </div>
+</div>
