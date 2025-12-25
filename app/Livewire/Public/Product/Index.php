@@ -5,24 +5,35 @@ namespace App\Livewire\Public\Product;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Color;
 
 class Index extends Component
 {
   use WithPagination;
 
-  public $category = '';
+  public $selectedCategory = '';
+  public $selectedColor = '';
 
-  protected $queryString = ['category'];
+  protected $queryString = [
+    'selectedCategory' => ['except' => ''],
+    'selectedColor' => ['except' => '']
+  ];
 
-  public function mount()
+  public function updatedSelectedCategory()
   {
-    if (request()->has('category')) {
-      $this->category = request()->query('category');
-    }
+    $this->resetPage();
   }
 
-  public function updatedCategory()
+  public function updatedSelectedColor()
   {
+    $this->resetPage();
+  }
+
+  public function clearFilters()
+  {
+    $this->selectedCategory = '';
+    $this->selectedColor = '';
     $this->resetPage();
   }
 
@@ -34,20 +45,17 @@ class Index extends Component
         'brand:id,nama_brand',
         'variants:id,id_product,id_color,image'
       ])
-      ->whereExists(function ($subquery) {
-        $subquery->select(\DB::raw(1))
-          ->from('product_variants')
-          ->whereColumn('product_variants.id_product', 'products.id')
-          ->whereExists(function ($specQuery) {
-            $specQuery->select(\DB::raw(1))
-              ->from('product_variant_specs')
-              ->whereColumn('product_variant_specs.id_variant', 'product_variants.id');
-          });
-      });
+      ->has('variants.specs');
 
-    if ($this->category) {
-      $query->whereHas('category', function ($q) {
-        $q->where('nama_category', $this->category);
+    // Filter by category
+    if ($this->selectedCategory) {
+      $query->where('id_category', $this->selectedCategory);
+    }
+
+    // Filter by color
+    if ($this->selectedColor) {
+      $query->whereHas('variants', function ($q) {
+        $q->where('id_color', $this->selectedColor);
       });
     }
 
@@ -64,8 +72,14 @@ class Index extends Component
       return $product;
     });
 
+    // Get available categories and colors for filter
+    $categories = Category::orderBy('nama_category')->get();
+    $colors = Color::orderBy('nama_color')->get();
+
     return view('livewire.public.product.index', [
-      'products' => $products
+      'products' => $products,
+      'categories' => $categories,
+      'colors' => $colors
     ])->layout('components.layouts.app', ['title' => 'Products']);
   }
 }
