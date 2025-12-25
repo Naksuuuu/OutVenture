@@ -8,6 +8,6 @@ class Edit extends Component
 {
     public function render()
     {
-        return view('livewire.admin.color.edit');
+        return view('livewire.admin.color.edit')->layout('components.layouts.admin', ['title' => 'Edit Color']);
     }
 }

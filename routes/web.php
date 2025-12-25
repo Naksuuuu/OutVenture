@@ -28,6 +28,9 @@ use App\Livewire\Admin\Size\Show as DashboardSizeShow;
 use App\Livewire\Admin\Order\Index as DashboardOrderIndex;
 use App\Livewire\Admin\Order\Show as DashboardOrderShow;
 
+use App\Livewire\Admin\Color\Index as DashboardColorIndex;
+use App\Livewire\Admin\Color\Edit as DashboardColorShow;
+
 
 use App\Livewire\Public\Product\Index as PublicProductIndex;
 use App\Livewire\Public\Brand\Index as PublicBrandIndex;
@@ -91,6 +94,10 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group
     // Orders Management
     Route::get('orders', DashboardOrderIndex::class)->name('orders.index');
     Route::get('orders/{id}/show', DashboardOrderShow::class)->name('orders.show');
+
+    // Colors Management
+    Route::get('colors', DashboardColorIndex::class)->name('colors.index');
+    Route::get('colors/{colorId}/edit', DashboardColorShow::class)->name('colors.edit');
 });
 
 // Google OAuth Routes
