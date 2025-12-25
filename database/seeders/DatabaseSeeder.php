@@ -44,14 +44,14 @@ class DatabaseSeeder extends Seeder
 
         // 3. Colors
         $colors = [
-            ['id' => 1, 'nama_warna' => 'Hitam'],
-            ['id' => 2, 'nama_warna' => 'Abu-abu'],
-            ['id' => 3, 'nama_warna' => 'Biru'],
-            ['id' => 4, 'nama_warna' => 'Merah'],
-            ['id' => 5, 'nama_warna' => 'Hijau'],
-            ['id' => 6, 'nama_warna' => 'Orange'],
-            ['id' => 7, 'nama_warna' => 'Kuning'],
-            ['id' => 8, 'nama_warna' => 'Coklat'],
+            ['id' => 1, 'nama_warna' => 'Hitam', 'hex_code' => '#000000'],
+            ['id' => 2, 'nama_warna' => 'Abu-abu', 'hex_code' => '#6B7280'],
+            ['id' => 3, 'nama_warna' => 'Biru', 'hex_code' => '#2563EB'],
+            ['id' => 4, 'nama_warna' => 'Merah', 'hex_code' => '#DC2626'],
+            ['id' => 5, 'nama_warna' => 'Hijau', 'hex_code' => '#16A34A'],
+            ['id' => 6, 'nama_warna' => 'Orange', 'hex_code' => '#F97316'],
+            ['id' => 7, 'nama_warna' => 'Kuning', 'hex_code' => '#EAB308'],
+            ['id' => 8, 'nama_warna' => 'Coklat', 'hex_code' => '#92400E'],
         ];
 
         foreach ($colors as $color) {
