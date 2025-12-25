@@ -12,7 +12,8 @@ class Color extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'nama_warna'
+        'nama_warna',
+        'hex_code'
     ];
 
 

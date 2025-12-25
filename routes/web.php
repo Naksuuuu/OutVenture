@@ -29,7 +29,8 @@ use App\Livewire\Admin\Order\Index as DashboardOrderIndex;
 use App\Livewire\Admin\Order\Show as DashboardOrderShow;
 
 use App\Livewire\Admin\Color\Index as DashboardColorIndex;
-use App\Livewire\Admin\Color\Edit as DashboardColorShow;
+use App\Livewire\Admin\Color\Edit as DashboardColorEdit;
+use App\Livewire\Admin\Color\Create as DashboardColorCreate;
 
 
 use App\Livewire\Public\Product\Index as PublicProductIndex;
@@ -97,7 +98,8 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group
 
     // Colors Management
     Route::get('colors', DashboardColorIndex::class)->name('colors.index');
-    Route::get('colors/{colorId}/edit', DashboardColorShow::class)->name('colors.edit');
+    Route::get('colors/create', DashboardColorCreate::class)->name('colors.create');
+    Route::get('colors/{colorId}/edit', DashboardColorEdit::class)->name('colors.edit');
 });
 
 // Google OAuth Routes
