@@ -21,10 +21,83 @@ class Create extends Component
     'id_category' => 'required|exists:categories,id',
   ];
 
+  private $categoryKeywords = [
+    // Tenda keywords
+    'Tenda' => 'Tenda',
+    'tenda' => 'Tenda',
+
+    // Sleeping Bag keywords
+    'Sleeping Bag' => 'Sleeping Bag',
+    'sleeping bag' => 'Sleeping Bag',
+    'Sleepingbag' => 'Sleeping Bag',
+    'sleepingbag' => 'Sleeping Bag',
+
+    // Sepatu keywords
+    'Sepatu' => 'Sepatu',
+    'sepatu' => 'Sepatu',
+
+    // Matras keywords
+    'Matras' => 'Matras',
+    'matras' => 'Matras',
+
+    // Tas keywords
+    'Tas' => 'Tas',
+    'tas' => 'Tas',
+    'Ransel' => 'Tas',
+    'ransel' => 'Tas',
+
+    // Pakaian keywords
+    'Parka' => 'Pakaian',
+    'parka' => 'Pakaian',
+    'Jaket' => 'Pakaian',
+    'jaket' => 'Pakaian',
+    'Jacket' => 'Pakaian',
+    'Pakaian' => 'Pakaian',
+    'pakaian' => 'Pakaian',
+
+    // Topi keywords
+    'Topi' => 'Topi',
+    'topi' => 'Topi',
+    'Kupluk' => 'Topi',
+    'kupluk' => 'Topi',
+
+    // Kompor keywords
+    'Kompor' => 'Kompor',
+    'kompor' => 'Kompor',
+
+    // Furniture keywords
+    'Furniture' => 'Furniture',
+    'furniture' => 'Furniture',
+    'Meja' => 'Furniture',
+    'meja' => 'Furniture',
+    'Kursi' => 'Furniture',
+    'kursi' => 'Furniture',
+    'Kursi Lipat' => 'Furniture',
+    'Kursi lipat' => 'Furniture',
+    'kursi lipat' => 'Furniture',
+  ];
+
+  public function updatedNamaProduct()
+  {
+    $namaLower = strtolower(trim($this->nama_product));
+    
+    if (empty($namaLower)) {
+      return;
+    }
+    
+    foreach ($this->categoryKeywords as $keyword => $categoryName) {
+      if (strpos($namaLower, strtolower($keyword)) !== false) {
+        $category = Category::whereRaw('LOWER(nama_category) LIKE ?', ['%' . strtolower($categoryName) . '%'])->first();
+        if ($category) {
+          $this->id_category = $category->id;
+          break;
+        }
+      }
+    }
+  }
+
   public function saveProduct()
   {
-
-
     $this->validate();
 
     Product::create([

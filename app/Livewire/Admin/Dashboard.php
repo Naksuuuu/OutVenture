@@ -38,7 +38,7 @@ class Dashboard extends Component
         'bestSellingProducts' => ProductVariant::with(['product.brand', 'color'])
           ->withSum(['specs as total_terjual' => function ($query) {
             $query->join('order_items', 'product_variant_specs.id', '=', 'order_items.id_variant_spec');
-          }], 'order_items.quantity') // Menjumlahkan kolom quantity di tabel order_items
+          }], 'order_items.quantity') 
           ->orderByDesc('total_terjual')
           ->take(5)
           ->get()

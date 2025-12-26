@@ -12,6 +12,9 @@ class Brand extends Model
     protected $table = 'brands';
     protected $primaryKey = 'id';
     protected $fillable = ['nama_brand', 'image', 'wide_image', 'logo', 'is_trusted'];
+    protected $casts = [
+        'is_trusted' => 'boolean',
+    ];
 
 
     public function products()

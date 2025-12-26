@@ -14,7 +14,15 @@ class Index extends Component
     #[Url(history: true, keep: true)]
     public $search = '';
 
+    #[Url(history: true, keep: true)]
+    public $sort = 'latest';
+
     public function updatingSearch()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingSort()
     {
         $this->resetPage();
     }
@@ -35,7 +43,11 @@ class Index extends Component
                 $query->where('nama_brand', 'like', '%' . $this->search . '%');
             })
             ->withCount('products')
-            ->latest()
+            ->when($this->sort === 'latest', function ($query) {
+                $query->latest();
+            }, function ($query) {
+                $query->oldest();
+            })
             ->simplePaginate(10);
 
         return view('livewire.admin.brand.index', [

@@ -14,6 +14,23 @@
                     placeholder="Cari berdasarkan ID atau pelanggan..."
                     class="w-full pl-10 pr-4 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white shadow-sm transition-all">
             </div>
+
+            <div class="relative w-40">
+                <select wire:model.live="sortBy"
+                    class="w-full pl-3 pr-8 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white shadow-sm font-semibold text-gray-700">
+                    <option value="latest">Terbaru</option>
+                    <option value="oldest">Terlama</option>
+                </select>
+            </div>
+
+            <div class="relative w-48">
+                <select wire:model.live="status"
+                    class="w-full pl-3 pr-8 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white shadow-sm font-semibold text-gray-700">
+                    <option value="all">Semua Status</option>
+                    <option value="lunas">Lunas</option>
+                    <option value="belum_bayar">Belum Bayar</option>
+                </select>
+            </div>
         </div>
     </div>
 
@@ -72,27 +89,22 @@
                                     items</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                <div class="text-sm font-bold text-gray-900">Rp
-                                    {{ number_format($order->total_harga, 0, ',', '.') }}</div>
+                                <div class="text-sm font-bold text-gray-900">
+                                    Rp {{ number_format($order->items->sum(fn($item) => $item->harga * $item->quantity), 0, ',', '.') }}
+                                </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                                @if ($order->status_pembayaran === 'paid')
+                                @if ($order->status_pembayaran)
                                     <span
                                         class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
                                         <x-lucide-check-circle class="w-3 h-3 mr-1" />
                                         Lunas
                                     </span>
-                                @elseif ($order->status_pembayaran === 'pending')
-                                    <span
-                                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-yellow-100 text-yellow-800">
-                                        <x-lucide-clock class="w-3 h-3 mr-1" />
-                                        Menunggu
-                                    </span>
                                 @else
                                     <span
                                         class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800">
                                         <x-lucide-x-circle class="w-3 h-3 mr-1" />
-                                        {{ ucfirst($order->status_pembayaran) }}
+                                        Belum Bayar
                                     </span>
                                 @endif
                             </td>
