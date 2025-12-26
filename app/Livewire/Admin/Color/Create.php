@@ -24,7 +24,6 @@ class Create extends Component
 
     public function updatedNamaWarna($value)
     {
-        // Cek apakah nama warna sudah ada
         $this->existingColorName = Color::where('nama_warna', $value)->first();
         
         if (!$this->existingColorName) {

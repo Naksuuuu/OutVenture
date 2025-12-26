@@ -13,8 +13,9 @@ class Index extends Component
 
   public $search = '';
   public $category = '';
+  public $sort = 'terbaru';
 
-  protected $queryString = ['search', 'category'];
+  protected $queryString = ['search', 'category', 'sort'];
 
   public function updatingSearch()
   {
@@ -22,6 +23,11 @@ class Index extends Component
   }
 
   public function updatingCategory()
+  {
+    $this->resetPage();
+  }
+
+  public function updatingSort()
   {
     $this->resetPage();
   }
@@ -37,7 +43,14 @@ class Index extends Component
 
   public function render()
   {
-    $query = Product::with(['category', 'variants', 'brand'])->orderBy('id', 'desc');
+    $query = Product::with(['category', 'variants', 'brand']);
+
+    // Apply sorting
+    if ($this->sort === 'terlama') {
+      $query->orderBy('id', 'asc');
+    } else {
+      $query->orderBy('id', 'desc');
+    }
 
     if ($this->category) {
       $query->whereHas('category', function ($q) {

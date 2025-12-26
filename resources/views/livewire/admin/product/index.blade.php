@@ -15,6 +15,12 @@
             </div>
 
             <div class="flex items-center gap-3">
+                <select wire:model.live="sort"
+                    class="px-4 py-2.5 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-gray-700 shadow-sm">
+                    <option value="terbaru">Terbaru</option>
+                    <option value="terlama">Terlama</option>
+                </select>
+
                 <div class="relative">
                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-indigo-500">
                         <x-lucide-search class="w-5 h-5" />

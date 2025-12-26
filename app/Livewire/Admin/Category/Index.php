@@ -14,7 +14,15 @@ class Index extends Component
   #[Url(history: true, keep: true)]
   public $search = '';
 
+  #[Url(history: true, keep: true)]
+  public $sortBy = 'latest';
+
   public function updatingSearch()
+  {
+    $this->resetPage();
+  }
+
+  public function updatingSortBy()
   {
     $this->resetPage();
   }
@@ -35,7 +43,12 @@ class Index extends Component
         $query->where('nama_category', 'like', '%' . $this->search . '%');
       })
       ->withCount('products')
-      ->latest() // Selalu urutkan agar user tidak bingung data baru di mana
+      ->when($this->sortBy === 'latest', function ($query) {
+        $query->latest();
+      })
+      ->when($this->sortBy === 'oldest', function ($query) {
+        $query->oldest();
+      })
       ->simplePaginate(10);
 
     return view('livewire.admin.category.index', [

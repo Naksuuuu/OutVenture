@@ -2,12 +2,20 @@
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
         <div>
             <h2 class="text-4xl font-black text-slate-900 tracking-tight uppercase italic">Kategori</h2>
-            <p class="text-slate-500 mt-2 font-medium font-sans">Kelola struktur katalog produk Anda dengan sistem yang lebih rapi.</p>
+            <p class="text-slate-500 mt-2 font-medium font-sans">Kelola struktur katalog produk Anda dengan sistem yang
+                lebih rapi.</p>
         </div>
 
         <div class="flex items-center gap-4 w-full md:w-auto">
+            <select wire:model.live="sortBy"
+                class="px-4 py-3 text-sm border-none rounded-2xl bg-white shadow-sm ring-1 ring-slate-200 focus:ring-2 focus:ring-emerald-500 transition-all outline-none font-medium text-slate-700 cursor-pointer hover:ring-slate-300">
+                <option value="latest">Terbaru</option>
+                <option value="oldest">Terlama</option>
+            </select>
+
             <div class="relative flex-1 md:w-72 group">
-                <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-emerald-500 transition-colors">
+                <span
+                    class="absolute inset-y-0 left-0 pl-4 flex items-center text-slate-400 group-focus-within:text-emerald-500 transition-colors">
                     <x-lucide-search class="w-5 h-5" />
                 </span>
                 <input type="text" wire:model.live.debounce="search" placeholder="Cari kategori..."
@@ -24,9 +32,11 @@
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach ($categories as $category)
-            <div class="group bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden relative">
-                
-                <div class="absolute -right-6 -bottom-6 text-slate-50 group-hover:text-emerald-50/50 transition-colors duration-500">
+            <div
+                class="group bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden relative">
+
+                <div
+                    class="absolute -right-6 -bottom-6 text-slate-50 group-hover:text-emerald-50/50 transition-colors duration-500">
                     <x-lucide-layers class="w-32 h-32" />
                 </div>
 
@@ -34,14 +44,16 @@
                     <div class="h-48 overflow-hidden relative bg-slate-100">
                         @if ($category->image)
                             <img src="{{ asset('storage/' . $category->image) }}"
-                                class="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt="{{ $category->nama_category }}">
+                                class="w-full h-full object-cover transition duration-700 group-hover:scale-110"
+                                alt="{{ $category->nama_category }}">
                         @else
                             <div class="w-full h-full flex items-center justify-center text-slate-300">
                                 <x-lucide-image class="w-12 h-12" />
                             </div>
                         @endif
-                        
-                        <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
+
+                        <div
+                            class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
                             <a href="{{ route('admin.categories.edit', $category->id) }}"
                                 class="p-2.5 bg-white/90 backdrop-blur text-slate-600 hover:text-emerald-600 rounded-xl shadow-xl transition-colors">
                                 <x-lucide-square-pen class="w-5 h-5" />
