@@ -49,6 +49,7 @@ Route::get('brands', PublicBrandIndex::class)->name('brands.index');
 Route::middleware('auth')->group(function () {
     Route::get('user/profile', App\Livewire\User\Profile::class)->name('user.profile');
     Route::get('user/orders', App\Livewire\User\Order\Index::class)->name('user.orders.index');
+    Route::get('user/carts', App\Livewire\User\Cart\Index::class)->name('user.carts.index');
 });
 
 // Auth Routes - Livewire
@@ -106,6 +107,3 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group
 Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
 Route::get('auth/google/logout', [GoogleController::class, 'logout'])->name('google.logout');
-
-
-

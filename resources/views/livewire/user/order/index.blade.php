@@ -14,6 +14,14 @@
                     class="px-5 py-2 rounded-lg text-sm font-bold transition-all {{ $statusFilter === 'all' ? 'bg-black text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
                     Semua Pesanan
                 </button>
+                <button wire:click="$set('statusFilter', 'unpaid')"
+                    class="px-5 py-2 rounded-lg text-sm font-bold transition-all {{ $statusFilter === 'unpaid' ? 'bg-black text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
+                    Harus Bayar
+                </button>
+                <button wire:click="$set('statusFilter', 'paid')"
+                    class="px-5 py-2 rounded-lg text-sm font-bold transition-all {{ $statusFilter === 'paid' ? 'bg-black text-white shadow-md' : 'bg-gray-100 text-gray-600 hover:bg-gray-200' }}">
+                    Lunas
+                </button>
             </div>
         </div>
 
@@ -47,21 +55,11 @@
                                 </div>
                                 <div>
                                     @php
-                                        $statusClasses = [
-                                            'pending' => 'bg-yellow-100 text-yellow-700',
-                                            'success' => 'bg-green-100 text-green-700',
-                                            'failed' => 'bg-red-100 text-red-700',
-                                        ];
-                                        $statusLabel = [
-                                            'pending' => 'Pending Payment',
-                                            'success' => 'Paid',
-                                            'failed' => 'Failed',
-                                        ];
-                                        $currentStatus = $order->status_pembayaran;
+                                        $isPaid = $order->status_pembayaran == 1;
                                     @endphp
                                     <span
-                                        class="px-3 py-1.5 text-[11px] font-black uppercase rounded-md {{ $statusClasses[$currentStatus] ?? 'bg-gray-100 text-gray-600' }}">
-                                        {{ $statusLabel[$currentStatus] ?? $currentStatus }}
+                                        class="px-3 py-1.5 text-[11px] font-black uppercase rounded-md {{ $isPaid ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700' }}">
+                                        {{ $isPaid ? 'Lunas' : 'Belum Bayar' }}
                                     </span>
                                 </div>
                             </div>
@@ -86,12 +84,12 @@
                                                 {{ $item->variantSpec->variant->product->nama_product }}
                                             </h3>
                                             <div class="flex flex-wrap items-center gap-x-3 text-[13px] text-gray-500">
-                                                <p>Color: <span
-                                                        class="font-semibold text-gray-800">{{ $item->variantSpec->variant->color->nama_color }}</span>
+                                                <p>Warna: <span
+                                                        class="font-semibold text-gray-800">{{ $item->variantSpec->variant->color->nama_warna ?? '-' }}</span>
                                                 </p>
                                                 <span class="w-1 h-1 bg-gray-300 rounded-full hidden md:block"></span>
-                                                <p>Size: <span
-                                                        class="font-semibold text-gray-800">{{ $item->variantSpec->size->nama_size }}</span>
+                                                <p>Ukuran: <span
+                                                        class="font-semibold text-gray-800">{{ $item->variantSpec->size->label_size ?? '-' }}</span>
                                                 </p>
                                                 <span class="w-1 h-1 bg-gray-300 rounded-full hidden md:block"></span>
                                                 <p>Qty: <span
@@ -118,10 +116,17 @@
                         {{-- Action Footer --}}
                         <div class="border-t border-gray-100 bg-gray-50/30 px-6 py-4">
                             <div class="flex justify-end gap-3">
-                                @if ($order->status_pembayaran === 'pending')
-                                    <button
-                                        class="px-6 py-2.5 text-sm font-bold text-white bg-black rounded-lg hover:bg-gray-800 transition-all shadow-sm active:scale-95">
-                                        Pay Now
+                                @if ($order->status_pembayaran == 0)
+                                    {{-- Belum Bayar - Tombol Pay Now --}}
+                                    <button disabled
+                                        class="px-6 py-2.5 text-sm font-bold text-white bg-black rounded-lg hover:bg-gray-800 transition-all shadow-sm active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed">
+                                        Pay Now (Coming Soon)
+                                    </button>
+                                @else
+                                    {{-- Lunas - Tombol Download Invoice PDF --}}
+                                    <button wire:click="downloadInvoice({{ $order->id }})"
+                                        class="px-6 py-2.5 text-sm font-bold text-white bg-green-600 rounded-lg hover:bg-green-700 transition-all shadow-sm active:scale-95">
+                                        Download Invoice
                                     </button>
                                 @endif
                                 <button
