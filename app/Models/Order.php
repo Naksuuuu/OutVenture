@@ -24,6 +24,7 @@ class Order extends Model
     return [
       'total_harga' => 'decimal:2',
       'tgl_order' => 'datetime',
+      'status_pembayaran' => 'boolean',
     ];
   }
 

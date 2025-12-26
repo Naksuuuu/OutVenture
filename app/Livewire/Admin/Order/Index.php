@@ -15,7 +15,10 @@ class Index extends Component
     public $search = '';
 
     #[Url(history: true, keep: true)]
-    public $sortBy = 'latest'; // latest, oldest
+    public $sortBy = 'latest';
+
+    #[Url(history: true, keep: true)]
+    public $status = 'all';
 
     public function updatingSearch()
     {
@@ -23,6 +26,11 @@ class Index extends Component
     }
 
     public function updatingSortBy()
+    {
+        $this->resetPage();
+    }
+
+    public function updatingStatus()
     {
         $this->resetPage();
     }
@@ -36,6 +44,10 @@ class Index extends Component
                         $q->where('name', 'like', '%' . $this->search . '%')
                             ->orWhere('email', 'like', '%' . $this->search . '%');
                     });
+            })
+            ->when($this->status !== 'all', function ($query) {
+                $value = $this->status === 'lunas' ? 1 : 0;
+                $query->where('status_pembayaran', $value);
             })
             ->when($this->sortBy === 'latest', function ($query) {
                 $query->orderBy('tgl_order', 'desc');

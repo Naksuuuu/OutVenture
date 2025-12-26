@@ -52,7 +52,7 @@ class Edit extends Component
       'image' => $imagePath,
       'wide_image' => $wideImagePath,
       'logo' => $logoPath,
-      'is_trusted' => $this->is_trusted,
+      'is_trusted' => (bool) $this->is_trusted,
     ]);
 
     session()->flash('success', 'Brand updated successfully!');

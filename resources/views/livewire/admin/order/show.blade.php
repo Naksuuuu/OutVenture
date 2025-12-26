@@ -18,23 +18,17 @@
                     </div>
                 </div>
                 <div>
-                    @if ($order->status_pembayaran === 'paid')
+                    @if ($order->status_pembayaran)
                         <span
                             class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-100 text-emerald-800">
                             <x-lucide-check-circle class="w-4 h-4 mr-2" />
                             Lunas
                         </span>
-                    @elseif ($order->status_pembayaran === 'pending')
-                        <span
-                            class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold bg-yellow-100 text-yellow-800">
-                            <x-lucide-clock class="w-4 h-4 mr-2" />
-                            Menunggu
-                        </span>
                     @else
                         <span
                             class="inline-flex items-center px-4 py-2 rounded-xl text-sm font-semibold bg-red-100 text-red-800">
                             <x-lucide-x-circle class="w-4 h-4 mr-2" />
-                            {{ ucfirst($order->status_pembayaran) }}
+                            Belum Bayar
                         </span>
                     @endif
                 </div>
@@ -87,7 +81,7 @@
                             </p>
                             <div
                                 class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner font-semibold">
-                                {{ ucfirst($order->status_pembayaran) }}
+                                {{ $order->status_pembayaran ? 'Lunas' : 'Belum Bayar' }}
                             </div>
                         </div>
                     </div>
@@ -194,7 +188,8 @@
                                         </td>
                                         <td class="px-6 py-4 text-right">
                                             <span class="text-lg font-bold text-indigo-600">
-                                                Rp {{ number_format($order->total_harga, 0, ',', '.') }}
+                                                Rp
+                                                {{ number_format($order->items->sum(fn($item) => $item->harga * $item->quantity), 0, ',', '.') }}
                                             </span>
                                         </td>
                                     </tr>
@@ -219,21 +214,23 @@
                                     <x-lucide-shopping-bag class="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Total Item
+                                    <p class="text-xs font-bold text-indigo-600 uppercase tracking-wider">
+                                        Total Item
                                     </p>
-                                    <p class="text-2xl font-bold text-indigo-900">{{ $order->items->sum('quantity') }}
+                                    <p class="text-2xl font-bold text-indigo-900">
+                                        {{ $order->items->sum('quantity') }}
                                     </p>
                                 </div>
                             </div>
                         </div>
-
                         <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-200">
                             <div class="flex items-center gap-3">
                                 <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center">
                                     <x-lucide-package class="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">Jenis Produk
+                                    <p class="text-xs font-bold text-emerald-600 uppercase tracking-wider">
+                                        Total Jenis Produk
                                     </p>
                                     <p class="text-2xl font-bold text-emerald-900">{{ $order->items->count() }}</p>
                                 </div>
@@ -246,10 +243,11 @@
                                     <x-lucide-wallet class="w-6 h-6 text-white" />
                                 </div>
                                 <div>
-                                    <p class="text-xs font-bold text-amber-600 uppercase tracking-wider">Total Jumlah
+                                    <p class="text-xs font-bold text-amber-600 uppercase tracking-wider">
+                                        Total Jumlah
                                     </p>
                                     <p class="text-2xl font-bold text-amber-900">
-                                        Rp {{ number_format($order->total_harga, 0, ',', '.') }}
+                                        Rp {{ number_format($order->items->sum(fn($item) => $item->harga * $item->quantity), 0, ',', '.') }}
                                     </p>
                                 </div>
                             </div>
