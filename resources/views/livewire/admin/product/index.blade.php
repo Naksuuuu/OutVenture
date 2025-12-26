@@ -6,6 +6,12 @@
         </div>
     @endif
 
+    @if (session('error'))
+        <div class="fixed bottom-10 right-10 p-6 w-fit bg-red-400/90 rounded-lg border border-red-400 mb-2 z-50">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <div class="mx-auto">
         <div class="flex items-center justify-between mb-8">
             <div>
@@ -83,14 +89,11 @@
                                         class="inline-flex items-center justify-center px-4 py-1.5 text-[11px] font-bold text-indigo-600 bg-white border border-indigo-200 rounded-md hover:bg-indigo-50 transition-all uppercase tracking-wider">
                                         <x-lucide-square-pen class="w-4 h-4" />
                                     </a>
-                                    <form action="" method="POST" class="inline">
-                                        @csrf @method('DELETE')
-                                        <button type="submit"
-                                            class="inline-flex items-center justify-center px-4 py-1.5 text-[11px] font-bold text-red-600 bg-white border border-red-200 rounded-md hover:bg-red-50 transition-all uppercase tracking-wider"
-                                            onclick="return confirm('Hapus produk?')">
-                                            <x-lucide-trash class="w-4 h-4" />
-                                        </button>
-                                    </form>
+                                    <button type="button" wire:click="deleteProduct({{ $product->id }})"
+                                        onclick="return confirm('Hapus produk ini?')"
+                                        class="inline-flex items-center justify-center px-4 py-1.5 text-[11px] font-bold text-red-600 bg-white border border-red-200 rounded-md hover:bg-red-50 transition-all uppercase tracking-wider">
+                                        <x-lucide-trash class="w-4 h-4" />
+                                    </button>
                                 </div>
                             </td>
                         </tr>

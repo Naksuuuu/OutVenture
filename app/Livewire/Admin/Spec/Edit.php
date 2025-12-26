@@ -41,7 +41,6 @@ class Edit extends Component
 
     public function save()
     {
-
         $this->validate();
 
         ProductVariantSpec::where('id', $this->spec->id)->update([
@@ -52,11 +51,15 @@ class Edit extends Component
             'stok' => $this->stok,
         ]);
 
-        $this->dispatch('spec-events');
-        $this->reset(['id_size_value', 'harga', 'sku', 'stok']);
-        $this->isOpen = false;
+        // Reload spec to reflect latest changes
+        $this->spec = ProductVariantSpec::findOrFail($this->spec->id);
 
-        $this->dispatch('show-alert', message: 'Spesifikasi berhasil dirubah');
+        // Emit event to parent edit component to refresh product data
+        $this->dispatch('spec-events');
+        
+        // Show success message and close modal (no redirect, stay on edit page)
+        session()->flash('success', 'Spesifikasi berhasil diperbarui!');
+        $this->isOpen = false;
     }
 
 

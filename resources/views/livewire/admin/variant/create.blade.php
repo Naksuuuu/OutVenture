@@ -30,7 +30,22 @@
                 @error('id_color')
                     <span class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
                 @enderror
-                {{-- Tambah field lain yang dibutuhkan storeVariant --}}
+
+                <label class="block text-xs font-bold mb-2 mt-4">Gambar Varian</label>
+                <input type="file" wire:model="image" accept="image/*"
+                    class="w-full mb-2 bg-slate-50 border-none rounded-xl px-4 py-3 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 font-medium text-sm file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100">
+                @error('image')
+                    <span class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                @enderror
+
+                @if ($image)
+                    <div class="mt-3 mb-4">
+                        <p class="text-[11px] font-bold text-slate-600 mb-2">Preview:</p>
+                        <img src="{{ $image->temporaryUrl() }}"
+                            class="w-full h-40 object-cover rounded-xl border-2 border-slate-200 shadow-sm" alt="Preview Gambar Varian">
+                    </div>
+                @endif
+
                 <div class="flex justify-end gap-2">
                     <button type="button" @click="open = false"
                         class="inline-flex items-center justify-center px-4 py-2 text-[11px] font-black text-slate-500 bg-white border border-slate-200 rounded-xl hover:bg-slate-100 transition-all duration-300 uppercase tracking-widest shadow-sm">

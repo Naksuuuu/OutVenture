@@ -36,6 +36,11 @@ class Index extends Component
   {
     $product = Product::find($productId);
     if ($product) {
+      if ($product->variants->isNotEmpty()) {
+        session()->flash('error', 'Produk masih memiliki varian, hapus varian terlebih dahulu.');
+        return;
+      }
+
       $product->delete();
       session()->flash('success', 'Product deleted successfully!');
     }

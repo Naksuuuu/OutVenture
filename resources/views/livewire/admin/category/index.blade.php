@@ -1,4 +1,15 @@
 <div class="p-8 bg-slate-50/50 min-h-screen">
+    @if (session('success'))
+        <div class="fixed bottom-10 right-10 p-6 w-fit bg-green-400/90 rounded-lg border border-green-400 mb-2 z-50">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="fixed bottom-10 right-10 p-6 w-fit bg-red-400/90 rounded-lg border border-red-400 mb-2 z-50">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
         <div>
             <h2 class="text-4xl font-black text-slate-900 tracking-tight uppercase italic">Kategori</h2>

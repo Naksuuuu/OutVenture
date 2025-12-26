@@ -76,14 +76,6 @@
                                             </svg>
                                         </div>
                                     </div>
-                                    @if ($nama_category && $id_size_group)
-                                    @elseif ($nama_category && !$id_size_group)
-                                        <div
-                                            class="px-4 py-3 bg-blue-50 border border-blue-200 rounded-xl text-[11px] font-black text-blue-700 uppercase tracking-tight">
-                                            ⏳ Tunggu, size group sedang dibuat: <span class="text-blue-600">size
-                                                {{ strtolower($nama_category) }}</span>
-                                        </div>
-                                    @endif
                                 </div>
                                 @error('id_size_group')
                                     <span

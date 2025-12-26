@@ -16,6 +16,11 @@ class Delete extends Component
   }
   public function delete()
   {
+    if ($this->brand->products()->exists()) {
+      session()->flash('error', 'Merek masih memiliki produk, hapus atau pindahkan produk terlebih dahulu.');
+      return redirect()->route('admin.brands.index');
+    }
+
     $this->brand->delete();
 
     session()->flash('success', 'Brand deleted successfully!');

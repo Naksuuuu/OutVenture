@@ -16,6 +16,11 @@ class Delete extends Component
     }
     public function delete()
     {
+        if ($this->category->products()->exists()) {
+            session()->flash('error', 'Kategori masih memiliki produk, hapus atau pindahkan produk terlebih dahulu.');
+            return redirect()->route('admin.categories.index');
+        }
+
         $this->category->delete();
 
         session()->flash('success', 'Category deleted successfully!');
