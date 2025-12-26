@@ -67,17 +67,14 @@
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="flex items-center">
-                                    <div
-                                        class="flex-shrink-0 h-10 w-10 bg-emerald-100 rounded-lg flex items-center justify-center">
-                                        <x-lucide-receipt class="h-5 w-5 text-emerald-600" />
-                                    </div>
                                     <div class="ml-4">
                                         <div class="text-sm font-bold text-gray-900">#{{ $order->id }}</div>
                                     </div>
                                 </div>
                             </td>
                             <td class="px-6 py-4">
-                                <div class="text-sm font-semibold text-gray-900">{{ $order->user->name ?? 'N/A' }}</div>
+                                <div class="text-sm font-semibold text-gray-900">
+                                    {{ $order->user->nama_lengkap ?? 'N/A' }}</div>
                                 <div class="text-xs text-gray-500">{{ $order->user->email ?? 'N/A' }}</div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
@@ -90,7 +87,8 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <div class="text-sm font-bold text-gray-900">
-                                    Rp {{ number_format($order->items->sum(fn($item) => $item->harga * $item->quantity), 0, ',', '.') }}
+                                    Rp
+                                    {{ number_format($order->items->sum(fn($item) => $item->harga * $item->quantity), 0, ',', '.') }}
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">

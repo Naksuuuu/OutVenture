@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class ProductVariant extends Model
 {
@@ -16,6 +17,15 @@ class ProductVariant extends Model
     'id_color',
     'image',
   ];
+
+  protected static function booted(): void
+  {
+    static::deleting(function (ProductVariant $variant) {
+      if ($variant->image) {
+        Storage::disk('public')->delete($variant->image);
+      }
+    });
+  }
 
 
 

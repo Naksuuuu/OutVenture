@@ -22,24 +22,6 @@ class Create extends Component
     'image' => 'nullable|image|max:2048',
   ];
 
-  public function updatedNamaCategory($value)
-  {
-    if (!empty($value)) {
-      $sizeGroupName = 'size ' . strtolower($value);
-      
-      $existingGroup = SizeGroup::where('nama_group', $sizeGroupName)->first();
-      
-      if ($existingGroup) {
-        $this->id_size_group = $existingGroup->id;
-      } else {
-        $newGroup = SizeGroup::create([
-          'nama_group' => $sizeGroupName,
-        ]);
-        $this->id_size_group = $newGroup->id;
-      }
-    }
-  }
-
   public function save()
   {
     $this->validate();

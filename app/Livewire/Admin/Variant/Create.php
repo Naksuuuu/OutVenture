@@ -6,17 +6,22 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 
 class Create extends Component
 {
 
+    use WithFileUploads;
+
     public $product;
     public $id_color;
     public $isOpen;
+    public $image;
 
     protected $rules = [
         'id_color' => 'required|exists:colors,id',
+        'image' => 'nullable|image|max:2048',
     ];
 
 
@@ -26,30 +31,34 @@ class Create extends Component
         $this->isOpen = false;
     }
 
-
-
-
-
     public function save()
     {
 
         $this->validate();
 
+        $imagePath = $this->image ? $this->image->store('variants', 'public') : null;
+
         ProductVariant::create([
             'id_product' => $this->product->id,
             'id_color' => $this->id_color,
+            'image' => $imagePath,
         ]);
 
         session()->flash('success', 'Varian berhasil ditambahkan!');
 
+        $this->reset(['id_color', 'image']);
         $this->dispatch('variant-created'); // Emit event ke parent
         $this->isOpen = false;
     }
 
     public function render()
     {
+        $usedColorIds = $this->product->variants->pluck('id_color')->toArray();
+        
+        $availableColors = Color::whereNotIn('id', $usedColorIds)->get();
+
         return view('livewire.admin.variant.create', [
-            'colors' => Color::all(),
+            'colors' => $availableColors,
         ]);
     }
 }

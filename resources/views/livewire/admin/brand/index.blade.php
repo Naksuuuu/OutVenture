@@ -1,4 +1,17 @@
 <div class="p-8 bg-slate-50/50 min-h-screen">
+    @if (session('success'))
+        <div
+            class="fixed bottom-10 right-10 p-6 w-fit bg-green-400/90 rounded-lg border border-green-400 mb-2 z-50 shadow-lg">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div
+            class="fixed bottom-10 right-10 p-6 w-fit bg-red-400/90 rounded-lg border border-red-400 mb-2 z-50 shadow-lg">
+            {{ session('error') }}
+        </div>
+    @endif
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
         <div>
             <h2 class="text-3xl font-black text-slate-900 tracking-tight uppercase italic">Merek</h2>
@@ -34,8 +47,7 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         @foreach ($brands as $brand)
             <div
-                class="group relative bg-white rounded-[2rem] border border-slate-100 shadow-sm shadow-slate-200/40 hover:shadow-2xl hover:shadow-slate-300/50 hover:-translate-y-1 transition-all duration-500 overflow-hidden">
-
+                class="group relative bg-white rounded-[2rem] border border-slate-100 shadow-sm shadow-slate-200/40 hover:shadow-2xl hover:shadow-slate-300/50 transition-all duration-500 overflow-hidden">
                 <div
                     class="absolute -right-6 -top-6 text-slate-50/50 group-hover:text-emerald-50 group-hover:rotate-12 transition-all duration-500">
                     <x-lucide-award class="w-32 h-32" />
