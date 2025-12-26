@@ -13,7 +13,7 @@
 
     <livewire:public.template.navbar />
 
-    <main class="w-full min-h-screen ">
+    <main class="w-full min-h-screen pt-16 md:pt-[100px]">
         {{ $slot }}
     </main>
 

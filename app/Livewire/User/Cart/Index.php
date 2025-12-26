@@ -22,7 +22,7 @@ class Index extends Component
     public function loadCart()
     {
         $cart = Cart::where('id_user', Auth::id())->with([
-            'cartitems.variantSpec.variant.product',
+            'cartitems.variantSpec.variant.product.brand',
             'cartitems.variantSpec.variant.color',
             'cartitems.variantSpec.size'
         ])->first();
@@ -40,9 +40,58 @@ class Index extends Component
         $this->total = $this->subtotal;
     }
 
+    public function incrementQuantity($itemId)
+    {
+        $item = CartItem::find($itemId);
+
+        if ($item && $item->quantity < $item->variantSpec->stok) {
+            $item->increment('quantity');
+            $this->loadCart();
+            $this->dispatch('cart-updated');
+            session()->flash('success', 'Jumlah produk berhasil ditambah');
+        } else {
+            session()->flash('error', 'Stok tidak mencukupi');
+        }
+    }
+
+    public function decrementQuantity($itemId)
+    {
+        $item = CartItem::find($itemId);
+
+        if ($item && $item->quantity > 1) {
+            $item->decrement('quantity');
+            $this->loadCart();
+            $this->dispatch('cart-updated');
+            session()->flash('success', 'Jumlah produk berhasil dikurangi');
+        }
+    }
+
+    public function removeItem($itemId)
+    {
+        $item = CartItem::find($itemId);
+
+        if ($item) {
+            $item->delete();
+            $this->loadCart();
+            $this->dispatch('cart-updated');
+            session()->flash('success', 'Produk berhasil dihapus dari keranjang');
+        }
+    }
+
+    public function checkout()
+    {
+        if ($this->cartItems->isEmpty()) {
+            session()->flash('error', 'Keranjang Anda kosong');
+            return;
+        }
+
+        // TODO: Implement checkout logic
+        // For now, redirect to checkout page
+        return redirect()->route('user.checkout');
+    }
+
     public function render()
     {
-        // \dd($this->cartItems);
-        return view('livewire.user.cart.index');
+        return view('livewire.user.cart.index')->layout('components.layouts.app', ['title' => 'My Cart']);
     }
 }
