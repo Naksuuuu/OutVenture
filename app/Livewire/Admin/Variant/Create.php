@@ -31,10 +31,6 @@ class Create extends Component
         $this->isOpen = false;
     }
 
-
-
-
-
     public function save()
     {
 
@@ -57,8 +53,12 @@ class Create extends Component
 
     public function render()
     {
+        $usedColorIds = $this->product->variants->pluck('id_color')->toArray();
+        
+        $availableColors = Color::whereNotIn('id', $usedColorIds)->get();
+
         return view('livewire.admin.variant.create', [
-            'colors' => Color::all(),
+            'colors' => $availableColors,
         ]);
     }
 }
