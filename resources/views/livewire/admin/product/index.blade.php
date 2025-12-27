@@ -15,7 +15,7 @@
     <div class="mx-auto">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4 md:gap-0">
             <div>
-                <h1 class="text-xl md:text-2xl font-bold text-gray-900">Manajemen Produk</h1>
+                <h2 class="text-2xl font-bold text-gray-900">Manajemen Produk</h2>
                 <p class="text-sm text-gray-500 mt-1">Total {{ $totalProducts ?? $products->count() }} produk di
                     database.</p>
             </div>

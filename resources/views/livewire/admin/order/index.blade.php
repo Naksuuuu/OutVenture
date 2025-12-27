@@ -2,7 +2,7 @@
     {{-- Header & Filters --}}
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
-            <h2 class="text-3xl font-extrabold text-gray-900 tracking-tight">Manajemen Pesanan</h2>
+            <h2 class="text-2xl font-bold text-gray-900">Manajemen Pesanan</h2>
             <p class="text-gray-500 mt-1">Lihat dan kelola semua pesanan pelanggan</p>
         </div>
 

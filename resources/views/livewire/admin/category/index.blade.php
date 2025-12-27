@@ -12,7 +12,7 @@
     @endif
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
         <div>
-            <h2 class="text-4xl font-black text-slate-900 tracking-tight uppercase italic">Kategori</h2>
+            <h2 class="text-2xl font-bold text-gray-900">Kategori</h2>
             <p class="text-slate-500 mt-2 font-medium font-sans">Kelola struktur katalog produk Anda dengan sistem yang
                 lebih rapi.</p>
         </div>

@@ -9,7 +9,7 @@
     <div class="mx-auto">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 md:mb-8 gap-4">
             <div>
-                <h1 class="text-xl md:text-2xl font-bold text-gray-900">Manajemen Grup Ukuran</h1>
+                <h2 class="text-2xl font-bold text-gray-900">Manajemen Grup Ukuran</h2>
                 <p class="text-sm text-gray-500 mt-1">Kelola grup ukuran dan nilainya untuk kategori produk.</p>
             </div>
 

@@ -14,7 +14,7 @@
     @endif
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6 mb-6 md:mb-10">
         <div>
-            <h2 class="text-2xl md:text-3xl font-black text-slate-900 tracking-tight uppercase italic">Merek</h2>
+            <h2 class="text-2xl font-bold text-gray-900">Merek</h2>
             <p class="text-slate-500 mt-1 font-medium">Kelola dan atur identitas merek produk Anda</p>
         </div>
 
