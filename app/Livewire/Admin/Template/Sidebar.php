@@ -22,7 +22,7 @@ class Sidebar extends Component
         $this->isCollapsed = !$this->isCollapsed;
         session(['sidebar_collapsed' => $this->isCollapsed]);
 
-        // Emit event ke layout dengan value
+
         $this->dispatch('sidebar-toggled', isCollapsed: $this->isCollapsed);
     }
 
