@@ -2,60 +2,7 @@
 
 
 
-    <div class="text-center w-full md:h-[600px] relative">
-
-        <img src="{{ asset('storage/herosection/herotent.jpg') }}" alt="Banner Tenda"
-            class="absolute -z-10 h-full w-full object-cover ">
-
-        <div class="relative p-10 flex flex-col items-center md:items-start md:justify-end w-full h-full bg-black/20">
-
-            <a href="#" class="text-2xl md:text-4xl font-semibold tracking-tight text-white">OUTVENTURE</a>
-
-            <div class="mt-4 space-x-2">
-
-                <button class="group relative h-9 font-semibold overflow-hidden rounded-md bg-white px-4">
-
-                    <div
-                        class="flex h-9 w-fit items-center transition-transform duration-300 group-hover:-translate-y-9">
-
-                        CONSINA
-
-                    </div>
-
-                    <div
-                        class="flex h-9 w-fit items-center transition-transform duration-300 group-hover:-translate-y-9">
-
-                        CONSINA
-
-                    </div>
-
-
-
-                </button>
-
-                <button class="group relative h-9 font-semibold overflow-hidden rounded-md bg-black/70 text-white px-4">
-
-                    <div class="flex h-9 items-center transition-transform duration-300 group-hover:-translate-y-9">
-
-                        LIHAT SEMUA PRODUK
-
-                    </div>
-
-                    <div class="flex h-9 items-center transition-transform duration-300 group-hover:-translate-y-9">
-
-                        LIHAT SEMUA PRODUK
-
-                    </div>
-
-                </button>
-
-
-
-            </div>
-
-        </div>
-
-    </div>
+    <livewire:public.hero.index />
 
 
 
@@ -101,7 +48,6 @@
 
 
     <div class="w-full px-4 md:px-10">
-
         <div class="flex justify-between items-end mb-8 border-b border-gray-100 pb-4">
             <h2 class="text-3xl font-black uppercase tracking-tighter">BRAND PILIHAN</h2>
             <a href="{{ route('products.index') }}" wire:navigate
@@ -125,9 +71,7 @@
             @forelse ($brands as $brand)
                 <div
                     class="w-full lg:w-1/4 md:w-1/2 px-2 mb-6 lg:mb-0 transition-all duration-300 delay-150 lg:group-hover/brands:w-[22%] lg:hover:!w-[34%]">
-
                     <div class="relative text-white rounded-lg overflow-hidden shadow-lg group">
-
                         @if ($brand->image)
                             <img src="{{ asset('storage/' . $brand->image) }}"
                                 class="w-full h-80 object-cover opacity-80 group-hover:opacity-90 transition duration-300"
@@ -137,31 +81,21 @@
                                 class="w-full h-80 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-32 w-32 text-gray-500" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
-
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-
                                 </svg>
                             </div>
                         @endif
-
                         <div
                             class="absolute inset-0 p-6 bg-gradient-to-t from-black/60 to-black/10 flex flex-col justify-end">
-
                             <h5 class="text-2xl font-bold uppercase text-white mb-3">
                                 {{ $brand->nama_brand }}</h5>
-
-
-
-                            <a href="#"
+                            <a href="{{ route('brands.show', $brand->id) }}"
                                 class="inline-block border border-white text-white text-sm font-medium px-4 py-2 w-fit hover:bg-white hover:text-black transition duration-300">
                                 BELI SEKARANG &rarr;
                             </a>
-
                         </div>
-
                     </div>
-
                 </div>
             @empty
                 <div class="w-full text-center py-12">
@@ -244,8 +178,8 @@
             <div class="flex items-center gap-4 p-6 justify-center">
                 <div class="p-2 border border-gray-400 rounded-sm">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round"                         stroke-linejoin="round">
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
 
                         <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
 

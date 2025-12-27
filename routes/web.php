@@ -34,8 +34,11 @@ use App\Livewire\Admin\Color\Create as DashboardColorCreate;
 
 
 use App\Livewire\Public\Product\Index as PublicProductIndex;
-use App\Livewire\Public\Brand\Index as PublicBrandIndex;
 use App\Livewire\Public\Product\Show as PublicProductShow;
+
+use App\Livewire\Public\Brand\Index as PublicBrandIndex;
+use App\Livewire\Public\Brand\Show as PublicBrandShow;
+
 
 
 // Public Routes - Livewire
@@ -44,6 +47,7 @@ Route::get('products', PublicProductIndex::class)->name('products.index');
 Route::get('products/{id}', PublicProductShow::class)->name('products.show');
 
 Route::get('brands', PublicBrandIndex::class)->name('brands.index');
+Route::get('brands/{id}', PublicBrandShow::class)->name('brands.show');
 
 // User Profile
 Route::middleware('auth')->group(function () {

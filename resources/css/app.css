@@ -10,6 +10,15 @@
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
+ .swiper-pagination-bullet {
+            background: white !important;
+            opacity: 0.5;
+}
+.swiper-pagination-bullet-active {
+            background: white !important;
+            opacity: 1;
+}
+
 
 .scrollbar-hide::-webkit-scrollbar {
     display: none;

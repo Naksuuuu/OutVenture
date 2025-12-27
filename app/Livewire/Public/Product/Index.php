@@ -1,5 +1,5 @@
 <?php
-
+//  halaman ini belum beres logic nya
 namespace App\Livewire\Public\Product;
 
 use Livewire\Component;
@@ -14,11 +14,19 @@ class Index extends Component
 
   public $selectedCategory = '';
   public $selectedColor = '';
+  public $selectedSort = 'latest';
 
   protected $queryString = [
     'selectedCategory' => ['except' => ''],
-    'selectedColor' => ['except' => '']
+    'selectedColor' => ['except' => ''],
+    'selectedSort' => ['except' => 'latest']
   ];
+
+
+  public function updatedSelectedSort()
+  {
+    $this->resetPage();
+  }
 
   public function updatedSelectedCategory()
   {
@@ -34,6 +42,7 @@ class Index extends Component
   {
     $this->selectedCategory = '';
     $this->selectedColor = '';
+    $this->selectedSort = 'latest';
     $this->resetPage();
   }
 
@@ -47,7 +56,6 @@ class Index extends Component
       ])
       ->has('variants.specs');
 
-    // Filter by category
     if ($this->selectedCategory) {
       $query->where('id_category', $this->selectedCategory);
     }
@@ -59,7 +67,12 @@ class Index extends Component
       });
     }
 
-    $products = $query->orderBy('id', 'desc')->paginate(12);
+
+    $direction = ($this->selectedSort === 'latest') ? 'desc' : 'asc';
+
+
+    $products = $query->orderBy('created_at', $direction)
+      ->paginate(12);
 
     // Load specs untuk produk yang sudah di-paginate saja
     $products->load(['variants.specs:id,id_variant,harga,stok']);

@@ -118,9 +118,10 @@
                             <div class="flex justify-end gap-3">
                                 @if ($order->status_pembayaran == 0)
                                     {{-- Belum Bayar - Tombol Pay Now --}}
-                                    <button disabled
-                                        class="px-6 py-2.5 text-sm font-bold text-white bg-black rounded-lg hover:bg-gray-800 transition-all shadow-sm active:scale-95 disabled:bg-gray-400 disabled:cursor-not-allowed">
-                                        Pay Now (Coming Soon)
+                                    <button wire:click="payNow({{ $order->id }})" wire:loading.attr="disabled"
+                                        class="px-6 py-2.5 text-sm font-bold text-white bg-black rounded-lg hover:bg-gray-800 transition-all shadow-sm active:scale-95 disabled:opacity-50">
+                                        <span wire:loading.remove wire:target="payNow">Pay Now</span>
+                                        <span wire:loading wire:target="payNow">Processing...</span>
                                     </button>
                                 @else
                                     {{-- Lunas - Tombol Download Invoice PDF --}}
@@ -169,3 +170,41 @@
 
     </div>
 </div>
+
+@push('scripts')
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+    </script>
+    <script>
+        document.addEventListener('livewire:init', () => {
+
+            Livewire.on('open-payment', (event) => {
+                const snapToken = event.snapToken;
+
+                if (!snapToken) {
+                    alert('Snap token tidak ditemukan!');
+                    return;
+                }
+
+                window.snap.pay(snapToken, {
+                    onSuccess: function(result) {
+                        console.log('Payment success:', result);
+                        window.location.href =
+                            '{{ route('user.orders.index') }}?payment=success';
+                    },
+                    onPending: function(result) {
+                        console.log('Payment pending:', result);
+                        window.location.href =
+                            '{{ route('user.orders.index') }}?payment=pending';
+                    },
+                    onError: function(result) {
+                        console.log('Payment error:', result);
+                        alert('Pembayaran gagal, silakan coba lagi');
+                    },
+                    onClose: function() {
+                        console.log('Payment popup closed');
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
