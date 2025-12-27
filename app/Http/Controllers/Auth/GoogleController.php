@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+
+use function Symfony\Component\Clock\now;
 
 class GoogleController extends Controller
 {
@@ -22,17 +25,19 @@ class GoogleController extends Controller
         // 1. Jika user belum ada, buat baru & simpan
         $user = User::updateOrCreate(
             [
-                'email' => $userFromGoogle->getEmail() 
+                'email' => $userFromGoogle->getEmail()
             ],
             [
                 'nama_lengkap' => $userFromGoogle->getName(),
                 'google_id' => $userFromGoogle->getId(),
-                'email_verified_at' => date('Y-m-d H:i:s'),
+                'email_verified_at' => now(),
                 'password'  => bcrypt('12345678'),
                 'role' => 'user',
                 'no_telepon' => null,
             ]
         );
+
+
 
         // 2. Login user
         Auth::login($user);
