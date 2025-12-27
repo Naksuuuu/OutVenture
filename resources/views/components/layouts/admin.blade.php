@@ -9,16 +9,19 @@
     @livewireStyles
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-gray-100" x-data="{ mobileMenuOpen: false, isCollapsed: @json(session('sidebar_collapsed', false)) }">
 
     <livewire:admin.template.sidebar />
 
-    <div x-data="{ isCollapsed: @json(session('sidebar_collapsed', false)) }" @sidebar-toggled.window="isCollapsed = $event.detail.isCollapsed"
-        :class="isCollapsed ? 'ml-20' : 'ml-64'" class="transition-margin duration-300">
+    <div x-show="mobileMenuOpen" x-transition.opacity @click="mobileMenuOpen = false"
+        class="fixed inset-0 bg-black/50 z-[9998] md:hidden">
+    </div>
+
+    <div :class="isCollapsed ? 'md:ml-20' : 'md:ml-64'" class="transition-all duration-300 min-h-screen">
 
         <livewire:admin.template.navbar />
 
-        <main class="min-h-screen w-full">
+        <main class="p-4">
             {{ $slot }}
         </main>
     </div>
