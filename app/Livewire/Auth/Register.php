@@ -4,6 +4,7 @@ namespace App\Livewire\Auth;
 
 use Livewire\Component;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Hash;
 
 class Register extends Component
@@ -27,7 +28,7 @@ class Register extends Component
   {
     $this->validate();
 
-    User::create([
+    $user = User::create([
       'nama_lengkap' => $this->nama_lengkap,
       'no_telepon' => $this->no_telepon,
       'alamat' => $this->alamat,
@@ -35,7 +36,9 @@ class Register extends Component
       'password' => Hash::make($this->password),
     ]);
 
-    session()->flash('success', 'Registrasi berhasil! Silakan login.');
+    event(new Registered($user));
+
+    session()->flash('success', 'Registrasi berhasil! Silahkan Verifikasi email Anda sebelum login.');
 
     return redirect()->route('auth.login');
   }

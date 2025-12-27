@@ -21,8 +21,17 @@ class Login extends Component
     $this->validate();
 
     if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
-      session()->regenerate();
+      $user = Auth::user();
 
+      if (!$user->hasVerifiedEmail()) {
+        Auth::logout();
+
+        // Berikan pesan error spesifik di halaman login
+        $this->addError('email', 'Akun Anda belum aktif. Silakan verifikasi email Anda terlebih dahulu sebelum login.');
+        return;
+      }
+
+      session()->regenerate();
       if (Auth::user()->role === 'admin') {
         return redirect()->route('admin.dashboard');
       }

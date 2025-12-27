@@ -71,6 +71,12 @@ class Sidebar extends Component
                 'label' => 'Colors',
                 'matchExact' => false,
             ],
+            [
+                'route' => 'admin.users.index',
+                'icon' => 'user',
+                'label' => 'Admin Users',
+                'matchExact' => false,
+            ],
         ];
     }
 

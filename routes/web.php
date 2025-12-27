@@ -1,5 +1,9 @@
 <?php
 
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+
+
 use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -38,8 +42,8 @@ use App\Livewire\Public\Product\Show as PublicProductShow;
 
 use App\Livewire\Public\Brand\Index as PublicBrandIndex;
 use App\Livewire\Public\Brand\Show as PublicBrandShow;
-
-
+use App\Models\User;
+use Illuminate\Auth\Events\Verified;
 
 // Public Routes - Livewire
 Route::get('/', App\Livewire\Public\Home::class)->name('home');
@@ -105,9 +109,33 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group
     Route::get('colors', DashboardColorIndex::class)->name('colors.index');
     Route::get('colors/create', DashboardColorCreate::class)->name('colors.create');
     Route::get('colors/{colorId}/edit', DashboardColorEdit::class)->name('colors.edit');
+
+    // admin user management
+    Route::get('users', App\Livewire\Admin\User\Index::class)->name('users.index');
+    Route::get('users/{id}/show', App\Livewire\Admin\User\Show::class)->name('users.show');
+    Route::get('users/{id}/edit', App\Livewire\Admin\User\Edit::class)->name('users.edit');
 });
+
+
+
+
 
 // Google OAuth Routes
 Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google.login');
 Route::get('auth/google/callback', [GoogleController::class, 'callback'])->name('google.callback');
 Route::get('auth/google/logout', [GoogleController::class, 'logout'])->name('google.logout');
+
+// Email Verification Routes
+Route::get('/email/verify/{id}/{hash}', function (Request $request) {
+    $user = User::findOrFail($request->route('id'));
+    if (! hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
+        return redirect()->route('auth.login')->with('error', 'Link verifikasi tidak valid.');
+    }
+    if ($user->hasVerifiedEmail()) {
+        return redirect()->route('auth.login')->with('success', 'Email sudah terverifikasi, silakan login.');
+    }
+    if ($user->markEmailAsVerified()) {
+        event(new Verified($user));
+    }
+    return redirect()->route('auth.login')->with('success', 'Email berhasil diverifikasi! Silakan login.');
+})->name('verification.verify');
