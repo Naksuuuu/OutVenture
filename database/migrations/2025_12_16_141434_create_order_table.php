@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
             $table->decimal('total_harga', 10, 2);
             $table->integer('status_pembayaran');
+            $table->string('snap_token')->nullable();
             $table->timestamps();
         });
     }

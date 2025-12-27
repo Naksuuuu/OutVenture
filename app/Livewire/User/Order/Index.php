@@ -6,6 +6,7 @@ use App\Models\Order;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Services\MidtransService;
 
 class Index extends Component
 {
@@ -63,6 +64,39 @@ class Index extends Component
         return response()->streamDownload(function () use ($pdf) {
             echo $pdf->output();
         }, 'invoice-' . str_pad($order->id, 6, '0', STR_PAD_LEFT) . '.pdf');
+    }
+
+    public function payNow($orderId)
+    {
+        try {
+
+            $order = Order::with([
+                'user',
+                'items.variantSpec.variant.product.brand',
+                'items.variantSpec.variant.color',
+                'items.variantSpec.size'
+            ])->findOrFail($orderId);
+
+
+            if ($order->id_user !== auth()->id()) {
+                session()->flash('error', 'Unauthorized access');
+                return;
+            }
+
+            if ($order->status_pembayaran != 0) {
+                session()->flash('error', 'Pesanan ini sudah dibayar');
+                return;
+            }
+
+            $midtrans = new MidtransService();
+            $snapToken = $midtrans->createTransaction($order);
+
+            $order->update(['snap_token' => $snapToken]);
+
+            $this->dispatch('open-payment', snapToken: $snapToken);
+        } catch (\Exception $e) {
+            session()->flash('error', 'Gagal membuat pembayaran: ' . $e->getMessage());
+        }
     }
 
     public function render()

@@ -30,6 +30,17 @@ class Product extends Model
     return $this->hasMany(ProductVariant::class, 'id_product', 'id');
   }
 
+  public function latestVariant()
+  {
+    return $this->hasOne(ProductVariant::class, 'id_product', 'id')->latestOfMany();
+  }
+
+
+  public function allSpecs()
+  {
+    return $this->hasManyThrough(ProductVariantSpec::class, ProductVariant::class, 'id_product', 'id_variant', 'id', 'id');
+  }
+
   public function brand()
   {
     return $this->belongsTo(Brand::class, 'id_brand', 'id');

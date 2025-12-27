@@ -11,9 +11,9 @@ class Index extends Component
     {
         $trustedBrands = Brand::where('is_trusted', true)
             ->with(['products' => function ($query) {
-                $query->with(['category', 'variants']);
+                $query->with(['category', 'variants'])->has('variants')->withCount('variants')->withAggregate('allSpecs as min_price', 'harga', 'min')->limit(5);
             }])
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->take(4)
             ->get();
 

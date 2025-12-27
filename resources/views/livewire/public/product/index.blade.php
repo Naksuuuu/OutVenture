@@ -1,53 +1,82 @@
-<div class="w-full flex flex-col items-center gap-20">
+<div class="w-full flex flex-col items-center">
 
-    <div class="w-full border-t border-b border-gray-500 bg-white">
-        <div class="w-full px-4 md:px-10 py-4">
-            <div class="flex flex-wrap items-center gap-4">
-                <!-- Category Filter -->
-                <div class="relative">
-                    <select wire:model.live="selectedCategory"
-                        class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm font-bold uppercase tracking-tight text-black focus:outline-none focus:ring-2 focus:ring-black cursor-pointer">
-                        <option value="">ALL CATEGORIES</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->nama_category }}</option>
-                        @endforeach
-                    </select>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                        stroke="currentColor"
-                        class="w-3.5 h-3.5 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                    </svg>
-                </div>
 
-                <!-- Color Filter -->
-                <div class="relative">
-                    <select wire:model.live="selectedColor"
-                        class="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm font-bold uppercase tracking-tight text-black focus:outline-none focus:ring-2 focus:ring-black cursor-pointer">
-                        <option value="">ALL COLORS</option>
-                        @foreach ($colors as $color)
-                            <option value="{{ $color->id }}">{{ $color->nama_warna }}</option>
-                        @endforeach
-                    </select>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5"
-                        stroke="currentColor"
-                        class="w-3.5 h-3.5 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                    </svg>
-                </div>
+    <livewire:public.hero.index />
 
-                <!-- Clear Filters -->
-                @if ($selectedCategory || $selectedColor)
-                    <button wire:click="clearFilters"
-                        class="px-4 py-2 text-sm font-bold uppercase tracking-tight text-red-600 hover:text-red-800 transition-colors">
-                        RESET FILTERS
+
+    <div class="w-full shadow-sm  mb-20 border-gray-400 bg-white">
+        <div class="w-full px-4 md:px-10 py-3">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+
+                <div class="flex flex-wrap items-center gap-3">
+                    <button
+                        class="flex items-center gap-2 bg-[#1a1a1a] text-white px-4 py-2 rounded text-sm font-medium hover:bg-black transition-colors">
+                        <x-lucide-sliders-horizontal class="w-4 h-4" />
+                        Filter
                     </button>
-                @endif
+
+                    <div class="relative">
+                        <select wire:model.live="selectedCategory"
+                            class="appearance-none bg-white border border-gray-300 rounded px-4 py-2 pr-10 text-[15px] text-gray-700 focus:outline-none focus:border-gray-500 cursor-pointer">
+                            <option value="">Category</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->nama_category }}</option>
+                            @endforeach
+                        </select>
+                        <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+
+
+                            <x-lucide-chevron-down class="w-4 h-4 text-gray-800" />
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <select wire:model.live="selectedColor"
+                            class="appearance-none bg-white border border-gray-300 rounded px-4 py-2 pr-10 text-[15px] text-gray-700 focus:outline-none focus:border-gray-500 cursor-pointer">
+                            <option value="">Warna</option>
+                            @foreach ($colors as $color)
+                                <option value="{{ $color->id }}">{{ $color->nama_warna }}</option>
+                            @endforeach
+                        </select>
+                        <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                            <x-lucide-chevron-down class="w-4 h-4 text-gray-800" />
+                        </div>
+                    </div>
+
+                    @if ($selectedCategory || $selectedColor)
+                        <button wire:click="clearFilters"
+                            class="text-xs font-semibold text-gray-500 hover:text-red-600 underline underline-offset-4 ml-2">
+                            RESET
+                        </button>
+                    @endif
+                </div>
+
+                <div class="flex items-center gap-3">
+                    <span class="text-[15px] text-gray-600">Berdasarkan:</span>
+                    <div class="relative">
+                        <select wire:model.live="selectedSort"
+                            class="appearance-none bg-white border border-gray-300 rounded px-4 py-2 pr-10 text-[15px] text-gray-700 focus:outline-none focus:border-gray-500 cursor-pointer">
+                            <option value="latest">Terbaru</option>
+                            <option value="oldest">Terlama</option>
+                        </select>
+                        <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" class="w-4 h-4 text-gray-800">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
-    <div class="w-full px-4 md:px-10 py-12 bg-white">
-        <h3 class="text-xl font-bold uppercase mb-6 tracking-tight">PRODUK TERBARU</h3>
+    <div class="w-full px-4 md:px-10 mb-20 bg-white">
+        <div class="flex justify-between items-end mb-8 border-b border-gray-100 pb-4">
+            <h3 class="text-3xl font-black uppercase tracking-tighter">SEMUA PRODUK</h3>
+
+        </div>
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             @forelse ($products as $product)

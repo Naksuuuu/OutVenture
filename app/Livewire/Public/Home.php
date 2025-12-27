@@ -13,6 +13,7 @@ class Home extends Component
   public function render()
   {
     $brands = Brand::withCount('products')
+      ->where('is_trusted', true)
       ->orderBy('is_trusted', 'desc')
       ->limit(4)
       ->get();
@@ -21,13 +22,13 @@ class Home extends Component
       ->orderBy('products_count', 'desc')
       ->get();
 
-    $latestProducts = ProductVariant::with(['product.brand', 'product.category', 'color', 'specs'])
-      ->whereHas('product')
-      ->whereHas('specs')
+    $latestProducts = Product::with(['brand', 'category', 'latestVariant.specs', 'latestVariant.color'])
+      ->has('variants')
+      ->withCount('variants')
+      ->withAggregate('allSpecs as min_price', 'harga', 'min')
       ->latest()
       ->limit(10)
       ->get();
-
 
     return view('livewire.public.home', [
       'brands' => $brands,

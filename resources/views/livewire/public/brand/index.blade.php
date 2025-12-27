@@ -43,11 +43,12 @@
 
                         <div class="text-[13px] font-black mt-1 text-black">
                             <span class="text-gray-400 mr-1 font-normal text-[11px]">From</span>
-                            Rp {{ number_format($product->variants->min('price') ?? 0, 0, ',', '.') }}
+                            {{ Number::currency($product->min_price, 'IDR', 'id', precision: 0) }}
                         </div>
                     </div>
                 </a>
             @endforeach
+
         </div>
     @endforeach
 </div>

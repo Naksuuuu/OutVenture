@@ -1,5 +1,5 @@
 <aside @class([
-    'h-screen fixed shadow-md transition-width duration-300 ',
+    'h-screen fixed shadow-md transition-width duration-300 bg-white ',
     $isCollapsed ? 'w-20' : 'w-64',
 ])>
     <div class="p-6 text-center">

@@ -73,7 +73,7 @@
                         </div>
                     </div>
 
-                    <div class="p-6 flex-1 bg-white relative z-10">
+                    <div class="p-6 flex-1 bg-white relative">
                         <a href="{{ route('admin.categories.show', $category->id) }}" wire:navigate
                             class="text-xl font-black text-slate-800 hover:text-emerald-600 transition-colors block mb-2 tracking-tight">
                             {{ $category->nama_category }}
