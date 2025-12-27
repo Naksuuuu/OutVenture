@@ -178,14 +178,14 @@
 
         <div class="lg:col-span-2 space-y-10">
             <div class="bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-sm relative overflow-hidden">
-                <div class="flex items-center justify-between mb-10 relative z-10">
+                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-10 relative z-10 gap-4 md:gap-0">
                     <div>
-                        <h3 class="text-2xl font-black text-slate-900 tracking-tight">Ikhtisar Penjualan</h3>
+                        <h3 class="text-xl md:text-2xl font-black text-slate-900 tracking-tight">Ikhtisar Penjualan</h3>
                         <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mt-1">Volume unit terjual
                         </p>
                     </div>
                     <select
-                        class="text-xs font-black border-slate-200 rounded-xl bg-slate-50 text-slate-600 outline-none p-3 hover:bg-slate-100 transition-colors shadow-sm">
+                        class="text-xs md:text-sm font-black border-slate-200 rounded-xl bg-slate-50 text-slate-600 outline-none p-2 md:p-3 hover:bg-slate-100 transition-colors shadow-sm w-full md:w-auto">
                         <option>Last 6 Months</option>
                     </select>
                 </div>

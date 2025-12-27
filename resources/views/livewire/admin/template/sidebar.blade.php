@@ -7,8 +7,8 @@
     <div class="flex flex-col h-full overflow-y-auto">
         <div class="p-6 text-center border-b border-gray-100">
             <h1 class="text-black text-3xl font-bold">
-                <span :class="!isCollapsed ? 'md:hidden' : ''">O</span>
-                <span :class="isCollapsed ? 'md:hidden' : ''">Outventure</span>
+                <span :class="isCollapsed ? '' : 'hidden'">O</span>
+                <span :class="isCollapsed ? 'hidden' : ''">Outventure</span>
 
             </h1>
         </div>
