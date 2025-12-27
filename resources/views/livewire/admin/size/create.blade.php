@@ -29,7 +29,7 @@
                     <section>
                         <div class="flex items-center space-x-2 mb-6">
                             <span class="text-indigo-600 font-bold text-lg">01</span>
-                            <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">
+                            <h2 class="lg:text-lg text-base font-bold text-slate-800 uppercase tracking-wide">
                                 Size Group Information
                             </h2>
                         </div>
