@@ -1,4 +1,4 @@
-<nav class="p-4 fixed w-full z-50 bg-white" x-data="{ mobileMenuOpen: false }">
+<nav class="p-4 fixed w-full z-[9999] bg-white" x-data="{ mobileMenuOpen: false }">
     <div x-show="mobileMenuOpen"
         class="absolute  md:hidden left-0 w-full h-screen flex flex-col items-center justify-center bg-white text-2xl font-semibold gap-4">
         <a href="{{ route('home') }}" wire:navigate class="hover:text-black uppercase">home</a>
@@ -95,8 +95,9 @@
         <div class="md:w-[20%] flex items-end justify-end gap-2">
             <div x-data="{ openUser: false }" class="relative">
                 <button @click="openUser = !openUser" @click.away="openUser = false"
-                    class="flex items-center gap-1 hover:text-black uppercase cursor-pointer p-1 rounded-md hover:bg-black/5">
+                    class="flex items-center gap-1 hover:text-black uppercase cursor-pointer px-2 py-1 rounded-md hover:bg-black/5">
                     <x-lucide-user-round class="w-6 h-6" />
+
                     <x-lucide-chevron-up class="w-3 h-3 transition-transform duration-200"
                         x-bind:class="{ 'rotate-180': openUser }" />
                 </button>
@@ -110,6 +111,13 @@
                         class="block px-4 py-2 text-gray-800 hover:bg-gray-100 border-b border-gray-50">Orders</a>
 
                     @auth
+
+                        @if (Auth::user()->role == 'admin' || Auth::user()->role == 'superadmin')
+                            <a href="{{ route('admin.dashboard') }}" wire:navigate
+                                class="block px-4 py-2 text-gray-800 hover:bg-gray-100 border-b border-gray-50">Admin
+                                Dashboard</a>
+                        @endif
+
                         <form action="{{ route('auth.logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="w-full text-left px-4 py-2 text-gray-800 hover:bg-gray-100">

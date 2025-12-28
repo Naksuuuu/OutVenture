@@ -149,4 +149,47 @@
         </div>
     </div>
 
+    {{-- Store Location Map --}}
+    <div class="w-full px-4 md:px-10 mb-10">
+        <div class="flex justify-between items-end mb-8 border-b border-gray-100 pb-4">
+            <h2 class="text-3xl font-black uppercase tracking-tighter">LOKASI TOKO</h2>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
+            <div id="map" class="w-full h-[400px]"></div>
+            <div class="p-6 bg-gray-50 border-t border-gray-100">
+                <div class="flex items-start gap-3">
+                    <x-lucide-map-pin class="w-5 h-5 text-gray-600 mt-1 flex-shrink-0" />
+                    <div>
+                        <h3 class="font-bold text-gray-900 mb-1">Outventure Store</h3>
+                        <p class="text-sm text-gray-600">Gegerkalong, Kota Bandung, Jawa Barat</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Koordinat Gegerkalong, Bandung (Plus Code: 4HMV+G2)
+                const lat = -6.8663;
+                const lng = 107.5926;
+
+                // Initialize map
+                const map = L.map('map').setView([lat, lng], 15);
+
+                // Add OpenStreetMap tiles
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                    maxZoom: 19
+                }).addTo(map);
+
+                // Add marker
+                const marker = L.marker([lat, lng]).addTo(map);
+                marker.bindPopup('<b>Outventure Store</b><br>Gegerkalong, Bandung').openPopup();
+            });
+        </script>
+    @endpush
+
 </div>
