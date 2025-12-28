@@ -99,9 +99,7 @@ class Edit extends Component
       }
     }
 
-    session()->flash('success', 'Size Group updated successfully!');
-
-    return redirect()->route('admin.sizes.index');
+    return redirect()->route('admin.sizes.index')->with('notifySuccess', 'Size Group updated successfully!');
   }
 
   public function render()

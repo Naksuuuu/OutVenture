@@ -1,57 +1,5 @@
 <div class="p-4 md:p-8 bg-slate-50/50 min-h-screen">
-    {{-- Modal Pop-up Notifikasi Success/Error --}}
-    @if (session('success') || session('error'))
-        <div x-data="{ show: true }"
-            x-show="show"
-            x-init="setTimeout(() => show = false, 3000)"
-            x-transition:enter="transition ease-out duration-100"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in duration-100"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
-            class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-            
-            <!-- Backdrop -->
-            <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
-
-            <!-- Modal Content -->
-            <div class="relative z-[10000] w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-100 p-8 space-y-4">
-                <div class="flex items-center justify-center mb-4">
-                    @if (session('success'))
-                        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
-                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
-                        </div>
-                    @else
-                        <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
-                            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                        </div>
-                    @endif
-                </div>
-                
-                <div class="text-center">
-                    <h3 class="text-xl font-bold {{ session('success') ? 'text-green-600' : 'text-red-600' }} mb-2">
-                        {{ session('success') ? 'Berhasil!' : 'Gagal!' }}
-                    </h3>
-                    <p class="text-slate-600 text-sm">
-                        {{ session('success') ?: session('error') }}
-                    </p>
-                </div>
-
-                <div class="flex items-center justify-center pt-4">
-                    <button @click="show = false"
-                        class="text-xs font-bold text-slate-500 uppercase tracking-widest hover:text-slate-700 transition-colors px-6 py-2 rounded-lg hover:bg-slate-50">
-                        Tutup
-                    </button>
-                </div>
-            </div>
-        </div>
-    @endif
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6 mb-6 md:mb-10">
+    <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 md:gap-6 mb-6 md:mb-10">
         <div>
             <h2 class="text-2xl font-bold text-gray-900">Merek</h2>
             <p class="text-slate-500 mt-1 font-medium">Kelola dan atur identitas merek produk Anda</p>
@@ -84,7 +32,7 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 md:gap-6 lg:gap-8">
         @foreach ($brands as $brand)
             <div
                 class="group relative bg-white rounded-[2rem] border border-slate-100 shadow-sm shadow-slate-200/40 hover:shadow-2xl hover:shadow-slate-300/50 transition-all duration-500 overflow-hidden">
@@ -93,7 +41,8 @@
                     <x-lucide-award class="w-32 h-32" />
                 </div>
 
-                <div class="relative flex flex-col sm:flex-row items-center p-3 md:p-4 h-auto sm:h-[160px] gap-3 md:gap-6">
+                <div
+                    class="relative flex flex-col sm:flex-row items-center p-3 md:p-4 h-auto sm:h-[160px] gap-3 md:gap-6">
                     <div
                         class="w-24 h-24 sm:w-36 sm:h-full bg-slate-50 rounded-[1rem] sm:rounded-[1.5rem] overflow-hidden flex items-center justify-center p-1 relative z-10 transition-transform duration-500 group-hover:scale-[0.98]">
                         @if ($brand->image)
@@ -103,7 +52,8 @@
                         @else
                             <div class="flex flex-col items-center justify-center text-slate-300">
                                 <x-lucide-image class="w-6 h-6 sm:w-8 sm:h-8 mb-1 opacity-20" />
-                                <span class="text-[7px] sm:text-[8px] font-black uppercase tracking-tighter opacity-40">No
+                                <span
+                                    class="text-[7px] sm:text-[8px] font-black uppercase tracking-tighter opacity-40">No
                                     Image</span>
                             </div>
                         @endif

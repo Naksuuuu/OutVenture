@@ -42,9 +42,7 @@ class Create extends Component
     }
 
 
-    session()->flash('success', 'Category Berhasil Dibuat!');
-
-    return redirect()->route('admin.categories.index');
+    return redirect()->route('admin.categories.index')->with('notifySuccess', 'Category Berhasil Dibuat!');
   }
 
   public function render()

@@ -26,9 +26,7 @@ class Delete extends Component
 
         $this->category->delete();
 
-        session()->flash('success', 'Kategori berhasil dihapus!');
-
-        return redirect()->route('admin.categories.index');
+        return redirect()->route('admin.categories.index')->with('notifySuccess', 'Kategori berhasil dihapus!');
     }
 
     public function render()

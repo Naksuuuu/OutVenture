@@ -32,7 +32,7 @@ class Index extends Component
     $category = Category::find($categoryId);
     if ($category) {
       $category->delete();
-      session()->flash('success', 'Category deleted successfully!');
+      $this->dispatch('notify', type: 'success', message: 'Category deleted successfully!');
     }
   }
 

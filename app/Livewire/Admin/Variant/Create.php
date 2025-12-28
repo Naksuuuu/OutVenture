@@ -61,7 +61,7 @@ class Create extends Component
     public function render()
     {
         $usedColorIds = $this->product->variants->pluck('id_color')->toArray();
-        
+
         $availableColors = Color::whereNotIn('id', $usedColorIds)->get();
 
         return view('livewire.admin.variant.create', [

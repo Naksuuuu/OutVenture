@@ -82,9 +82,7 @@ class Edit extends Component
       'is_trusted' => (bool) $this->is_trusted,
     ]);
 
-    session()->flash('success', 'Merek Berhasil Diperbarui!');
-
-    return redirect()->route('admin.brands.index');
+    return redirect()->route('admin.brands.index')->with('notifySuccess', 'Merek Berhasil Diperbarui!');
   }
 
   protected function deletePublicFile(?string $path): void

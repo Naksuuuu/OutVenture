@@ -111,10 +111,12 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group
     Route::get('colors/create', DashboardColorCreate::class)->name('colors.create');
     Route::get('colors/{colorId}/edit', DashboardColorEdit::class)->name('colors.edit');
 
-    // admin user management
-    Route::get('users', App\Livewire\Admin\User\Index::class)->name('users.index');
-    Route::get('users/{id}/show', App\Livewire\Admin\User\Show::class)->name('users.show');
-    Route::get('users/{id}/edit', App\Livewire\Admin\User\Edit::class)->name('users.edit');
+    // Admin User Management (Only SuperAdmin)
+    Route::middleware('superadmin')->group(function () {
+        Route::get('users', App\Livewire\Admin\User\Index::class)->name('users.index');
+        Route::get('users/{id}/show', App\Livewire\Admin\User\Show::class)->name('users.show');
+        Route::get('users/{id}/edit', App\Livewire\Admin\User\Edit::class)->name('users.edit');
+    });
 });
 
 

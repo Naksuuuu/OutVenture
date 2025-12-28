@@ -32,7 +32,7 @@ class Index extends Component
         $brand = Brand::find($brandId);
         if ($brand) {
             $brand->delete();
-            session()->flash('success', 'Brand deleted successfully!');
+            $this->dispatch('notify', type: 'success', message: 'Brand deleted successfully!');
         }
     }
 

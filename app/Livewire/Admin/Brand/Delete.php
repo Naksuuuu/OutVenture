@@ -26,9 +26,7 @@ class Delete extends Component
 
     $this->brand->delete();
 
-    session()->flash('success', 'Merek berhasil dihapus!');
-
-    return redirect()->route('admin.brands.index');
+    return redirect()->route('admin.brands.index')->with('notifySuccess', 'Merek berhasil dihapus!');
   }
 
   public function render()

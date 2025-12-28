@@ -1,17 +1,5 @@
 <div class="py-8 md:py-12 px-4 sm:px-6">
 
-    @if (session('success'))
-        <div class="fixed bottom-4 md:bottom-10 right-4 md:right-10 p-4 md:p-6 w-fit bg-green-400/90 rounded-lg border border-green-400 mb-2 z-50">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    @if (session('error'))
-        <div class="fixed bottom-4 md:bottom-10 right-4 md:right-10 p-4 md:p-6 w-fit bg-red-400/90 rounded-lg border border-red-400 mb-2 z-50">
-            {{ session('error') }}
-        </div>
-    @endif
-
     <div class="mx-auto">
 
         <div

@@ -55,9 +55,7 @@ class Edit extends Component
       'image' => $imagePath,
     ]);
 
-    session()->flash('success', 'Category Berhasil Diperbarui!');
-
-    return redirect()->route('admin.categories.index');
+    return redirect()->route('admin.categories.index')->with('notifySuccess', 'Category Berhasil Diperbarui!');
   }
 
   protected function deletePublicFile(?string $path): void

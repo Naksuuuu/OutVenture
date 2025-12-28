@@ -1,11 +1,5 @@
 <div class="bg-gray-50 min-h-screen p-4 md:p-8">
 
-    @if (session('success'))
-        <div class="fixed bottom-4 md:bottom-10 right-4 md:right-10 p-4 md:p-6 w-fit bg-green-400/90 rounded-lg border border-green-400 mb-2 z-50">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <div class="mx-auto">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 md:mb-8 gap-4">
             <div>

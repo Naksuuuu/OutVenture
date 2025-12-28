@@ -344,7 +344,7 @@ class DatabaseSeeder extends Seeder
                 'email_verified_at' => now(),
                 'alamat' => 'Jl. Outdoor Adventure No. 1, Jakarta',
                 'password' => bcrypt('admin123'),
-                'role' => 'admin',
+                'role' => 'superadmin',
             ],
             [
                 'id' => 2,

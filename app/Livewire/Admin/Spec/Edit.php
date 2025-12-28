@@ -58,7 +58,7 @@ class Edit extends Component
         $this->dispatch('spec-events');
         
         // Show success message and close modal (no redirect, stay on edit page)
-        session()->flash('success', 'Spesifikasi berhasil diperbarui!');
+        $this->dispatch('notify', type: 'success', message: 'Spesifikasi berhasil diperbarui!');
         $this->isOpen = false;
     }
 
