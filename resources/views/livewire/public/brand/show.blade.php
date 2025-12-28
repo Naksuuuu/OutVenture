@@ -6,9 +6,12 @@
         @forelse ($products as $product)
             <x-product-card :product="$product" />
         @empty
-            <div class="col-span-full bg-gray-50 rounded-2xl p-12 text-center">
-                <p class="text-gray-500">Belum ada produk untuk brand ini</p>
-            </div>
+            <x-ui.empty-state 
+                full
+                icon="shopping-bag"
+                title="Belum Ada Produk"
+                message="Belum ada produk untuk brand ini"
+            />
         @endforelse
     </div>
     @if ($products->hasPages())

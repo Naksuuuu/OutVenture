@@ -152,9 +152,10 @@
                                 </div>
                             </div>
                         @empty
-                            <div class="bg-gray-50 rounded-2xl p-8 text-center">
-                                <p class="text-gray-500">Tidak ada item dalam pesanan ini</p>
-                            </div>
+                            <x-ui.empty-state 
+                                message="Tidak ada item dalam pesanan ini"
+                                class="bg-gray-50 rounded-2xl"
+                            />
                         @endforelse
                     </div>
 

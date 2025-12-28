@@ -111,10 +111,13 @@
                             </span>
                         </div>
 
-                        <button wire:click="checkout"
+                        <x-ui.loading-button 
+                            wire:click="checkout"
+                            loading-target="checkout"
+                            loading-text="Processing..."
                             class="w-full bg-black text-white py-4 text-[11px] font-bold uppercase tracking-[0.2em] rounded-lg hover:bg-gray-800 transition-all shadow-md active:scale-95">
                             Checkout
-                        </button>
+                        </x-ui.loading-button>
 
                         <a href="{{ route('products.index') }}" wire:navigate
                             class="block text-center mt-3 text-[11px] text-gray-600 hover:text-black font-bold uppercase">
@@ -124,21 +127,14 @@
                 </div>
             </div>
         @else
-            {{-- Empty State --}}
-            <div class="bg-white rounded-2xl shadow-sm p-16 text-center border border-gray-100">
-                <div class="inline-flex items-center justify-center w-20 h-20 bg-gray-50 rounded-full mb-6">
-                    <x-lucide-shopping-bag class="h-10 w-10 text-gray-400" />
-                </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-2">Keranjang Kosong</h3>
-                <p class="text-gray-500 max-w-sm mx-auto mb-8 text-sm">
-                    Keranjang belanja Anda masih kosong. Mari jelajahi koleksi terbaik kami dan temukan produk favorit
-                    Anda!
-                </p>
-                <a href="{{ route('products.index') }}" wire:navigate
-                    class="inline-block px-8 py-3 bg-black text-white font-bold rounded-lg hover:bg-gray-800 transition-all shadow-lg hover:shadow-black/20 uppercase text-sm tracking-wide">
-                    Mulai Belanja
-                </a>
-            </div>
+            <x-ui.empty-state 
+                full
+                icon="shopping-bag"
+                title="Keranjang Kosong"
+                message="Keranjang belanja Anda masih kosong. Mari jelajahi koleksi terbaik kami dan temukan produk favorit Anda!"
+                button-text="Mulai Belanja"
+                button-url="{{ route('products.index') }}"
+            />
         @endif
 
     </div>

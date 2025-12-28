@@ -24,8 +24,6 @@
                             @endforeach
                         </select>
                         <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-
-
                             <x-lucide-chevron-down class="w-4 h-4 text-gray-800" />
                         </div>
                     </div>
@@ -94,9 +92,7 @@
             @forelse ($products as $product)
                 <x-product-card :product="$product" :selectedColor="$selectedColor" />
             @empty
-                <div class="col-span-full text-center py-12">
-                    <p class="text-gray-500">Tidak ada produk ditemukan</p>
-                </div>
+                <x-ui.empty-state message="Tidak ada produk ditemukan" />
             @endforelse
         </div>
 
