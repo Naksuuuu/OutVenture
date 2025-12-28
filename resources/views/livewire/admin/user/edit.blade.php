@@ -52,10 +52,7 @@
                     Simpan
                 </button>
             @endif
-            <a href="{{ route('admin.users.index') }}"
-                class="flex-1 bg-gray-100 text-gray-700 py-2.5 md:py-4 rounded-xl font-extrabold text-center text-[11px] md:text-sm transition-all hover:bg-gray-200">
-                Batal
-            </a>
+            <x-ui.back-link href="{{ route('admin.users.index') }}"  />
         </div>
     </div>
 </div>

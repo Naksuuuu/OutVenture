@@ -226,16 +226,8 @@
             </div>
 
             <div class="bg-slate-50/80 px-8 py-6 flex items-center border-t border-slate-100">
-                <a href="{{ route('admin.orders.index') }}" wire:navigate
-                    class="text-slate-500 hover:text-slate-800 text-sm font-bold uppercase tracking-widest transition-colors flex items-center group">
-                    <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18">
-                        </path>
-                    </svg>
-                    Kembali ke Daftar Pesanan
-                </a>
+                <x-ui.back-link href="{{ route('admin.orders.index') }}" wire:navigate label="Kembali ke Daftar Pesanan"
+                    class="text-slate-500 hover:text-slate-800 text-sm font-bold uppercase tracking-widest transition-colors flex items-center group" />
             </div>
         </div>
 

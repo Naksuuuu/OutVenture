@@ -282,8 +282,10 @@
                                                             </tr>
                                                         @empty
                                                             <tr>
-                                                                <td colspan="5" class="px-4 py-8 text-center text-gray-500">
-                                                                    <p class="text-sm">Belum ada spesifikasi untuk varian ini</p>
+                                                                <td colspan="5"
+                                                                    class="px-4 py-8 text-center text-gray-500">
+                                                                    <p class="text-sm">Belum ada spesifikasi untuk
+                                                                        varian ini</p>
                                                                 </td>
                                                             </tr>
                                                         @endforelse
@@ -293,10 +295,12 @@
                                         </div>
                                     </div>
                                 @empty
-                                    <div class="bg-white rounded-2xl p-12 text-center border border-dashed border-gray-300">
+                                    <div
+                                        class="bg-white rounded-2xl p-12 text-center border border-dashed border-gray-300">
                                         <x-lucide-package-open class="w-16 h-16 mx-auto text-gray-300 mb-4" />
                                         <p class="text-gray-500 font-medium">Belum ada varian untuk produk ini</p>
-                                        <p class="text-sm text-gray-400 mt-2">Gunakan tombol "Tambah Varian Warna" untuk membuat varian</p>
+                                        <p class="text-sm text-gray-400 mt-2">Gunakan tombol "Tambah Varian Warna"
+                                            untuk membuat varian</p>
                                     </div>
                                 @endforelse
                             </div>
@@ -322,20 +326,11 @@
                     </div>
                 </div>
             </form>
-        </div>
 
-        <div
-            class="bg-slate-50/80 px-4 md:px-8 py-4 md:py-6 flex items-center justify-center border-t border-slate-100">
-            <a href="{{ route('admin.products.index') }}" wire:navigate
-                class="text-slate-500 hover:text-slate-800 text-sm font-bold uppercase tracking-widest transition-colors flex items-center group">
-                <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 19l-7-7m0 0l7-7m-7 7h18">
-                    </path>
-                </svg>
-                Kembali
-            </a>
+            <div class="bg-slate-50/80 px-8 py-6 flex items-center border-t border-slate-100">
+                <x-ui.back-link href="{{ route('admin.products.index') }}" wire:navigate label="Kembali"
+                    class="text-slate-500 hover:text-slate-800 text-sm font-bold uppercase tracking-widest transition-colors flex items-center group" />
+            </div>
         </div>
     </div>
 

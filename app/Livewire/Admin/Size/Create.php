@@ -60,7 +60,7 @@ class Create extends Component
       }
     }
 
-    return redirect()->route('admin.sizes.index')->with('notifySuccess', 'Size Group created successfully!');
+    return redirect()->route('admin.sizes.index')->with('notifySuccess', 'Size Grup Berhasil di Tambahkan!');
   }
 
   public function render()
