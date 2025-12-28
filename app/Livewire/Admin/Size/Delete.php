@@ -8,6 +8,11 @@ use Livewire\Component;
 class Delete extends Component
 {
   public $sizeGroup;
+  public $errorMessage = '';
+  
+  protected $listeners = [
+    'size-values-updated' => 'refreshGroup',
+  ];
 
   public function mount($sizeGroup)
   {
@@ -16,15 +21,34 @@ class Delete extends Component
 
   public function delete()
   {
-    // Delete related size values first
-    $this->sizeGroup->values()->delete();
+    $this->errorMessage = '';
 
-    // Then delete the size group
-    $this->sizeGroup->delete();
+    
+    // Refresh relation state
+    $this->sizeGroup->refresh();
+    
+    // Prevent delete if group still has values
+    if ($this->sizeGroup->values()->exists()) {
+      $this->errorMessage = 'Size group masih memiliki size values. Hapus semua value terlebih dahulu.';
+      return;
+    }
+
+    try {
+      $this->sizeGroup->delete();
+    } catch (\Exception $e) {
+      $this->errorMessage = 'Gagal menghapus size group. Coba lagi.';
+      return;
+    }
 
     session()->flash('success', 'Size Group deleted successfully!');
 
     return redirect()->route('admin.sizes.index');
+  }
+  
+  public function refreshGroup()
+  {
+    $this->sizeGroup = SizeGroup::findOrFail($this->sizeGroup->id);
+    $this->errorMessage = '';
   }
 
   public function render()

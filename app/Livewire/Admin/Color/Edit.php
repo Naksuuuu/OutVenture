@@ -45,7 +45,7 @@ class Edit extends Component
             'hex_code' => $this->hex_code,
         ]);
 
-        session()->flash('success', 'Warna berhasil diupdate!');
+        session()->flash('success', 'Warna berhasil diperbarui!');
 
         return redirect()->route('admin.colors.index');
     }

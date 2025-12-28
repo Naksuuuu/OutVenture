@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Brand;
 use Livewire\Component;
 use App\Models\Brand;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class Edit extends Component
 {
@@ -43,9 +44,35 @@ class Edit extends Component
   {
     $this->validate();
 
-    $imagePath = $this->new_image ? $this->new_image->store('brands', 'public') : $this->oldImage;
-    $wideImagePath = $this->new_wide_image ? $this->new_wide_image->store('brands', 'public') : $this->oldWideImage;
-    $logoPath = $this->new_logo ? $this->new_logo->store('brands', 'public') : $this->oldLogo;
+    // Handle main image
+    $imagePath = $this->oldImage;
+    if ($this->new_image) {
+      $newPath = $this->new_image->store('brands', 'public');
+      $imagePath = $newPath;
+      if ($this->oldImage && $this->oldImage !== $newPath) {
+        $this->deletePublicFile($this->oldImage);
+      }
+    }
+
+    // Handle wide image
+    $wideImagePath = $this->oldWideImage;
+    if ($this->new_wide_image) {
+      $newPath = $this->new_wide_image->store('brands', 'public');
+      $wideImagePath = $newPath;
+      if ($this->oldWideImage && $this->oldWideImage !== $newPath) {
+        $this->deletePublicFile($this->oldWideImage);
+      }
+    }
+
+    // Handle logo
+    $logoPath = $this->oldLogo;
+    if ($this->new_logo) {
+      $newPath = $this->new_logo->store('brands', 'public');
+      $logoPath = $newPath;
+      if ($this->oldLogo && $this->oldLogo !== $newPath) {
+        $this->deletePublicFile($this->oldLogo);
+      }
+    }
 
     $this->brand->update([
       'nama_brand' => $this->nama_brand,
@@ -55,9 +82,24 @@ class Edit extends Component
       'is_trusted' => (bool) $this->is_trusted,
     ]);
 
-    session()->flash('success', 'Brand updated successfully!');
+    session()->flash('success', 'Merek Berhasil Diperbarui!');
 
     return redirect()->route('admin.brands.index');
+  }
+
+  protected function deletePublicFile(?string $path): void
+  {
+    if (!$path) return;
+    try {
+      if (Storage::disk('public')->exists($path)) {
+        Storage::disk('public')->delete($path);
+      }
+    } catch (\Exception $e) {
+      $full = public_path('storage/' . ltrim($path, '/'));
+      if (is_file($full)) {
+        @unlink($full);
+      }
+    }
   }
 
   public function render()

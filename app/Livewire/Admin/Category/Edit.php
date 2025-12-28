@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Category;
 use App\Models\SizeGroup;
 use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 
 class Edit extends Component
 {
@@ -37,10 +38,15 @@ class Edit extends Component
   {
     $this->validate();
 
+    $imagePath = $this->oldImage;
     if ($this->new_image) {
-      $imagePath = $this->new_image->store('categories', 'public');
-    } else {
-      $imagePath = $this->oldImage;
+      // Store new image
+      $newPath = $this->new_image->store('categories', 'public');
+      $imagePath = $newPath;
+      // Delete previous image if different
+      if ($this->oldImage && $this->oldImage !== $newPath) {
+        $this->deletePublicFile($this->oldImage);
+      }
     }
 
     $this->category->update([
@@ -49,9 +55,24 @@ class Edit extends Component
       'image' => $imagePath,
     ]);
 
-    session()->flash('success', 'Category updated successfully!');
+    session()->flash('success', 'Category Berhasil Diperbarui!');
 
     return redirect()->route('admin.categories.index');
+  }
+
+  protected function deletePublicFile(?string $path): void
+  {
+    if (!$path) return;
+    try {
+      if (Storage::disk('public')->exists($path)) {
+        Storage::disk('public')->delete($path);
+      }
+    } catch (\Exception $e) {
+      $full = public_path('storage/' . ltrim($path, '/'));
+      if (is_file($full)) {
+        @unlink($full);
+      }
+    }
   }
 
   public function render()

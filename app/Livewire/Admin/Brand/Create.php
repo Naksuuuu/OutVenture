@@ -41,7 +41,7 @@ class Create extends Component
       'is_trusted' => $this->is_trusted,
     ]);
 
-    session()->flash('success', 'Brand created successfully!');
+    session()->flash('success', 'Merek Berhasil Dibuat!');
 
     return redirect()->route('admin.brands.index');
   }

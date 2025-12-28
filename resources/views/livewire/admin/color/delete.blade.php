@@ -1,7 +1,7 @@
 <div x-data="{ openDelete: false }">
     <button type="button" @click="openDelete = true"
-        class="p-2 text-gray-400 hover:text-red-600 hover:bg-indigo-50 rounded-lg transition-colors">
-        <x-lucide-trash />
+        class="inline-flex items-center justify-center px-4 py-1.5 text-[11px] font-bold text-red-600 bg-white border border-red-200 rounded-md hover:bg-red-50 transition-all uppercase tracking-wider">
+        <x-lucide-trash class="w-4 h-4" />
     </button>
 
     <!-- Modal dengan teleport langsung ke body -->
@@ -24,12 +24,13 @@
                         <x-lucide-circle-alert />
                     </div>
                     <div>
-                        <h4 class="text-lg font-bold text-slate-800">Hapus kategori?</h4>
-                        <p class="text-sm text-slate-500">Yakin ingin menghapus kategori ini? Data tidak bisa
+                        <h4 class="text-lg font-bold text-slate-800">Hapus warna '{{ $color->nama_warna }}'?</h4>
+                        <p class="text-sm text-slate-500">Yakin ingin menghapus warna ini? Data tidak bisa
                             dikembalikan.
                         </p>
                     </div>
                 </div>
+                
                 @if ($errorMessage)
                     <div class="p-4 bg-red-50 border border-red-200 rounded-xl">
                         <p class="text-sm text-red-700 font-medium">{{ $errorMessage }}</p>
@@ -52,9 +53,6 @@
                             </span>
                         </button>
                     @endif
-                </div>
-                <div wire:loading wire:target="delete" class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p class="text-xs text-blue-700 font-semibold">Sedang menghapus...</p>
                 </div>
             </div>
         </div>
