@@ -73,7 +73,6 @@ class Sidebar extends Component
             ],
         ];
 
-        // Only show Admin Users menu for superadmin
         if (auth()->check() && auth()->user()->role === 'superadmin') {
             $menuItems[] = [
                 'route' => 'admin.users.index',

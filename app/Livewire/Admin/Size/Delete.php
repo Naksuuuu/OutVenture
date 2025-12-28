@@ -24,10 +24,8 @@ class Delete extends Component
     $this->errorMessage = '';
 
     
-    // Refresh relation state
     $this->sizeGroup->refresh();
     
-    // Prevent delete if group still has values
     if ($this->sizeGroup->values()->exists()) {
       $this->errorMessage = 'Size group masih memiliki size values. Hapus semua value terlebih dahulu.';
       return;
