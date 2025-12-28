@@ -1,7 +1,7 @@
 <div class="p-8 bg-slate-50/50 min-h-screen font-sans">
     <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-            <h2 class="text-4xl font-black text-slate-900 tracking-tight">Dasbor</h2>
+            <h2 class="text-2xl font-bold text-gray-900">Dasbor</h2>
             <p class="text-slate-500 mt-2 font-medium text-lg">
                 Selamat datang kembali, <span
                     class="text-slate-900 font-bold underline decoration-emerald-400 decoration-2">{{ Auth::user()->nama_lengkap }}</span>.
