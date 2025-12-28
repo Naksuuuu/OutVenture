@@ -19,7 +19,6 @@ class Create extends Component
 
   public function mount()
   {
-    // Initialize with one empty size value
     $this->sizeValues = [
       ['label_size' => '', 'sort_order' => 1]
     ];
@@ -38,7 +37,6 @@ class Create extends Component
     unset($this->sizeValues[$index]);
     $this->sizeValues = array_values($this->sizeValues);
 
-    // Update sort order
     foreach ($this->sizeValues as $key => $value) {
       $this->sizeValues[$key]['sort_order'] = $key + 1;
     }
@@ -48,12 +46,10 @@ class Create extends Component
   {
     $this->validate();
 
-    // Create size group
     $sizeGroup = SizeGroup::create([
       'nama_group' => $this->nama_group,
     ]);
 
-    // Create size values
     foreach ($this->sizeValues as $sizeValue) {
       if (!empty($sizeValue['label_size'])) {
         SizeValue::create([

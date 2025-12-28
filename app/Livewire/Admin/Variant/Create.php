@@ -54,7 +54,6 @@ class Create extends Component
 
     public function refreshAvailableColors()
     {
-        // Refresh product data dari database
         $this->product = Product::with(['variants.color'])->findOrFail($this->product->id);
     }
 

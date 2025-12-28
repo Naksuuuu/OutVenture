@@ -1,49 +1,55 @@
-<div
-    style="padding: clamp(15px, 5vw, 50px); display: flex; justify-content: center; align-items: center; background: #fcfcfc; min-height: 100vh; font-family: sans-serif;">
-    <div
-        style="background: #fff; width: 100%; max-width: 480px; border-radius: 24px; box-shadow: 0 15px 35px rgba(0,0,0,0.05); padding: clamp(25px, 8vw, 40px); border: 1px solid #f1f1f1; box-sizing: border-box;">
+<div class="fixed inset-0 flex justify-center items-center bg-gray-50 overflow-hidden w-full h-[100dvh] p-4 font-sans">
+    
+    <div class="bg-white w-full max-w-[320px] md:max-w-sm rounded-[2rem] shadow-xl p-6 md:p-10 lg:mt-16 border border-gray-100 mx-auto">
 
-        <div style="text-align: center; margin-bottom: clamp(25px, 7vw, 35px);">
-            <h2
-                style="font-weight: 900; text-transform: uppercase; margin: 0; color: #1a202c; letter-spacing: 0.5px; font-size: clamp(1.2rem, 5vw, 1.5rem);">
-                Update Access</h2>
-            <p style="color: #718096; font-size: clamp(0.75rem, 2.5vw, 0.85rem); margin-top: 5px;">Hanya hak akses yang
-                dapat diperbarui</p>
+        <div class="text-center mb-5 md:mb-8">
+            <h2 class="font-black uppercase m-0 text-gray-900 tracking-wide text-base md:text-2xl">
+                Update Access
+            </h2>
+            <p class="text-gray-500 text-[10px] md:text-sm mt-1">
+                Hanya hak akses yang dapat diperbarui
+            </p>
         </div>
 
-        <div
-            style="margin-bottom: 25px; padding: clamp(15px, 5vw, 20px); background: #f8fafc; border-radius: 15px; border: 1px solid #e2e8f0;">
-            <small
-                style="display: block; color: #a0aec0; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px;">User
-                Account</small>
-            <div style="font-weight: 700; color: #1a202c; font-size: clamp(0.9rem, 3vw, 1rem); word-break: break-all;">
+        <div class="mb-4 md:mb-6 p-3 md:p-4 bg-gray-50 rounded-2xl border border-gray-200">
+            <small class="block text-gray-400 font-extrabold text-[10px] uppercase mb-1 tracking-wide">
+                User Account
+            </small>
+            <div class="font-bold text-gray-900 text-[11px] md:text-base break-all leading-tight">
                 {{ $admin->email ?? 'admin@outventure.com' }}
             </div>
         </div>
 
-        <div style="margin-bottom: clamp(30px, 8vw, 40px);">
-            <label
-                style="display: block; font-weight: 800; margin-bottom: 12px; font-size: 0.75rem; color: #1a202c; text-transform: uppercase; letter-spacing: 0.5px;">Pilih
-                Role Baru</label>
-            <div style="position: relative;">
-                <select wire:model="role"
-                    style="width: 100%; padding: 16px; border-radius: 14px; border: 2px solid #1a202c; background: #fff; font-weight: 800; cursor: pointer; outline: none; appearance: none; font-size: 1rem; color: #1a202c; text-transform: uppercase;">
-                    <option value="admin">ADMIN</option>
-                    <option value="user">USER</option>
-                </select>
-                <div
-                    style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); pointer-events: none; color: #1a202c; font-size: 12px;">
-                    ▼</div>
-            </div>
+        <div class="mb-6 md:mb-10">
+            <label class="block font-extrabold mb-1.5 text-[10px] text-gray-900 uppercase tracking-wide">
+                Pilih Role Baru
+            </label>
+            @if ($admin->role === 'superadmin')
+                <p class="text-[10px] text-red-600 mb-2 font-semibold">Role superadmin tidak dapat diubah.</p>
+                <div class="inline-block bg-gray-900 text-white px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase">SUPERADMIN</div>
+            @else
+                <div class="relative">
+                    <select wire:model="role"
+                        class="w-full px-4 py-2.5 md:py-4 rounded-xl border-2 border-gray-900 bg-white font-extrabold outline-none appearance-none text-xs md:text-base text-gray-900 uppercase">
+                        <option value="admin">ADMIN</option>
+                        <option value="user">USER</option>
+                    </select>
+                    <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-900 text-[8px] md:text-[10px]">
+                        ▼
+                    </div>
+                </div>
+            @endif
         </div>
 
-        <div style="display: flex; gap: 12px; align-items: center;">
-            <button wire:click="update"
-                style="flex: 2; background: #1a202c; color: white; border: none; padding: clamp(14px, 4vw, 18px); border-radius: 14px; font-weight: 800; cursor: pointer; text-transform: uppercase; font-size: clamp(0.8rem, 3vw, 1rem); transition: 0.3s;">
-                Simpan
-            </button>
-            <a href="/dashboard/users" wire:navigate
-                style="flex: 1; text-decoration: none; background: #f1f5f9; color: #4a5568; padding: clamp(14px, 4vw, 18px); border-radius: 14px; font-weight: 800; text-align: center; font-size: clamp(0.8rem, 2.5vw, 0.9rem); transition: 0.3s;">
+        <div class="flex gap-2 md:gap-3 items-center">
+            @if ($admin->role !== 'superadmin')
+                <button wire:click="update"
+                    class="flex-[2] bg-gray-900 text-white border-none py-2.5 md:py-4 rounded-xl font-extrabold cursor-pointer uppercase text-[11px] md:text-sm transition-all hover:bg-black active:scale-95">
+                    Simpan
+                </button>
+            @endif
+            <a href="{{ route('admin.users.index') }}"
+                class="flex-1 bg-gray-100 text-gray-700 py-2.5 md:py-4 rounded-xl font-extrabold text-center text-[11px] md:text-sm transition-all hover:bg-gray-200">
                 Batal
             </a>
         </div>

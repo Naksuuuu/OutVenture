@@ -6,7 +6,6 @@ use App\Models\Product;
 use App\Models\ProductVariant;
 use App\Models\ProductVariantSpec;
 use App\Models\SizeValue;
-use Illuminate\Support\Facades\Session;
 use Livewire\Component;
 
 class Create extends Component

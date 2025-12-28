@@ -51,13 +51,10 @@ class Edit extends Component
             'stok' => $this->stok,
         ]);
 
-        // Reload spec to reflect latest changes
         $this->spec = ProductVariantSpec::findOrFail($this->spec->id);
 
-        // Emit event to parent edit component to refresh product data
         $this->dispatch('spec-events');
         
-        // Show success message and close modal (no redirect, stay on edit page)
         $this->dispatch('notify', type: 'success', message: 'Spesifikasi berhasil diperbarui!');
         $this->isOpen = false;
     }

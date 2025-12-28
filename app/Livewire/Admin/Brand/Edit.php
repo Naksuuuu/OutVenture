@@ -44,7 +44,6 @@ class Edit extends Component
   {
     $this->validate();
 
-    // Handle main image
     $imagePath = $this->oldImage;
     if ($this->new_image) {
       $newPath = $this->new_image->store('brands', 'public');
@@ -54,7 +53,6 @@ class Edit extends Component
       }
     }
 
-    // Handle wide image
     $wideImagePath = $this->oldWideImage;
     if ($this->new_wide_image) {
       $newPath = $this->new_wide_image->store('brands', 'public');
@@ -64,7 +62,6 @@ class Edit extends Component
       }
     }
 
-    // Handle logo
     $logoPath = $this->oldLogo;
     if ($this->new_logo) {
       $newPath = $this->new_logo->store('brands', 'public');

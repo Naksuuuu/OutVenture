@@ -40,10 +40,9 @@ class Edit extends Component
 
     $imagePath = $this->oldImage;
     if ($this->new_image) {
-      // Store new image
       $newPath = $this->new_image->store('categories', 'public');
       $imagePath = $newPath;
-      // Delete previous image if different
+      
       if ($this->oldImage && $this->oldImage !== $newPath) {
         $this->deletePublicFile($this->oldImage);
       }

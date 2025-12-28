@@ -2,13 +2,13 @@
     <div class="max-w-4xl mx-auto space-y-10">
 
         <section>
-            <h2 class="text-xl font-bold uppercase tracking-tight mb-6 text-black">PROFILE</h2>
+            <h2 class="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-6 text-black">PROFILE</h2>
             <div class="bg-white rounded-sm p-6 md:p-10 shadow-lg">
-                <div class="space-y-8">
+                <div class="space-y-6 md:space-y-8">
                     <div class="flex flex-col">
-                        <label class="text-[10px] font-bold uppercase tracking-widest mb-2">NAMA</label>
-                        <div class="flex items-center justify-between border-b border-gray-700 pb-2">
-                            <span class="text-[14px] font-medium uppercase">{{ $user->nama_lengkap }}</span>
+                        <label class="text-xs md:text-[10px] font-bold uppercase tracking-wide md:tracking-widest mb-2">NAMA</label>
+                        <div class="flex items-center justify-between gap-2 border-b border-gray-700 pb-2">
+                            <span class="text-sm md:text-[14px] font-medium uppercase break-words">{{ $user->nama_lengkap }}</span>
                             <button wire:click="openEditNameModal" class="hover:scale-110 transition-transform">
                                 <svg class="w-4 h-4 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -19,17 +19,17 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <label class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">Email</label>
+                        <label class="text-xs md:text-[10px] font-bold text-gray-400 uppercase tracking-wide md:tracking-widest mb-2">Email</label>
                         <div class="pb-2">
-                            <span class="text-[14px] font-medium">{{ $user->email }}</span>
+                            <span class="text-sm md:text-[14px] font-medium break-words">{{ $user->email }}</span>
                         </div>
                     </div>
 
                     <div class="flex flex-col">
-                        <div class="flex justify-between items-center mb-4">
-                            <label class="text-[10px] font-bold uppercase tracking-widest">Alamat</label>
+                        <div class="flex justify-between items-center gap-3 mb-4">
+                            <label class="text-xs md:text-[10px] font-bold uppercase tracking-wide md:tracking-widest">Alamat</label>
                             <button wire:click="openAddAddressModal"
-                                class="text-[10px] font-bold uppercase underline hover:text-gray-300 transition-colors">
+                                class="text-xs md:text-[10px] font-bold uppercase underline hover:text-gray-300 transition-colors">
                                 @if ($user->alamat)
                                     Edit
                                 @else
@@ -40,7 +40,7 @@
 
                         @if ($user->alamat)
                             <div class="border border-gray-300 p-4 rounded-sm">
-                                <p class="text-[14px] text-gray-700">{{ $user->alamat }}</p>
+                                <p class="text-sm md:text-base text-gray-700 break-words">{{ $user->alamat }}</p>
                             </div>
                         @else
                             <div
@@ -51,7 +51,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                 </svg>
-                                <span class="text-[12px] text-gray-400">Tidak ada alamat yang ditambahkan.</span>
+                                <span class="text-xs md:text-sm text-gray-400">Tidak ada alamat yang ditambahkan.</span>
                             </div>
                         @endif
                     </div>
@@ -60,24 +60,24 @@
         </section>
 
         <section>
-            <h2 class="text-xl font-bold uppercase tracking-tight mb-6 text-black">SETTINGS</h2>
+            <h2 class="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-6 text-black">SETTINGS</h2>
 
-            <div class="bg-white rounded-sm p-6 md:p-10 shadow-lg space-y-10">
+            <div class="bg-white rounded-sm p-6 md:p-10 shadow-lg space-y-6 md:space-y-10">
 
-                <div class="flex flex-col md:flex-row gap-6 items-center">
+                <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
                     <div class="flex-1 flex items-center gap-3">
                         <x-lucide-lock-keyhole class="w-6 h-6" />
                         <div>
-                            <h3 class="text-[13px] font-bold uppercase tracking-tight text-black">KELUAR DARI SEMUA
+                            <h3 class="text-sm md:text-base font-bold uppercase tracking-tight text-black">KELUAR DARI SEMUA
                                 PERANGKAT</h3>
-                            <p class="text-[11px] text-gray-400 leading-relaxed">Jika Anda kehilangan perangkat
+                            <p class="text-xs md:text-sm text-gray-400 leading-relaxed">Jika Anda kehilangan perangkat
                                 atau memiliki kekhawatiran terkait keamanan, keluar dari semua akun Anda.</p>
                         </div>
                     </div>
                     <form action="{{ route('auth.logout') }}" method="POST">
                         @csrf
                         <button type="submit"
-                            class=" border border-gray-500 px-6 py-3 text-[11px] font-bold uppercase text-black hover:bg-black hover:text-white transition-all">
+                            class=" border border-gray-500 px-5 md:px-6 py-2.5 text-xs md:text-[11px] font-bold uppercase text-black hover:bg-black hover:text-white transition-all">
                             KELUAR
                         </button>
                     </form>
@@ -87,18 +87,18 @@
                     <hr class="border-t border-gray-200">
                 </div>
 
-                <div class="flex flex-col md:flex-row gap-6 items-center">
+                <div class="flex flex-col md:flex-row gap-4 md:gap-6 items-center">
                     <div class="flex-1 flex items-center gap-3">
                         <x-lucide-key-round class="w-6 h-6" />
                         <div>
-                            <h3 class="text-[13px] font-bold uppercase tracking-tight text-black">Ganti Password</h3>
-                            <p class="text-[11px] text-gray-400 leading-relaxed">Perbarui kata sandi Anda
+                            <h3 class="text-sm md:text-base font-bold uppercase tracking-tight text-black">Ganti Password</h3>
+                            <p class="text-xs md:text-sm text-gray-400 leading-relaxed">Perbarui kata sandi Anda
                                 secara
                                 berkala untuk menjaga keamanan akun Anda.</p>
                         </div>
                     </div>
                     <a href="{{ route('user.change-password') }}" wire:navigate
-                        class=" border border-gray-500 px-6 py-3 text-[11px] font-bold uppercase text-black hover:bg-black hover:text-white transition-all">
+                        class=" border border-gray-500 px-5 md:px-6 py-2.5 text-xs md:text-[11px] font-bold uppercase text-black hover:bg-black hover:text-white transition-all">
                         Reset Password
                     </a>
                 </div>
@@ -114,7 +114,7 @@
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-lg font-bold uppercase tracking-tight">Edit Nama</h3>
+                    <h3 class="text-base md:text-lg font-bold uppercase tracking-tight">Edit Nama</h3>
                     <button wire:click="closeEditNameModal" class="text-gray-500 hover:text-gray-700">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -153,7 +153,7 @@
         <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
                 <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-lg font-bold uppercase tracking-tight">{{ $user->alamat ? 'Edit' : 'Tambah' }}
+                    <h3 class="text-base md:text-lg font-bold uppercase tracking-tight">{{ $user->alamat ? 'Edit' : 'Tambah' }}
                         Alamat</h3>
                     <button wire:click="closeAddAddressModal" class="text-gray-500 hover:text-gray-700">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

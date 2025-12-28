@@ -9,23 +9,25 @@
 
         <div class="flex flex-wrap gap-2 md:gap-3 items-center w-full max-w-fit">
 
-            <div class="relative flex-1 min-w-[140px]">
+            <div class="relative flex-1 min-w-[120px]">
                 <select wire:model.live="roleFilter"
-                    class="w-full appearance-none bg-white border border-gray-200 px-4 pr-9 py-3 rounded-xl text-sm font-bold text-gray-900 uppercase outline-none cursor-pointer shadow-sm">
+                    class="w-full appearance-none bg-white border border-gray-200 px-2 pr-7 py-2 md:px-4 md:pr-9 md:py-3 rounded-lg md:rounded-xl text-xs md:text-sm font-bold text-gray-900 uppercase outline-none cursor-pointer shadow-sm">
                     <option value="">SEMUA ROLE</option>
                     <option value="admin">ADMIN</option>
                     <option value="user">USER</option>
                 </select>
-                <div class="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 text-[10px]">▼
+                <div
+                    class="absolute right-2 md:right-3 top-1/2 -translate-y-1/2 pointer-events-none text-gray-400 text-[10px]">
+                    ▼
                 </div>
             </div>
 
-            <div class="relative flex-[1.5] min-w-[220px]">
-                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 flex items-center">
-                    <x-lucide-search class="w-4 h-4" />
+            <div class="relative flex-[1.5] min-w-[180px]">
+                <span class="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 text-gray-400 flex items-center">
+                    <x-lucide-search class="w-3.5 h-3.5 md:w-4 md:h-4" />
                 </span>
                 <input type="text" wire:model.live="search" placeholder="Cari User"
-                    class="w-full py-3 px-4 pl-11 rounded-xl border border-gray-200 bg-white text-sm outline-none shadow-sm">
+                    class="w-full py-2 px-3 pl-9 md:py-3 md:px-4 md:pl-11 rounded-lg md:rounded-xl border border-gray-200 bg-white text-xs md:text-sm outline-none shadow-sm">
             </div>
         </div>
     </div>
@@ -38,7 +40,7 @@
                 <div class="flex-grow min-w-0 pr-2.5">
                     <h4
                         class="m-0 text-lg font-extrabold text-gray-900 uppercase tracking-wide whitespace-nowrap overflow-hidden text-ellipsis">
-                        {{ $admin->name ?? 'USER NAME' }}
+                        {{ $admin->nama_lengkap ?? 'USER NAME' }}
                     </h4>
                     <p class="my-1 text-gray-600 text-sm overflow-hidden text-ellipsis whitespace-nowrap">
                         {{ $admin->email }}</p>

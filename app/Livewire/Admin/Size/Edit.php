@@ -24,7 +24,6 @@ class Edit extends Component
     $this->sizeGroup = SizeGroup::with('values')->findOrFail($sizeGroupId);
     $this->nama_group = $this->sizeGroup->nama_group;
 
-    // Load existing size values
     $this->sizeValues = $this->sizeGroup->values->map(function ($value) {
       return [
         'id' => $value->id,
@@ -33,7 +32,6 @@ class Edit extends Component
       ];
     })->toArray();
 
-    // If no values exist, add one empty field
     if (empty($this->sizeValues)) {
       $this->sizeValues = [
         ['label_size' => '', 'sort_order' => 1]
@@ -51,7 +49,6 @@ class Edit extends Component
 
   public function removeSizeValue($index)
   {
-    // If it's an existing value, mark for deletion
     if (isset($this->sizeValues[$index]['id'])) {
       $this->deletedValues[] = $this->sizeValues[$index]['id'];
     }
@@ -59,7 +56,6 @@ class Edit extends Component
     unset($this->sizeValues[$index]);
     $this->sizeValues = array_values($this->sizeValues);
 
-    // Update sort order
     foreach ($this->sizeValues as $key => $value) {
       $this->sizeValues[$key]['sort_order'] = $key + 1;
     }
@@ -69,27 +65,22 @@ class Edit extends Component
   {
     $this->validate();
 
-    // Update size group
     $this->sizeGroup->update([
       'nama_group' => $this->nama_group,
     ]);
 
-    // Delete marked values
     if (!empty($this->deletedValues)) {
       SizeValue::whereIn('id', $this->deletedValues)->delete();
     }
 
-    // Update or create size values
     foreach ($this->sizeValues as $sizeValue) {
       if (!empty($sizeValue['label_size'])) {
         if (isset($sizeValue['id'])) {
-          // Update existing
           SizeValue::where('id', $sizeValue['id'])->update([
             'label_size' => $sizeValue['label_size'],
             'sort_order' => $sizeValue['sort_order'],
           ]);
         } else {
-          // Create new
           SizeValue::create([
             'id_size_group' => $this->sizeGroup->id,
             'label_size' => $sizeValue['label_size'],

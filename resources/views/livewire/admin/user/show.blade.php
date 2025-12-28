@@ -5,7 +5,7 @@
             <div
                 class="w-14 h-14 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
                 <span class="text-2xl md:text-3xl font-black text-gray-900">
-                    {{ strtoupper(substr($admin->name ?? 'A', 0, 1)) }}
+                    {{ strtoupper(substr($admin->nama_lengkap ?? 'A', 0, 1)) }}
                 </span>
             </div>
 
@@ -22,7 +22,7 @@
                     <label class="block text-gray-400 font-extrabold text-[0.65rem] uppercase mb-1 tracking-wider">Nama
                         Lengkap</label>
                     <div class="font-extrabold text-gray-900 text-base md:text-lg uppercase">
-                        {{ $admin->name ?? 'ADMIN' }}</div>
+                        {{ $admin->nama_lengkap ?? 'ADMIN' }}</div>
                 </div>
 
                 <div class="mb-6 border-b border-gray-50 pb-4">
