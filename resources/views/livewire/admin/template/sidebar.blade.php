@@ -5,12 +5,16 @@
     ]"
     class="h-screen fixed left-0 top-0 z-[9999] shadow-md transition-all duration-300 bg-white w-64 flex flex-col justify-between overflow-hidden">
     <div class="flex flex-col h-full overflow-y-auto">
-        <div class="p-6 text-center border-b border-gray-100">
-            <h1 class="text-black text-3xl font-bold">
-                <span :class="isCollapsed ? '' : 'hidden'">O</span>
-                <span :class="isCollapsed ? 'hidden' : ''">Outventure</span>
-
-            </h1>
+        <div class="mt-4 space-y-2 px-4 pb-4 overflow-x-hidden">
+            <a href="{{ route('home') }}" wire:navigate
+                class="flex items-center text-3xl font-bold p-3 rounded-lg  text-gray-800 hover:bg-gray-200 overflow-hidden group transition-all">
+                <span class="mx-0">
+                    O
+                </span>
+                <span :class="isCollapsed ? 'md:hidden' : ''" class="whitespace-nowrap">
+                    UTVENTURE
+                </span>
+            </a>
         </div>
 
         <div class="mt-8 space-y-2 px-4 flex-1">
@@ -34,11 +38,19 @@
             @endforeach
         </div>
 
-        <div class="p-4 border-t border-gray-100 bg-gray-50">
+        <div class="mt-4 space-y-2 px-4 pb-4 overflow-x-hidden">
+            <a href="{{ route('home') }}" wire:navigate
+                class="flex items-center space-x-3 p-3 rounded-lg font-semibold text-gray-800 hover:bg-gray-200 overflow-hidden group transition-all">
+                <x-lucide-home class="shrink-0 w-6 h-6" />
+                <span :class="isCollapsed ? 'md:hidden' : ''" class="whitespace-nowrap">
+                    Halaman Utama
+                </span>
+            </a>
+
             <form method="POST" action="{{ route('auth.logout') }}">
                 @csrf
                 <button type="submit"
-                    class="w-full flex items-center space-x-3 p-3 rounded-lg font-semibold text-red-600 hover:bg-red-50 hover:text-red-700 transition-all overflow-hidden group">
+                    class="w-full flex items-center space-x-3 p-3 rounded-lg font-semibold text-red-600 hover:bg-red-50 overflow-hidden group transition-all">
                     <x-lucide-log-out class="shrink-0 w-6 h-6" />
                     <span :class="isCollapsed ? 'md:hidden' : ''" class="whitespace-nowrap">
                         Logout
