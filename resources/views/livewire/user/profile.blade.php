@@ -3,7 +3,6 @@
 
         <section>
             <h2 class="text-xl font-bold uppercase tracking-tight mb-6 text-black">PROFILE</h2>
-
             <div class="bg-white rounded-sm p-6 md:p-10 shadow-lg">
                 <div class="space-y-8">
                     <div class="flex flex-col">
@@ -90,10 +89,10 @@
                     </div>
                     <div
                         class="md:w-2/3 flex items-center justify-between border border-gray-200 p-6 rounded-md bg-white">
-                        <button
+                        <a href={{ route('user.change-password') }} wire:navigate
                             class="border border-gray-500 px-6 py-3 text-[11px] font-bold uppercase text-black hover:bg-black hover:text-white transition-all">
                             Reset Password
-                        </button>
+                        </a>
                     </div>
                 </div>
 
