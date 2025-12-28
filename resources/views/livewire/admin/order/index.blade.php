@@ -1,12 +1,31 @@
 <div class="p-8 bg-gray-50/50 min-h-screen">
+    {{-- Notification Error --}}
+    @if (session('error'))
+        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
+            class="fixed top-4 right-4 z-50 bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-xl shadow-lg max-w-md">
+            <div class="flex items-center gap-2">
+                <x-lucide-x-circle class="w-5 h-5" />
+                <span class="font-medium">{{ session('error') }}</span>
+            </div>
+        </div>
+    @endif
+
     {{-- Header & Filters --}}
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
             <h2 class="text-2xl font-bold text-gray-900">Manajemen Pesanan</h2>
-            <p class="text-gray-500 mt-1">Lihat dan kelola semua pesanan pelanggan</p>
+            <p class="text-gray-500 mt-1 text-sm">Lihat dan kelola semua pesanan pelanggan</p>
         </div>
 
         <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
+            <button wire:click="downloadAllInvoices" 
+                wire:loading.attr="disabled"
+                class="inline-flex items-center px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
+                <x-lucide-download class="w-4 h-4 mr-2" />
+                <span wire:loading.remove wire:target="downloadAllInvoices">Download Semua PDF</span>
+                <span wire:loading wire:target="downloadAllInvoices">Generating...</span>
+            </button>
+
             <div class="relative flex-1 min-w-[250px] md:w-80">
                 <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
                     <x-lucide-search class="w-4 h-4" />

@@ -102,16 +102,8 @@
                     <p class="text-gray-500">Belum ada brand pilihan</p>
                 </div>
             @endforelse
-
-
-
-
         </div>
-
     </div>
-
-
-
 
     <div class="w-full border-y border-gray-200 bg-white">
         <div class="grid grid-cols-1 md:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-gray-200">
@@ -264,8 +256,5 @@
             @endforelse
         </div>
     </div>
-
-
-
 
 </div>

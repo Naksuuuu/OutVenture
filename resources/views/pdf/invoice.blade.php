@@ -188,7 +188,13 @@
             </div>
             <div class="info-col">
                 <div class="label">Status</div>
-                <div><span class="status-badge">LUNAS</span></div>
+                <div>
+                    @if ($order->status_pembayaran)
+                        <span class="status-badge">LUNAS</span>
+                    @else
+                        <span class="status-badge" style="background-color: #fee2e2; color: #991b1b;">BELUM BAYAR</span>
+                    @endif
+                </div>
             </div>
         </div>
         <div class="info-row">
