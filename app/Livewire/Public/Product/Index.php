@@ -14,11 +14,13 @@ class Index extends Component
 
   public $selectedCategory = '';
   public $selectedColor = '';
+  public $selectedSize = '';
   public $selectedSort = 'latest';
 
   protected $queryString = [
     'selectedCategory' => ['except' => ''],
     'selectedColor' => ['except' => ''],
+    'selectedSize' => ['except' => ''],
     'selectedSort' => ['except' => 'latest']
   ];
 
@@ -38,10 +40,16 @@ class Index extends Component
     $this->resetPage();
   }
 
+  public function updatedSelectedSize()
+  {
+    $this->resetPage();
+  }
+
   public function clearFilters()
   {
     $this->selectedCategory = '';
     $this->selectedColor = '';
+    $this->selectedSize = '';
     $this->selectedSort = 'latest';
     $this->resetPage();
   }
@@ -56,6 +64,7 @@ class Index extends Component
       ])
       ->has('variants.specs');
 
+    // Filter by category
     if ($this->selectedCategory) {
       $query->where('id_category', $this->selectedCategory);
     }
@@ -64,6 +73,13 @@ class Index extends Component
     if ($this->selectedColor) {
       $query->whereHas('variants', function ($q) {
         $q->where('id_color', $this->selectedColor);
+      });
+    }
+
+    // Filter by size
+    if ($this->selectedSize) {
+      $query->whereHas('variants.specs', function ($q) {
+        $q->where('id_size_value', $this->selectedSize);
       });
     }
 
@@ -87,12 +103,22 @@ class Index extends Component
 
     // Get available categories and colors for filter
     $categories = Category::orderBy('nama_category')->get();
-    $colors = Color::orderBy('nama_color')->get();
+    $colors = Color::orderBy('nama_warna')->get();
+
+    // Get sizes based on selected category
+    $sizes = collect();
+    if ($this->selectedCategory) {
+      $category = Category::with('sizeGroup.values')->find($this->selectedCategory);
+      if ($category && $category->sizeGroup) {
+        $sizes = $category->sizeGroup->values()->orderBy('sort_order')->get();
+      }
+    }
 
     return view('livewire.public.product.index', [
       'products' => $products,
       'categories' => $categories,
-      'colors' => $colors
+      'colors' => $colors,
+      'sizes' => $sizes
     ])->layout('components.layouts.app', ['title' => 'Products']);
   }
 }

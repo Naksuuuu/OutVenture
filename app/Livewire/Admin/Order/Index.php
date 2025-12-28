@@ -47,7 +47,7 @@ class Index extends Component
             ->when($this->search, function ($query) {
                 $query->where('id', 'like', '%' . $this->search . '%')
                     ->orWhereHas('user', function ($q) {
-                        $q->where('name', 'like', '%' . $this->search . '%')
+                        $q->where('nama_lengkap', 'like', '%' . $this->search . '%')
                             ->orWhere('email', 'like', '%' . $this->search . '%');
                     });
             })
@@ -58,7 +58,7 @@ class Index extends Component
             ->get();
 
         if ($orders->isEmpty()) {
-            session()->flash('error', 'Tidak ada pesanan untuk diunduh');
+            $this->dispatch('notify', type: 'error', message: 'Tidak ada pesanan untuk diunduh');
             return;
         }
 
@@ -89,7 +89,7 @@ class Index extends Component
             ->when($this->search, function ($query) {
                 $query->where('id', 'like', '%' . $this->search . '%')
                     ->orWhereHas('user', function ($q) {
-                        $q->where('name', 'like', '%' . $this->search . '%')
+                        $q->where('nama_lengkap', 'like', '%' . $this->search . '%')
                             ->orWhere('email', 'like', '%' . $this->search . '%');
                     });
             })

@@ -10,10 +10,7 @@
                         <div class="flex items-center justify-between gap-2 border-b border-gray-700 pb-2">
                             <span class="text-sm md:text-[14px] font-medium uppercase break-words">{{ $user->nama_lengkap }}</span>
                             <button wire:click="openEditNameModal" class="hover:scale-110 transition-transform">
-                                <svg class="w-4 h-4 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
-                                </svg>
+                                <x-lucide-pencil class="w-4 h-4" />
                             </button>
                         </div>
                     </div>
@@ -46,11 +43,7 @@
                             <div
                                 class="border border-dashed border-gray-600 py-6 rounded-sm flex items-center
                                     justify-center gap-3">
-                                <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                                <x-lucide-info class="w-4 h-4 text-gray-500" />
                                 <span class="text-xs md:text-sm text-gray-400">Tidak ada alamat yang ditambahkan.</span>
                             </div>
                         @endif
@@ -116,10 +109,7 @@
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-base md:text-lg font-bold uppercase tracking-tight">Edit Nama</h3>
                     <button wire:click="closeEditNameModal" class="text-gray-500 hover:text-gray-700">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                        <x-lucide-x class="w-6 h-6" />
                     </button>
                 </div>
 
@@ -156,10 +146,7 @@
                     <h3 class="text-base md:text-lg font-bold uppercase tracking-tight">{{ $user->alamat ? 'Edit' : 'Tambah' }}
                         Alamat</h3>
                     <button wire:click="closeAddAddressModal" class="text-gray-500 hover:text-gray-700">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
+                        <x-lucide-x class="w-6 h-6" />
                     </button>
                 </div>
 

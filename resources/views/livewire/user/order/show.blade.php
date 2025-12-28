@@ -1,4 +1,4 @@
-<div class="">
+<div class="p-4 md:p-8 lg:p-12">
     <div class="mx-auto">
         <div
             class="bg-white rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-slate-100 overflow-hidden">
@@ -226,14 +226,9 @@
             </div>
 
             <div class="bg-slate-50/80 px-8 py-6 flex items-center border-t border-slate-100">
-                <a href="{{ route('admin.orders.index') }}" wire:navigate
+                <a href="{{ route('user.orders.index') }}" wire:navigate
                     class="text-slate-500 hover:text-slate-800 text-sm font-bold uppercase tracking-widest transition-colors flex items-center group">
-                    <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M10 19l-7-7m0 0l7-7m-7 7h18">
-                        </path>
-                    </svg>
+                    <x-lucide-arrow-left class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                     Kembali ke Daftar Pesanan
                 </a>
             </div>

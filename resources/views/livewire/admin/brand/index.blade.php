@@ -1,4 +1,4 @@
-<div class="p-4 md:p-8 bg-slate-50/50 min-h-screen">
+<div>
     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 md:gap-6 mb-6 md:mb-10">
         <div>
             <h2 class="text-2xl font-bold text-gray-900">Merek</h2>
@@ -33,7 +33,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-4 md:gap-6 lg:gap-8">
-        @foreach ($brands as $brand)
+        @forelse ($brands as $brand)
             <div
                 class="group relative bg-white rounded-[2rem] border border-slate-100 shadow-sm shadow-slate-200/40 hover:shadow-2xl hover:shadow-slate-300/50 transition-all duration-500 overflow-hidden">
                 <div
@@ -95,6 +95,12 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="col-span-full bg-white rounded-2xl p-16 text-center border border-dashed border-gray-300">
+                <x-lucide-package-open class="w-16 h-16 mx-auto text-gray-300 mb-4" />
+                <p class="text-gray-500 font-medium">Belum ada brand</p>
+                <p class="text-sm text-gray-400 mt-2">Klik tombol "Tambah Brand" untuk membuat brand baru</p>
+            </div>
+        @endforelse
     </div>
 </div>

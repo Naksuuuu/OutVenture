@@ -43,7 +43,22 @@
                         </div>
                     </div>
 
-                    @if ($selectedCategory || $selectedColor)
+                    @if ($selectedCategory)
+                        <div class="relative">
+                            <select wire:model.live="selectedSize"
+                                class="appearance-none bg-white border border-gray-300 rounded px-4 py-2 pr-10 text-[15px] text-gray-700 focus:outline-none focus:border-gray-500 cursor-pointer">
+                                <option value="">Ukuran</option>
+                                @foreach ($sizes as $size)
+                                    <option value="{{ $size->id }}">{{ $size->label_size }}</option>
+                                @endforeach
+                            </select>
+                            <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
+                                <x-lucide-chevron-down class="w-4 h-4 text-gray-800" />
+                            </div>
+                        </div>
+                    @endif
+
+                    @if ($selectedCategory || $selectedColor || $selectedSize)
                         <button wire:click="clearFilters"
                             class="text-xs font-semibold text-gray-500 hover:text-red-600 underline underline-offset-4 ml-2">
                             RESET
@@ -60,10 +75,7 @@
                             <option value="oldest">Terlama</option>
                         </select>
                         <div class="absolute inset-y-0 right-3 flex items-center pointer-events-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" class="w-4 h-4 text-gray-800">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-                            </svg>
+                            <x-lucide-chevron-down class="w-4 h-4 text-gray-800" />
                         </div>
                     </div>
                 </div>
@@ -80,7 +92,7 @@
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             @forelse ($products as $product)
-                <x-product-card :product="$product" />
+                <x-product-card :product="$product" :selectedColor="$selectedColor" />
             @empty
                 <div class="col-span-full text-center py-12">
                     <p class="text-gray-500">Tidak ada produk ditemukan</p>

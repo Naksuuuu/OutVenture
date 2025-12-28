@@ -1,4 +1,4 @@
-<div class="min-h-screen py-12 px-4 sm:px-6">
+<div class="">
     <div class="mx-auto">
 
         <div
@@ -118,7 +118,7 @@
 
                         <div class="overflow-hidden rounded-3xl border border-slate-100 bg-slate-50/50 md:p-6 ">
                             <div class="space-y-6">
-                                @foreach ($product->variants as $variant)
+                                @forelse ($product->variants as $variant)
                                     <div
                                         class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden group hover:border-indigo-300 transition-all duration-300">
 
@@ -244,7 +244,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody class="divide-y divide-slate-50">
-                                                        @foreach ($variant->specs as $spec)
+                                                        @forelse ($variant->specs as $spec)
                                                             <tr>
                                                                 <td class="px-2 md:px-4 py-3">
                                                                     <span
@@ -280,13 +280,25 @@
                                                                     </div>
                                                                 </td>
                                                             </tr>
-                                                        @endforeach
+                                                        @empty
+                                                            <tr>
+                                                                <td colspan="5" class="px-4 py-8 text-center text-gray-500">
+                                                                    <p class="text-sm">Belum ada spesifikasi untuk varian ini</p>
+                                                                </td>
+                                                            </tr>
+                                                        @endforelse
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
                                     </div>
-                                @endforeach
+                                @empty
+                                    <div class="bg-white rounded-2xl p-12 text-center border border-dashed border-gray-300">
+                                        <x-lucide-package-open class="w-16 h-16 mx-auto text-gray-300 mb-4" />
+                                        <p class="text-gray-500 font-medium">Belum ada varian untuk produk ini</p>
+                                        <p class="text-sm text-gray-400 mt-2">Gunakan tombol "Tambah Varian Warna" untuk membuat varian</p>
+                                    </div>
+                                @endforelse
                             </div>
                         </div>
                     </section>

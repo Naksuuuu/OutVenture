@@ -1,4 +1,4 @@
-<div class="p-8 bg-slate-50/50 min-h-screen">
+<div class=" min-h-screen">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
         <div>
             <h2 class="text-2xl font-bold text-gray-900">Kategori</h2>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        @foreach ($categories as $category)
+        @forelse ($categories as $category)
             <div
                 class="group bg-white rounded-[2rem] border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden relative">
 
@@ -78,6 +78,12 @@
                     </div>
                 </div>
             </div>
-        @endforeach
+        @empty
+            <div class="col-span-full bg-white rounded-2xl p-16 text-center border border-dashed border-gray-300">
+                <x-lucide-folder-open class="w-16 h-16 mx-auto text-gray-300 mb-4" />
+                <p class="text-gray-500 font-medium">Belum ada kategori</p>
+                <p class="text-sm text-gray-400 mt-2">Klik tombol "Tambah Kategori" untuk membuat kategori baru</p>
+            </div>
+        @endforelse
     </div>
 </div>

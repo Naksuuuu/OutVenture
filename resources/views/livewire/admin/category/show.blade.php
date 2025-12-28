@@ -1,4 +1,4 @@
-<div class="py-12 px-4 sm:px-6 bg-slate-50/50 min-h-screen">
+<div class="">
     <div class="mx-auto">
 
         <div class="bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">

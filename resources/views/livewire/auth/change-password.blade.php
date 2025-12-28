@@ -4,15 +4,6 @@
         <p class="text-gray-500 text-sm mt-1 uppercase text-[10px] font-medium tracking-wider">Ubah password anda!</p>
     </div>
 
-
-
-    @if (session('success'))
-        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md relative mb-4 text-sm">
-            {{ session('success') }}
-        </div>
-    @endif
-
-
     <form wire:submit.prevent="updatePassword">
         <div class="space-y-4">
             <div>

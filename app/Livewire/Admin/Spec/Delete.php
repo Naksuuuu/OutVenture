@@ -25,9 +25,9 @@ class Delete extends Component
         try {
             $this->spec->delete();
             $this->dispatch('spec-events');
-            $this->dispatch('show-success-message', message: 'Spesifikasi berhasil dihapus!')->to('admin.product.edit');
+            $this->dispatch('notify', type: 'success', message: 'Spesifikasi berhasil dihapus!');
         } catch (\Exception $e) {
-            $this->errorMessage = 'Gagal menghapus spesifikasi. Silakan coba lagi.';
+            $this->dispatch('notify', type: 'error', message: 'Gagal menghapus spesifikasi. Silakan coba lagi.');
             return;
         }
     }

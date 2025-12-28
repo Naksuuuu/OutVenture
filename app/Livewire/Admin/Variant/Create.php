@@ -48,7 +48,7 @@ class Create extends Component
         $this->reset(['id_color', 'image']);
         $this->dispatch('variant-created');
         $this->dispatch('variant-deleted');
-        $this->dispatch('show-success-message', message: 'Tambah varian warna berhasil')->to('admin.product.edit');
+        $this->dispatch('notify', type: 'success', message: 'Varian warna berhasil ditambahkan!');
         $this->isOpen = false;
     }
 
