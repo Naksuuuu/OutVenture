@@ -1,5 +1,4 @@
-<div class="w-full flex flex-col items-center gap-20">
-
+<div id="hero-section" class="w-full flex flex-col items-center gap-20">
 
 
     <livewire:public.hero.index />
