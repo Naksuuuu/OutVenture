@@ -31,8 +31,7 @@ class ChangePassword extends Component
 
         $this->reset();
 
-        session()->flash('success', 'Password berhasil diperbarui!');
-        return redirect()->route('user.profile');
+        return redirect()->route('user.profile')->with('notifySuccess', 'Password berhasil diperbarui!');
     }
 
     public function render()

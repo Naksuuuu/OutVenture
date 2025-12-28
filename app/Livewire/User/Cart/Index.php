@@ -51,9 +51,9 @@ class Index extends Component
             $item->increment('quantity');
             $this->loadCart();
             $this->dispatch('cart-updated');
-            session()->flash('success', 'Jumlah produk berhasil ditambah');
+            $this->dispatch('notify', type: 'success', message: 'Jumlah produk berhasil ditambah');
         } else {
-            session()->flash('error', 'Stok tidak mencukupi');
+            $this->dispatch('notify', type: 'error', message: 'Stok tidak mencukupi');
         }
     }
 
@@ -65,7 +65,7 @@ class Index extends Component
             $item->decrement('quantity');
             $this->loadCart();
             $this->dispatch('cart-updated');
-            session()->flash('success', 'Jumlah produk berhasil dikurangi');
+            $this->dispatch('notify', type: 'success', message: 'Jumlah produk berhasil dikurangi');
         }
     }
 
@@ -77,14 +77,14 @@ class Index extends Component
             $item->delete();
             $this->loadCart();
             $this->dispatch('cart-updated');
-            session()->flash('success', 'Produk berhasil dihapus dari keranjang');
+            $this->dispatch('notify', type: 'success', message: 'Produk berhasil dihapus dari keranjang');
         }
     }
 
     public function checkout()
     {
         if ($this->cartItems->isEmpty()) {
-            session()->flash('error', 'Keranjang Anda kosong');
+            $this->dispatch('notify', type: 'error', message: 'Keranjang Anda kosong');
             return;
         }
 
@@ -128,13 +128,12 @@ class Index extends Component
             DB::commit();
 
             $this->dispatch('cart-updated');
-            session()->flash('success', 'Pesanan berhasil dibuat! Silakan lakukan pembayaran.');
 
-            return redirect()->route('user.orders.index');
+            return redirect()->route('user.orders.index')->with('notifySuccess', 'Pesanan berhasil dibuat! Silakan lakukan pembayaran.');
         } catch (\Exception $e) {
             dd('blog');
             DB::rollBack();
-            session()->flash('error', 'Terjadi kesalahan: ' . $e->getMessage());
+            $this->dispatch('notify', type: 'error', message: 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 
