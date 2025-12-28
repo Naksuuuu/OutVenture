@@ -57,6 +57,7 @@ Route::get('brands/{id}', PublicBrandShow::class)->name('brands.show');
 Route::middleware('auth')->group(function () {
     Route::get('user/profile', App\Livewire\User\Profile::class)->name('user.profile');
     Route::get('user/orders', App\Livewire\User\Order\Index::class)->name('user.orders.index');
+    Route::get('user/orders/{id}/show', App\Livewire\User\Order\Show::class)->name('user.orders.show');
     Route::get('user/carts', App\Livewire\User\Cart\Index::class)->name('user.carts.index');
     Route::get('user/change-password', App\Livewire\Auth\ChangePassword::class)->name('user.change-password');
 });

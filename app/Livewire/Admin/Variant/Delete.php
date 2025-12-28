@@ -46,7 +46,7 @@ class Delete extends Component
         $this->dispatch('variant-delete-success');
         $this->dispatch('variant-deleted');
         $this->dispatch('variant-created');
-        $this->dispatch('show-success-message', message: 'Varian berhasil dihapus!');
+        $this->dispatch('notify', type: 'success', message: 'Varian berhasil dihapus!');
     }
 
     public function render()

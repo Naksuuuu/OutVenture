@@ -1,6 +1,7 @@
 <div class="fixed inset-0 flex justify-center items-center bg-gray-50 overflow-hidden w-full h-[100dvh] p-4 font-sans">
-    
-    <div class="bg-white w-full max-w-[320px] md:max-w-sm rounded-[2rem] shadow-xl p-6 md:p-10 lg:mt-16 border border-gray-100 mx-auto">
+
+    <div
+        class="bg-white w-full max-w-[320px] md:max-w-sm rounded-[2rem] shadow-xl p-6 md:p-10 lg:mt-16 border border-gray-100 mx-auto">
 
         <div class="text-center mb-5 md:mb-8">
             <h2 class="font-black uppercase m-0 text-gray-900 tracking-wide text-base md:text-2xl">
@@ -26,7 +27,9 @@
             </label>
             @if ($admin->role === 'superadmin')
                 <p class="text-[10px] text-red-600 mb-2 font-semibold">Role superadmin tidak dapat diubah.</p>
-                <div class="inline-block bg-gray-900 text-white px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase">SUPERADMIN</div>
+                <div
+                    class="inline-block bg-gray-900 text-white px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase">
+                    SUPERADMIN</div>
             @else
                 <div class="relative">
                     <select wire:model="role"
@@ -34,7 +37,8 @@
                         <option value="admin">ADMIN</option>
                         <option value="user">USER</option>
                     </select>
-                    <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-900 text-[8px] md:text-[10px]">
+                    <div
+                        class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-900 text-[8px] md:text-[10px]">
                         ▼
                     </div>
                 </div>

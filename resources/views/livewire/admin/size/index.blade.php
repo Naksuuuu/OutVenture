@@ -1,4 +1,4 @@
-<div class="bg-gray-50 min-h-screen p-4 md:p-8">
+<div class="">
 
     <div class="mx-auto">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-6 md:mb-8 gap-4">
@@ -35,10 +35,12 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             @forelse ($sizeGroups as $sizeGroup)
-                <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-200">
+                <div
+                    class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all duration-200">
                     <div class="flex items-start justify-between mb-4">
                         <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 font-bold">
+                            <div
+                                class="w-12 h-12 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 font-bold">
                                 {{ strtoupper(substr($sizeGroup->nama_group, 0, 2)) }}
                             </div>
                             <div>
@@ -65,14 +67,16 @@
                             <h4 class="text-sm font-bold text-gray-400 uppercase tracking-wider mb-2">Nilai Ukuran</h4>
                             <div class="flex flex-wrap gap-1.5">
                                 @forelse ($sizeGroup->values->take(6) as $value)
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-gray-100 text-gray-700 border border-gray-200">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-gray-100 text-gray-700 border border-gray-200">
                                         {{ $value->label_size }}
                                     </span>
                                 @empty
                                     <span class="text-xs text-gray-400 italic">No values</span>
                                 @endforelse
                                 @if ($sizeGroup->values_count > 6)
-                                    <span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-indigo-50 text-indigo-600">
+                                    <span
+                                        class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-bold bg-indigo-50 text-indigo-600">
                                         +{{ $sizeGroup->values_count - 6 }} more
                                     </span>
                                 @endif
@@ -81,7 +85,8 @@
 
                         <div class="flex items-center justify-between pt-2 border-t border-gray-100">
                             <span class="text-sm font-bold text-gray-400 uppercase tracking-wider">Kategori</span>
-                            <span class="inline-flex items-center px-3 py-1 rounded-md text-sm font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
+                            <span
+                                class="inline-flex items-center px-3 py-1 rounded-md text-sm font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
                                 {{ $sizeGroup->categories_count }}
                             </span>
                         </div>

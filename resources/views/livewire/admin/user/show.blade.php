@@ -1,4 +1,4 @@
-<div class="p-4 md:p-12 flex justify-center bg-gray-50 min-h-screen">
+<div class=" flex justify-center  ">
     <div class="bg-white w-full max-w-md rounded-3xl shadow-xl border border-gray-100 overflow-hidden h-fit">
 
         <div class="bg-gray-900 p-5 md:p-10 relative flex items-center gap-5">

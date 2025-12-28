@@ -1,4 +1,4 @@
-<div class="p-4 md:p-8 bg-slate-50/50 min-h-screen">
+<div>
     <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 md:gap-6 mb-6 md:mb-10">
         <div>
             <h2 class="text-2xl font-bold text-gray-900">Merek</h2>

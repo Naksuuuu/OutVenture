@@ -1,9 +1,29 @@
-@props(['product'])
+@props(['product', 'selectedColor' => null])
+
+@php
+    // Priority: selectedColor > latestVariant > first variant
+    $displayVariant = null;
+
+    // If color is selected, try to find variant with that color
+    if ($selectedColor) {
+        $displayVariant = $product->variants->where('id_color', $selectedColor)->first();
+    }
+
+    // If no color selected or not found, use latestVariant if available
+    if (!$displayVariant && isset($product->latestVariant)) {
+        $displayVariant = $product->latestVariant;
+    }
+
+    // Fallback to first variant
+    if (!$displayVariant) {
+        $displayVariant = $product->variants->first();
+    }
+@endphp
 
 <a href="{{ route('products.show', $product->id) }}" wire:navigate class="flex flex-col">
     <div class="relative aspect-[4/5] bg-[#f2f2ed] mb-3 overflow-hidden">
-        @if ($product->variants->first() && $product->variants->first()->image)
-            <img src="{{ asset('storage/' . $product->variants->first()->image) }}" alt="{{ $product->nama_product }}"
+        @if ($displayVariant && $displayVariant->image)
+            <img src="{{ asset('storage/' . $displayVariant->image) }}" alt="{{ $product->nama_product }}"
                 class="w-full h-full object-cover">
         @else
             <div class="w-full h-full flex items-center justify-center">

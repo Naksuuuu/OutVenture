@@ -7,13 +7,6 @@
 
 
 
-    <div class="mb-6">
-        <h2 class="text-xl font-bold text-gray-900 leading-tight uppercase tracking-tight">Sign in</h2>
-        <p class="text-gray-500 text-sm mt-1 uppercase text-[10px] font-medium tracking-wider">Sign in or create an
-            account</p>
-    </div>
-
-
 
     @if (session('success'))
         <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md relative mb-4 text-sm">
@@ -62,18 +55,22 @@
 
         <button type="submit"
             class="w-full bg-black hover:bg-neutral-500 text-white font-bold py-3.5 px-4 rounded-md transition duration-300 uppercase text-xs tracking-[0.2em]">
-            Continue
+            Masuk
         </button>
     </form>
 
-
+    <div class="flex items-center my-4">
+        <div class="flex-grow border-t border-gray-300"></div>
+        <span class="flex-shrink-0 mx-4 text-gray-600 text-sm">Atau masuk dengan</span>
+        <div class="flex-grow border-t border-gray-300"></div>
+    </div>
 
     <div class="mt-4">
         <a href="{{ route('google.login') }}"
             class="w-full flex items-center justify-center bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 py-3.5 px-4 rounded-md shadow-sm transition duration-300 text-xs font-bold uppercase tracking-wide">
             <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-4 h-4 mr-3"
                 alt="Google">
-            Sign in with Google
+            Masuk Dengan Google
         </a>
     </div>
 
@@ -83,7 +80,7 @@
         <p class="text-gray-500 text-xs uppercase tracking-tight">
             Belum punya akun?
             <a href="{{ route('auth.register') }}" wire:navigate
-                class="text-blue-500 font-black hover:underline ml-1">SIGN UP</a>
+                class="text-blue-500 font-black hover:underline ml-1">DAFTAR</a>
         </p>
     </div>
 </div>

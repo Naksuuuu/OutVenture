@@ -1,40 +1,42 @@
-<div class="bg-gray-50 min-h-screen p-8">
+<div class="">
 
     {{-- Modal Pop-up Notifikasi Success/Error --}}
     @if ($successMessage || $errorMessage)
-        <div x-data="{ show: true }"
-            x-show="show"
-            x-init="setTimeout(() => { show = false; @this.call('resetMessages'); }, 3000)"
+        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => {
+            show = false;
+            @this.call('resetMessages');
+        }, 3000)"
             @click="if($event.target === $el) { show = false; @this.call('resetMessages'); }"
-            x-transition:enter="transition ease-out duration-100"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in duration-100"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
+            x-transition:enter="transition ease-out duration-100" x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-100"
+            x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
             class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-            
+
             <!-- Backdrop -->
             <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
 
             <!-- Modal Content -->
-            <div class="relative z-[10000] w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-100 p-8 space-y-4">
+            <div
+                class="relative z-[10000] w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-100 p-8 space-y-4">
                 <div class="flex items-center justify-center mb-4">
                     @if ($successMessage)
                         <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
-                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 13l4 4L19 7"></path>
                             </svg>
                         </div>
                     @else
                         <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
                             <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12"></path>
                             </svg>
                         </div>
                     @endif
                 </div>
-                
+
                 <div class="text-center">
                     <h3 class="text-xl font-bold {{ $successMessage ? 'text-green-600' : 'text-red-600' }} mb-2">
                         {{ $successMessage ? 'Berhasil!' : 'Gagal!' }}
@@ -80,7 +82,8 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             @forelse ($colors as $color)
-                <div class="bg-white border border-gray-100 rounded-3xl p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
+                <div
+                    class="bg-white border border-gray-100 rounded-3xl p-5 shadow-sm hover:shadow-md transition-all duration-300 flex flex-col justify-between group">
                     <div class="flex items-start justify-between mb-4">
                         <div class="flex items-center gap-4">
                             <div class="w-12 h-12 rounded-2xl border-2 border-gray-100 shadow-inner group-hover:scale-110 transition-transform duration-300"
@@ -88,11 +91,13 @@
                             </div>
                             <div>
                                 <h3 class="text-base font-bold text-gray-800">{{ $color->nama_warna }}</h3>
-                                <p class="text-xs font-mono text-gray-400 tracking-wider lowercase">{{ $color->hex_code }}</p>
+                                <p class="text-xs font-mono text-gray-400 tracking-wider lowercase">
+                                    {{ $color->hex_code }}</p>
                             </div>
                         </div>
-                        
-                        <span class="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
+
+                        <span
+                            class="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
                             {{ $color->product_variants_count }} Varian
                         </span>
                     </div>
@@ -103,12 +108,13 @@
                             <x-lucide-square-pen class="w-3.5 h-3.5" />
                             <span>Edit</span>
                         </a>
-                        
+
                         <livewire:admin.color.delete :color="$color->id" :key="'color-delete-' . $color->id" />
                     </div>
                 </div>
             @empty
-                <div class="col-span-full py-20 bg-white border border-dashed border-gray-200 rounded-3xl flex flex-col items-center justify-center text-gray-400">
+                <div
+                    class="col-span-full py-20 bg-white border border-dashed border-gray-200 rounded-3xl flex flex-col items-center justify-center text-gray-400">
                     <x-lucide-palette class="w-12 h-12 mb-3 opacity-20" />
                     <p class="text-sm italic tracking-wide">Tidak ada warna yang ditemukan.</p>
                 </div>

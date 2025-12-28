@@ -1,15 +1,4 @@
-<div class="p-8 bg-gray-50/50 min-h-screen">
-    {{-- Notification Error --}}
-    @if (session('error'))
-        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
-            class="fixed top-4 right-4 z-50 bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-xl shadow-lg max-w-md">
-            <div class="flex items-center gap-2">
-                <x-lucide-x-circle class="w-5 h-5" />
-                <span class="font-medium">{{ session('error') }}</span>
-            </div>
-        </div>
-    @endif
-
+<div>
     {{-- Header & Filters --}}
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
         <div>
@@ -18,11 +7,10 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
-            <button wire:click="downloadAllInvoices" 
-                wire:loading.attr="disabled"
+            <button wire:click="downloadAllInvoices" wire:loading.attr="disabled"
                 class="inline-flex items-center px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
                 <x-lucide-download class="w-4 h-4 mr-2" />
-                <span wire:loading.remove wire:target="downloadAllInvoices">Download Semua PDF</span>
+                <span wire:loading.remove wire:target="downloadAllInvoices">Download Semua Invoice</span>
                 <span wire:loading wire:target="downloadAllInvoices">Generating...</span>
             </button>
 
@@ -57,21 +45,24 @@
     {{-- Cards Grid --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         @forelse ($orders as $order)
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all flex flex-col justify-between">
+            <div
+                class="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 hover:shadow-md transition-all flex flex-col justify-between">
                 <div>
                     {{-- ID & Status --}}
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-sm font-bold text-gray-900 bg-gray-100 px-3 py-1 rounded-lg">
                             #{{ $order->id }}
                         </span>
-                        
+
                         @if ($order->status_pembayaran)
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
+                            <span
+                                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
                                 <x-lucide-check-circle class="w-3 h-3 mr-1" />
                                 Lunas
                             </span>
                         @else
-                            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800">
+                            <span
+                                class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800">
                                 <x-lucide-x-circle class="w-3 h-3 mr-1" />
                                 Belum Bayar
                             </span>
@@ -104,10 +95,10 @@
                     <div>
                         <p class="text-xs text-gray-400 font-medium uppercase">Total Harga</p>
                         <p class="text-lg font-black text-gray-900 leading-none">
-                            Rp {{ number_format($order->items->sum(fn($item) => $item->harga * $item->quantity), 0, ',', '.') }}
+                            Rp {{ number_format($order->total_harga, 0, ',', '.') }}
                         </p>
                     </div>
-                    
+
                     <a href="{{ route('admin.orders.show', $order->id) }}" wire:navigate
                         class="inline-flex items-center px-4 py-2 bg-gray-900 hover:bg-gray-800 text-white text-xs font-bold rounded-xl transition-all shadow-sm">
                         <x-lucide-eye class="w-4 h-4 mr-1.5" />
@@ -120,7 +111,8 @@
                 <div class="flex flex-col items-center justify-center">
                     <x-lucide-package-open class="w-16 h-16 text-gray-300 mb-4" />
                     <p class="text-gray-500 font-medium">Tidak ada pesanan</p>
-                    <p class="text-sm text-gray-400 mt-1">Pesanan akan muncul di sini ketika pelanggan melakukan pembelian</p>
+                    <p class="text-sm text-gray-400 mt-1">Pesanan akan muncul di sini ketika pelanggan melakukan
+                        pembelian</p>
                 </div>
             </div>
         @endforelse

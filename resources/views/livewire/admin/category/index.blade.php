@@ -1,4 +1,4 @@
-<div class="p-8 bg-slate-50/50 min-h-screen">
+<div class=" min-h-screen">
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
         <div>
             <h2 class="text-2xl font-bold text-gray-900">Kategori</h2>

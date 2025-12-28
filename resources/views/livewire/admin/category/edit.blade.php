@@ -1,4 +1,4 @@
-<div class="py-12 px-4 sm:px-6 bg-slate-50/50 min-h-screen">
+<div class="">
     <div class="mx-auto">
 
         <div class="bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
@@ -7,11 +7,7 @@
                 <div class="relative z-10 flex items-center gap-6">
                     <div
                         class="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/20 rotate-3 transition-transform hover:rotate-0">
-                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                            </path>
-                        </svg>
+                        <x-lucide-square-pen />
                     </div>
                     <div>
                         <h1 class="text-3xl font-black tracking-tight uppercase italic">Edit Kategori</h1>

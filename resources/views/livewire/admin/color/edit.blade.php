@@ -1,4 +1,4 @@
-<div class="py-12 px-4 sm:px-6">
+<div class="">
     <div class="mx-auto">
 
         <div
@@ -28,13 +28,17 @@
                 @if ($isUsedInVariants)
                     <div class="bg-red-50 border-l-4 border-red-400 p-5 rounded-lg">
                         <div class="flex items-center">
-                            <svg class="w-6 h-6 text-red-400 mr-3 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                            <svg class="w-6 h-6 text-red-400 mr-3 flex-shrink-0" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                    clip-rule="evenodd" />
                             </svg>
                             <div>
                                 <h3 class="text-sm font-bold text-red-800">Warna Tidak Dapat Diubah</h3>
                                 <p class="text-sm text-red-700 mt-1">
-                                    Warna ini sedang digunakan pada <span class="font-bold">{{ $variantsCount }} varian produk</span> dan tidak dapat diubah untuk menjaga konsistensi data.
+                                    Warna ini sedang digunakan pada <span class="font-bold">{{ $variantsCount }} varian
+                                        produk</span> dan tidak dapat diubah untuk menjaga konsistensi data.
                                 </p>
                             </div>
                         </div>
@@ -62,8 +66,8 @@
                                     class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Nama
                                     Warna
                                 </label>
-                                <input wire:model.live="nama_warna" type="text" placeholder="Contoh: Merah, Biru, Hijau"
-                                    {{ $isUsedInVariants ? 'disabled' : '' }}
+                                <input wire:model.live="nama_warna" type="text"
+                                    placeholder="Contoh: Merah, Biru, Hijau" {{ $isUsedInVariants ? 'disabled' : '' }}
                                     class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium {{ $isUsedInVariants ? 'opacity-60 cursor-not-allowed' : '' }}">
                                 @error('nama_warna')
                                     <span
@@ -73,7 +77,8 @@
 
                             <div class="md:col-span-2">
                                 <label
-                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Kode Hex Warna
+                                    class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">Kode
+                                    Hex Warna
                                 </label>
                                 <div class="flex gap-3">
                                     <input wire:model.live="hex_code" type="color"
@@ -99,7 +104,8 @@
                                         style="background-color: {{ $hex_code ?? '#000000' }};">
                                     </div>
                                     <div>
-                                        <p class="text-sm font-bold text-slate-800">{{ $nama_warna ?: 'Nama warna' }}</p>
+                                        <p class="text-sm font-bold text-slate-800">{{ $nama_warna ?: 'Nama warna' }}
+                                        </p>
                                         <p class="text-xs text-slate-500">{{ $hex_code ?? '#000000' }}</p>
                                     </div>
                                 </div>
@@ -108,8 +114,7 @@
                     </section>
 
                     <div class="flex items-center justify-end px-8 py-6 mt-8">
-                        <button type="submit" 
-                            {{ $isUsedInVariants ? 'disabled' : '' }}
+                        <button type="submit" {{ $isUsedInVariants ? 'disabled' : '' }}
                             class="bg-black/80 cursor-pointer hover:bg-black text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95 {{ $isUsedInVariants ? 'opacity-50 cursor-not-allowed' : '' }}">
                             {{ $isUsedInVariants ? 'Tidak Dapat Diubah' : 'Simpan Perubahan' }}
                         </button>

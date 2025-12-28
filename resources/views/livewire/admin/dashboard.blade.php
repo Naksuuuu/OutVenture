@@ -1,4 +1,4 @@
-<div class="p-8 bg-slate-50/50 min-h-screen font-sans">
+<div class=" min-h-screen font-sans">
     <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
             <h2 class="text-2xl font-bold text-gray-900">Dasbor</h2>
@@ -159,18 +159,20 @@
                         </div>
                     </div>
 
-                    @if($latestOrder)
-                    <div
-                        class="flex items-start p-5 bg-emerald-50/70 rounded-3xl border border-emerald-100 transition-colors hover:bg-emerald-50">
+                    @if ($latestOrder)
                         <div
-                            class="w-10 h-10 bg-white text-emerald-600 rounded-xl flex items-center justify-center mr-4 shadow-sm border border-emerald-100">
-                            <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                            class="flex items-start p-5 bg-emerald-50/70 rounded-3xl border border-emerald-100 transition-colors hover:bg-emerald-50">
+                            <div
+                                class="w-10 h-10 bg-white text-emerald-600 rounded-xl flex items-center justify-center mr-4 shadow-sm border border-emerald-100">
+                                <div class="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-pulse"></div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-black text-emerald-900 uppercase tracking-tighter">Pesanan Baru
+                                </p>
+                                <p class="text-xs font-bold text-emerald-600/80 mt-1">Order dari
+                                    {{ $latestOrder->user->nama_lengkap }}.</p>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-sm font-black text-emerald-900 uppercase tracking-tighter">Pesanan Baru</p>
-                            <p class="text-xs font-bold text-emerald-600/80 mt-1">Order dari {{ $latestOrder->user->nama_lengkap }}.</p>
-                        </div>
-                    </div>
                     @endif
                 </div>
             </div>
@@ -178,7 +180,8 @@
 
         <div class="lg:col-span-2 space-y-10">
             <div class="bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-sm relative overflow-hidden">
-                <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-10 relative z-10 gap-4 md:gap-0">
+                <div
+                    class="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-10 relative z-10 gap-4 md:gap-0">
                     <div>
                         <h3 class="text-xl md:text-2xl font-black text-slate-900 tracking-tight">Ikhtisar Penjualan</h3>
                         <p class="text-sm font-bold text-slate-400 uppercase tracking-widest mt-1">Volume unit terjual

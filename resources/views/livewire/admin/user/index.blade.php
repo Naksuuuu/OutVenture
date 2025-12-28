@@ -1,10 +1,12 @@
-<div class="p-4 md:p-6 max-w-7xl mx-auto">
+<div class="mx-auto">
     <div
         class="mb-4 md:mb-9 border-b-2 border-gray-100 pb-4 md:pb-6 flex flex-wrap justify-between items-center gap-3 md:gap-5">
 
-        <div class="flex-1 min-w-[280px]">
-            <h2 class="font-extrabold uppercase m-0 tracking-wide text-gray-900 text-2xl md:text-3xl">Admin Users</h2>
-            <p class="text-gray-600 mt-1 text-sm">Kelola dan atur identitas administrator Anda</p>
+
+
+        <div>
+            <h2 class="text-2xl font-bold text-gray-900">Admin Users</h2>
+            <p class="text-sm text-gray-500 mt-1">Kelola dan atur identitas administrator Anda.</p>
         </div>
 
         <div class="flex flex-wrap gap-2 md:gap-3 items-center w-full max-w-fit">
