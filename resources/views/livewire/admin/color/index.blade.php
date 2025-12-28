@@ -1,29 +1,58 @@
 <div class="bg-gray-50 min-h-screen p-8">
 
-    @if ($successMessage)
-        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 3000)"
-            class="fixed bottom-10 right-10 p-6 w-fit bg-green-400/90 rounded-lg border border-green-400 mb-2 z-50 shadow-lg text-white">
-            {{ $successMessage }}
+    {{-- Modal Pop-up Notifikasi Success/Error --}}
+    @if ($successMessage || $errorMessage)
+        <div x-data="{ show: true }"
+            x-show="show"
+            x-init="setTimeout(() => { show = false; @this.call('resetMessages'); }, 3000)"
+            @click="if($event.target === $el) { show = false; @this.call('resetMessages'); }"
+            x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-100"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+            
+            <!-- Backdrop -->
+            <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
+
+            <!-- Modal Content -->
+            <div class="relative z-[10000] w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-100 p-8 space-y-4">
+                <div class="flex items-center justify-center mb-4">
+                    @if ($successMessage)
+                        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                    @else
+                        <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+                            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </div>
+                    @endif
+                </div>
+                
+                <div class="text-center">
+                    <h3 class="text-xl font-bold {{ $successMessage ? 'text-green-600' : 'text-red-600' }} mb-2">
+                        {{ $successMessage ? 'Berhasil!' : 'Gagal!' }}
+                    </h3>
+                    <p class="text-slate-600 text-sm">
+                        {{ $successMessage ?: $errorMessage }}
+                    </p>
+                </div>
+
+                <div class="flex items-center justify-center pt-4">
+                    <button @click="show = false; @this.call('resetMessages')"
+                        class="text-xs font-bold text-slate-500 uppercase tracking-widest hover:text-slate-700 transition-colors px-6 py-2 rounded-lg hover:bg-slate-50">
+                        Tutup
+                    </button>
+                </div>
+            </div>
         </div>
     @endif
-
-    @if ($errorMessage)
-        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)"
-            class="fixed bottom-10 right-10 p-6 w-fit bg-red-400/90 text-white rounded-lg border border-red-400 mb-2 z-50 shadow-lg">
-            {{ $errorMessage }}
-        </div>
-    @endif
-
-    <script>
-        document.addEventListener('livewire:init', () => {
-            Livewire.on('close-message', () => {
-                setTimeout(() => {
-                    @this.set('successMessage', '');
-                    @this.set('errorMessage', '');
-                }, 3000);
-            });
-        });
-    </script>
 
     <div class="mx-auto">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
@@ -75,11 +104,7 @@
                             <span>Edit</span>
                         </a>
                         
-                        <button wire:click="deleteColor({{ $color->id }})"
-                            wire:confirm="Hapus warna '{{ $color->nama_warna }}'?"
-                            class="inline-flex items-center justify-center px-4 py-2 text-[11px] font-bold text-red-600 bg-red-50/50 rounded-xl hover:bg-red-600 hover:text-white transition-all uppercase tracking-wider">
-                            <x-lucide-trash class="w-3.5 h-3.5" />
-                        </button>
+                        <livewire:admin.color.delete :color="$color->id" :key="'color-delete-' . $color->id" />
                     </div>
                 </div>
             @empty

@@ -32,25 +32,10 @@ class Index extends Component
     $this->resetPage();
   }
 
-  public function deleteProduct($productId)
-  {
-    $product = Product::find($productId);
-    if ($product) {
-      if ($product->variants->isNotEmpty()) {
-        session()->flash('error', 'Produk masih memiliki varian, hapus varian terlebih dahulu.');
-        return;
-      }
-
-      $product->delete();
-      session()->flash('success', 'Product deleted successfully!');
-    }
-  }
-
   public function render()
   {
     $query = Product::with(['category', 'variants', 'brand']);
 
-    // Apply sorting
     if ($this->sort === 'terlama') {
       $query->orderBy('id', 'asc');
     } else {

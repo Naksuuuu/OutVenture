@@ -42,7 +42,7 @@ class Create extends Component
     }
 
 
-    session()->flash('success', 'Category created successfully!');
+    session()->flash('success', 'Category Berhasil Dibuat!');
 
     return redirect()->route('admin.categories.index');
   }

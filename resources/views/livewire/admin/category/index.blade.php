@@ -1,13 +1,54 @@
 <div class="p-8 bg-slate-50/50 min-h-screen">
-    @if (session('success'))
-        <div class="fixed bottom-10 right-10 p-6 w-fit bg-green-400/90 rounded-lg border border-green-400 mb-2 z-50">
-            {{ session('success') }}
-        </div>
-    @endif
+    {{-- Modal Pop-up Notifikasi Success/Error --}}
+    @if (session('success') || session('error'))
+        <div x-data="{ show: true }"
+            x-show="show"
+            x-init="setTimeout(() => show = false, 3000)"
+            x-transition:enter="transition ease-out duration-100"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition ease-in duration-100"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
+            
+            <!-- Backdrop -->
+            <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
 
-    @if (session('error'))
-        <div class="fixed bottom-10 right-10 p-6 w-fit bg-red-400/90 rounded-lg border border-red-400 mb-2 z-50">
-            {{ session('error') }}
+            <!-- Modal Content -->
+            <div class="relative z-[10000] w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-100 p-8 space-y-4">
+                <div class="flex items-center justify-center mb-4">
+                    @if (session('success'))
+                        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
+                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                    @else
+                        <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
+                            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                            </svg>
+                        </div>
+                    @endif
+                </div>
+                
+                <div class="text-center">
+                    <h3 class="text-xl font-bold {{ session('success') ? 'text-green-600' : 'text-red-600' }} mb-2">
+                        {{ session('success') ? 'Berhasil!' : 'Gagal!' }}
+                    </h3>
+                    <p class="text-slate-600 text-sm">
+                        {{ session('success') ?: session('error') }}
+                    </p>
+                </div>
+
+                <div class="flex items-center justify-center pt-4">
+                    <button @click="show = false"
+                        class="text-xs font-bold text-slate-500 uppercase tracking-widest hover:text-slate-700 transition-colors px-6 py-2 rounded-lg hover:bg-slate-50">
+                        Tutup
+                    </button>
+                </div>
+            </div>
         </div>
     @endif
     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">

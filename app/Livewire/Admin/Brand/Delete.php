@@ -7,23 +7,26 @@ use Livewire\Component;
 
 class Delete extends Component
 {
-
   public $brand;
+  public $errorMessage = '';
 
   public function mount($brand)
   {
     $this->brand = Brand::findOrFail($brand);
   }
+
   public function delete()
   {
+    $this->errorMessage = '';
+
     if ($this->brand->products()->exists()) {
-      session()->flash('error', 'Merek masih memiliki produk, hapus atau pindahkan produk terlebih dahulu.');
-      return redirect()->route('admin.brands.index');
+      $this->errorMessage = 'Merek masih memiliki produk, hapus atau pindahkan produk terlebih dahulu.';
+      return;
     }
 
     $this->brand->delete();
 
-    session()->flash('success', 'Brand deleted successfully!');
+    session()->flash('success', 'Merek berhasil dihapus!');
 
     return redirect()->route('admin.brands.index');
   }

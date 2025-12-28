@@ -24,6 +24,7 @@ class Create extends Component
         'image' => 'nullable|image|max:2048',
     ];
 
+    protected $listeners = ['variant-deleted' => 'refreshAvailableColors'];
 
     public function mount(Product $product)
     {
@@ -44,11 +45,17 @@ class Create extends Component
             'image' => $imagePath,
         ]);
 
-        session()->flash('success', 'Varian berhasil ditambahkan!');
-
         $this->reset(['id_color', 'image']);
-        $this->dispatch('variant-created'); // Emit event ke parent
+        $this->dispatch('variant-created');
+        $this->dispatch('variant-deleted');
+        $this->dispatch('show-success-message', message: 'Tambah varian warna berhasil')->to('admin.product.edit');
         $this->isOpen = false;
+    }
+
+    public function refreshAvailableColors()
+    {
+        // Refresh product data dari database
+        $this->product = Product::with(['variants.color'])->findOrFail($this->product->id);
     }
 
     public function render()

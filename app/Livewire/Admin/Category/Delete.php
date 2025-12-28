@@ -7,23 +7,26 @@ use Livewire\Component;
 
 class Delete extends Component
 {
-
     public $category;
+    public $errorMessage = '';
 
     public function mount($category)
     {
         $this->category = Category::findOrFail($category);
     }
+
     public function delete()
     {
+        $this->errorMessage = '';
+
         if ($this->category->products()->exists()) {
-            session()->flash('error', 'Kategori masih memiliki produk, hapus atau pindahkan produk terlebih dahulu.');
-            return redirect()->route('admin.categories.index');
+            $this->errorMessage = 'Kategori masih memiliki produk, hapus atau pindahkan produk terlebih dahulu.';
+            return;
         }
 
         $this->category->delete();
 
-        session()->flash('success', 'Category deleted successfully!');
+        session()->flash('success', 'Kategori berhasil dihapus!');
 
         return redirect()->route('admin.categories.index');
     }

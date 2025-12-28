@@ -107,7 +107,7 @@ class Create extends Component
       'id_category' => $this->id_category,
     ]);
 
-    session()->flash('success', 'Product created successfully!');
+    session()->flash('success', 'Product Berhasil Dibuat!');
 
     return redirect()->route('admin.products.index');
   }

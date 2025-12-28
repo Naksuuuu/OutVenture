@@ -28,8 +28,16 @@ class Edit extends Component
   public $stocks = [];
   public $variant_old_images = [];
   public $variant_new_images = [];
+  public $successMessage = '';
+  public $errorMessage = '';
+  public $usedColorIds = [];
 
-  protected $listeners = ['variant-created' => 'refreshProduct', 'spec-events' => 'refreshProduct'];
+  protected $listeners = [
+    'variant-created' => 'refreshProduct', 
+    'spec-events' => 'refreshProduct', 
+    'variant-deleted' => 'refreshProduct',
+    'show-success-message' => 'showSuccessMessage'
+  ];
 
   protected $rules = [
     'nama_product' => 'required|string|max:255',
@@ -55,80 +63,110 @@ class Edit extends Component
         $this->stocks[$spec->id] = $spec->stok;
       }
     }
+
+    $this->usedColorIds = $this->product->variants->pluck('id_color')->unique()->toArray();
   }
 
   public function update()
   {
-    $this->validate();
+    $this->successMessage = '';
+    $this->errorMessage = '';
+    
+    try {
+      $this->validate();
 
-    foreach ($this->variant_new_images as $variantId => $image) {
-      if ($image) {
-        $this->validateOnly('variant_new_images.' . $variantId, [
-          'variant_new_images.' . $variantId => 'image|max:2048'
+      if ($this->product->variants()->exists() && $this->id_category != $this->product->id_category) {
+        $this->addError('id_category', 'Kategori tidak dapat diubah karena produk memiliki varian. Hapus semua varian terlebih dahulu.');
+        $this->errorMessage = 'Kategori tidak dapat diubah karena produk memiliki varian.';
+        return;
+      }
+
+      foreach ($this->variant_new_images as $variantId => $image) {
+        if ($image) {
+          $this->validateOnly('variant_new_images.' . $variantId, [
+            'variant_new_images.' . $variantId => 'image|max:2048'
+          ]);
+        }
+      }
+
+      foreach ($this->variant_colors as $variantId => $colorId) {
+        $variant = $this->product->variants->firstWhere('id', $variantId);
+        if ($variant) {
+          $hasSpecs = $variant->specs->count() > 0;
+          $isChangingColor = $colorId != $variant->id_color;
+          if ($hasSpecs && $isChangingColor) {
+            $this->addError('variant_colors.' . $variantId, 'Warna varian tidak dapat diubah karena varian memiliki spesifikasi. Hapus spesifikasi terlebih dahulu.');
+            $this->errorMessage = 'Tidak bisa ubah warna varian yang memiliki spesifikasi.';
+            return;
+          }
+
+          $isColorUsedByOther = $this->product->variants
+            ->where('id', '!=', $variantId)
+            ->pluck('id_color')
+            ->contains($colorId);
+          if ($isChangingColor && $isColorUsedByOther) {
+            $this->addError('variant_colors.' . $variantId, 'Warna ini sudah digunakan oleh varian lain pada produk ini.');
+            $this->errorMessage = 'Warna sudah digunakan oleh varian lain.';
+            return;
+          }
+        }
+
+        $updateData = ['id_color' => $colorId];
+
+        if (isset($this->variant_new_images[$variantId]) && $this->variant_new_images[$variantId]) {
+          $oldPath = $this->variant_old_images[$variantId] ?? null;
+          $newPath = $this->variant_new_images[$variantId]->store('variants', 'public');
+          $updateData['image'] = $newPath;
+          
+          if ($oldPath && $oldPath !== $newPath) {
+            $this->deletePublicFile($oldPath);
+          }
+        } else {
+          $updateData['image'] = $this->variant_old_images[$variantId] ?? null;
+        }
+        
+        ProductVariant::where('id', $variantId)->update($updateData);
+      }
+
+      foreach ($this->prices as $specId => $hargaBaru) {
+        ProductVariantSpec::where('id', $specId)->update([
+          'sku' => $this->skus_spec[$specId],
+          'harga' => $hargaBaru,
+          'stok' => $this->stocks[$specId]
         ]);
       }
-    }
 
-    foreach ($this->variant_colors as $variantId => $colorId) {
-      $updateData = ['id_color' => $colorId];
-      
-      if (isset($this->variant_new_images[$variantId]) && $this->variant_new_images[$variantId]) {
-        if (!empty($this->variant_old_images[$variantId])) {
-          Storage::disk('public')->delete($this->variant_old_images[$variantId]);
-        }
-        $updateData['image'] = $this->variant_new_images[$variantId]->store('variants', 'public');
-      } else {
-        $updateData['image'] = $this->variant_old_images[$variantId] ?? null;
-      }
-      
-      ProductVariant::where('id', $variantId)->update($updateData);
-    }
-
-    foreach ($this->prices as $specId => $hargaBaru) {
-      ProductVariantSpec::where('id', $specId)->update([
-        'sku' => $this->skus_spec[$specId],
-        'harga' => $hargaBaru,
-        'stok' => $this->stocks[$specId]
+      $this->product->update([
+        'nama_product' => $this->nama_product,
+        'id_brand' => $this->id_brand,
+        'id_category' => $this->id_category,
+        'deskripsi' => $this->deskripsi,
       ]);
+
+      $this->product = Product::with(['category', 'brand', 'variants.specs', 'variants.color'])
+        ->findOrFail($this->product->id);
+      
+      $this->variant_new_images = [];
+
+      $this->successMessage = 'Produk berhasil diperbarui!';
+    } catch (\Exception $e) {
+      $this->errorMessage = 'Gagal memperbarui produk: ' . $e->getMessage();
     }
-
-    $this->product->update([
-      'nama_product' => $this->nama_product,
-      'id_brand' => $this->id_brand,
-      'id_category' => $this->id_category,
-      'deskripsi' => $this->deskripsi,
-    ]);
-
-    session()->flash('success', 'Product updated successfully!');
-
-    return redirect()->route('admin.products.index');
   }
 
-  public function deleteVariant($variantId)
+  protected function deletePublicFile(?string $path): void
   {
-    $variant = ProductVariant::where('id', $variantId)
-      ->where('id_product', $this->product->id)
-      ->first();
-
-    if (!$variant) {
-      session()->flash('success', 'Varian tidak ditemukan.');
-      return;
+    if (!$path) return;
+    try {
+      if (Storage::disk('public')->exists($path)) {
+        Storage::disk('public')->delete($path);
+      }
+    } catch (\Exception $e) {
+      $full = public_path('storage/' . ltrim($path, '/'));
+      if (is_file($full)) {
+        @unlink($full);
+      }
     }
-
-    if ($variant->specs()->exists()) {
-      session()->flash('success', 'Varian masih memiliki spesifikasi, hapus spesifikasi terlebih dahulu.');
-      return;
-    }
-
-    if ($variant->image) {
-      Storage::disk('public')->delete($variant->image);
-    }
-
-    $variant->delete();
-
-    $this->refreshProduct();
-
-    session()->flash('success', 'Varian berhasil dihapus.');
   }
 
   public function refreshProduct()
@@ -144,6 +182,20 @@ class Edit extends Component
       $this->variant_colors[$variant->id] = $variant->id_color;
       $this->variant_old_images[$variant->id] = $variant->image;
     }
+
+    $this->usedColorIds = $this->product->variants->pluck('id_color')->unique()->toArray();
+  }
+
+  public function showSuccessMessage($message)
+  {
+    $this->successMessage = $message;
+    $this->errorMessage = '';
+  }
+
+  public function resetMessages()
+  {
+    $this->successMessage = '';
+    $this->errorMessage = '';
   }
 
   public function render()
@@ -158,9 +210,12 @@ class Edit extends Component
       'brands' => $brands,
       'colors' => $colors,
       'sizes' => $sizes,
+      'usedColorIds' => $this->usedColorIds,
       'variant_colors' => $this->variant_colors,
       'variant_old_images' => $this->variant_old_images,
       'variant_new_images' => $this->variant_new_images,
+      'successMessage' => $this->successMessage,
+      'errorMessage' => $this->errorMessage,
     ])->layout('components.layouts.admin', ['title' => 'Edit Product']);
   }
 }
