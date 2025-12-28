@@ -1,21 +1,17 @@
 <div x-data="{ open: @entangle('isOpen') }">
     <button type="button" @click="open = true"
         class="group inline-flex items-center justify-center px-6 py-3 text-[11px] font-black text-white bg-gradient-to-r from-indigo-600 to-violet-600 rounded-2xl hover:from-indigo-700 hover:to-violet-700 hover:shadow-xl hover:shadow-indigo-200 transition-all duration-300 uppercase tracking-[0.2em] active:scale-95">
-        <svg class="w-4 h-4 mr-2 stroke-[3] group-hover:rotate-90 transition-transform duration-300" fill="none"
-            stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"></path>
-        </svg>
+        <x-lucide-plus class="w-4 h-4 mr-2 stroke-[3] group-hover:rotate-90 transition-transform duration-300" />
         Tambah Varian Warna
     </button>
 
     <template x-teleport="body">
         <div x-show="open" x-cloak class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
 
-            <div x-show="open" x-transition:enter="transition ease-out duration-300"
-                x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
-                x-transition:leave="transition ease-in duration-200" x-transition:leave-start="opacity-100"
-                x-transition:leave-end="opacity-0" class="absolute inset-0 bg-slate-900/40 backdrop-blur-md"
-                @click="open = false">
+            <div x-show="open" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
+                x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
+                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                class="absolute inset-0 bg-slate-900/40 backdrop-blur-md" @click="open = false">
             </div>
 
             <div x-show="open" x-transition:enter="transition ease-out duration-300"

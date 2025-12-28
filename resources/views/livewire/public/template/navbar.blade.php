@@ -27,7 +27,7 @@
                 @if (!empty($this->products) && count($this->products) > 0)
                     <div
                         class="w-full md:w-[60%] absolute bg-white border border-gray-200 rounded-md shadow-lg max-h-96 overflow-y-auto mb-4">
-                        @foreach ($this->products as $product)
+                        @forelse ($this->products as $product)
                             <a href="{{ route('products.show', $product->id) }}" wire:navigate
                                 class="flex items-center gap-4 p-4 hover:bg-gray-50 border-b border-gray-100 last:border-b-0">
                                 <div class="w-20 h-24 bg-[#f2f2ed] rounded flex-shrink-0 overflow-hidden">
@@ -50,7 +50,11 @@
                                     </p>
                                 </div>
                             </a>
-                        @endforeach
+                        @empty
+                            <div class="p-8 text-center text-gray-500">
+                                <p>Tidak ada produk ditemukan</p>
+                            </div>
+                        @endforelse
                     </div>
                 @endif
             </div>

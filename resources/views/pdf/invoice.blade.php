@@ -221,7 +221,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($order->items as $item)
+            @forelse ($order->items as $item)
                 <tr>
                     <td>
                         <div class="product-name">{{ $item->variantSpec->variant->product->nama_product }}</div>
@@ -235,7 +235,11 @@
                     <td class="text-right">Rp {{ number_format($item->harga, 0, ',', '.') }}</td>
                     <td class="text-right">Rp {{ number_format($item->harga * $item->quantity, 0, ',', '.') }}</td>
                 </tr>
-            @endforeach
+            @empty
+                <tr>
+                    <td colspan="4" style="text-align: center; padding: 20px; color: #666;">Tidak ada item</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 

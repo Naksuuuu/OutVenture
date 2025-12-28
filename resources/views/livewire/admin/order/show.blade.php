@@ -95,7 +95,7 @@
                     </div>
 
                     <div class="grid grid-cols-1 gap-4">
-                        @foreach ($order->items as $item)
+                        @forelse ($order->items as $item)
                             <div class="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm">
                                 <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
                                     <div class="flex-1">
@@ -151,7 +151,11 @@
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            <div class="bg-gray-50 rounded-2xl p-8 text-center">
+                                <p class="text-gray-500">Tidak ada item dalam pesanan ini</p>
+                            </div>
+                        @endforelse
                     </div>
 
                     <div class="mt-4 flex justify-end">

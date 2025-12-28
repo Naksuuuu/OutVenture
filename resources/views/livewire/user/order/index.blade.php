@@ -114,10 +114,7 @@
             {{-- Empty State --}}
             <div class="bg-white rounded-2xl shadow-sm p-16 text-center border border-gray-100">
                 <div class="inline-flex items-center justify-center w-20 h-20 bg-gray-50 rounded-full mb-6">
-                    <svg class="h-10 w-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                    </svg>
+                    <x-lucide-shopping-bag class="h-10 w-10 text-gray-400" />
                 </div>
                 <h3 class="text-xl font-bold text-gray-900 mb-2">Belum ada pesanan</h3>
                 <p class="text-gray-500 max-w-sm mx-auto mb-8 text-sm">

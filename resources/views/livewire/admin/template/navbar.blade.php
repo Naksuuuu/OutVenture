@@ -15,10 +15,8 @@
 
     <div class="flex items-center gap-4 text-gray-600">
         <div class="flex items-center gap-2">
-            <span class="text-sm font-semibold text-gray-700">{{ auth()->user()->name ?? 'Admin' }}</span>
-            <div class="w-8 h-8 rounded-full bg-gray-200 border border-gray-300 overflow-hidden">
-                <img src="https://ui-avatars.com/api/?name=Admin" alt="avatar">
-            </div>
+            <span class="text-sm font-semibold text-gray-700">{{ auth()->user()->nama_lengkap ?? 'Admin' }}</span>
+
         </div>
     </div>
 </header>
