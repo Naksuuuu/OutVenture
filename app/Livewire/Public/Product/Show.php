@@ -73,14 +73,14 @@ class Show extends Component
     }
 
     if (!$this->selectedSize) {
-      session()->flash('error', 'Silakan pilih ukuran terlebih dahulu');
+      $this->dispatch('notify', type: 'error', message: 'Silakan pilih ukuran terlebih dahulu');
       return;
     }
 
     $spec = $this->selectedSpec;
     
     if (!$spec || $spec->stok <= 0) {
-      session()->flash('error', 'Produk tidak tersedia');
+      $this->dispatch('notify', type: 'error', message: 'Produk tidak tersedia');
       return;
     }
 
@@ -97,7 +97,7 @@ class Show extends Component
     if ($cartItem) {
       // Update quantity if item exists
       if ($cartItem->quantity + 1 > $spec->stok) {
-        session()->flash('error', 'Stok tidak mencukupi');
+        $this->dispatch('notify', type: 'error', message: 'Stok tidak mencukupi');
         return;
       }
       $cartItem->increment('quantity');
@@ -110,7 +110,7 @@ class Show extends Component
       ]);
     }
 
-    session()->flash('success', 'Produk berhasil ditambahkan ke keranjang');
+    $this->dispatch('notify', type: 'success', message: 'Produk berhasil ditambahkan ke keranjang');
     $this->dispatch('cart-updated');
   }
 

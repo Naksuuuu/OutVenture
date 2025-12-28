@@ -55,7 +55,7 @@ class Index extends Component
 
         // Check if order is paid
         if ($order->status_pembayaran != 1) {
-            session()->flash('error', 'Invoice hanya tersedia untuk pesanan yang sudah lunas');
+            $this->dispatch('notify', type: 'error', message: 'Invoice hanya tersedia untuk pesanan yang sudah lunas');
             return;
         }
 
@@ -79,12 +79,12 @@ class Index extends Component
 
 
             if ($order->id_user !== auth()->id()) {
-                session()->flash('error', 'Unauthorized access');
+                $this->dispatch('notify', type: 'error', message: 'Unauthorized access');
                 return;
             }
 
             if ($order->status_pembayaran != 0) {
-                session()->flash('error', 'Pesanan ini sudah dibayar');
+                $this->dispatch('notify', type: 'error', message: 'Pesanan ini sudah dibayar');
                 return;
             }
 
@@ -95,7 +95,7 @@ class Index extends Component
 
             $this->dispatch('open-payment', snapToken: $snapToken);
         } catch (\Exception $e) {
-            session()->flash('error', 'Gagal membuat pembayaran: ' . $e->getMessage());
+            $this->dispatch('notify', type: 'error', message: 'Gagal membuat pembayaran: ' . $e->getMessage());
         }
     }
 
