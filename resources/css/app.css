@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'leaflet/dist/leaflet.css';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -8,4 +9,22 @@
 @theme {
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+ .swiper-pagination-bullet {
+            background: white !important;
+            opacity: 0.5;
+}
+.swiper-pagination-bullet-active {
+            background: white !important;
+            opacity: 1;
+}
+
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }

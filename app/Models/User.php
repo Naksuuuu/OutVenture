@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -17,10 +18,18 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+
     protected $fillable = [
-        'name',
+        'nama_lengkap',
+        'alamat',
         'email',
+        'google_id',
+        'email_verified_at',
         'password',
+        'role',
     ];
 
     /**
@@ -44,5 +53,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'id_user', 'id');
+    }
+
+    public function cart()
+    {
+        return $this->hasOne(Cart::class, 'id_user', 'id');
     }
 }
