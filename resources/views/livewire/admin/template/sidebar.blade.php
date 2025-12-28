@@ -6,7 +6,7 @@
     class="h-screen fixed left-0 top-0 z-[9999] shadow-md transition-all duration-300 bg-white w-64 flex flex-col justify-between overflow-hidden">
     <div class="flex flex-col h-full overflow-y-auto">
         <div class="mt-4 space-y-2 px-4 pb-4 overflow-x-hidden">
-            <a href="{{ route('home') }}" wire:navigate
+            <a href="{{ route('admin.dashboard') }}" wire:navigate
                 class="flex items-center text-3xl font-bold p-3 rounded-lg  text-gray-800 hover:bg-gray-200 overflow-hidden group transition-all">
                 <span class="mx-0">
                     O
