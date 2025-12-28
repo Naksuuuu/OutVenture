@@ -64,9 +64,7 @@ class Create extends Component
       }
     }
 
-    session()->flash('success', 'Size Group created successfully!');
-
-    return redirect()->route('admin.sizes.index');
+    return redirect()->route('admin.sizes.index')->with('notifySuccess', 'Size Group created successfully!');
   }
 
   public function render()

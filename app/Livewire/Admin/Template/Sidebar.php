@@ -28,7 +28,7 @@ class Sidebar extends Component
 
     public function getMenuItems()
     {
-        return [
+        $menuItems = [
             [
                 'route' => 'admin.dashboard',
                 'icon' => 'layout-dashboard',
@@ -71,13 +71,19 @@ class Sidebar extends Component
                 'label' => 'Colors',
                 'matchExact' => false,
             ],
-            [
+        ];
+
+        // Only show Admin Users menu for superadmin
+        if (auth()->check() && auth()->user()->role === 'superadmin') {
+            $menuItems[] = [
                 'route' => 'admin.users.index',
                 'icon' => 'user',
                 'label' => 'Admin Users',
                 'matchExact' => false,
-            ],
-        ];
+            ];
+        }
+
+        return $menuItems;
     }
 
     public function render()

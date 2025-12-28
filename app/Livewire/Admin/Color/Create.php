@@ -75,9 +75,7 @@ class Create extends Component
             'hex_code' => $this->hex_code,
         ]);
 
-        session()->flash('success', 'Warna berhasil ditambahkan!');
-
-        return redirect()->route('admin.colors.index');
+        return redirect()->route('admin.colors.index')->with('notifySuccess', 'Warna berhasil ditambahkan!');
     }
 
     public function render()

@@ -40,9 +40,7 @@ class Delete extends Component
       return;
     }
 
-    session()->flash('success', 'Size Group deleted successfully!');
-
-    return redirect()->route('admin.sizes.index');
+    return redirect()->route('admin.sizes.index')->with('notifySuccess', 'Size Group deleted successfully!');
   }
   
   public function refreshGroup()

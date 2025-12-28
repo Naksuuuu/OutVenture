@@ -1,58 +1,5 @@
 <div class="bg-gray-50 min-h-screen p-4 md:p-8">
 
-    {{-- Modal Pop-up Notifikasi Success/Error --}}
-    @if (session('success') || session('error'))
-        <div x-data="{ show: true }"
-            x-show="show"
-            x-init="setTimeout(() => show = false, 3000)"
-            x-transition:enter="transition ease-out duration-100"
-            x-transition:enter-start="opacity-0"
-            x-transition:enter-end="opacity-100"
-            x-transition:leave="transition ease-in duration-100"
-            x-transition:leave-start="opacity-100"
-            x-transition:leave-end="opacity-0"
-            class="fixed inset-0 z-[9999] flex items-center justify-center p-4">
-            
-            <!-- Backdrop -->
-            <div class="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
-
-            <!-- Modal Content -->
-            <div class="relative z-[10000] w-full max-w-sm bg-white rounded-2xl shadow-2xl border border-slate-100 p-8 space-y-4">
-                <div class="flex items-center justify-center mb-4">
-                    @if (session('success'))
-                        <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
-                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                            </svg>
-                        </div>
-                    @else
-                        <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
-                            <svg class="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                        </div>
-                    @endif
-                </div>
-                
-                <div class="text-center">
-                    <h3 class="text-xl font-bold {{ session('success') ? 'text-green-600' : 'text-red-600' }} mb-2">
-                        {{ session('success') ? 'Berhasil!' : 'Gagal!' }}
-                    </h3>
-                    <p class="text-slate-600 text-sm">
-                        {{ session('success') ?: session('error') }}
-                    </p>
-                </div>
-
-                <div class="flex items-center justify-center pt-4">
-                    <button @click="show = false"
-                        class="text-xs font-bold text-slate-500 uppercase tracking-widest hover:text-slate-700 transition-colors px-6 py-2 rounded-lg hover:bg-slate-50">
-                        Tutup
-                    </button>
-                </div>
-            </div>
-        </div>
-    @endif
-
     <div class="mx-auto">
         <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-8 gap-4 md:gap-0">
             <div>
@@ -92,7 +39,8 @@
                         <div class="p-4 hover:bg-gray-50/50 transition-all">
                             <div class="flex justify-between items-start mb-2">
                                 <div class="flex-1">
-                                    <span class="text-sm font-bold text-gray-800 tracking-tight leading-tight">{{ $product->nama_product }}</span>
+                                    <span
+                                        class="text-sm font-bold text-gray-800 tracking-tight leading-tight">{{ $product->nama_product }}</span>
                                     <div class="text-xs text-gray-500 mt-1">
                                         Merek: {{ $product->brand->nama_brand ?? 'No Brand' }}
                                     </div>
@@ -110,7 +58,7 @@
                                         class="inline-flex items-center justify-center px-3 py-1.5 text-[11px] font-bold text-indigo-600 bg-white border border-indigo-200 rounded-md hover:bg-indigo-50 transition-all uppercase tracking-wider">
                                         <x-lucide-square-pen class="w-4 h-4" />
                                     </a>
-                                    @livewire('admin.product.delete', ['product' => $product->id], key('delete-mobile-'.$product->id))
+                                    @livewire('admin.product.delete', ['product' => $product->id], key('delete-mobile-' . $product->id))
                                 </div>
                             </div>
                         </div>
@@ -125,9 +73,13 @@
                 <table class="w-full text-left table-fixed border-collapse min-w-[600px]">
                     <thead>
                         <tr class="bg-gray-50 border-b border-gray-200">
-                            <th class="w-[40%] px-4 md:px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Informasi
+                            <th
+                                class="w-[40%] px-4 md:px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                                Informasi
                                 Produk</th>
-                            <th class="w-[20%] px-4 md:px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">Merek
+                            <th
+                                class="w-[20%] px-4 md:px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
+                                Merek
                             </th>
                             <th
                                 class="w-[20%] px-4 md:px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider text-center">
@@ -167,13 +119,14 @@
                                             class="inline-flex items-center justify-center px-3 md:px-4 py-1.5 text-[11px] font-bold text-indigo-600 bg-white border border-indigo-200 rounded-md hover:bg-indigo-50 transition-all uppercase tracking-wider">
                                             <x-lucide-square-pen class="w-4 h-4" />
                                         </a>
-                                        @livewire('admin.product.delete', ['product' => $product->id], key('delete-desktop-'.$product->id))
+                                        @livewire('admin.product.delete', ['product' => $product->id], key('delete-desktop-' . $product->id))
                                     </div>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="4" class="px-4 md:px-6 py-12 text-center text-gray-400 text-sm italic">Tidak ada
+                                <td colspan="4" class="px-4 md:px-6 py-12 text-center text-gray-400 text-sm italic">
+                                    Tidak ada
                                     produk
                                     available yet.</td>
                             </tr>

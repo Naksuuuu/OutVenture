@@ -41,9 +41,7 @@ class Create extends Component
       'is_trusted' => $this->is_trusted,
     ]);
 
-    session()->flash('success', 'Merek Berhasil Dibuat!');
-
-    return redirect()->route('admin.brands.index');
+    return redirect()->route('admin.brands.index')->with('notifySuccess', 'Merek Berhasil Dibuat!');
   }
 
   public function render()

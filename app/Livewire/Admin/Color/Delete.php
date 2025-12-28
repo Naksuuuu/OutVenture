@@ -35,9 +35,7 @@ class Delete extends Component
 
         $this->color->delete();
 
-        session()->flash('success', 'Warna berhasil dihapus!');
-
-        return redirect()->route('admin.colors.index');
+        return redirect()->route('admin.colors.index')->with('notifySuccess', 'Warna berhasil dihapus!');
     }
 
     public function render()

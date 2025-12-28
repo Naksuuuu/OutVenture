@@ -1,41 +1,51 @@
-<div style="padding: clamp(15px, 5vw, 50px); display: flex; justify-content: center; background: #fcfcfc; min-height: 100vh; font-family: sans-serif;">
-    <div style="background: #fff; width: 100%; max-width: 420px; border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.06); border: 1px solid #f0f0f0; overflow: hidden; height: fit-content;">
-        
-        <div style="background: #1a202c; padding: clamp(20px, 5vw, 40px); position: relative; display: flex; align-items: center; gap: 20px;">
-            <div style="width: clamp(55px, 15vw, 75px); height: clamp(55px, 15vw, 75px); background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0,0,0,0.2); flex-shrink: 0;">
-                <span style="font-size: clamp(24px, 6vw, 32px); font-weight: 900; color: #1a202c;">
+<div class="p-4 md:p-12 flex justify-center bg-gray-50 min-h-screen">
+    <div class="bg-white w-full max-w-md rounded-3xl shadow-xl border border-gray-100 overflow-hidden h-fit">
+
+        <div class="bg-gray-900 p-5 md:p-10 relative flex items-center gap-5">
+            <div
+                class="w-14 h-14 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
+                <span class="text-2xl md:text-3xl font-black text-gray-900">
                     {{ strtoupper(substr($admin->name ?? 'A', 0, 1)) }}
                 </span>
             </div>
-            
-            <div style="text-align: left;">
-                <h3 style="margin: 0; font-weight: 900; text-transform: uppercase; color: #fff; letter-spacing: 1px; font-size: clamp(1rem, 4vw, 1.3rem); line-height: 1.2;">Detail User</h3>
-                <p style="color: rgba(255,255,255,0.6); font-size: clamp(0.65rem, 2vw, 0.75rem); margin: 4px 0 0 0;">Data lengkap administrator</p>
+
+            <div class="text-left">
+                <h3 class="m-0 font-black uppercase text-white tracking-wide text-base md:text-xl leading-tight">Detail
+                    User</h3>
+                <p class="text-white/60 text-xs mt-1">Data lengkap administrator</p>
             </div>
         </div>
 
-        <div style="padding: clamp(25px, 8vw, 40px);">
-            <div style="text-align: left;">
-                <div style="margin-bottom: 25px; border-bottom: 1px solid #f8fafc; padding-bottom: 15px;">
-                    <label style="display: block; color: #a0aec0; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px;">Nama Lengkap</label>
-                    <div style="font-weight: 800; color: #1a202c; font-size: clamp(1rem, 3vw, 1.1rem); text-transform: uppercase;">{{ $admin->name ?? 'ADMIN' }}</div>
+        <div class="p-6 md:p-10">
+            <div class="text-left">
+                <div class="mb-6 border-b border-gray-50 pb-4">
+                    <label class="block text-gray-400 font-extrabold text-[0.65rem] uppercase mb-1 tracking-wider">Nama
+                        Lengkap</label>
+                    <div class="font-extrabold text-gray-900 text-base md:text-lg uppercase">
+                        {{ $admin->name ?? 'ADMIN' }}</div>
                 </div>
 
-                <div style="margin-bottom: 25px; border-bottom: 1px solid #f8fafc; padding-bottom: 15px;">
-                    <label style="display: block; color: #a0aec0; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 0.5px;">Alamat Email</label>
-                    <div style="font-weight: 700; color: #1a202c; font-size: clamp(0.9rem, 2.5vw, 1rem); word-break: break-all;">{{ $admin->email ?? 'admin@outventure.com' }}</div>
+                <div class="mb-6 border-b border-gray-50 pb-4">
+                    <label
+                        class="block text-gray-400 font-extrabold text-[0.65rem] uppercase mb-1 tracking-wider">Alamat
+                        Email</label>
+                    <div class="font-bold text-gray-900 text-sm md:text-base break-all">
+                        {{ $admin->email ?? 'admin@outventure.com' }}</div>
                 </div>
 
-                <div style="margin-bottom: clamp(30px, 8vw, 40px);">
-                    <label style="display: block; color: #a0aec0; font-weight: 800; font-size: 0.65rem; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px;">Level Akses</label>
-                    <div style="display: inline-block; background: #1a202c; color: white; padding: 6px 15px; border-radius: 8px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase;">
+                <div class="mb-8 md:mb-10">
+                    <label class="block text-gray-400 font-extrabold text-[0.65rem] uppercase mb-2 tracking-wider">Level
+                        Akses</label>
+                    <div
+                        class="inline-block bg-gray-900 text-white px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase">
                         {{ $admin->role ?? 'ADMIN' }}
                     </div>
                 </div>
             </div>
 
-            <a href="/dashboard/users" wire:navigate style="display: flex; align-items: center; justify-content: center; gap: 10px; text-decoration: none; width: 100%; background: #f1f5f9; color: #64748b; padding: clamp(14px, 4vw, 18px); border-radius: 14px; font-weight: 800; text-transform: uppercase; font-size: clamp(0.8rem, 2.5vw, 0.9rem); transition: 0.3s;">
-                <span style="font-size: 1.2rem;">&larr;</span>
+            <a href="/dashboard/users" wire:navigate
+                class="flex items-center justify-center gap-2.5 no-underline w-full bg-gray-100 text-gray-600 px-4 py-3.5 md:py-4 rounded-xl font-extrabold uppercase text-sm md:text-base transition-all hover:bg-gray-200">
+                <span class="text-xl">&larr;</span>
                 <span>Kembali ke Daftar</span>
             </a>
         </div>

@@ -25,9 +25,7 @@ class Delete extends Component
 
         $this->product->delete();
 
-        session()->flash('success', 'Product Berhasil Dihapus!');
-
-        return redirect()->route('admin.products.index');
+        return redirect()->route('admin.products.index')->with('notifySuccess', 'Product Berhasil Dihapus!');
     }
 
     public function render()
