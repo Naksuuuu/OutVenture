@@ -35,8 +35,8 @@ use App\Livewire\Admin\Order\Show as DashboardOrderShow;
 use App\Livewire\Admin\Color\Index as DashboardColorIndex;
 use App\Livewire\Admin\Color\Edit as DashboardColorEdit;
 use App\Livewire\Admin\Color\Create as DashboardColorCreate;
-
-
+use App\Livewire\Auth\ForgotPassword;
+use App\Livewire\Auth\ResetPassword;
 use App\Livewire\Public\Product\Index as PublicProductIndex;
 use App\Livewire\Public\Product\Show as PublicProductShow;
 
@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::get('user/profile', App\Livewire\User\Profile::class)->name('user.profile');
     Route::get('user/orders', App\Livewire\User\Order\Index::class)->name('user.orders.index');
     Route::get('user/carts', App\Livewire\User\Cart\Index::class)->name('user.carts.index');
+    Route::get('user/change-password', App\Livewire\Auth\ChangePassword::class)->name('user.change-password');
 });
 
 // Auth Routes - Livewire
@@ -117,6 +118,9 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group
 });
 
 
+// Lupa Password Routes - Livewire
+Route::get('/forgot-password', ForgotPassword::class)->middleware('guest')->name('password.request');
+Route::get('/reset-password/{token}', ResetPassword::class)->middleware('guest')->name('password.reset');
 
 
 

@@ -32,7 +32,8 @@
     @stack('body-js')
 
     @if (session('success'))
-        <div class="fixed bottom-10 right-10 p-4 bg-green-500 text-white rounded-lg shadow-lg max-w-sm">
+        <div
+            class="fixed bottom-10 right-10 p-4 bg-green-50 text-green-700 border border-green-200 rounded-md shadow-lg max-w-sm">
             {{ session('success') }}
         </div>
     @endif

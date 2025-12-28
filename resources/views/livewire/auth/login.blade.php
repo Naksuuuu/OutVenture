@@ -1,4 +1,3 @@
-
 <div class="bg-white p-10 rounded-xl shadow-sm border border-gray-100 w-96 font-sans">
     <div class="text-center mb-8">
         <h1 class="text-2xl font-black tracking-tighter uppercase mb-1 text-gray-900">
@@ -10,7 +9,8 @@
 
     <div class="mb-6">
         <h2 class="text-xl font-bold text-gray-900 leading-tight uppercase tracking-tight">Sign in</h2>
-        <p class="text-gray-500 text-sm mt-1 uppercase text-[10px] font-medium tracking-wider">Sign in or create an account</p>
+        <p class="text-gray-500 text-sm mt-1 uppercase text-[10px] font-medium tracking-wider">Sign in or create an
+            account</p>
     </div>
 
 
@@ -52,7 +52,9 @@
                     class="rounded border-gray-300 text-black focus:ring-black h-4 w-4 transition-all">
                 <span class="ml-2 text-xs text-gray-500 group-hover:text-black transition-colors">Remember me</span>
             </label>
-            <a href="#" class="text-[11px] font-bold text-gray-400 hover:text-black uppercase tracking-tighter transition-colors">LUPA PASSWORD?</a>
+            <a href="{{ route('password.request') }}" wire:navigate
+                class="text-[11px] font-bold text-gray-400 hover:text-black uppercase tracking-tighter transition-colors">LUPA
+                PASSWORD?</a>
 
         </div>
 
@@ -69,7 +71,8 @@
     <div class="mt-4">
         <a href="{{ route('google.login') }}"
             class="w-full flex items-center justify-center bg-white border border-gray-200 hover:bg-gray-50 text-gray-700 py-3.5 px-4 rounded-md shadow-sm transition duration-300 text-xs font-bold uppercase tracking-wide">
-            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-4 h-4 mr-3" alt="Google">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-4 h-4 mr-3"
+                alt="Google">
             Sign in with Google
         </a>
     </div>
@@ -79,7 +82,8 @@
     <div class="mt-8 text-center border-t border-gray-100 pt-6">
         <p class="text-gray-500 text-xs uppercase tracking-tight">
             Belum punya akun?
-            <a href="{{ route('auth.register') }}" wire:navigate class="text-blue-500 font-black hover:underline ml-1">SIGN UP</a>
+            <a href="{{ route('auth.register') }}" wire:navigate
+                class="text-blue-500 font-black hover:underline ml-1">SIGN UP</a>
         </p>
     </div>
 </div>
