@@ -47,7 +47,7 @@ class Create extends Component
 
         $this->reset(['id_color', 'image']);
         $this->dispatch('variant-created');
-        $this->dispatch('variant-deleted');
+        $this->refreshAvailableColors();
         $this->dispatch('notify', type: 'success', message: 'Varian warna berhasil ditambahkan!');
         $this->isOpen = false;
     }

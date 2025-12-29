@@ -198,6 +198,54 @@ class Edit extends Component
     $this->errorMessage = '';
   }
 
+  public function delete($id)
+  {
+    $this->errorMessage = '';
+
+    $spec = ProductVariantSpec::find($id);
+    if ($spec) {
+      try {
+        $spec->delete();
+        $this->dispatch('delete-success');
+        $this->dispatch('spec-events');
+        $this->dispatch('notify', type: 'success', message: 'Spesifikasi berhasil dihapus!');
+        $this->refreshProduct();
+        return;
+      } catch (\Exception $e) {
+        $this->errorMessage = 'Gagal menghapus spesifikasi.';
+        return;
+      }
+    }
+
+    $variant = ProductVariant::with('specs')->find($id);
+    if ($variant) {
+      $hasSpecs = ProductVariantSpec::where('id_variant', $variant->id)->exists();
+
+      if ($hasSpecs) {
+        $this->errorMessage = 'Varian masih memiliki spesifikasi, hapus spesifikasi terlebih dahulu.';
+        return;
+      }
+
+      try {
+        if ($variant->image) {
+          $this->deletePublicFile($variant->image);
+        }
+        $variant->delete();
+        $this->dispatch('delete-success');
+        $this->dispatch('variant-deleted');
+        $this->dispatch('variant-created');
+        $this->dispatch('notify', type: 'success', message: 'Varian berhasil dihapus!');
+        $this->refreshProduct();
+        return;
+      } catch (\Exception $e) {
+        $this->errorMessage = 'Gagal menghapus varian.';
+        return;
+      }
+    }
+
+    $this->errorMessage = 'Data tidak ditemukan.';
+  }
+
   public function render()
   {
     $categories = Category::all();
