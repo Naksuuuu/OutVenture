@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ui.button-href extends Component
+class ui.button.delete extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class ui.button-href extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.ui.button-create');
+        return view('components.ui.button.delete');
     }
 }

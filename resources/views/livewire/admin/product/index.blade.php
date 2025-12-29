@@ -8,7 +8,7 @@
 
             <x-ui.search-input model="search" placeholder="Cari produk..." width="" />
 
-            <x-ui.button-href href="{{ route('admin.products.create') }}" label="Tambah" />
+            <x-ui.button.create href="{{ route('admin.products.create') }}" label="Tambah" />
         </x-slot:actions>
     </x-ui.page-header>
 
