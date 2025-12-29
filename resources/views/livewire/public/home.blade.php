@@ -19,7 +19,7 @@
                                 class="mx-auto object-cover w-full h-full rounded-lg">
                         </div>
                     @else
-                        <div class="w-30 h-30 lg:w-40 lg:h-40 bg-gray-200 rounded-lg">
+                        <div class="w-30 h-30 lg:w-40 lg:h-40 bg-gray-200 rounded-lg flex items-center justify-center">
                             <x-ui.image-placeholder icon="image" />
                         </div>
                     @endif
@@ -39,11 +39,8 @@
 
 
     <div class="w-full px-4 md:px-10">
-        <x-ui.section-header 
-            title="BRAND PILIHAN" 
-            cta-text="LIHAT SEMUA BRAND" 
-            cta-url="{{ route('products.index') }}" 
-        />
+        <x-ui.section-header title="BRAND PILIHAN" cta-text="LIHAT SEMUA BRAND"
+            cta-url="{{ route('products.index') }}" />
 
         <div class="flex flex-wrap group/brands">
 
@@ -59,7 +56,8 @@
                                 class="w-full h-80 object-cover opacity-80 group-hover:opacity-90 transition duration-300"
                                 alt="{{ $brand->nama_brand }}">
                         @else
-                            <div class="w-full h-80 bg-gradient-to-br from-gray-700 to-gray-900">
+                            <div
+                                class="w-full h-80 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
                                 <x-ui.image-placeholder icon="image" size="lg" />
                             </div>
                         @endif
@@ -121,11 +119,8 @@
     </div>
 
     <div class="w-full px-4 md:px-10 mb-10">
-        <x-ui.section-header 
-            title="KOLEKSI TERBARU" 
-            cta-text="LIHAT SEMUA PRODUK" 
-            cta-url="{{ route('products.index') }}" 
-        />
+        <x-ui.section-header title="KOLEKSI TERBARU" cta-text="LIHAT SEMUA PRODUK"
+            cta-url="{{ route('products.index') }}" />
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             @forelse ($latestProducts as $product)
