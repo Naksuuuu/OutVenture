@@ -15,6 +15,7 @@ class Index extends Component
   public $search = '';
   public $category = '';
   public $sort = 'latest';
+  public $errorMessage = '';
 
   protected $queryString = ['search', 'category', 'sort'];
 
@@ -31,6 +32,27 @@ class Index extends Component
   public function updatingSort()
   {
     $this->resetPage();
+  }
+
+  public function delete($id)
+  {
+    $this->errorMessage = '';
+    $product = Product::find($id);
+
+    if (!$product) {
+      $this->errorMessage = 'Produk tidak ditemukan.';
+      return;
+    }
+
+    if ($product->variants()->exists()) {
+      $this->errorMessage = 'Produk tidak dapat dihapus karena masih memiliki varian.';
+      return;
+    }
+
+    $product->delete();
+
+    $this->dispatch('delete-success');
+    $this->dispatch('notify', type: 'success', message: 'Produk berhasil dihapus!');
   }
 
   public function render()

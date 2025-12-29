@@ -177,8 +177,7 @@
                                                     <livewire:admin.spec.create :product="$product" :variant="$variant"
                                                         :key="'spec-create-' . $variant->id" />
 
-                                                    <livewire:admin.variant.delete :variant="$variant->id" :product="$product->id"
-                                                        :key="'variant-delete-' . $variant->id" />
+                                                    <x-ui.button.delete :id="$variant->id" />
                                                 </div>
                                             </div>
 
@@ -210,8 +209,7 @@
                                                                     class="w-full h-40 bg-slate-200 rounded-lg border-2 border-slate-300 flex items-center justify-center">
                                                                     <span
                                                                         class="text-[10px] text-slate-400 font-bold">Tidak
-                                                                        ada
-                                                                        gambar</span>
+                                                                        ada gambar</span>
                                                                 </div>
                                                             @endif
                                                         </div>
@@ -275,8 +273,7 @@
                                                                             :product="$product" :variant="$variant"
                                                                             :key="'spec-edit-' . $spec->id" />
 
-                                                                        <livewire:admin.spec.delete :spec="$spec"
-                                                                            :variant="$variant" :key="'spec-delete-' . $spec->id" />
+                                                                        <x-ui.button.delete :id="$spec->id" />
                                                                     </div>
                                                                 </td>
                                                             </tr>
@@ -337,4 +334,7 @@
     <p class="mt-8 text-center text-slate-400 text-xs tracking-wide uppercase">
         &copy; 2025 Praktikum Web &bull; Management System
     </p>
+
+    <x-ui.modal.delete title="Hapus Data?" message="Yakin ingin menghapus data ini? Data tidak bisa dikembalikan."
+        :errorMessage="$errorMessage" />
 </div>

@@ -39,7 +39,10 @@
                                     class="inline-flex items-center justify-center px-3 py-1.5 text-[11px] font-bold text-indigo-600 bg-white border border-indigo-200 rounded-md hover:bg-indigo-50 transition-all uppercase tracking-wider">
                                     <x-lucide-square-pen class="w-4 h-4" />
                                 </a>
-                                @livewire('admin.product.delete', ['product' => $product->id], key('delete-mobile-' . $product->id))
+                                <x-ui.button.delete :id="$product->id"
+                                    class="inline-flex items-center justify-center px-3 py-1.5 text-red-600 bg-white border border-red-200 rounded-md hover:bg-red-50 transition-all">
+                                    <x-lucide-trash class="w-4 h-4" />
+                                </x-ui.button.delete>
                             </div>
                         </div>
                     </div>
@@ -98,16 +101,14 @@
                                         class="inline-flex items-center justify-center px-3 md:px-4 py-1.5 text-[11px] font-bold text-indigo-600 bg-white border border-indigo-200 rounded-md hover:bg-indigo-50 transition-all uppercase tracking-wider">
                                         <x-lucide-square-pen class="w-4 h-4" />
                                     </a>
-                                    @livewire('admin.product.delete', ['product' => $product->id], key('delete-desktop-' . $product->id))
+                                    <x-ui.button.delete :id="$product->id" />
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
                             <td colspan="4" class="px-4 md:px-6 py-12 text-center text-gray-400 text-sm italic">
-                                Tidak ada
-                                produk
-                                available yet.</td>
+                                Tidak ada produk available yet.</td>
                         </tr>
                     @endforelse
                 </tbody>
@@ -118,4 +119,7 @@
             {{ $products->links() }}
         </div>
     </x-ui.card-item>
+
+    <x-ui.modal.delete title="Hapus Produk?" message="Yakin ingin menghapus produk ini? Data tidak bisa dikembalikan."
+        :errorMessage="$errorMessage" />
 </div>
