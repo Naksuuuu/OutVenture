@@ -35,7 +35,7 @@
                     <div class="flex items-center gap-2">
                         <x-ui.button.edit href="{{ route('admin.sizes.edit', $sizeGroup->id) }}"
                             class="rounded-lg! p-2!" size="size-6" />
-                        <livewire:admin.size.delete :sizeGroup="$sizeGroup->id" :key="'size-delete-' . $sizeGroup->id" />
+                        <x-ui.button.delete :id="$sizeGroup->id" />
                     </div>
                 </x-slot:header>
 
@@ -73,6 +73,8 @@
             </div>
         @endforelse
     </div>
+
+    <x-ui.modal.delete title="Hapus Grup Ukuran?" message="Yakin ingin menghapus grup ukuran ini?" :errorMessage="$errorMessage" />
 
     <div class="mt-8">
         <div class="px-6 py-4">

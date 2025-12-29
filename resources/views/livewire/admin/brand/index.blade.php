@@ -7,11 +7,11 @@
             <x-ui.search-input model="search" placeholder="Cari merek..." width="" />
 
 
-            <x-ui.button.create href="{{ route('admin.brands.create') }}" label="Tambah" />
+            <x-ui.button.create size='size-4' href="{{ route('admin.brands.create') }}" label="Tambah" />
         </x-slot:actions>
     </x-ui.page-header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  gap-4 md:gap-6 lg:gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4  gap-4 md:gap-6 lg:gap-8">
         @forelse ($brands as $brand)
             <x-ui.card-item
                 class="group justify-self-center flex flex-col justify-between h-[550px] w-full max-w-xl p-3 transition-all duration-300"
@@ -62,7 +62,8 @@
 
                             <x-ui.button.edit href="{{ route('admin.brands.edit', $brand->id) }}" label='edit' />
 
-                            <livewire:admin.brand.delete :brand="$brand->id" :key="'brand-delete-' . $brand->id" />
+
+                            <x-ui.button.delete :id="$brand->id" />
                         </div>
                     </div>
 
@@ -77,4 +78,7 @@
             </div>
         @endforelse
     </div>
+
+    <x-ui.modal.delete title="Hapus Brand?" message="Yakin ingin menghapus brand ini?" :errorMessage="$errorMessage" />
+
 </div>

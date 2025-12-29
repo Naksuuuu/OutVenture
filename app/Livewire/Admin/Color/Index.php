@@ -21,10 +21,29 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function resetMessages()
+
+
+
+    public function delete($id)
     {
-        $this->successMessage = '';
         $this->errorMessage = '';
+        $color = Color::find($id);
+
+
+        if (!$color) {
+            $this->errorMessage = 'Data tidak ditemukan.';
+            return;
+        }
+
+        if ($color->productVariants()->exists()) {
+            $this->errorMessage = 'Warna masih memiliki varian produk, hapus atau pindahkan varian produk terlebih dahulu.';
+            return;
+        }
+
+        $color->delete();
+
+        $this->dispatch('delete-success');
+        $this->dispatch('notify', type: 'success', message: 'Warna berhasil dihapus!');
     }
 
     public function render()

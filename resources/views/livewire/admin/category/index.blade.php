@@ -13,7 +13,7 @@
         </x-slot:actions>
     </x-ui.page-header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 ">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 ">
         @forelse ($categories as $category)
             <x-ui.card-item
                 class="group justify-self-center flex flex-col justify-between h-[550px] w-full max-w-xl p-3 transition-all duration-300"
@@ -58,7 +58,7 @@
                             <x-ui.button.edit href="{{ route('admin.categories.edit', $category->id) }}"
                                 label='edit' />
 
-                            <livewire:admin.category.delete :category="$category->id" :key="'category-delete-' . $category->id" />
+                            <x-ui.button.delete :id="$category->id" />
                         </div>
                     </div>
 
@@ -72,4 +72,7 @@
             </div>
         @endforelse
     </div>
+
+    <x-ui.modal.delete title="Hapus Kategori?" message="Yakin ingin menghapus kategori ini?" :errorMessage="$errorMessage" />
+
 </div>
