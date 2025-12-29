@@ -29,7 +29,7 @@
         class="fixed inset-0 bg-black/50 z-[9998] md:hidden">
     </div>
 
-    <div :class="isCollapsed ? 'md:ml-20' : 'md:ml-64'" class="transition-all duration-300 min-h-screen">
+    <div :class="isCollapsed ? 'lg:ml-20' : 'lg:ml-64'" class="transition-all duration-300 min-h-screen">
 
         <livewire:admin.template.navbar />
 

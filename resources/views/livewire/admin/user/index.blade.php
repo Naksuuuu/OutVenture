@@ -1,26 +1,18 @@
 <div class="mx-auto">
-    <div class="mb-4 md:mb-9 border-b-2 border-gray-100 pb-4 md:pb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-            <h2 class="text-2xl font-bold text-gray-900">Admin Users</h2>
-            <p class="text-sm text-gray-500 mt-1">Kelola dan atur identitas administrator Anda.</p>
-        </div>
 
-        <div class="flex flex-col sm:flex-row gap-2 md:gap-3 items-stretch sm:items-center w-full md:w-auto">
-            <livewire:ui.dropdown
-                wire:model.live="roleFilter"
-                :options="['' => 'Semua Role', 'admin' => 'Admin', 'user' => 'User']"
-                width="w-full sm:w-40"
-            />
 
-            <div class="relative w-full sm:w-64">
-                <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 flex items-center">
-                    <x-lucide-search class="w-4 h-4" />
-                </span>
-                <input type="text" wire:model.live="search" placeholder="Cari User"
-                    class="w-full py-2.5 px-4 pl-10 rounded-xl border border-gray-200 bg-white text-sm outline-none shadow-sm focus:ring-2 focus:ring-indigo-500">
-            </div>
-        </div>
-    </div>
+    <x-ui.page-header title="Pengguna & Admin" subtitle="Kelola pengguna dan administrator sistem Anda."
+        class="lg:items-center mb-6 md:mb-10">
+        <x-slot:actions>
+            <livewire:ui.dropdown wire:model.live="roleFilter" :options="['' => 'Role', 'admin' => 'Admin', 'user' => 'User']" width="w-full sm:w-40" />
+            <livewire:ui.dropdown wire:model.live="sort" :options="['' => 'Sort', 'latest' => 'Terbaru', 'oldest' => 'Terlama']" class="" />
+
+
+            <x-ui.search-input model="search" placeholder="Cari pengguna atau admin..." width="" />
+
+
+        </x-slot:actions>
+    </x-ui.page-header>
 
     <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,350px),1fr))] gap-3 md:gap-5">
         @forelse ($admins as $admin)

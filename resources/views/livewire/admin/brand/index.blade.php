@@ -1,26 +1,14 @@
 <div>
-    <x-ui.page-header
-        title="Merek"
-        subtitle="Kelola dan atur identitas merek produk Anda"
-        class="lg:items-center mb-6 md:mb-10"
-    >
+    <x-ui.page-header title="Merek" subtitle="Kelola dan atur identitas merek produk Anda"
+        class="lg:items-center mb-6 md:mb-10">
         <x-slot:actions>
-            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 md:gap-4 w-full md:w-auto">
-                <livewire:ui.dropdown
-                    wire:model.live="sort"
-                    :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']"
-                    width="w-full sm:w-48"
-                />
+            <livewire:ui.dropdown wire:model.live="sort" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']" class="" />
 
-                <x-ui.search-input model="search" placeholder="Cari merek..." width="md:w-80" class="pl-11 focus:ring-emerald-500/20" />
 
-                <a href="{{ route('admin.brands.create') }}" wire:navigate
-                    class="flex items-center justify-center gap-2 bg-slate-900 hover:bg-emerald-600 text-white px-4 md:px-6 py-2 md:py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-lg shadow-slate-200 active:scale-95">
-                    <x-lucide-plus class="w-4 h-4" />
-                    <span class="hidden sm:inline">Tambah Baru</span>
-                    <span class="sm:hidden">Tambah</span>
-                </a>
-            </div>
+            <x-ui.search-input model="search" placeholder="Cari merek..." width="" />
+
+
+            <x-ui.button-href href="{{ route('admin.brands.create') }}" label="Tambah" />
         </x-slot:actions>
     </x-ui.page-header>
 

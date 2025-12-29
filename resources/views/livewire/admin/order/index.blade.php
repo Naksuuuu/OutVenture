@@ -1,41 +1,25 @@
 <div>
-    {{-- Header & Filters --}}
-    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-        <div>
-            <h2 class="text-2xl font-bold text-gray-900">Manajemen Pesanan</h2>
-            <p class="text-gray-500 mt-1 text-sm">Lihat dan kelola semua pesanan pelanggan</p>
-        </div>
+    <x-ui.page-header title="Pesanan" subtitle="Lihat dan kelola semua pesanan pelanggan"
+        class="lg:items-center mb-6 md:mb-10">
+        <x-slot:actions>
 
-        <div class="flex flex-wrap items-center gap-3 w-full md:w-auto">
             <button wire:click="downloadAllInvoices" wire:loading.attr="disabled"
                 class="inline-flex items-center px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold rounded-xl transition-all shadow-sm disabled:opacity-50 disabled:cursor-not-allowed">
                 <x-lucide-download class="w-4 h-4 mr-2" />
-                <span wire:loading.remove wire:target="downloadAllInvoices">Download Semua Invoice</span>
+                <span wire:loading.remove wire:target="downloadAllInvoices">Invoice</span>
                 <span wire:loading wire:target="downloadAllInvoices">Generating...</span>
             </button>
 
-            <div class="relative flex-1 min-w-[250px] md:w-80">
-                <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
-                    <x-lucide-search class="w-4 h-4" />
-                </span>
-                <input type="text" wire:model.live.debounce="search"
-                    placeholder="Cari berdasarkan ID atau pelanggan..."
-                    class="w-full pl-10 pr-4 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white shadow-sm transition-all">
-            </div>
+            <livewire:ui.dropdown wire:model.live="sortBy" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']" width="w-full sm:w-40" />
 
-            <livewire:ui.dropdown
-                wire:model.live="sortBy"
-                :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']"
-                width="w-full sm:w-40"
-            />
+            <livewire:ui.dropdown wire:model.live="status" :options="['all' => 'Semua Status', 'lunas' => 'Lunas', 'belum_bayar' => 'Belum Bayar']" width="w-full sm:w-48" />
 
-            <livewire:ui.dropdown
-                wire:model.live="status"
-                :options="['all' => 'Semua Status', 'lunas' => 'Lunas', 'belum_bayar' => 'Belum Bayar']"
-                width="w-full sm:w-48"
-            />
-        </div>
-    </div>
+
+            <x-ui.search-input model="search" placeholder="Cari produk..." width="" />
+
+            <x-ui.button-href href="{{ route('admin.products.create') }}" label="Tambah" />
+        </x-slot:actions>
+    </x-ui.page-header>
 
     {{-- Cards Grid --}}
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
