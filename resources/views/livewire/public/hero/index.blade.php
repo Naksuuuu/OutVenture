@@ -6,8 +6,10 @@
                     <img src="{{ asset('storage/' . $brand->wide_image) }}" alt="{{ $brand->nama_brand }}"
                         class="absolute inset-0 -z-10 h-full w-full object-cover">
                 @else
-                    <img src="{{ asset('storage/herosection/herotent.jpg') }}" alt="Default Banner"
-                        class="absolute inset-0 -z-10 h-full w-full object-cover">
+                    <div class="absolute inset-0 m-auto w-full h-full flex justify-center items-center flex-col gap-2">
+                        <x-lucide-image class="h-16 w-16 text-gray-400 " />
+                        {{ $brand->nama_brand }}
+                    </div>
                 @endif
 
                 <div

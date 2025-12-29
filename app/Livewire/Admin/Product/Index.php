@@ -37,9 +37,9 @@ class Index extends Component
     $query = Product::with(['category', 'variants', 'brand']);
 
     if ($this->sort === 'terlama') {
-      $query->orderBy('id', 'asc');
+      $query->orderBy('created_at', 'asc');
     } else {
-      $query->orderBy('id', 'desc');
+      $query->orderBy('created_at', 'desc');
     }
 
     if ($this->category) {

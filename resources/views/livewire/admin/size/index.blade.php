@@ -8,13 +8,11 @@
             </div>
 
             <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full md:w-auto">
-                <div class="relative w-full sm:w-44">
-                    <select wire:model.live="sortBy"
-                        class="w-full pl-3 pr-8 py-2.5 border border-gray-100 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 bg-white text-indigo-700 shadow-sm font-semibold">
-                        <option value="latest">Terbaru</option>
-                        <option value="oldest">Terlama</option>
-                    </select>
-                </div>
+                <livewire:ui.dropdown
+                    wire:model.live="sortBy"
+                    :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']"
+                    width="w-full sm:w-44"
+                />
 
                 <div class="relative flex-1 md:w-64">
                     <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-indigo-500">

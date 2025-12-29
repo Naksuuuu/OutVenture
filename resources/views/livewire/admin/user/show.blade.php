@@ -43,11 +43,7 @@
                 </div>
             </div>
 
-            <a href="/dashboard/users" wire:navigate
-                class="flex items-center justify-center gap-2.5 no-underline w-full bg-gray-100 text-gray-600 px-4 py-3.5 md:py-4 rounded-xl font-extrabold uppercase text-sm md:text-base transition-all hover:bg-gray-200">
-                <span class="text-xl">&larr;</span>
-                <span>Kembali ke Daftar</span>
-            </a>
+            <x-ui.back-link href="/dashboard/users" wire:navigate />
         </div>
     </div>
 </div>

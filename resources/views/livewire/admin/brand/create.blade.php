@@ -130,12 +130,8 @@
                     </div>
 
                     <div
-                        class="pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <a href="{{ route('admin.brands.index') }}" wire:navigate
-                            class="flex items-center gap-2 text-slate-400 hover:text-slate-900 font-black text-[10px] uppercase tracking-[0.2em] transition-all group">
-                            <x-lucide-arrow-left class="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-                            Kembali ke Daftar
-                        </a>
+                        class="flex items-center justify-between pt-10 border-t border-slate-50">
+                        <x-ui.back-link href="{{ route('admin.brands.index') }}" wire:navigate />
 
                         <button type="submit" wire:loading.attr="disabled"
                             class="w-full sm:w-auto bg-slate-900 hover:bg-emerald-600 text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-slate-200 transition-all active:scale-95 flex items-center justify-center gap-3">
