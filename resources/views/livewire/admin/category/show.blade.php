@@ -109,16 +109,7 @@
                 </div>
 
                 <div class="flex items-center justify-between mt-20 pt-10 border-t border-slate-50">
-                    <a href="{{ route('admin.categories.index') }}" wire:navigate
-                        class="text-slate-400 hover:text-slate-900 text-[11px] font-black uppercase tracking-[0.2em] transition-colors flex items-center group">
-                        <svg class="w-5 h-5 mr-3 group-hover:-translate-x-1 transition-transform" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                        </svg>
-                        Kembali
-                    </a>
-
+                    <x-ui.back-link href="{{ route('admin.categories.index') }}" wire:navigate />
 
                 </div>
             </div>

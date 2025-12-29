@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\public;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class footer extends Component
+class ui.card-item extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class footer extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.public.footer');
+        return view('components.ui.card-item');
     }
 }

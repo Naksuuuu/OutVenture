@@ -20,7 +20,7 @@
                         </div>
                     @else
                         <div class="w-30 h-30 lg:w-40 lg:h-40 bg-gray-200 rounded-lg flex items-center justify-center">
-                            <x-lucide-image class="h-16 w-16 text-gray-400" />
+                            <x-ui.image-placeholder icon="image" />
                         </div>
                     @endif
 
@@ -29,9 +29,7 @@
 
                 </div>
             @empty
-                <div class="w-full text-center py-12">
-                    <p class="text-gray-500">Belum ada kategori</p>
-                </div>
+                <x-ui.empty-state message="Belum ada kategori" class="w-full" />
             @endforelse
 
         </div>
@@ -41,14 +39,8 @@
 
 
     <div class="w-full px-4 md:px-10">
-        <div class="flex justify-between items-end mb-8 border-b border-gray-100 pb-4">
-            <h2 class="text-3xl font-black uppercase tracking-tighter">BRAND PILIHAN</h2>
-            <a href="{{ route('products.index') }}" wire:navigate
-                class="group flex items-center gap-2 bg-black text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
-                LIHAT SEMUA BRAND
-                <x-lucide-arrow-right class="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-        </div>
+        <x-ui.section-header title="BRAND PILIHAN" cta-text="LIHAT SEMUA BRAND"
+            cta-url="{{ route('products.index') }}" />
 
         <div class="flex flex-wrap group/brands">
 
@@ -66,7 +58,7 @@
                         @else
                             <div
                                 class="w-full h-80 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center">
-                                <x-lucide-image class="h-32 w-32 text-gray-500" />
+                                <x-ui.image-placeholder icon="image" size="lg" />
                             </div>
                         @endif
                         <div
@@ -81,9 +73,7 @@
                     </div>
                 </div>
             @empty
-                <div class="w-full text-center py-12">
-                    <p class="text-gray-500">Belum ada brand pilihan</p>
-                </div>
+                <x-ui.empty-state message="Belum ada brand pilihan" class="w-full" />
             @endforelse
         </div>
     </div>
@@ -129,22 +119,14 @@
     </div>
 
     <div class="w-full px-4 md:px-10 mb-10">
-        <div class="flex justify-between items-end mb-8 border-b border-gray-100 pb-4">
-            <h2 class="text-3xl font-black uppercase tracking-tighter">KOLEKSI TERBARU</h2>
-            <a href="{{ route('products.index') }}" wire:navigate
-                class="group flex items-center gap-2 bg-black text-white px-6 py-3 text-xs font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
-                LIHAT SEMUA PRODUK
-                <x-lucide-arrow-right class="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
-        </div>
+        <x-ui.section-header title="KOLEKSI TERBARU" cta-text="LIHAT SEMUA PRODUK"
+            cta-url="{{ route('products.index') }}" />
 
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             @forelse ($latestProducts as $product)
                 <x-product-card :product="$product" />
             @empty
-                <div class="col-span-full text-center py-12">
-                    <p class="text-gray-500">Belum ada produk tersedia</p>
-                </div>
+                <x-ui.empty-state message="Belum ada produk tersedia" />
             @endforelse
         </div>
     </div>

@@ -11,6 +11,8 @@ class Index extends Component
 {
     use WithPagination;
 
+    public $errorMessage = '';
+
     #[Url(history: true, keep: true)]
     public $search = '';
 
@@ -27,13 +29,28 @@ class Index extends Component
         $this->resetPage();
     }
 
-    public function deleteBrand($brandId)
+
+
+    public function delete($id)
     {
-        $brand = Brand::find($brandId);
-        if ($brand) {
-            $brand->delete();
-            $this->dispatch('notify', type: 'success', message: 'Brand deleted successfully!');
+        $this->errorMessage = '';
+        $brand = Brand::find($id);
+
+
+        if (!$brand) {
+            $this->errorMessage = 'Data tidak ditemukan.';
+            return;
         }
+
+        if ($brand->products()->exists()) {
+            $this->errorMessage = 'Merek masih memiliki produk, hapus atau pindahkan produk terlebih dahulu.';
+            return;
+        }
+
+        $brand->delete();
+
+        $this->dispatch('delete-success');
+        $this->dispatch('notify', type: 'success', message: 'Brand berhasil dihapus!');
     }
 
     public function render()

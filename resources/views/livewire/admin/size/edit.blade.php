@@ -1,4 +1,3 @@
-<div class="">
     <div class="mx-auto">
 
         <div
@@ -142,4 +141,3 @@
             &copy; 2025 Praktikum Web &bull; Management System
         </p>
     </div>
-</div>

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\admin;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class sidebar extends Component
+class ui.button.create extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class sidebar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.admin.sidebar');
+        return view('components.ui.button-create');
     }
 }

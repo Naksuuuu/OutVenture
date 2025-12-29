@@ -143,15 +143,8 @@
 
                     <div
                         class="pt-8 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-4">
-                        <a href="{{ route('admin.brands.index') }}" wire:navigate
-                            class="flex items-center gap-2 text-slate-400 hover:text-slate-900 font-black text-[10px] uppercase tracking-[0.2em] transition-all group">
-                            <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                            </svg>
-                            Kembali ke Daftar
-                        </a>
+                        <x-ui.back-link href="{{ route('admin.brands.index') }}" wire:navigate label="Kembali ke Daftar"
+                            class="flex items-center gap-2 text-slate-400 hover:text-slate-900 font-black text-[10px] uppercase tracking-[0.2em] transition-all group" />
 
                         <button type="submit" wire:loading.attr="disabled"
                             class="w-full sm:w-auto bg-slate-900 hover:bg-emerald-600 text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-slate-200 transition-all active:scale-95 flex items-center justify-center gap-3">
