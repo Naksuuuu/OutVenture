@@ -1,7 +1,7 @@
 <aside
     :class="[
-        isCollapsed ? 'md:w-20' : 'md:w-64',
-        mobileMenuOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+        isCollapsed ? 'lg:w-20' : 'lg:w-64',
+        mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
     ]"
     class="h-screen fixed left-0 top-0 z-[9999] shadow-md transition-all duration-300 bg-white w-64 flex flex-col justify-between overflow-hidden">
     <div class="flex flex-col h-full overflow-y-auto">

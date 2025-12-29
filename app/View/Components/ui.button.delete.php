@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\public;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class navbar extends Component
+class ui.button.delete extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class navbar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.public.navbar');
+        return view('components.ui.button.delete');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Product;
 
+use App\Models\Category;
 use Livewire\Component;
 use Illuminate\Support\Facades\Cache;
 use Livewire\WithPagination;
@@ -13,7 +14,7 @@ class Index extends Component
 
   public $search = '';
   public $category = '';
-  public $sort = 'terbaru';
+  public $sort = 'latest';
 
   protected $queryString = ['search', 'category', 'sort'];
 
@@ -34,12 +35,13 @@ class Index extends Component
 
   public function render()
   {
+    $allCategories = Category::pluck('nama_category', 'nama_category')->prepend('Kategori', '')->toArray();
     $query = Product::with(['category', 'variants', 'brand']);
 
-    if ($this->sort === 'terlama') {
-      $query->orderBy('created_at', 'asc');
+    if ($this->sort === 'latest') {
+      $query->latest();
     } else {
-      $query->orderBy('created_at', 'desc');
+      $query->oldest();
     }
 
     if ($this->category) {
@@ -57,11 +59,12 @@ class Index extends Component
       return $query->toBase()->getCountForPagination();
     });
 
-    $products = $query->simplePaginate(12);
+    $products = $query->paginate(12);
 
     return view('livewire.admin.product.index', [
       'products' => $products,
       'totalProducts' => $totalProducts,
+      'allCategories' => $allCategories,
     ])->layout('components.layouts.admin', ['title' => 'Products Management']);
   }
 }
