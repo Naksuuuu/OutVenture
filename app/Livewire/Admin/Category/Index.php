@@ -11,6 +11,8 @@ class Index extends Component
 {
   use WithPagination;
 
+  public $errorMessage = '';
+
   #[Url(history: true, keep: true)]
   public $search = '';
 
@@ -27,13 +29,26 @@ class Index extends Component
     $this->resetPage();
   }
 
-  public function deleteCategory($categoryId)
+  public function delete($id)
   {
-    $category = Category::find($categoryId);
-    if ($category) {
-      $category->delete();
-      $this->dispatch('notify', type: 'success', message: 'Category deleted successfully!');
+    $this->errorMessage = '';
+    $category = Category::find($id);
+
+
+    if (!$category) {
+      $this->errorMessage = 'Data tidak ditemukan.';
+      return;
     }
+
+    if ($category->products()->exists()) {
+      $this->errorMessage = 'Kategori masih memiliki produk, hapus atau pindahkan produk terlebih dahulu.';
+      return;
+    }
+
+    $category->delete();
+
+    $this->dispatch('delete-success');
+    $this->dispatch('notify', type: 'success', message: 'Kategori berhasil dihapus!');
   }
 
   public function render()

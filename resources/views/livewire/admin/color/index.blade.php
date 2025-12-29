@@ -37,7 +37,7 @@
                     <div class="flex items-center gap-2 mt-2 pt-4 border-t border-gray-50">
                         <x-ui.button.edit href="{{ route('admin.colors.edit', $color->id) }}" label='edit' />
 
-                        <livewire:admin.color.delete :color="$color->id" :key="'color-delete-' . $color->id" />
+                        <x-ui.button.delete :id="$color->id" />
                     </div>
                 </x-slot>
             </x-ui.card-item>
@@ -49,6 +49,8 @@
             </div>
         @endforelse
     </div>
+
+    <x-ui.modal.delete title="Hapus Warna?" message="Yakin ingin menghapus warna ini?" :errorMessage="$errorMessage" />
 
     <div class="mt-8 px-2">
         {{ $colors->links() }}

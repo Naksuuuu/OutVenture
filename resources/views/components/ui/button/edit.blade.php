@@ -2,7 +2,7 @@
     'href' => '#',
     'label' => '',
     'icon' => 'square-pen',
-    'size' => 'size-6',
+    'size' => 'size-4',
 ])
 
 <a href="{{ $href }}" wire:navigate
