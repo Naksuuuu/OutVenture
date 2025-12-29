@@ -22,8 +22,7 @@
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-        <div
-            class="bg-white p-7 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+        <x-ui.card-item padding="p-7" hover="hover:shadow-xl hover:-translate-y-1" class="transition-all duration-300 group">
             <div
                 class="p-4 bg-blue-50 rounded-2xl text-blue-600 w-fit group-hover:bg-blue-600 group-hover:text-white transition-colors duration-300">
                 <x-lucide-handbag class="w-6 h-6" />
@@ -32,10 +31,9 @@
                 <p class="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Total Produk</p>
                 <h3 class="text-4xl font-black text-slate-800 mt-2">{{ $totalProducts }}</h3>
             </div>
-        </div>
+        </x-ui.card-item>
 
-        <div
-            class="bg-white p-7 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+        <x-ui.card-item padding="p-7" hover="hover:shadow-xl hover:-translate-y-1" class="transition-all duration-300 group">
             <div
                 class="p-4 bg-purple-50 rounded-2xl text-purple-600 w-fit group-hover:bg-purple-600 group-hover:text-white transition-colors duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -48,10 +46,9 @@
                 <p class="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Total Kategori</p>
                 <h3 class="text-4xl font-black text-slate-800 mt-2">{{ $totalCategories }}</h3>
             </div>
-        </div>
+        </x-ui.card-item>
 
-        <div
-            class="bg-white p-7 rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+        <x-ui.card-item padding="p-7" hover="hover:shadow-xl hover:-translate-y-1" class="transition-all duration-300 group">
             <div
                 class="p-4 bg-orange-50 rounded-2xl text-orange-600 w-fit group-hover:bg-orange-600 group-hover:text-white transition-colors duration-300">
                 <x-lucide-shopping-cart class="w-6 h-6" />
@@ -60,7 +57,7 @@
                 <p class="text-xs font-black text-slate-400 uppercase tracking-[0.2em]">Total Transaksi</p>
                 <h3 class="text-4xl font-black text-slate-800 mt-2">{{ $totalTransaksi }}</h3>
             </div>
-        </div>
+        </x-ui.card-item>
 
         <div
             class="bg-emerald-600 p-7 rounded-[2rem] shadow-lg shadow-emerald-200 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 relative overflow-hidden">
@@ -81,7 +78,7 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
         <div class="lg:col-span-1 space-y-8">
-            <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm">
+            <x-ui.card-item padding="p-8">
                 <h3
                     class="text-xl font-black text-slate-900 mb-8 border-l-4 border-emerald-500 pl-4 uppercase tracking-tighter">
                     Paling Laris</h3>
@@ -115,9 +112,9 @@
                         </div>
                     @endforelse
                 </div>
-            </div>
+            </x-ui.card-item>
 
-            <div class="bg-white p-8 rounded-[2rem] border border-slate-200 shadow-sm">
+            <x-ui.card-item padding="p-8">
                 <h3 class="text-xl font-black text-slate-900 mb-8 uppercase tracking-tighter">Notifikasi</h3>
                 <div class="space-y-4">
                     <div class="p-5 bg-red-50/70 rounded-3xl border border-red-100 transition-colors hover:bg-red-50">
@@ -175,11 +172,11 @@
                         </div>
                     @endif
                 </div>
-            </div>
+            </x-ui.card-item>
         </div>
 
         <div class="lg:col-span-2 space-y-10">
-            <div class="bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-sm relative overflow-hidden">
+            <x-ui.card-item padding="p-10" rounded="rounded-[2.5rem]" class="relative overflow-hidden">
                 <div
                     class="flex flex-col md:flex-row md:items-center justify-between mb-6 md:mb-10 relative z-10 gap-4 md:gap-0">
                     <div>
@@ -221,9 +218,9 @@
                 }">
                     <canvas x-ref="salesCanvas"></canvas>
                 </div>
-            </div>
+            </x-ui.card-item>
 
-            <div class="bg-white p-10 rounded-[2.5rem] border border-slate-200 shadow-sm overflow-hidden">
+            <x-ui.card-item padding="p-10" rounded="rounded-[2.5rem]" class="overflow-hidden">
                 <div class="flex items-center justify-between mb-10">
                     <div>
                         <h3 class="text-2xl font-black text-slate-900 tracking-tight">Tren Pendapatan</h3>
@@ -274,7 +271,7 @@
                 }">
                     <canvas x-ref="revenueCanvas"></canvas>
                 </div>
-            </div>
+            </x-ui.card-item>
         </div>
     </div>
 </div>

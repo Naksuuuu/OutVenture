@@ -10,7 +10,8 @@
                 <div class="flex items-center space-x-2 md:space-x-4">
                     <div
                         class="w-10 h-10 md:w-12 md:h-12 bg-black rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
-                        <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
                             </path>
@@ -108,23 +109,12 @@
                         Save Product
                     </button>
                 </div>
-
             </form>
 
-
-        </div>
-
-        <div class="bg-slate-50/80 px-4 md:px-8 py-4 md:py-6 flex items-center border-t border-slate-100">
-            <a href="{{ route('admin.products.index') }}" wire:navigate
-                class="text-slate-500 hover:text-slate-800 text-sm font-bold uppercase tracking-widest transition-colors flex items-center group">
-                <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none"
-                    stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M10 19l-7-7m0 0l7-7m-7 7h18">
-                    </path>
-                </svg>
-                Kembali
-            </a>
+            <div class="bg-slate-50/80 px-4 md:px-8 py-4 md:py-6 flex items-center border-t border-slate-100">
+                <x-ui.back-link href="{{ route('admin.products.index') }}" wire:navigate label="Kembali"
+                    class="text-slate-500 hover:text-slate-800 text-sm font-bold uppercase tracking-widest transition-colors flex items-center group" />
+            </div>
         </div>
     </div>
 

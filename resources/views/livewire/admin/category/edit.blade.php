@@ -150,15 +150,7 @@
                     </div>
 
                     <div class="flex items-center justify-between pt-10 border-t border-slate-50">
-                        <a href="{{ route('admin.categories.index') }}" wire:navigate
-                            class="text-slate-400 hover:text-slate-900 text-[11px] font-black uppercase tracking-[0.2em] transition-colors flex items-center group">
-                            <svg class="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
-                                    d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                            </svg>
-                            Kembali
-                        </a>
+                        <x-ui.back-link href="{{ route('admin.categories.index') }}" wire:navigate />
 
                         <button type="submit"
                             class="bg-slate-900 hover:bg-emerald-600 text-white px-10 py-5 rounded-2xl font-black text-xs shadow-xl transition-all active:scale-95 uppercase italic tracking-widest">

@@ -23,22 +23,17 @@
                     class="w-full pl-10 pr-4 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white shadow-sm transition-all">
             </div>
 
-            <div class="relative w-full sm:w-40">
-                <select wire:model.live="sortBy"
-                    class="w-full pl-3 pr-8 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white shadow-sm font-semibold text-gray-700">
-                    <option value="latest">Terbaru</option>
-                    <option value="oldest">Terlama</option>
-                </select>
-            </div>
+            <livewire:ui.dropdown
+                wire:model.live="sortBy"
+                :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']"
+                width="w-full sm:w-40"
+            />
 
-            <div class="relative w-full sm:w-48">
-                <select wire:model.live="status"
-                    class="w-full pl-3 pr-8 py-2 text-sm border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white shadow-sm font-semibold text-gray-700">
-                    <option value="all">Semua Status</option>
-                    <option value="lunas">Lunas</option>
-                    <option value="belum_bayar">Belum Bayar</option>
-                </select>
-            </div>
+            <livewire:ui.dropdown
+                wire:model.live="status"
+                :options="['all' => 'Semua Status', 'lunas' => 'Lunas', 'belum_bayar' => 'Belum Bayar']"
+                width="w-full sm:w-48"
+            />
         </div>
     </div>
 

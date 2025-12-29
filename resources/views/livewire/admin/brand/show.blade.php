@@ -46,10 +46,11 @@
                 <div class="space-y-12">
 
                     <div class="relative">
-                        <label class="block text-[11px] font-black text-slate-400 uppercase mb-3 tracking-[0.2em]">Nama
-                            Brand</label>
+                        <label class="block text-[11px] font-black text-slate-400 uppercase mb-3 tracking-[0.2em]">
+                            Nama Brand
+                        </label>
                         <div class="bg-slate-50 rounded-2xl px-8 py-6 border border-slate-100 shadow-inner">
-                            <h2 class="text-2xl md:text-4xl font-black text-slate-800 italic uppercase tracking-tight">
+                            <h2 class="text-2xl md:text-4xl font-black text-slate-800">
                                 {{ $brand->nama_brand }}
                             </h2>
                         </div>
@@ -107,23 +108,16 @@
                                     <div class="flex flex-col items-center justify-center h-full">
                                         <x-lucide-layout-panel-top class="w-12 h-12 text-slate-200 mb-2" />
                                         <p class="text-[10px] font-bold text-slate-300 uppercase tracking-widest">No
-                                            Banner Image</p>
+                                            Banner Image
+                                        </p>
                                     </div>
                                 @endif
                             </div>
                         </div>
                     </div>
 
-                    <div class="pt-8 border-t border-slate-100 flex justify-center">
-                        <a href="{{ route('admin.brands.index') }}" wire:navigate
-                            class="flex items-center gap-3 bg-slate-900 hover:bg-slate-800 text-white px-10 py-4 rounded-2xl font-black text-[11px] uppercase tracking-[0.2em] shadow-xl shadow-slate-200 transition-all active:scale-95 group">
-                            <svg class="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-                            </svg>
-                            Kembali ke Daftar Brand
-                        </a>
+                    <div class="flex items-center justify-between mt-15 border-t border-slate-50">
+                        <x-ui.back-link href="{{ route('admin.brands.index') }}" wire:navigate  />
                     </div>
                 </div>
             </div>
