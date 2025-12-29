@@ -11,6 +11,9 @@ class Index extends Component
 {
     use WithPagination;
 
+    public $errorMessage = '';
+
+
     #[Url(history: true, keep: true)]
     public $search = '';
 
@@ -25,6 +28,27 @@ class Index extends Component
     public function updatingSortBy()
     {
         $this->resetPage();
+    }
+
+
+    public function delete($id)
+    {
+        $sizeGroup = SizeGroup::find($id);
+
+        if (!$sizeGroup) {
+            $this->errorMessage = 'Data tidak ditemukan.';
+            return;
+        }
+
+        // if ($sizeGroup->values()->exists()) {
+        //     $this->errorMessage = 'Grup ukuran masih memiliki nilai ukuran, hapus atau pindahkan nilai ukuran terlebih dahulu.';
+        //     return;
+        // }
+
+        $sizeGroup->delete();
+
+        $this->dispatch('delete-success');
+        $this->dispatch('notify', type: 'success', message: 'Grup ukuran berhasil dihapus!');
     }
 
     public function render()
