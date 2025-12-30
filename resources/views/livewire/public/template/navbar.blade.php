@@ -28,7 +28,7 @@
                     <div
                         class="w-full md:w-[60%] absolute bg-white border border-gray-200 rounded-md shadow-lg max-h-96 overflow-y-auto mb-4">
                         @forelse ($this->products as $product)
-                            <a href="{{ route('products.show', $product->id) }}" wire:navigate
+                            <a href="{{ route('products.show', $product) }}" wire:navigate
                                 class="flex items-center gap-4 p-4 hover:bg-gray-50 border-b border-gray-100 last:border-b-0">
                                 <div class="w-20 h-24 bg-[#f2f2ed] rounded flex-shrink-0 overflow-hidden">
                                     @if ($product->variants->first() && $product->variants->first()->image)

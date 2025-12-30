@@ -2,13 +2,14 @@
 
     <x-ui.page-header title="Produk" :subtitle="'Total ' . ($totalProducts ?? $products->count()) . ' produk di database.'" class="lg:items-center mb-6 md:mb-10">
         <x-slot:actions>
-            <livewire:ui.dropdown wire:model.live="sort" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']" class="" />
+            <livewire:ui.dropdown wire:model.live="sort" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']"
+                class="" />
             <livewire:ui.dropdown wire:model.live="category" :options="$allCategories" class="" />
 
 
             <x-ui.search-input model="search" placeholder="Cari produk..." width="" />
 
-            <x-ui.button.create href="{{ route('admin.products.create') }}" label="Tambah" />
+            <x-ui.link href="{{ route('admin.products.create') }}" label="Tambah" icon="plus" variant="create" />
         </x-slot:actions>
     </x-ui.page-header>
 
@@ -30,19 +31,12 @@
                                 </div>
                             </div>
                             <div class="flex gap-1 ml-2">
-                                <a href="{{ route('admin.products.show', $product) }}" wire:navigate
-                                    class="inline-flex items-center justify-center px-3 py-1.5 text-[11px] font-bold text-slate-700 bg-white border border-slate-200 rounded-md hover:bg-slate-50 transition-all uppercase tracking-wider"
-                                    title="Lihat">
-                                    <x-lucide-eye class="w-4 h-4" />
-                                </a>
-                                <a href="{{ route('admin.products.edit', $product) }}" wire:navigate
-                                    class="inline-flex items-center justify-center px-3 py-1.5 text-[11px] font-bold text-indigo-600 bg-white border border-indigo-200 rounded-md hover:bg-indigo-50 transition-all uppercase tracking-wider">
-                                    <x-lucide-square-pen class="w-4 h-4" />
-                                </a>
-                                <x-ui.button.delete :id="$product->id"
-                                    class="inline-flex items-center justify-center px-3 py-1.5 text-red-600 bg-white border border-red-200 rounded-md hover:bg-red-50 transition-all">
-                                    <x-lucide-trash class="w-4 h-4" />
-                                </x-ui.button.delete>
+                                <x-ui.link href="{{ route('admin.products.show', $product) }}" icon="eye" variant="show"
+                                    size="sm" title="Lihat" />
+                                <x-ui.link href="{{ route('admin.products.edit', $product) }}" icon="square-pen" size="sm"
+                                    variant="edit" />
+                                <x-ui.button variant="delete" size="icon-sm" icon="trash"
+                                    @click="$dispatch('open-delete-modal', { id: {{ $product->id }} })" />
                             </div>
                         </div>
                     </div>
@@ -81,8 +75,7 @@
                                 </div>
                             </td>
                             <td class="px-4 md:px-6 py-4">
-                                <span
-                                    class="text-sm text-gray-600">{{ $product->brand->nama_brand ?? 'No Brand' }}</span>
+                                <span class="text-sm text-gray-600">{{ $product->brand->nama_brand ?? 'No Brand' }}</span>
                             </td>
                             <td class="px-4 md:px-6 py-4 text-center">
                                 <span
@@ -92,23 +85,19 @@
                             </td>
                             <td class="px-4 md:px-6 py-4">
                                 <div class="flex justify-center items-center gap-1 md:gap-2">
-                                    <a href="{{ route('admin.products.show', $product) }}" wire:navigate
-                                        class="inline-flex items-center justify-center px-3 md:px-4 py-1.5 text-[11px] font-bold text-slate-700 bg-white border border-slate-200 rounded-md hover:bg-slate-50 transition-all uppercase tracking-wider"
-                                        title="Lihat">
-                                        <x-lucide-eye class="w-4 h-4" />
-                                    </a>
-                                    <a href="{{ route('admin.products.edit', $product) }}" wire:navigate
-                                        class="inline-flex items-center justify-center px-3 md:px-4 py-1.5 text-[11px] font-bold text-indigo-600 bg-white border border-indigo-200 rounded-md hover:bg-indigo-50 transition-all uppercase tracking-wider">
-                                        <x-lucide-square-pen class="w-4 h-4" />
-                                    </a>
-                                    <x-ui.button.delete :id="$product->id" />
+                                    <x-ui.link href="{{ route('admin.products.show', $product) }}" icon="eye" variant="show"
+                                        size="md" title="Lihat" />
+                                    <x-ui.link href="{{ route('admin.products.edit', $product) }}" icon="square-pen"
+                                        size="md" variant="edit" />
+                                    <x-ui.button variant="delete" size="md" icon="trash"
+                                        @click="$dispatch('open-delete-modal', { id: {{ $product->id }} })" />
                                 </div>
                             </td>
                         </tr>
                     @empty
                         <tr>
                             <td colspan="4" class="px-4 md:px-6 py-12 text-center text-gray-400 text-sm italic">
-                                Tidak ada produk available yet.</td>
+                                Tidak ada produk Tersedia</td>
                         </tr>
                     @endforelse
                 </tbody>

@@ -10,9 +10,9 @@ class Show extends Component
 
   public $brand;
 
-  public function mount($brandId)
+  public function mount(Brand $brand)
   {
-    $this->brand = Brand::findOrFail($brandId);
+    $this->brand = $brand;
   }
 
   public function render()

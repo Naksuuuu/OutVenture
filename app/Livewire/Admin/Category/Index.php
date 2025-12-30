@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Url; // Tambahkan ini
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class Index extends Component
 {
@@ -43,6 +44,10 @@ class Index extends Component
     if ($category->products()->exists()) {
       $this->errorMessage = 'Kategori masih memiliki produk, hapus atau pindahkan produk terlebih dahulu.';
       return;
+    }
+
+    if ($category->image) {
+      $this->deletePublicFile($category->image);
     }
 
     $category->delete();

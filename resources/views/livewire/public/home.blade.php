@@ -65,7 +65,7 @@
                             class="absolute inset-0 p-6 bg-gradient-to-t from-black/60 to-black/10 flex flex-col justify-end">
                             <h5 class="text-2xl font-bold uppercase text-white mb-3">
                                 {{ $brand->nama_brand }}</h5>
-                            <a href="{{ route('brands.show', $brand->id) }}"
+                            <a href="{{ route('brands.show', $brand) }}"
                                 class="inline-block border border-white text-white text-sm font-medium px-4 py-2 w-fit hover:bg-white hover:text-black transition duration-300">
                                 BELI SEKARANG &rarr;
                             </a>

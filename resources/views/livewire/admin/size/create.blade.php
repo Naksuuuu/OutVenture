@@ -39,12 +39,10 @@
                                 <label class="block text-[13px] font-bold text-slate-600 uppercase mb-2 tracking-wider">
                                     Group Name
                                 </label>
-                                <input wire:model="nama_group" type="text"
-                                    placeholder="e.g., Apparel, Shoes, General"
+                                <input wire:model="nama_group" type="text" placeholder="e.g., Apparel, Shoes, General"
                                     class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium">
                                 @error('nama_group')
-                                    <span
-                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                    <span class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -58,11 +56,8 @@
                                     Size Values
                                 </h2>
                             </div>
-                            <button type="button" wire:click="addSizeValue"
-                                class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl font-semibold text-xs transition-all shadow-sm">
-                                <x-lucide-plus class="w-4 h-4" />
-                                Add Value
-                            </button>
+                            <x-ui.button type="button" wire:click="addSizeValue" variant="create" label="Add Value"
+                                icon="plus" size="sm" />
                         </div>
 
                         <div class="space-y-4">
@@ -99,10 +94,8 @@
                                     </div>
 
                                     @if (count($sizeValues) > 1)
-                                        <button type="button" wire:click="removeSizeValue({{ $index }})"
-                                            class="flex-shrink-0 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-                                            <x-lucide-trash class="w-5 h-5" />
-                                        </button>
+                                        <x-ui.button type="button" wire:click="removeSizeValue({{ $index }})" variant="delete"
+                                            icon="trash" size="icon-sm" />
                                     @endif
                                 </div>
                             @endforeach
@@ -117,10 +110,8 @@
                     </section>
 
                     <div class="flex items-center justify-end px-8 py-6 mt-8">
-                        <button type="submit"
-                            class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
-                            Simpan Grup Ukuran
-                        </button>
+                        <x-ui.button type="submit" variant="create" label="Simpan Grup Ukuran"
+                            class="px-8 py-4 shadow-xl shadow-blue-200" />
                     </div>
                 </form>
 

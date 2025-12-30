@@ -9,10 +9,9 @@ class Show extends Component
 {
     public $product;
 
-    public function mount($productId)
+    public function mount(Product $product)
     {
-        $this->product = Product::with(['category', 'brand', 'variants.specs.size', 'variants.color'])
-            ->findOrFail($productId);
+        $this->product = $product->load(['category', 'brand', 'variants.specs.size', 'variants.color']);
     }
 
     public function render()

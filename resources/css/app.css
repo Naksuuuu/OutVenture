@@ -28,3 +28,16 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+select {
+  /* Menghilangkan panah bawaan */
+  -webkit-appearance: none;  /* Chrome, Safari, Opera, Edge baru */
+  -moz-appearance: none;     /* Firefox */
+  appearance: none;          /* Standar modern */
+  
+}
+
+/* Khusus untuk Internet Explorer (jika masih perlu didukung) */
+select::-ms-expand {
+  display: none;
+}

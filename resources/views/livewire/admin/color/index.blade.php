@@ -7,7 +7,7 @@
 
             <x-ui.search-input model="search" placeholder="Cari warna..." width="" />
 
-            <x-ui.button.create size="size-4" href="{{ route('admin.colors.create') }}" label="Tambah" />
+            <x-ui.link href="{{ route('admin.colors.create') }}" label="Tambah" icon="plus" variant="create" />
         </x-slot:actions>
     </x-ui.page-header>
 
@@ -23,7 +23,8 @@
                         <div>
                             <h3 class="text-base font-bold text-gray-800">{{ $color->nama_warna }}</h3>
                             <p class="text-xs font-mono text-gray-400 tracking-wider lowercase">
-                                {{ $color->hex_code }}</p>
+                                {{ $color->hex_code }}
+                            </p>
                         </div>
                     </div>
 
@@ -35,9 +36,11 @@
 
                 <x-slot>
                     <div class="flex items-center gap-2 mt-2 pt-4 border-t border-gray-50">
-                        <x-ui.button.edit href="{{ route('admin.colors.edit', $color->id) }}" label='edit' />
+                        <x-ui.link href="{{ route('admin.colors.edit', $color) }}" label='edit' icon="square-pen" size="sm"
+                            variant="edit" />
 
-                        <x-ui.button.delete :id="$color->id" />
+                        <x-ui.button variant="delete" size="icon-sm" icon="trash"
+                            @click="$dispatch('open-delete-modal', { id: {{ $color->id }} })" />
                     </div>
                 </x-slot>
             </x-ui.card-item>

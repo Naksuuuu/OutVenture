@@ -1,7 +1,5 @@
 <div class="py-8 md:py-12 px-4 sm:px-6">
-
     <div class="mx-auto">
-
         <div
             class="bg-white rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-slate-100 overflow-hidden">
 
@@ -45,8 +43,7 @@
                                     class="w-full bg-slate-50 border-none rounded-2xl px-5 py-4 text-slate-800 shadow-inner focus:ring-2 focus:ring-indigo-500/20 focus:bg-white transition-all duration-300 placeholder:text-slate-400 font-medium"
                                     placeholder="e.g., GORE-TEX Waterproof Jacket">
                                 @error('nama_product')
-                                    <span
-                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                    <span class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -60,12 +57,12 @@
                                     <option value="" disabled>Pilih Brand</option>
                                     @foreach ($brands as $brand)
                                         <option value="{{ $brand->id }}">
-                                            {{ $brand->nama_brand }}</option>
+                                            {{ $brand->nama_brand }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('id_brand')
-                                    <span
-                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                    <span class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -84,8 +81,7 @@
                                     </select>
                                 </div>
                                 @error('id_category')
-                                    <span
-                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                    <span class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -104,10 +100,8 @@
                 </section>
 
                 <div class="flex items-center justify-center px-4 md:px-8 py-4 md:py-6">
-                    <button type="submit" wire:loading.attr="disabled"
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95">
-                        Save Product
-                    </button>
+                    <x-ui.button type="submit" variant="create" label="Save Product"
+                        class="px-6 md:px-8 py-3 md:py-4 shadow-xl shadow-blue-200" />
                 </div>
             </form>
 

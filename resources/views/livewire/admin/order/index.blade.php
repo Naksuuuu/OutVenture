@@ -10,14 +10,15 @@
                 <span wire:loading wire:target="downloadAllInvoices">Generating...</span>
             </button>
 
-            <livewire:ui.dropdown wire:model.live="sortBy" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']" width="w-full sm:w-40" />
+            <livewire:ui.dropdown wire:model.live="sortBy" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']"
+                width="w-full sm:w-40" />
 
             <livewire:ui.dropdown wire:model.live="status" :options="['all' => 'Semua Status', 'lunas' => 'Lunas', 'belum_bayar' => 'Belum Bayar']" width="w-full sm:w-48" />
 
 
             <x-ui.search-input model="search" placeholder="Cari produk..." width="" />
 
-            <x-ui.button.create size="size-4" href="{{ route('admin.products.create') }}" label="Tambah" />
+            <x-ui.link href="{{ route('admin.products.create') }}" label="Tambah" icon="plus" variant="create" />
         </x-slot:actions>
     </x-ui.page-header>
 
@@ -79,8 +80,8 @@
                         </p>
                     </div>
 
-                    <x-ui.button.show href="{{ route('admin.orders.show', $order) }}" label="Lihat Detail"
-                        size='size-4' />
+                    <x-ui.link href="{{ route('admin.orders.show', $order) }}" label="Lihat Detail" icon="eye"
+                        variant="show" size="sm" />
 
                 </x-slot:footer>
             </x-ui.card-item>

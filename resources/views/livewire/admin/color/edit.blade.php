@@ -114,10 +114,10 @@
                     </section>
 
                     <div class="flex items-center justify-end px-8 py-6 mt-8">
-                        <button type="submit" {{ $isUsedInVariants ? 'disabled' : '' }}
-                            class="bg-black/80 cursor-pointer hover:bg-black text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95 {{ $isUsedInVariants ? 'opacity-50 cursor-not-allowed' : '' }}">
-                            {{ $isUsedInVariants ? 'Tidak Dapat Diubah' : 'Simpan Perubahan' }}
-                        </button>
+                        <x-ui.button type="submit" variant="update"
+                            :label="$isUsedInVariants ? 'Tidak Dapat Diubah' : 'Simpan Perubahan'"
+                            class="px-8 py-4 shadow-xl shadow-emerald-200 {{ $isUsedInVariants ? 'opacity-50 cursor-not-allowed' : '' }}"
+                            :disabled="$isUsedInVariants" />
                     </div>
                 </form>
 

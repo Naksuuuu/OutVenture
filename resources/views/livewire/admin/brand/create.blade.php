@@ -129,15 +129,11 @@
                         </div>
                     </div>
 
-                    <div
-                        class="flex items-center justify-between pt-10 border-t border-slate-50">
+                    <div class="flex items-center justify-between pt-10 border-t border-slate-50">
                         <x-ui.back-link href="{{ route('admin.brands.index') }}" wire:navigate />
 
-                        <button type="submit" wire:loading.attr="disabled"
-                            class="w-full sm:w-auto bg-slate-900 hover:bg-emerald-600 text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-slate-200 transition-all active:scale-95 flex items-center justify-center gap-3">
-                            Simpan Brand
-                            <x-lucide-check-circle class="w-4 h-4" />
-                        </button>
+                        <x-ui.button type="submit" variant="create" label="Simpan Brand" icon="check-circle"
+                            class="w-full sm:w-auto px-12 py-5 shadow-xl shadow-blue-200" />
                     </div>
                 </form>
             </div>

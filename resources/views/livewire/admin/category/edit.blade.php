@@ -152,10 +152,8 @@
                     <div class="flex items-center justify-between pt-10 border-t border-slate-50">
                         <x-ui.back-link href="{{ route('admin.categories.index') }}" wire:navigate />
 
-                        <button type="submit"
-                            class="bg-slate-900 hover:bg-emerald-600 text-white px-10 py-5 rounded-2xl font-black text-xs shadow-xl transition-all active:scale-95 uppercase italic tracking-widest">
-                            Simpan Perubahan
-                        </button>
+                        <x-ui.button type="submit" variant="update" label="Simpan Perubahan"
+                            class="px-10 py-5 shadow-xl shadow-emerald-100 italic" />
                     </div>
                 </form>
             </div>

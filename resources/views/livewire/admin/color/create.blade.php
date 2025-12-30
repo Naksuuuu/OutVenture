@@ -57,8 +57,7 @@
                                 @endif
 
                                 @error('nama_warna')
-                                    <span
-                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                    <span class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -87,8 +86,7 @@
                                 @endif
 
                                 @error('hex_code')
-                                    <span
-                                        class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
+                                    <span class="text-red-500 text-[10px] mt-1 font-bold uppercase">{{ $message }}</span>
                                 @enderror
                             </div>
 
@@ -112,10 +110,9 @@
                     </section>
 
                     <div class="flex items-center justify-end px-8 py-6 mt-8">
-                        <button type="submit" {{ $existingColorName || $existingColorHex ? 'disabled' : '' }}
-                            class="bg-black/80 cursor-pointer hover:bg-black text-white px-8 py-4 rounded-2xl font-bold text-sm shadow-xl shadow-indigo-200 transition-all active:scale-95 {{ $existingColorName || $existingColorHex ? 'opacity-50 cursor-not-allowed' : '' }}">
-                            {{ $existingColorName || $existingColorHex ? 'Warna Sudah Ada' : 'Simpan Warna' }}
-                        </button>
+                        <x-ui.button type="submit" variant="create" :label="$existingColorName || $existingColorHex ? 'Warna Sudah Ada' : 'Simpan Warna'"
+                            class="px-8 py-4 shadow-xl shadow-blue-200 {{ $existingColorName || $existingColorHex ? 'opacity-50 cursor-not-allowed' : '' }}"
+                            :disabled="$existingColorName || $existingColorHex" />
                     </div>
                 </form>
 

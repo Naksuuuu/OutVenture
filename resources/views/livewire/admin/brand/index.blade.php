@@ -2,12 +2,13 @@
     <x-ui.page-header title="Merek" subtitle="Kelola dan atur identitas merek produk Anda"
         class="lg:items-center mb-6 md:mb-10">
         <x-slot:actions>
-            <livewire:ui.dropdown wire:model.live="sort" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']" class="" />
+            <livewire:ui.dropdown wire:model.live="sort" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']"
+                class="" />
 
             <x-ui.search-input model="search" placeholder="Cari merek..." width="" />
 
 
-            <x-ui.button.create size='size-4' href="{{ route('admin.brands.create') }}" label="Tambah" />
+            <x-ui.link href="{{ route('admin.brands.create') }}" label="Tambah" icon="plus" variant="create" />
         </x-slot:actions>
     </x-ui.page-header>
 
@@ -39,7 +40,7 @@
                 <x-slot>
                     <div class=" rounded-b-2xl h-1/4 p-4 flex flex-col gap-1 justify-between">
                         <div class="flex w-full justify-between">
-                            <a href="{{ route('admin.brands.show', $brand->id) }}" wire:navigate
+                            <a href="{{ route('admin.brands.show', $brand) }}" wire:navigate
                                 class="text-lg font-extrabold text-gray-900 uppercase tracking-wide hover:text-emerald-600 transition-colors">
                                 {{ $brand->nama_brand }}
                             </a>
@@ -60,10 +61,10 @@
                         <div class="flex items-start gap-2">
 
 
-                            <x-ui.button.edit href="{{ route('admin.brands.edit', $brand->id) }}" label='edit' />
-
-
-                            <x-ui.button.delete :id="$brand->id" />
+                            <x-ui.link href="{{ route('admin.brands.edit', $brand) }}" label='edit' icon="square-pen"
+                                size="sm" variant="edit" />
+                            <x-ui.button variant="delete" size="icon-sm" icon="trash"
+                                @click="$dispatch('open-delete-modal', { id: {{ $brand->id }} })" />
                         </div>
                     </div>
 

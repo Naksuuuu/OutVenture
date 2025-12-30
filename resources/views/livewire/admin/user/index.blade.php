@@ -24,8 +24,7 @@
 
 
                         @if ($admin->role == 'admin')
-                            <p
-                                class="bg-emerald-400 text-white px-3 py-1 rounded-lg text-[0.65rem] font-bold uppercase">
+                            <p class="bg-emerald-400 text-white px-3 py-1 rounded-lg text-[0.65rem] font-bold uppercase">
                                 {{ $admin->role }}
                             </p>
                         @elseif ($admin->role == 'superadmin')
@@ -54,15 +53,14 @@
                 </x-slot>
 
                 <x-slot:footer class="flex gap-2">
-                    <x-ui.button.edit href="{{ route('admin.users.edit', $admin->id) }}" label='Edit' size="size-4"
-                        class="flex-1" />
-                    <x-ui.button.show href="{{ route('admin.users.show', $admin->id) }}" class="" />
+                    <x-ui.link href="{{ route('admin.users.edit', $admin->id) }}" label='Edit' size="sm" icon="square-pen"
+                        class="flex-1" variant="edit" />
+                    <x-ui.link href="{{ route('admin.users.show', $admin->id) }}" size="sm" icon="eye" variant="show" />
 
                 </x-slot:footer>
             </x-ui.card-item>
         @empty
-            <div
-                class="col-[1/-1] text-center py-14 px-5 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+            <div class="col-[1/-1] text-center py-14 px-5 bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
                 <p class="text-gray-400 font-semibold">Data tidak ditemukan.</p>
             </div>
         @endforelse
