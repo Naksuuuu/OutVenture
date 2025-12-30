@@ -42,7 +42,7 @@ class Edit extends Component
     if ($this->new_image) {
       $newPath = $this->new_image->store('categories', 'public');
       $imagePath = $newPath;
-      
+
       if ($this->oldImage && $this->oldImage !== $newPath) {
         $this->deletePublicFile($this->oldImage);
       }
@@ -54,12 +54,18 @@ class Edit extends Component
       'image' => $imagePath,
     ]);
 
-    return redirect()->route('admin.categories.index')->with('notifySuccess', 'Category Berhasil Diperbarui!');
+    $this->dispatch('notify', type: 'success', message: 'Category berhasil diperbarui!');
+  }
+
+  public function refreshCategory()
+  {
+    $this->category->refresh();
   }
 
   protected function deletePublicFile(?string $path): void
   {
-    if (!$path) return;
+    if (!$path)
+      return;
     try {
       if (Storage::disk('public')->exists($path)) {
         Storage::disk('public')->delete($path);

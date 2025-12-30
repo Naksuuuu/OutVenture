@@ -79,12 +79,22 @@ class Edit extends Component
       'is_trusted' => (bool) $this->is_trusted,
     ]);
 
-    return redirect()->route('admin.brands.index')->with('notifySuccess', 'Merek Berhasil Diperbarui!');
+    $this->reset(['new_image', 'new_wide_image', 'new_logo']);
+
+    $this->dispatch('notify', type: 'success', message: 'Merek berhasil diperbarui!');
+    $this->refreshBrand();
+  }
+
+
+  public function refreshBrand()
+  {
+    $this->brand->refresh();
   }
 
   protected function deletePublicFile(?string $path): void
   {
-    if (!$path) return;
+    if (!$path)
+      return;
     try {
       if (Storage::disk('public')->exists($path)) {
         Storage::disk('public')->delete($path);

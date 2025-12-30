@@ -34,9 +34,9 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <x-ui.link href="{{ route('admin.sizes.edit', $sizeGroup->id) }}" icon="square-pen" size="sm"
+                        <x-ui.link href="{{ route('admin.sizes.edit', $sizeGroup->id) }}" icon="square-pen" size="md"
                             variant="edit" />
-                        <x-ui.button variant="delete" size="icon-sm" icon="trash"
+                        <x-ui.button variant="delete" size="md" icon="trash"
                             @click="$dispatch('open-delete-modal', { id: {{ $sizeGroup->id }} })" />
                     </div>
                 </x-slot:header>

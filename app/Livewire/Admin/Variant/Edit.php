@@ -48,10 +48,7 @@ class Edit extends Component
       return;
     }
 
-    // Cek apakah warna boleh diubah (jika sudah ada spec, tidak boleh ubah warna)
-    // Note: Logic aslinya di VariantManager membatasi ini. 
-    // Namun jika user ingin ganti warna tapi spesifikasinya masih cocok, mungkin tidak masalah.
-    // Tapi untuk aman, kita ikuti logic lama: 
+
     if ($this->variant->specs()->exists() && $this->variant->id_color != $this->id_color) {
       $this->addError('id_color', 'Warna tidak bisa diubah karena varian ini sudah memiliki spesifikasi. Hapus spesifikasi dulu jika ingin ganti warna.');
       return;
@@ -62,11 +59,15 @@ class Edit extends Component
     ];
 
     if ($this->image) {
-      // Delete old image if exists
       if ($this->old_image) {
         Storage::disk('public')->delete($this->old_image);
       }
-      $data['image'] = $this->image->store('variants', 'public');
+      $imagePath = $this->image->store('variants', 'public');
+      $data['image'] = $imagePath;
+
+      // Update old_image agar jika diedit lagi, yang dihapus adalah gambar yang baru
+      $this->old_image = $imagePath;
+      $this->reset('image');
     }
 
     $this->variant->update($data);
