@@ -54,7 +54,7 @@ class Edit extends Component
         $this->spec = ProductVariantSpec::findOrFail($this->spec->id);
 
         $this->dispatch('spec-events');
-        
+
         $this->dispatch('notify', type: 'success', message: 'Spesifikasi berhasil diperbarui!');
         $this->isOpen = false;
     }
@@ -62,8 +62,14 @@ class Edit extends Component
 
     public function render()
     {
+        $usedSizeIds = ProductVariantSpec::where('id_variant', $this->variant->id)
+            ->pluck('id_size_value')
+            ->toArray();
+
         return view('livewire.admin.spec.edit', [
-            'sizes' => SizeValue::where('id_size_group', $this->product->category->id_size_group)->get(),
+            'sizes' => SizeValue::where('id_size_group', $this->product->category->id_size_group)
+                ->whereNotIn('id', $usedSizeIds)
+                ->get(),
         ]);
     }
 }

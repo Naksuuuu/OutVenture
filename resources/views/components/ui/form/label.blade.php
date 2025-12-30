@@ -1,6 +1,7 @@
 @props([
-    'label' => 'Laebl',
+    'label' => 'Label',
 ])
 
-<label
+
+   <label
     {{ $attributes->merge(['class' => 'block text-xs font-bold text-slate-600 uppercase mb-2 tracking-widest']) }}>{{ $label }}</label>

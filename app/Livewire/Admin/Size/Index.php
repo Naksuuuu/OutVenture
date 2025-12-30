@@ -40,10 +40,15 @@ class Index extends Component
             return;
         }
 
-        // if ($sizeGroup->values()->exists()) {
-        //     $this->errorMessage = 'Grup ukuran masih memiliki nilai ukuran, hapus atau pindahkan nilai ukuran terlebih dahulu.';
-        //     return;
-        // }
+        if ($sizeGroup->values()->exists()) {
+            $this->errorMessage = 'Grup ukuran masih memiliki nilai ukuran, hapus atau pindahkan nilai ukuran terlebih dahulu.';
+            return;
+        }
+
+        if ($sizeGroup->categories()->exists()) {
+            $this->errorMessage = 'Grup ukuran masih digunakan pada kategori, hapus atau pindahkan kategori terlebih dahulu.';
+            return;
+        }
 
         $sizeGroup->delete();
 
