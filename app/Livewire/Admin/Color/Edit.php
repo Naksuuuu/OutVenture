@@ -21,9 +21,9 @@ class Edit extends Component
         ];
     }
 
-    public function mount($colorId)
+    public function mount(Color $color)
     {
-        $this->color = Color::withCount('productVariants')->findOrFail($colorId);
+        $this->color = $color->loadCount('productVariants');
         $this->nama_warna = $this->color->nama_warna;
         $this->hex_code = $this->color->hex_code;
 

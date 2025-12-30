@@ -20,7 +20,7 @@
     }
 @endphp
 
-<a href="{{ route('products.show', $product->id) }}" wire:navigate class="flex flex-col">
+<a href="{{ route('products.show', $product) }}" wire:navigate class="flex flex-col">
     <div class="relative aspect-[4/5] bg-[#f2f2ed] mb-3 overflow-hidden">
         @if ($displayVariant && $displayVariant->image)
             <img src="{{ asset('storage/' . $displayVariant->image) }}" alt="{{ $product->nama_product }}"

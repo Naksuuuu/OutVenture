@@ -27,8 +27,7 @@
             </label>
             @if ($admin->role === 'superadmin')
                 <p class="text-[10px] text-red-600 mb-2 font-semibold">Role superadmin tidak dapat diubah.</p>
-                <div
-                    class="inline-block bg-gray-900 text-white px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase">
+                <div class="inline-block bg-gray-900 text-white px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase">
                     SUPERADMIN</div>
             @else
                 <div class="relative">
@@ -47,12 +46,10 @@
 
         <div class="flex gap-2 md:gap-3 items-center">
             @if ($admin->role !== 'superadmin')
-                <button wire:click="update"
-                    class="flex-[2] bg-gray-900 text-white border-none py-2.5 md:py-4 rounded-xl font-extrabold cursor-pointer uppercase text-[11px] md:text-sm transition-all hover:bg-black active:scale-95">
-                    Simpan
-                </button>
+                <x-ui.button wire:click="update" variant="update" label="Simpan"
+                    class="flex-[2] py-2.5 md:py-4 rounded-xl text-[11px] md:text-sm" />
             @endif
-            <x-ui.back-link href="{{ route('admin.users.index') }}"  />
+            <x-ui.back-link href="{{ route('admin.users.index') }}" />
         </div>
     </div>
 </div>

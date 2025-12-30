@@ -9,9 +9,14 @@ class Show extends Component
 {
     public $brand;
 
-    public function mount($brandId)
+    public function mount($brand)
     {
-        $this->brand = Brand::findOrFail($brandId);
+        // Accept either Brand model instance or brand ID/slug
+        if ($brand instanceof Brand) {
+            $this->brand = $brand;
+        } else {
+            $this->brand = Brand::where('slug', $brand)->orWhere('id', $brand)->firstOrFail();
+        }
     }
 
 

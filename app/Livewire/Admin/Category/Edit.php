@@ -26,9 +26,9 @@ class Edit extends Component
 
   ];
 
-  public function mount($categoryId)
+  public function mount(Category $category)
   {
-    $this->category = Category::findOrFail($categoryId);
+    $this->category = $category;
     $this->nama_category = $this->category->nama_category;
     $this->id_size_group = $this->category->id_size_group;
     $this->oldImage = $this->category->image;

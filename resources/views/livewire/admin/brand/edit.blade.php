@@ -16,7 +16,8 @@
                     <div>
                         <h1 class="text-3xl font-black tracking-tight text-slate-900 uppercase italic">Edit Brand</h1>
                         <p class="text-emerald-600 font-bold mt-1 uppercase text-xs tracking-widest">
-                            {{ $brand->nama_brand }}</p>
+                            {{ $brand->nama_brand }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -146,14 +147,8 @@
                         <x-ui.back-link href="{{ route('admin.brands.index') }}" wire:navigate label="Kembali ke Daftar"
                             class="flex items-center gap-2 text-slate-400 hover:text-slate-900 font-black text-[10px] uppercase tracking-[0.2em] transition-all group" />
 
-                        <button type="submit" wire:loading.attr="disabled"
-                            class="w-full sm:w-auto bg-slate-900 hover:bg-emerald-600 text-white px-12 py-5 rounded-2xl font-black text-xs uppercase tracking-widest shadow-xl shadow-slate-200 transition-all active:scale-95 flex items-center justify-center gap-3">
-                            Simpan Perubahan
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5 13l4 4L19 7"></path>
-                            </svg>
-                        </button>
+                        <x-ui.button type="submit" variant="update" label="Simpan Perubahan" icon="check"
+                            class="w-full sm:w-auto px-12 py-5 shadow-xl shadow-emerald-200" />
                     </div>
                 </form>
             </div>

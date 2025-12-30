@@ -30,9 +30,9 @@ class Edit extends Component
     'is_trusted' => 'boolean',
   ];
 
-  public function mount($brandId)
+  public function mount(Brand $brand)
   {
-    $this->brand = Brand::findOrFail($brandId);
+    $this->brand = $brand;
     $this->nama_brand = $this->brand->nama_brand;
     $this->oldImage = $this->brand->image;
     $this->oldWideImage = $this->brand->wide_image;

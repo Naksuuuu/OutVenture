@@ -5,13 +5,14 @@
     <x-ui.page-header title="Manajemen Grup Ukuran" subtitle="Kelola grup ukuran dan nilainya untuk kategori produk."
         class="lg:items-center mb-6 md:mb-10">
         <x-slot:actions>
-            <livewire:ui.dropdown wire:model.live="sortBy" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']" class="" />
+            <livewire:ui.dropdown wire:model.live="sortBy" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']"
+                class="" />
 
 
             <x-ui.search-input model="search" placeholder="Cari grup ukuran..." width="" />
 
 
-            <x-ui.button.create size="size-4" href="{{ route('admin.sizes.create') }}" label="Tambah" />
+            <x-ui.link href="{{ route('admin.sizes.create') }}" label="Tambah" icon="plus" variant="create" />
         </x-slot:actions>
     </x-ui.page-header>
 
@@ -33,9 +34,10 @@
                         </div>
                     </div>
                     <div class="flex items-center gap-2">
-                        <x-ui.button.edit href="{{ route('admin.sizes.edit', $sizeGroup->id) }}"
-                            class="rounded-lg! p-2!" size="size-6" />
-                        <x-ui.button.delete :id="$sizeGroup->id" />
+                        <x-ui.link href="{{ route('admin.sizes.edit', $sizeGroup->id) }}" icon="square-pen" size="sm"
+                            variant="edit" />
+                        <x-ui.button variant="delete" size="icon-sm" icon="trash"
+                            @click="$dispatch('open-delete-modal', { id: {{ $sizeGroup->id }} })" />
                     </div>
                 </x-slot:header>
 
@@ -74,7 +76,8 @@
         @endforelse
     </div>
 
-    <x-ui.modal.delete title="Hapus Grup Ukuran?" message="Yakin ingin menghapus grup ukuran ini?" :errorMessage="$errorMessage" />
+    <x-ui.modal.delete title="Hapus Grup Ukuran?" message="Yakin ingin menghapus grup ukuran ini?"
+        :errorMessage="$errorMessage" />
 
     <div class="mt-8">
         <div class="px-6 py-4">

@@ -1,6 +1,6 @@
 <div class="w-full pb-10 flex flex-col gap-20">
 
-    <livewire:public.hero.show :brandId="$brand->id" />
+    <livewire:public.hero.show :brand="$brand" />
 
     <div class="grid grid-cols-2 px-4 md:px-10 md:grid-cols-3 lg:grid-cols-5 gap-x-6 gap-y-12 mb-24">
         @forelse ($products as $product)

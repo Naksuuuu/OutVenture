@@ -15,14 +15,14 @@ class Show extends Component
   public $selectedSize;
   public $availableSizes = [];
 
-  public function mount($id)
+  public function mount(Product $product)
   {
-    $this->product = Product::with([
+    $this->product = $product->load([
       'category.sizeGroup.values',
       'brand',
       'variants.color',
       'variants.specs.size'
-    ])->findOrFail($id);
+    ]);
 
     // Set default variant (first one)
     if ($this->product->variants->isNotEmpty()) {

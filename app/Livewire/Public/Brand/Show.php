@@ -14,10 +14,12 @@ class Show extends Component
     public $brand;
 
 
-    public function mount($id)
+    public function mount(Brand $brand)
     {
-        $this->brand = Brand::where('is_trusted', true)
-            ->findOrFail($id);
+        if (!$brand->is_trusted) {
+            abort(404);
+        }
+        $this->brand = $brand;
     }
 
     public function render()
@@ -26,6 +28,6 @@ class Show extends Component
 
         return view('livewire.public.brand.show', [
             'products' => $products,
-        ])->layout('components.layouts.app', ['title' => $this->brand->name]);
+        ])->layout('components.layouts.app', ['title' => $this->brand->nama_brand]);
     }
 }

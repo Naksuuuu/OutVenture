@@ -12,9 +12,9 @@ class Show extends Component
 
 
 
-    public function mount($categoryId)
+    public function mount(Category $category)
     {
-        $this->category = Category::findOrFail($categoryId);
+        $this->category = $category;
     }
 
     public function render()

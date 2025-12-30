@@ -19,12 +19,15 @@ class Create extends Component
     public $stok;
     public $isOpen;
 
-    protected $rules = [
-        'id_size_value' => 'required|exists:size_values,id',
-        'harga' => 'required|numeric|min:0',
-        'sku' => 'required|string|max:100|unique:product_variant_specs,sku',
-        'stok' => 'required|integer|min:0',
-    ];
+    protected function rules()
+    {
+        return [
+            'id_size_value' => 'required|exists:size_values,id',
+            'harga' => 'required|numeric|min:0',
+            'sku' => 'required|string|max:100|unique:product_variant_specs,sku',
+            'stok' => 'required|integer|min:0',
+        ];
+    }
 
     public function mount(Product $product, ProductVariant $variant)
     {
@@ -56,8 +59,15 @@ class Create extends Component
 
     public function render()
     {
+        // Ambil ID size_value yang sudah digunakan di varian ini
+        $usedSizeIds = ProductVariantSpec::where('id_variant', $this->variant->id)
+            ->pluck('id_size_value')
+            ->toArray();
+
         return view('livewire.admin.spec.create', [
-            'sizes' => SizeValue::where('id_size_group', $this->product->category->id_size_group)->get(),
+            'sizes' => SizeValue::where('id_size_group', $this->product->category->id_size_group)
+                ->whereNotIn('id', $usedSizeIds)
+                ->get(),
         ]);
     }
 }

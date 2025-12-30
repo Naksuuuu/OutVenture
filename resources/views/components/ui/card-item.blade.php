@@ -4,9 +4,10 @@
     'border' => 'border border-gray-200',
     'shadow' => 'shadow-sm',
     'hover' => 'hover:shadow-md',
+    'bg' => 'bg-white',
 ])
 
-<div {{ $attributes->merge(['class' => "bg-white $rounded $border $shadow $hover transition-all $padding"]) }}>
+<div {{ $attributes->merge(['class' => " $bg $rounded $border $shadow $hover transition-all $padding"]) }}>
 
     @if (isset($header))
         <div {{ $header->attributes->merge(['class' => 'mb-4']) }}>

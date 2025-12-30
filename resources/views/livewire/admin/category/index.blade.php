@@ -1,15 +1,14 @@
 <div class="">
-    <x-ui.page-header title="Kategori"
-        subtitle="Kelola struktur katalog produk Anda dengan sistem yang
-                lebih rapi."
-        class="lg:items-center mb-6 md:mb-10">
+    <x-ui.page-header title="Kategori" subtitle="Kelola struktur katalog produk Anda dengan sistem yang
+                lebih rapi." class="lg:items-center mb-6 md:mb-10">
         <x-slot:actions>
-            <livewire:ui.dropdown wire:model.live="sortBy" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']" class="" />
+            <livewire:ui.dropdown wire:model.live="sortBy" :options="['latest' => 'Terbaru', 'oldest' => 'Terlama']"
+                class="" />
 
 
             <x-ui.search-input model="search" placeholder="Cari kategori..." width="" />
 
-            <x-ui.button.create href="{{ route('admin.categories.create') }}" label="Tambah" />
+            <x-ui.link href="{{ route('admin.categories.create') }}" label="Tambah" icon="plus" variant="create" />
         </x-slot:actions>
     </x-ui.page-header>
 
@@ -35,7 +34,7 @@
                 <x-slot>
                     <div class=" rounded-b-2xl h-1/4 p-4 flex flex-col justify-between">
                         <div class="flex justify-between w-full items-center">
-                            <a href="{{ route('admin.categories.show', $category->id) }}" wire:navigate
+                            <a href="{{ route('admin.categories.show', $category) }}" wire:navigate
                                 class="text-lg font-extrabold text-gray-900 uppercase tracking-wide hover:text-emerald-600 transition-colors">
                                 {{ $category->nama_category }}
                             </a>
@@ -55,10 +54,10 @@
 
 
 
-                            <x-ui.button.edit href="{{ route('admin.categories.edit', $category->id) }}"
-                                label='edit' />
-
-                            <x-ui.button.delete :id="$category->id" />
+                            <x-ui.link href="{{ route('admin.categories.edit', $category) }}" label='edit' icon="square-pen"
+                                size="md" variant="edit" class="flex-1" />
+                            <x-ui.button variant="delete" size="md" icon="trash"
+                                @click="$dispatch('open-delete-modal', { id: {{ $category->id }} })" />
                         </div>
                     </div>
 
@@ -73,6 +72,7 @@
         @endforelse
     </div>
 
-    <x-ui.modal.delete title="Hapus Kategori?" message="Yakin ingin menghapus kategori ini?" :errorMessage="$errorMessage" />
+    <x-ui.modal.delete title="Hapus Kategori?" message="Yakin ingin menghapus kategori ini?"
+        :errorMessage="$errorMessage" />
 
 </div>

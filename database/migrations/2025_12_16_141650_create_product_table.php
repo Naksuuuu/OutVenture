@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_category')->constrained('categories')->onDelete('cascade');
             $table->string('nama_product');
+            $table->string('slug')->unique()->nullable();
             $table->foreignId('id_brand')->constrained('brands')->onDelete('cascade');
             $table->text('deskripsi');
             $table->timestamps();
