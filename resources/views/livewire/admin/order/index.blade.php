@@ -16,9 +16,9 @@
             <livewire:ui.dropdown wire:model.live="status" :options="['all' => 'Semua Status', 'lunas' => 'Lunas', 'belum_bayar' => 'Belum Bayar']" width="w-full sm:w-48" />
 
 
-            <x-ui.search-input model="search" placeholder="Cari produk..." width="" />
+            <x-ui.search-input model="search" placeholder="Cari ID Pesanan, Nama, Email..." width="" />
 
-            <x-ui.link href="{{ route('admin.products.create') }}" label="Tambah" icon="plus" variant="create" />
+            {{-- Removed irrelevant "Create Product" button --}}
         </x-slot:actions>
     </x-ui.page-header>
 
@@ -26,80 +26,88 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         @forelse ($orders as $order)
             <x-ui.card-item
-                class="flex flex-col justify-between gap-4 bg-white rounded-2xl shadow-sm border border-gray-200 p-3 hover:shadow-md transition-all ">
-                <x-slot:header class="flex justify-between w-full items-start mb-4">
-                    <span class="text-sm font-bold text-gray-900 bg-gray-100 px-3 py-1 rounded-lg">
-                        #{{ $order->id }}
-                    </span>
+                class="group justify-self-center flex flex-col justify-between h-[450px] w-full max-w-xl p-3 transition-all duration-300"
+                rounded="rounded-2xl" hover="hover:shadow-lg hover:-translate-y-2">
 
-                    @if ($order->status_pembayaran)
-                        <span
-                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">
-                            <x-lucide-check-circle class="w-3 h-3 mr-1" />
-                            Lunas
-                        </span>
-                    @else
-                        <span
-                            class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-red-100 text-red-800">
-                            <x-lucide-x-circle class="w-3 h-3 mr-1" />
-                            Belum Bayar
-                        </span>
-                    @endif
+                <x-slot:header
+                    class="w-full h-2/5 bg-indigo-50/50 rounded-2xl overflow-hidden flex items-center justify-center border border-indigo-100/50 group-hover:bg-indigo-50 transition-colors relative">
+                    <div class="absolute top-3 right-3">
+                        @if ($order->status_pembayaran)
+                            <span
+                                class="inline-flex items-center px-2 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider bg-emerald-100/80 text-emerald-700 backdrop-blur-sm shadow-sm border border-emerald-200">
+                                Lunas
+                            </span>
+                        @else
+                            <span
+                                class="inline-flex items-center px-2 py-1 rounded-lg text-[10px] font-black uppercase tracking-wider bg-red-100/80 text-red-700 backdrop-blur-sm shadow-sm border border-red-200">
+                                Belum Bayar
+                            </span>
+                        @endif
+                    </div>
+
+                    <div class="flex flex-col items-center gap-2">
+                        <div class="p-3 bg-white rounded-xl shadow-sm border border-indigo-100">
+                            <x-lucide-receipt class="w-8 h-8 text-indigo-500" />
+                        </div>
+                        <span class="text-sm font-black text-indigo-900">#{{ $order->id }}</span>
+                    </div>
                 </x-slot:header>
 
                 <x-slot>
-                    <div class="flex flex-col gap-4">
-                        <div class="">
-                            <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Pelanggan</p>
-                            <h4 class="text-sm font-bold text-gray-900">{{ $order->user->nama_lengkap ?? 'N/A' }}</h4>
-                            <p class="text-xs text-gray-500">{{ $order->user->email ?? 'N/A' }}</p>
+                    <div class="rounded-b-2xl h-3/5 pt-4 pb-2 px-2 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Pelanggan</p>
+                                <div class="flex items-center gap-2">
+                                    <div
+                                        class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-500">
+                                        {{ substr($order->user->nama_lengkap ?? '?', 0, 1) }}
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <h4 class="text-sm font-bold text-slate-800 line-clamp-1">
+                                            {{ $order->user->nama_lengkap ?? 'N/A' }}</h4>
+                                        <p class="text-[10px] font-bold text-slate-400 line-clamp-1">
+                                            {{ $order->user->email ?? 'N/A' }}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <div class="bg-slate-50 p-2 rounded-xl border border-slate-100">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Tanggal
+                                    </p>
+                                    <p class="text-xs font-bold text-slate-700">{{ $order->tgl_order->format('d M Y') }}</p>
+                                </div>
+                                <div class="bg-slate-50 p-2 rounded-xl border border-slate-100">
+                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-0.5">Total
+                                    </p>
+                                    <p class="text-xs font-bold text-slate-700">Rp
+                                        {{ number_format($order->total_harga, 0, ',', '.') }}</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="grid grid-cols-2 gap-4">
-                            <div>
-                                <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Tanggal</p>
-                                <p class="text-sm text-gray-900 font-medium">{{ $order->tgl_order->format('d M Y') }}
-                                </p>
-                                <p class="text-xs text-gray-500">{{ $order->tgl_order->format('H:i') }}</p>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-400 font-bold uppercase tracking-wider mb-1">Total Item</p>
-                                <p class="text-sm text-gray-900 font-bold">{{ $order->items->sum('quantity') }} items
-                                </p>
-                            </div>
+                        <div class="flex items-center gap-2 mt-auto">
+                            <x-ui.link href="{{ route('admin.orders.show', $order) }}" label="Lihat Detail" icon="eye"
+                                variant="show" size="md" class="w-full justify-center" />
                         </div>
                     </div>
-
                 </x-slot>
-
-                <x-slot:footer class="mt-0! border-t border-gray-100 flex items-end justify-between">
-                    <div class="mt-2">
-                        <p class="text-xs text-gray-400 font-medium uppercase">Total Harga</p>
-                        <p class="text-lg font-black text-gray-900 leading-none">
-                            Rp {{ number_format($order->total_harga, 0, ',', '.') }}
-                        </p>
-                    </div>
-
-                    <x-ui.link href="{{ route('admin.orders.show', $order) }}" label="Lihat Detail" icon="eye"
-                        variant="show" size="sm" />
-
-                </x-slot:footer>
             </x-ui.card-item>
         @empty
-            <div class="col-span-full bg-white rounded-2xl border border-dashed border-gray-300 py-20 text-center">
-                <div class="flex flex-col items-center justify-center">
-                    <x-lucide-package-open class="w-16 h-16 text-gray-300 mb-4" />
-                    <p class="text-gray-500 font-medium">Tidak ada pesanan</p>
-                    <p class="text-sm text-gray-400 mt-1">Pesanan akan muncul di sini ketika pelanggan melakukan
-                        pembelian</p>
+            <div class="col-span-full bg-white rounded-2xl p-16 text-center border-2 border-dashed border-slate-200">
+                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <x-lucide-package-open class="w-8 h-8 text-slate-300" />
                 </div>
+                <p class="text-slate-800 font-bold text-lg">Belum ada pesanan</p>
+                <p class="text-sm text-slate-400 mt-1">Pesanan akan muncul di sini ketika pelanggan melakukan pembelian</p>
             </div>
         @endforelse
     </div>
 
     {{-- Pagination --}}
     @if ($orders->hasPages())
-        <div class="mt-8">
+        <div class="mt-8 px-6 py-4">
             {{ $orders->links() }}
         </div>
     @endif

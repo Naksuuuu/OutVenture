@@ -12,7 +12,7 @@
         </x-slot:actions>
     </x-ui.page-header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4  gap-4 md:gap-6 lg:gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4  gap-4 ">
         @forelse ($brands as $brand)
             <x-ui.card-item
                 class="group justify-self-center flex flex-col justify-between h-[550px] w-full max-w-xl p-3 transition-all duration-300"
@@ -62,8 +62,8 @@
 
 
                             <x-ui.link href="{{ route('admin.brands.edit', $brand) }}" label='edit' icon="square-pen"
-                                size="sm" variant="edit" />
-                            <x-ui.button variant="delete" size="icon-sm" icon="trash"
+                                size="md" class="flex-1" variant="edit" />
+                            <x-ui.button variant="delete" size="md" icon="trash"
                                 @click="$dispatch('open-delete-modal', { id: {{ $brand->id }} })" />
                         </div>
                     </div>

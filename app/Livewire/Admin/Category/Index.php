@@ -47,7 +47,7 @@ class Index extends Component
     }
 
     if ($category->image) {
-      $this->deletePublicFile($category->image);
+      Storage::disk('public')->delete($category->image);
     }
 
     $category->delete();

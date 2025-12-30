@@ -39,6 +39,8 @@ class Edit extends Component
     }
   }
 
+  public $errorMessage = '';
+
   public function addSizeValue()
   {
     $this->sizeValues[] = [
@@ -47,18 +49,44 @@ class Edit extends Component
     ];
   }
 
-  public function removeSizeValue($index)
+  public function deleteValue($index)
   {
-    if (isset($this->sizeValues[$index]['id'])) {
-      $this->deletedValues[] = $this->sizeValues[$index]['id'];
+    $this->errorMessage = '';
+
+    if (!isset($this->sizeValues[$index])) {
+      return;
     }
 
+    // Jika item sudah ada di DB (punya ID), cek dependensi
+    if (isset($this->sizeValues[$index]['id'])) {
+      $sizeValueId = $this->sizeValues[$index]['id'];
+      $sizeValue = SizeValue::find($sizeValueId);
+
+      // Cek apakah digunakan di variants (melalui specs)
+      if ($sizeValue && $sizeValue->specs()->exists()) {
+        $this->errorMessage = 'Nilai ukuran ini sedang digunakan pada varian produk dan tidak dapat dihapus.';
+        return;
+      }
+
+      $this->deletedValues[] = $sizeValueId;
+    }
+
+    // Hapus dari array
     unset($this->sizeValues[$index]);
     $this->sizeValues = array_values($this->sizeValues);
 
+    // Re-index sort order
     foreach ($this->sizeValues as $key => $value) {
       $this->sizeValues[$key]['sort_order'] = $key + 1;
     }
+
+    $this->dispatch('delete-success');
+  }
+
+  // Deprecated/Alias just in case
+  public function removeSizeValue($index)
+  {
+    $this->deleteValue($index);
   }
 
   public function update()
