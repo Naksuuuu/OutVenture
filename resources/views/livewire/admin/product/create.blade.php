@@ -1,7 +1,5 @@
 <div class="py-8 md:py-12 px-4 sm:px-6">
-
     <div class="mx-auto">
-
         <div
             class="bg-white rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-slate-100 overflow-hidden">
 

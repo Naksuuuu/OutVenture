@@ -33,14 +33,14 @@ class Edit extends Component
   public $usedColorIds = [];
 
   protected $listeners = [
-    'variant-created' => 'refreshProduct', 
-    'spec-events' => 'refreshProduct', 
+    'variant-created' => 'refreshProduct',
+    'spec-events' => 'refreshProduct',
     'variant-deleted' => 'refreshProduct',
     'show-success-message' => 'showSuccessMessage'
   ];
 
   protected $rules = [
-    'nama_product' => 'required|string|max:255',
+    'nama_product' => 'required|string|min:2|max:255',
     'id_brand' => 'required',
     'id_category' => 'required',
     'deskripsi' => 'nullable|string',
@@ -71,7 +71,7 @@ class Edit extends Component
   {
     $this->successMessage = '';
     $this->errorMessage = '';
-    
+
     try {
       $this->validate();
 
@@ -117,14 +117,14 @@ class Edit extends Component
           $oldPath = $this->variant_old_images[$variantId] ?? null;
           $newPath = $this->variant_new_images[$variantId]->store('variants', 'public');
           $updateData['image'] = $newPath;
-          
+
           if ($oldPath && $oldPath !== $newPath) {
             $this->deletePublicFile($oldPath);
           }
         } else {
           $updateData['image'] = $this->variant_old_images[$variantId] ?? null;
         }
-        
+
         ProductVariant::where('id', $variantId)->update($updateData);
       }
 
@@ -145,7 +145,7 @@ class Edit extends Component
 
       $this->product = Product::with(['category', 'brand', 'variants.specs', 'variants.color'])
         ->findOrFail($this->product->id);
-      
+
       $this->variant_new_images = [];
 
       $this->successMessage = 'Produk berhasil diperbarui!';
@@ -244,6 +244,29 @@ class Edit extends Component
     }
 
     $this->errorMessage = 'Data tidak ditemukan.';
+  }
+
+
+  public function updateProduct()
+  {
+
+
+    $this->validate();
+
+    if ($this->product->variants()->exists() && $this->id_category != $this->product->id_category) {
+      $this->addError('id_category', 'Kategori tidak dapat diubah karena produk memiliki varian. Hapus semua varian terlebih dahulu.');
+      $this->errorMessage = 'Kategori tidak dapat diubah karena produk memiliki varian.';
+      return;
+    }
+
+    $this->product->update([
+      'nama_product' => $this->nama_product,
+      'id_brand' => $this->id_brand,
+      'id_category' => $this->id_category,
+      'deskripsi' => $this->deskripsi,
+    ]);
+
+    $this->dispatch('notify', type: 'success', message: 'Produk berhasil diperbarui!');
   }
 
   public function render()
