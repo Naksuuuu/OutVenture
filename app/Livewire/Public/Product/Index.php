@@ -14,12 +14,14 @@ class Index extends Component
   use WithPagination;
 
   public $selectedCategory = '';
+  public $selectedBrand = '';
   public $selectedColor = '';
   public $selectedSize = '';
   public $selectedSort = 'latest';
 
   protected $queryString = [
     'selectedCategory' => ['except' => ''],
+    'selectedBrand' => ['except' => ''],
     'selectedColor' => ['except' => ''],
     'selectedSize' => ['except' => ''],
     'selectedSort' => ['except' => 'latest']
@@ -32,6 +34,11 @@ class Index extends Component
   }
 
   public function updatedSelectedCategory()
+  {
+    $this->resetPage();
+  }
+
+  public function updatedSelectedBrand()
   {
     $this->resetPage();
   }
@@ -49,6 +56,7 @@ class Index extends Component
   public function clearFilters()
   {
     $this->selectedCategory = '';
+    $this->selectedBrand = '';
     $this->selectedColor = '';
     $this->selectedSize = '';
     $this->selectedSort = 'latest';
@@ -68,6 +76,11 @@ class Index extends Component
     // Filter by category
     if ($this->selectedCategory) {
       $query->where('id_category', $this->selectedCategory);
+    }
+
+    // Filter by brand
+    if ($this->selectedBrand) {
+      $query->where('id_brand', $this->selectedBrand);
     }
 
     // Filter by color
@@ -104,6 +117,7 @@ class Index extends Component
 
     // Get available categories and colors for filter
     $categories = Category::orderBy('nama_category')->get();
+    $allBrands = Brand::orderBy('nama_brand')->get();
     $colors = Color::orderBy('nama_warna')->get();
 
     // Get sizes based on selected category
@@ -123,6 +137,7 @@ class Index extends Component
 
     return view('livewire.public.product.index', [
       'brands' => $brands,
+      'allBrands' => $allBrands,
       'products' => $products,
       'categories' => $categories,
       'colors' => $colors,

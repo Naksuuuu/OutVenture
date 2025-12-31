@@ -57,10 +57,8 @@
                         </div>
                     </div>
                 @empty
-                    <div class="p-12 text-center">
-                        <x-lucide-package-open class="w-12 h-12 text-slate-300 mx-auto mb-3" />
-                        <p class="text-slate-500 text-sm font-medium">Belum ada produk</p>
-                    </div>
+                    <x-ui.empty-state icon="package-open" title="Produk Kosong"
+                        message="Belum ada produk yang sesuai filter" />
                 @endforelse
             </div>
         </div>
@@ -123,14 +121,11 @@
                         </x-ui.table.row>
                     @empty
                         <x-ui.table.row>
-                            <x-ui.table.cell colspan="6" class="py-16 text-center">
-                                <div class="flex flex-col items-center justify-center">
-                                    <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
-                                        <x-lucide-package-open class="w-8 h-8 text-slate-300" />
-                                    </div>
-                                    <p class="text-slate-800 font-bold mb-1">Tidak ada produk</p>
-                                    <p class="text-slate-400 text-sm">Mulai dengan menambahkan produk baru</p>
-                                </div>
+                            <x-ui.table.cell colspan="6">
+                                <x-ui.empty-state full icon="package-open" title="Tidak ada Produk"
+                                    message="Belum ada produk. Tambahkan produk baru untuk mengatur produk."
+                                    shadow="shadow-none" border="border-0" rounded="rounded-2xl" buttonText="Buat Produk"
+                                    buttonUrl="{{ route('admin.products.create') }}" />
                             </x-ui.table.cell>
                         </x-ui.table.row>
                     @endforelse

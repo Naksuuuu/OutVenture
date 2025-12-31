@@ -31,8 +31,7 @@ class GoogleController extends Controller
                 'nama_lengkap' => $userFromGoogle->getName(),
                 'google_id' => $userFromGoogle->getId(),
                 'email_verified_at' => now(),
-                'password'  => bcrypt('12345678'),
-                'role' => 'user',
+                'password' => bcrypt('12345678'),
                 'no_telepon' => null,
             ]
         );

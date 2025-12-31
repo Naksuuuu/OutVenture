@@ -77,14 +77,9 @@
             </x-ui.card-item>
 
         @empty
-            <div class="col-span-full bg-white rounded-2xl p-16 text-center border-2 border-dashed border-slate-200">
-                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <x-lucide-ruler class="w-8 h-8 text-slate-300" />
-                </div>
-                <p class="text-slate-800 font-bold text-lg">Belum ada grup ukuran</p>
-                <p class="text-sm text-slate-400 mt-1 mb-6">Tambahkan grup ukuran baru untuk mengatur varian produk</p>
-                <x-ui.link href="{{ route('admin.sizes.create') }}" label="Buat Grup Ukuran" icon="plus" variant="create" />
-            </div>
+            <x-ui.empty-state full icon="ruler" title="Grup Ukuran Kosong"
+                message="Belum ada grup ukuran. Tambahkan grup ukuran baru untuk mengatur varian produk."
+                buttonText="Buat Grup Ukuran" buttonUrl="{{ route('admin.sizes.create') }}" />
         @endforelse
     </div>
 

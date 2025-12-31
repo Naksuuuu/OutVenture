@@ -60,17 +60,9 @@
                 </x-slot>
             </x-ui.card-item>
         @empty
-            <div class="col-span-full bg-white rounded-2xl p-16 text-center border-2 border-dashed border-slate-200">
-                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <x-lucide-palette class="w-8 h-8 text-slate-300" />
-                </div>
-                <p class="text-slate-800 font-bold text-lg">Belum ada warna</p>
-                <p class="text-sm text-slate-400 mt-1">Tambahkan warna baru untuk varian produk</p>
-                <div class="mt-6">
-                    <x-ui.link href="{{ route('admin.colors.create') }}" label="Buat Warna Baru" icon="plus"
-                        variant="create" />
-                </div>
-            </div>
+            <x-ui.empty-state full icon="palette" title="Warna Kosong"
+                message="Belum ada warna yang ditambahkan. Tambahkan warna baru untuk varian produk."
+                buttonText="Buat Warna Baru" buttonUrl="{{ route('admin.colors.create') }}" />
         @endforelse
     </div>
 

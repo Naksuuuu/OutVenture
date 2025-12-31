@@ -108,8 +108,12 @@
                             </div>
                         </div>
                     @empty
-                        <div class="p-4 bg-slate-50 rounded-xl text-center italic text-slate-400 text-sm">Belum ada data
-                        </div>
+                        <x-ui.empty-state
+                            icon="trending-up"
+                            title="Belum Ada Data"
+                            message="Data penjualan belum tersedia"
+                            class="py-8 bg-slate-50 border border-dashed border-slate-100 rounded-xl"
+                        />
                     @endforelse
                 </div>
             </x-ui.card-item>
@@ -150,8 +154,9 @@
                                     </div>
                                 </div>
                             @empty
-                                <div class="px-3 py-2 rounded-xl bg-slate-50 text-center text-slate-400 text-sm">Tidak
-                                    ada stok rendah.</div>
+                                <div class="px-3 py-4 rounded-xl bg-slate-50 text-center text-slate-400 text-sm border border-slate-100">
+                                    <p class="font-medium italic">Tidak ada stok rendah.</p>
+                                </div>
                             @endforelse
                         </div>
                     </div>

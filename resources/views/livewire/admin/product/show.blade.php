@@ -153,9 +153,11 @@
                                                             </x-ui.table.row>
                                                         @empty
                                                             <x-ui.table.row>
-                                                                <x-ui.table.cell colspan="4"
-                                                                    class="text-center text-slate-400 text-xs italic py-4">
-                                                                    Belum ada spesifikasi
+                                                                <x-ui.table.cell colspan="4">
+                                                                    <x-ui.empty-state icon="clipboard-list"
+                                                                        title="Belum Ada Spesifikasi"
+                                                                        message="Varian ini belum memiliki spesifikasi ukuran/stok"
+                                                                        class="py-4" />
                                                                 </x-ui.table.cell>
                                                             </x-ui.table.row>
                                                         @endforelse
@@ -167,9 +169,8 @@
                                 </x-slot>
                             </x-ui.card-item>
                         @empty
-                            <div class="col-span-full py-12 text-center">
-                                <p class="text-slate-400 italic">Belum ada varian produk.</p>
-                            </div>
+                            <x-ui.empty-state full icon="layers" title="Belum Ada Varian"
+                                message="Produk ini belum memiliki varian warna atau spesifikasi." />
                         @endforelse
                     </div>
                 </div>

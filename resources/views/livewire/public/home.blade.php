@@ -30,7 +30,11 @@
 
                 </div>
             @empty
-                <x-ui.empty-state message="Belum ada kategori" class="w-full" />
+                <div class="w-full flex items-center justify-center">
+                    <x-ui.empty-state full icon="package-open" title="Belum Ada Kategori" padding="p-2" class="py-2!"
+                        message="Tunggu Admin Menambahkan Kategori!" shadow="shadow-none" border="border-0"
+                        rounded="rounded-2xl" />
+                </div>
             @endforelse
 
         </div>
@@ -70,7 +74,11 @@
                     </div>
                 </div>
             @empty
-                <x-ui.empty-state message="Belum ada brand pilihan" class="w-full" />
+                <div class="w-full flex items-center justify-center">
+                    <x-ui.empty-state full icon="package-open" title="Belum Ada Brand Pilihan" padding="p-2" class="py-2!"
+                        message="Tunggu Admin Menambahkan Brand Pilihan!" shadow="shadow-none" border="border-0"
+                        rounded="rounded-2xl" />
+                </div>
             @endforelse
         </div>
     </div>
@@ -123,7 +131,11 @@
             @forelse ($latestProducts as $product)
                 <x-product-card :product="$product" />
             @empty
-                <x-ui.empty-state message="Belum ada produk tersedia" />
+                <div class="w-full col-span-5">
+                    <x-ui.empty-state full icon="package-open" title="Belum Ada Produk Tersedia" padding="p-2"
+                        class="mx-auto py-2!" message="Tunggu Admin Menambahkan Produk!" shadow="shadow-none"
+                        border="border-0" rounded="rounded-2xl" />
+                </div>
             @endforelse
         </div>
     </div>

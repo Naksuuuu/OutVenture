@@ -76,11 +76,9 @@
 
 
         @empty
-            <div class="col-span-full bg-white rounded-2xl p-16 text-center border border-dashed border-gray-300">
-                <x-lucide-package-open class="w-16 h-16 mx-auto text-gray-300 mb-4" />
-                <p class="text-gray-500 font-medium">Belum ada brand</p>
-                <p class="text-sm text-gray-400 mt-2">Klik tombol "Tambah Brand" untuk membuat brand baru</p>
-            </div>
+            <x-ui.empty-state full icon="package-open" title="Tidak ada Brand "
+                message="Belum ada brand. Tambahkan brand baru untuk mengatur brand." shadow="shadow-none" border="border-0"
+                rounded="rounded-2xl" buttonText="Buat Brand" buttonUrl="{{ route('admin.brands.create') }}" />
         @endforelse
     </div>
     <div class="px-6 py-4 ">

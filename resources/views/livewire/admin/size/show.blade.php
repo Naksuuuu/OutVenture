@@ -74,11 +74,8 @@
                                     @endforeach
                                 </div>
                             @else
-                                <div
-                                    class="text-center py-8 text-slate-400 bg-slate-50 rounded-2xl border border-dashed border-slate-200">
-                                    <x-lucide-ruler class="w-10 h-10 mx-auto text-slate-300 mb-2" />
-                                    <p class="text-sm italic font-medium">Belum ada nilai ukuran.</p>
-                                </div>
+                                <x-ui.empty-state icon="ruler" title="Size Kosong" message="Belum ada nilai ukuran."
+                                    class="py-8 bg-slate-50 border border-dashed border-slate-200 rounded-2xl" />
                             @endif
                         </div>
 
@@ -107,9 +104,11 @@
                                             </div>
                                             <div>
                                                 <h4 class="font-bold text-slate-800 text-sm line-clamp-1">
-                                                    {{ $category->nama_category }}</h4>
+                                                    {{ $category->nama_category }}
+                                                </h4>
                                                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-                                                    {{ $category->products_count ?? 0 }} Produk</p>
+                                                    {{ $category->products_count ?? 0 }} Produk
+                                                </p>
                                             </div>
                                         </div>
                                     @endforeach

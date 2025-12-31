@@ -82,11 +82,13 @@
                     </x-ui.table.row>
                 @empty
                     <x-ui.table.row>
-                        <x-ui.table.cell colspan="7" class="py-12 text-center">
-                            <div class="flex flex-col items-center justify-center">
-                                <x-lucide-package-open class="w-12 h-12 text-slate-300 mb-2" />
-                                <p class="text-slate-500 text-sm">Belum ada pesanan</p>
-                            </div>
+                        <x-ui.table.cell colspan="7">
+                            <x-ui.empty-state
+                                icon="package-open"
+                                title="Belum ada pesanan"
+                                message="Pesanan akan muncul di sini"
+                                class="py-8"
+                            />
                         </x-ui.table.cell>
                     </x-ui.table.row>
                 @endforelse
@@ -171,13 +173,12 @@
                 </x-slot>
             </x-ui.card-item>
         @empty
-            <div class="col-span-full bg-white rounded-2xl p-16 text-center border-2 border-dashed border-slate-200">
-                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <x-lucide-package-open class="w-8 h-8 text-slate-300" />
-                </div>
-                <p class="text-slate-800 font-bold text-lg">Belum ada pesanan</p>
-                <p class="text-sm text-slate-400 mt-1">Pesanan akan muncul di sini ketika pelanggan melakukan pembelian</p>
-            </div>
+            <x-ui.empty-state
+                full
+                icon="package-open"
+                title="Belum ada pesanan"
+                message="Pesanan akan muncul di sini ketika pelanggan melakukan pembelian"
+            />
         @endforelse
     </div>
 

@@ -78,13 +78,11 @@
                                                 </div>
                                             </div>
 
-                                            @if (count($sizeValues) > 1)
-                                                <div class="mt-1">
-                                                    <x-ui.button type="button"
-                                                        @click="$dispatch('open-delete-modal', { id: {{ $index }} })"
-                                                        variant="delete" icon="trash" size="md" class="bg-white shadow-sm" />
-                                                </div>
-                                            @endif
+                                            <div class="mt-1">
+                                                <x-ui.button type="button"
+                                                    @click="$dispatch('open-delete-modal', { id: {{ $index }} })"
+                                                    variant="delete" icon="trash" size="md" class="bg-white shadow-sm" />
+                                            </div>
                                         </div>
                                     @endforeach
 
@@ -111,8 +109,8 @@
 
     </div>
 
-    <x-ui.modal.delete title="Hapus Nilai Ukuran?" message="Yakin ingin menghapus nilai ukuran ini?"
-        action="deleteValue" :errorMessage="$errorMessage" />
+    <x-ui.modal.delete trigger="open-delete-modal" title="Hapus Nilai Ukuran?"
+        message="Yakin ingin menghapus nilai ukuran ini?" action="deleteValue" :errorMessage="$errorMessage" />
 
     <div class="flex items-center justify-between mt-12">
         <x-ui.back-link href="{{ route('admin.sizes.index') }}" wire:navigate label="Kembali ke Daftar"

@@ -45,13 +45,14 @@
                                         <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-0.5">
                                             Date</p>
                                         <p class="text-sm font-semibold text-gray-900">
-                                            {{ $order->tgl_order->format('d M Y') }}</p>
+                                            {{ $order->tgl_order->format('d M Y') }}
+                                        </p>
                                     </div>
                                 </div>
                                 <div>
-                                    @php
-                                        $isPaid = $order->status_pembayaran == 1;
-                                    @endphp
+                        @php
+                            $isPaid = $order->status_pembayaran == 1;
+                        @endphp
                                     <span
                                         class="px-3 py-1.5 text-[11px] font-black uppercase rounded-md {{ $isPaid ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700' }}">
                                         {{ $isPaid ? 'Lunas' : 'Belum Bayar' }}
@@ -69,7 +70,8 @@
                                         <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-0.5">
                                             Items</p>
                                         <p class="text-sm font-semibold text-gray-900">
-                                            {{ $order->items->sum('quantity') }} Item</p>
+                                            {{ $order->items->sum('quantity') }} Item
+                                        </p>
                                     </div>
                                     <div>
                                         <p class="text-[10px] text-gray-400 uppercase font-bold tracking-widest mb-0.5">
@@ -111,20 +113,9 @@
                 {{ $orders->links() }}
             </div>
         @else
-            <x-ui.empty-state 
-                full
-                icon="shopping-bag"
-                title="Belum ada pesanan"
-                button-text="Mulai Belanja"
-                button-url="{{ route('products.index') }}">
-                <p class="text-gray-500 max-w-sm mx-auto mb-8 text-sm">
-                    @if ($statusFilter !== 'all')
-                        Anda tidak memiliki pesanan dengan status <strong>{{ $statusFilter }}</strong> saat ini.
-                    @else
-                        Sepertinya Anda belum melakukan pemesanan apapun. Mari jelajahi koleksi terbaik kami!
-                    @endif
-                </p>
-            </x-ui.empty-state>
+            <x-ui.empty-state full icon="shopping-bag" title="Belum ada pesanan"
+                message="{{ $statusFilter !== 'all' ? 'Anda tidak memiliki pesanan dengan status ' . $statusFilter . ' saat ini.' : 'Sepertinya Anda belum melakukan pemesanan apapun. Mari jelajahi koleksi terbaik kami!' }}"
+                button-text="Mulai Belanja" button-url="{{ route('products.index') }}" />
         @endif
 
     </div>
@@ -145,21 +136,21 @@
                 }
 
                 window.snap.pay(snapToken, {
-                    onSuccess: function(result) {
+                    onSuccess: function (result) {
                         console.log('Payment success:', result);
                         window.location.href =
                             '{{ route('user.orders.index') }}?payment=success';
                     },
-                    onPending: function(result) {
+                    onPending: function (result) {
                         console.log('Payment pending:', result);
                         window.location.href =
                             '{{ route('user.orders.index') }}?payment=pending';
                     },
-                    onError: function(result) {
+                    onError: function (result) {
                         console.log('Payment error:', result);
                         alert('Pembayaran gagal, silakan coba lagi');
                     },
-                    onClose: function() {
+                    onClose: function () {
                         console.log('Payment popup closed');
                     }
                 });
