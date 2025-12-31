@@ -28,6 +28,9 @@ class Index extends Component
   ];
 
 
+  /**
+   * Mereset pagination saat filter diubah.
+   */
   public function updatedSelectedSort()
   {
     $this->resetPage();
@@ -53,6 +56,9 @@ class Index extends Component
     $this->resetPage();
   }
 
+  /**
+   * Menghapus semua filter yang aktif.
+   */
   public function clearFilters()
   {
     $this->selectedCategory = '';
@@ -63,6 +69,9 @@ class Index extends Component
     $this->resetPage();
   }
 
+  /**
+   * Merender halaman daftar produk dengan filter dan pagination.
+   */
   public function render()
   {
     $query = Product::query()

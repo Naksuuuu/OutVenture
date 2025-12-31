@@ -16,6 +16,9 @@ class Index extends Component
 
     protected $queryString = ['search'];
 
+    /**
+     * Mereset halaman pagination saat kata kunci pencarian berubah.
+     */
     public function updatingSearch()
     {
         $this->resetPage();
@@ -24,6 +27,9 @@ class Index extends Component
 
 
 
+    /**
+     * Menghapus warna dari database.
+     */
     public function delete($id)
     {
         $this->errorMessage = '';
@@ -46,6 +52,9 @@ class Index extends Component
         $this->dispatch('notify', type: 'success', message: 'Warna berhasil dihapus!');
     }
 
+    /**
+     * Merender daftar warna dengan pencarian dan pagination.
+     */
     public function render()
     {
         $query = Color::withCount('productVariants')->orderBy('id', 'asc');

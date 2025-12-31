@@ -13,6 +13,9 @@ class GoogleSetPassword extends Component
   public $password_confirmation;
   public $googleData;
 
+  /**
+   * Menyiapkan data pengguna dari sesi Google saat komponen dimuat.
+   */
   public function mount()
   {
     $this->googleData = session('google_user_data');
@@ -26,6 +29,9 @@ class GoogleSetPassword extends Component
     'password' => 'required|min:8|confirmed',
   ];
 
+  /**
+   * Menyimpan pengguna baru dengan password yang telah ditetapkan.
+   */
   public function save()
   {
     $this->validate();
@@ -48,6 +54,9 @@ class GoogleSetPassword extends Component
     return redirect()->route('home');
   }
 
+  /**
+   * Merender tampilan halaman set password untuk akun Google.
+   */
   public function render()
   {
     return view('livewire.auth.google-set-password')->layout('components.layouts.auth', ['title' => 'Set Password']);

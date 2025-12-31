@@ -26,6 +26,9 @@ class Edit extends Component
 
   ];
 
+  /**
+   * Menyiapkan data awal kategori yang akan diedit.
+   */
   public function mount(Category $category)
   {
     $this->category = $category;
@@ -34,6 +37,9 @@ class Edit extends Component
     $this->oldImage = $this->category->image;
   }
 
+  /**
+   * Memperbarui data kategori ke database.
+   */
   public function update()
   {
     $this->validate();
@@ -57,11 +63,17 @@ class Edit extends Component
     $this->dispatch('notify', type: 'success', message: 'Category berhasil diperbarui!');
   }
 
+  /**
+   * Memuat ulang data kategori dari database.
+   */
   public function refreshCategory()
   {
     $this->category->refresh();
   }
 
+  /**
+   * Menghapus file gambar dari penyimpanan publik.
+   */
   protected function deletePublicFile(?string $path): void
   {
     if (!$path)
@@ -78,6 +90,9 @@ class Edit extends Component
     }
   }
 
+  /**
+   * Merender tampilan halaman edit kategori.
+   */
   public function render()
   {
     return view('livewire.admin.category.edit', ['sizes' => SizeGroup::all()])

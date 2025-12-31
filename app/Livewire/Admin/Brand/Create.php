@@ -25,6 +25,9 @@ class Create extends Component
     'is_trusted' => 'boolean',
   ];
 
+  /**
+   * Menyimpan data merek baru ke database.
+   */
   public function save()
   {
     $this->validate();
@@ -44,6 +47,9 @@ class Create extends Component
     return redirect()->route('admin.brands.index')->with('notifySuccess', 'Merek Berhasil Dibuat!');
   }
 
+  /**
+   * Merender tampilan halaman pembuatan merek.
+   */
   public function render()
   {
     return view('livewire.admin.brand.create')

@@ -20,6 +20,9 @@ class Edit extends Component
     'sizeValues.*.sort_order' => 'nullable|integer',
   ];
 
+  /**
+   * Menyiapkan data grup ukuran yang akan diedit.
+   */
   public function mount($sizeGroupId)
   {
     $this->sizeGroup = SizeGroup::with([
@@ -39,6 +42,9 @@ class Edit extends Component
 
   public $errorMessage = '';
 
+  /**
+   * Menambahkan form input untuk nilai ukuran baru.
+   */
   public function addSizeValue()
   {
     $this->sizeValues[] = [
@@ -48,6 +54,9 @@ class Edit extends Component
     ];
   }
 
+  /**
+   * Menandai nilai ukuran untuk dihapus atau menghapusnya dari daftar input jika belum disimpan.
+   */
   public function deleteValue($index)
   {
     $this->errorMessage = '';
@@ -81,6 +90,9 @@ class Edit extends Component
     $this->dispatch('notify', type: 'success', message: 'Nilai ukuran berhasil dihapus dari daftar (Simpan untuk memproses).');
   }
 
+  /**
+   * Memperbarui grup ukuran dan nilai-nilainya ke database.
+   */
   public function update()
   {
     $this->validate();
@@ -120,6 +132,9 @@ class Edit extends Component
     $this->dispatch('notify', type: 'success', message: 'Size Group Berhasil Diupdate');
   }
 
+  /**
+   * Merender tampilan halaman edit grup ukuran.
+   */
   public function render()
   {
     return view('livewire.admin.size.edit')

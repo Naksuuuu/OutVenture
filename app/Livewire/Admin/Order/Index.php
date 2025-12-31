@@ -21,21 +21,33 @@ class Index extends Component
     #[Url(history: true, keep: true)]
     public $status = 'all';
 
+    /**
+     * Reset pagination saat pencarian berubah.
+     */
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
+    /**
+     * Reset pagination saat sorting berubah.
+     */
     public function updatingSortBy()
     {
         $this->resetPage();
     }
 
+    /**
+     * Reset pagination saat status berubah.
+     */
     public function updatingStatus()
     {
         $this->resetPage();
     }
 
+    /**
+     * Mengunduh semua invoice pesanan dalam format ZIP.
+     */
     public function downloadAllInvoices()
     {
         $orders = Order::with([
@@ -83,6 +95,9 @@ class Index extends Component
         return response()->download($zipPath, $zipFileName)->deleteFileAfterSend(true);
     }
 
+    /**
+     * Merender daftar pesanan dengan filter dan pagination.
+     */
     public function render()
     {
         $orders = Order::with(['user', 'items'])

@@ -15,6 +15,9 @@ class Show extends Component
   public $selectedSize;
   public $availableSizes = [];
 
+  /**
+   * Menyiapkan data detail produk dan variannya.
+   */
   public function mount(Product $product)
   {
     $this->product = $product->load([
@@ -31,6 +34,9 @@ class Show extends Component
     }
   }
 
+  /**
+   * Mengatur varian yang dipilih oleh user.
+   */
   public function selectVariant($variantId)
   {
     $this->selectedVariantId = $variantId;
@@ -38,11 +44,17 @@ class Show extends Component
     $this->loadAvailableSizes();
   }
 
+  /**
+   * Mengatur ukuran yang dipilih oleh user.
+   */
   public function selectSize($sizeId)
   {
     $this->selectedSize = $sizeId;
   }
 
+  /**
+   * Memuat daftar ukuran yang tersedia berdasarkan kategori produk.
+   */
   public function loadAvailableSizes()
   {
     // Load all sizes from category's size group
@@ -51,11 +63,17 @@ class Show extends Component
     }
   }
 
+  /**
+   * Mendapatkan objek varian yang sedang dipilih.
+   */
   public function getSelectedVariantProperty()
   {
     return $this->product->variants->find($this->selectedVariantId);
   }
 
+  /**
+   * Mendapatkan spesifikasi varian (harga & stok) berdasarkan ukuran yang dipilih.
+   */
   public function getSelectedSpecProperty()
   {
     if (!$this->selectedSize || !$this->selectedVariantId) {
@@ -66,6 +84,9 @@ class Show extends Component
     return $variant?->specs->firstWhere('id_size_value', $this->selectedSize);
   }
 
+  /**
+   * Menambahkan produk ke keranjang belanja.
+   */
   public function addToCart()
   {
     if (!Auth::check()) {
@@ -78,7 +99,7 @@ class Show extends Component
     }
 
     $spec = $this->selectedSpec;
-    
+
     if (!$spec || $spec->stok <= 0) {
       $this->dispatch('notify', type: 'error', message: 'Produk tidak tersedia');
       return;
@@ -114,6 +135,9 @@ class Show extends Component
     $this->dispatch('cart-updated');
   }
 
+  /**
+   * Merender tampilan halaman detail produk.
+   */
   public function render()
   {
     return view('livewire.public.product.show')

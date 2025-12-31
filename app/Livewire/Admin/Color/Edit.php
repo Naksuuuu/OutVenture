@@ -13,6 +13,9 @@ class Edit extends Component
     public $isUsedInVariants = false;
     public $variantsCount = 0;
 
+    /**
+     * Mendefinisikan aturan validasi.
+     */
     protected function rules()
     {
         return [
@@ -21,6 +24,9 @@ class Edit extends Component
         ];
     }
 
+    /**
+     * Menyiapkan data awal warna yang akan diedit.
+     */
     public function mount(Color $color)
     {
         $this->color = $color->loadCount('productVariants');
@@ -31,6 +37,9 @@ class Edit extends Component
         $this->isUsedInVariants = $this->variantsCount > 0;
     }
 
+    /**
+     * Memperbarui data warna ke database.
+     */
     public function update()
     {
         if ($this->isUsedInVariants) {
@@ -48,6 +57,9 @@ class Edit extends Component
         return redirect()->route('admin.colors.index')->with('notifySuccess', 'Warna berhasil diperbarui!');
     }
 
+    /**
+     * Merender tampilan halaman edit warna.
+     */
     public function render()
     {
         return view('livewire.admin.color.edit')->layout('components.layouts.admin', ['title' => 'Edit Color']);

@@ -10,6 +10,9 @@ class Show extends Component
 {
   public Order $order;
 
+  /**
+   * Menyiapkan data detail pesanan.
+   */
   public function mount($id)
   {
     $this->order = Order::with([
@@ -25,6 +28,9 @@ class Show extends Component
     }
   }
 
+  /**
+   * Mengunduh invoice pesanan dalam format PDF.
+   */
   public function downloadInvoice()
   {
     // Check if order is paid
@@ -40,6 +46,9 @@ class Show extends Component
     }, 'invoice-' . str_pad($this->order->id, 6, '0', STR_PAD_LEFT) . '.pdf');
   }
 
+  /**
+   * Merender tampilan halaman detail pesanan.
+   */
   public function render()
   {
     return view('livewire.user.order.show')->layout('components.layouts.app', ['title' => 'Order Details']);
