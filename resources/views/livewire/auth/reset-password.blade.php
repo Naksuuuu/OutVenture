@@ -1,22 +1,11 @@
 <div class="bg-white p-10 rounded-xl shadow-sm border border-gray-100 w-96 font-sans">
 
-
-
-
     <div class="mb-6">
         <h2 class="text-xl font-bold text-gray-900 leading-tight uppercase tracking-tight">Reset Password</h2>
-        <p class="text-gray-500 text-sm mt-1 uppercase text-[10px] font-medium tracking-wider">Masukan password baru anda
+        <p class="text-gray-500 text-sm mt-1 uppercase text-[10px] font-medium tracking-wider">Masukan password baru
+            anda
         </p>
     </div>
-
-
-
-    @if (session('success'))
-        <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-md relative mb-4 text-sm">
-            {{ session('success') }}
-        </div>
-    @endif
-
 
     <form wire:submit.prevent="resetPassword">
         <div class="space-y-4">

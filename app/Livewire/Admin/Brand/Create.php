@@ -25,6 +25,17 @@ class Create extends Component
     'is_trusted' => 'boolean',
   ];
 
+  protected $messages = [
+    'nama_brand.required' => 'Nama brand wajib diisi.',
+    'nama_brand.max' => 'Nama brand maksimal 255 karakter.',
+    'image.image' => 'Thumbnail harus berupa gambar.',
+    'image.max' => 'Ukuran thumbnail maksimal 2MB.',
+    'wide_image.image' => 'Banner harus berupa gambar.',
+    'wide_image.max' => 'Ukuran banner maksimal 2MB.',
+    'logo.image' => 'Logo harus berupa gambar.',
+    'logo.max' => 'Ukuran logo maksimal 2MB.',
+  ];
+
   /**
    * Menyimpan data merek baru ke database.
    */

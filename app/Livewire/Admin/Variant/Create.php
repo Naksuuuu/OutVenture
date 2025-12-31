@@ -24,6 +24,13 @@ class Create extends Component
         'image' => 'nullable|image|max:2048',
     ];
 
+    protected $messages = [
+        'id_color.required' => 'Warna wajib dipilih.',
+        'id_color.exists' => 'Warna tidak valid.',
+        'image.image' => 'File harus berupa gambar.',
+        'image.max' => 'Ukuran gambar maksimal 2MB.',
+    ];
+
     protected $listeners = ['variant-deleted' => 'refreshAvailableColors'];
 
     public function mount(Product $product)
