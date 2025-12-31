@@ -14,7 +14,7 @@
                 <div class="relative z-10 flex items-center gap-6">
                     <div
                         class="w-16 h-16 bg-black rounded-2xl flex items-center justify-center shadow-lg  rotate-3 transition-transform hover:rotate-0">
-                        <x-lucide-box class="w-8 h-8 text-white" />
+                        <x-lucide-eye class="w-8 h-8 text-white" />
                     </div>
                     <div>
                         <h1 class="text-3xl font-black tracking-tight uppercase italic">Detail Produk</h1>

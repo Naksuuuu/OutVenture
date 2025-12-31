@@ -1,13 +1,17 @@
 <div>
     <x-ui.card-item class=" border-none! shadow-none! p-0!">
-        <x-slot:header
-            class="flex flex-col md:flex-row items-start gap-3 md:gap-0 md:items-center md:justify-between mb-6">
-            <div class="flex items-center gap-4">
+        <x-slot:header class="px-10 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="relative z-10 flex items-center gap-6">
                 <div
-                    class="w-10 h-10 md:w-12 md:h-12 bg-indigo-600 rounded-2xl flex items-center justify-center shadow-lg shadow-black/10">
-                    <x-lucide-square-pen class="size-6 text-white" />
+                    class="w-16 h-16 bg-emerald-100 rounded-2xl flex items-center justify-center shadow-lg rotate-3 transition-transform hover:rotate-0">
+                    <x-lucide-layers class="w-8 h-8 text-emerald-600" />
                 </div>
-                <h1 class="text-xl font-bold text-slate-800">Variant & Spesifikasi</h1>
+                <div>
+                    <h1 class="text-3xl font-black tracking-tight uppercase italic">Varian Produk</h1>
+                    <p class="text-emerald-500 font-bold mt-1 tracking-wider uppercase text-xs">
+                        Kelola Varian & Spesifikasi
+                    </p>
+                </div>
             </div>
             <livewire:admin.variant.create :product="$product" :key="'variant-create-' . $product->id" />
         </x-slot:header>
@@ -56,7 +60,7 @@
 
                                 @forelse ($variant->specs as $spec)
                                     <div class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3">
-                                        <div class="flex flex-col  items-center">
+                                        <div class="flex flex-col  items-start justify-center">
                                             <span class="text-sm font-medium">UKURAN:
                                                 {{ $spec->size->label_size ?? '-' }}</span>
                                             <span class="text-sm font-medium">SKU:

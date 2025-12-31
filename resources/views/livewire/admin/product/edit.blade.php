@@ -95,7 +95,8 @@
         </x-ui.card-item>
 
         {{-- Variant & Spec Management Card --}}
-        <x-ui.card-item class="p-4 md:p-6 space-y-6 bg-white rounded-[2.5rem] shadow-sm border overflow-hidden">
+        <x-ui.card-item class="p-4 md:p-6 space-y-6 bg-white shadow-sm border overflow-hidden" rounded="rounded-4xl"
+            shadow="shadow-xl shadow-slate-200/50">
             <livewire:admin.variant.index :product="$product" :key="'variant-manager-' . $product->id" />
         </x-ui.card-item>
 
