@@ -4,11 +4,15 @@
     'message' => null,
     'buttonText' => null,
     'buttonUrl' => null,
-])
+    'shadow' => 'shadow-sm',
+    'border' => 'border-gray-100',
+    'rounded' => 'rounded-2xl',
+    'padding' => 'p-16'
+    ])
 
 <div {{ $attributes->merge(['class' => 'col-span-full text-center py-12']) }}>
     @if($attributes->has('full'))
-        <div class="bg-white rounded-2xl shadow-sm p-16 border border-gray-100">
+        <div class="bg-white {{ $rounded }} {{ $shadow }} {{ $padding }} {{ $border }}">
             <div class="inline-flex items-center justify-center w-20 h-20 bg-gray-50 rounded-full mb-6">
                 <x-dynamic-component :component="'lucide-' . $icon" class="h-10 w-10 text-gray-400" />
             </div>

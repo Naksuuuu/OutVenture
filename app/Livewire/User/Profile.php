@@ -14,6 +14,9 @@ class Profile extends Component
   public $nama_lengkap = '';
   public $alamat = '';
 
+  /**
+   * Menyiapkan data profil pengguna saat komponen dimuat.
+   */
   public function mount()
   {
     $this->user = Auth::user();
@@ -21,18 +24,27 @@ class Profile extends Component
     $this->alamat = $this->user->alamat ?? '';
   }
 
+  /**
+   * Membuka modal untuk mengedit nama lengkap.
+   */
   public function openEditNameModal()
   {
     $this->nama_lengkap = $this->user->nama_lengkap;
     $this->showEditNameModal = true;
   }
 
+  /**
+   * Menutup modal edit nama lengkap dan mereset validasi.
+   */
   public function closeEditNameModal()
   {
     $this->showEditNameModal = false;
     $this->resetValidation();
   }
 
+  /**
+   * Memperbarui nama lengkap pengguna.
+   */
   public function updateName()
   {
     $this->validate([
@@ -52,18 +64,27 @@ class Profile extends Component
     $this->dispatch('notify', type: 'success', message: 'Nama berhasil diperbarui.');
   }
 
+  /**
+   * Membuka modal untuk menambah atau mengedit alamat.
+   */
   public function openAddAddressModal()
   {
     $this->alamat = $this->user->alamat ?? '';
     $this->showAddAddressModal = true;
   }
 
+  /**
+   * Menutup modal alamat dan mereset validasi.
+   */
   public function closeAddAddressModal()
   {
     $this->showAddAddressModal = false;
     $this->resetValidation();
   }
 
+  /**
+   * Memperbarui alamat pengguna.
+   */
   public function updateAddress()
   {
     $this->validate([
@@ -83,6 +104,9 @@ class Profile extends Component
     $this->dispatch('notify', type: 'success', message: 'Alamat berhasil diperbarui.');
   }
 
+  /**
+   * Merender tampilan halaman profil pengguna.
+   */
   public function render()
   {
 

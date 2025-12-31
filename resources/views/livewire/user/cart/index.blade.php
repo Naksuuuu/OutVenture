@@ -111,13 +111,26 @@
                             </span>
                         </div>
 
-                        <x-ui.loading-button 
-                            wire:click="checkout"
-                            loading-target="checkout"
-                            loading-text="Processing..."
-                            class="w-full bg-black text-white py-4 text-[11px] font-bold uppercase tracking-[0.2em] rounded-lg hover:bg-gray-800 transition-all shadow-md active:scale-95">
-                            Checkout
-                        </x-ui.loading-button>
+                        @php
+                            $hasAddress = !empty(auth()->user()->alamat);
+                        @endphp
+
+                        <div class="space-y-3">
+                            <x-ui.loading-button wire:click="checkout" loading-target="checkout"
+                                loading-text="Processing..." :disabled="!$hasAddress"
+                                class="w-full py-4 text-[11px] font-bold uppercase tracking-[0.2em] rounded-lg transition-all shadow-md {{ $hasAddress ? 'bg-black text-white hover:bg-gray-800 active:scale-95' : 'bg-gray-300 text-gray-500 cursor-not-allowed shadow-none' }}">
+                                Checkout
+                            </x-ui.loading-button>
+
+                            @if (!$hasAddress)
+                                <p class="text-[10px] text-red-500 text-center leading-tight">
+                                    Anda belum mengatur alamat pengiriman. <br>
+                                    Silakan <a href="{{ route('user.profile') }}"
+                                        class="underline font-bold hover:text-red-700">atur alamat</a> untuk melanjutkan
+                                    checkout.
+                                </p>
+                            @endif
+                        </div>
 
                         <a href="{{ route('products.index') }}" wire:navigate
                             class="block text-center mt-3 text-[11px] text-gray-600 hover:text-black font-bold uppercase">
@@ -127,14 +140,9 @@
                 </div>
             </div>
         @else
-            <x-ui.empty-state 
-                full
-                icon="shopping-bag"
-                title="Keranjang Kosong"
+            <x-ui.empty-state full icon="shopping-bag" title="Keranjang Kosong"
                 message="Keranjang belanja Anda masih kosong. Mari jelajahi koleksi terbaik kami dan temukan produk favorit Anda!"
-                button-text="Mulai Belanja"
-                button-url="{{ route('products.index') }}"
-            />
+                button-text="Mulai Belanja" button-url="{{ route('products.index') }}" />
         @endif
 
     </div>

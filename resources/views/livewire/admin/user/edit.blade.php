@@ -1,58 +1,81 @@
-<div class="fixed inset-0 flex justify-center items-center bg-gray-50 overflow-hidden w-full h-[100dvh] p-4 font-sans">
-
-    <div
-        class="bg-white w-full max-w-[320px] md:max-w-sm rounded-[2rem] shadow-xl p-6 md:p-10 lg:mt-16 border border-gray-100 mx-auto">
-
-        <div class="text-center mb-5 md:mb-8">
-            <h2 class="font-black uppercase m-0 text-gray-900 tracking-wide text-base md:text-2xl">
-                Update Access
-            </h2>
-            <p class="text-gray-500 text-[10px] md:text-sm mt-1">
-                Hanya hak akses yang dapat diperbarui
-            </p>
-        </div>
-
-        <div class="mb-4 md:mb-6 p-3 md:p-4 bg-gray-50 rounded-2xl border border-gray-200">
-            <small class="block text-gray-400 font-extrabold text-[10px] uppercase mb-1 tracking-wide">
-                User Account
-            </small>
-            <div class="font-bold text-gray-900 text-[11px] md:text-base break-all leading-tight">
-                {{ $admin->email ?? 'admin@outventure.com' }}
+<div class="max-w-2xl mx-auto">
+    <x-ui.card-item class="rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+        <x-slot:header class="bg-emerald-600 text-white p-8 relative overflow-hidden">
+            <div
+                class="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl">
             </div>
-        </div>
-
-        <div class="mb-6 md:mb-10">
-            <label class="block font-extrabold mb-1.5 text-[10px] text-gray-900 uppercase tracking-wide">
-                Pilih Role Baru
-            </label>
-            @if ($admin->role === 'superadmin')
-                <p class="text-[10px] text-red-600 mb-2 font-semibold">Role superadmin tidak dapat diubah.</p>
+            <div class="flex items-center gap-6 relative z-10">
                 <div
-                    class="inline-block bg-gray-900 text-white px-4 py-1.5 rounded-lg text-xs font-extrabold uppercase">
-                    SUPERADMIN</div>
-            @else
-                <div class="relative">
-                    <select wire:model="role"
-                        class="w-full px-4 py-2.5 md:py-4 rounded-xl border-2 border-gray-900 bg-white font-extrabold outline-none appearance-none text-xs md:text-base text-gray-900 uppercase">
-                        <option value="admin">ADMIN</option>
-                        <option value="user">USER</option>
-                    </select>
-                    <div
-                        class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-900 text-[8px] md:text-[10px]">
-                        ▼
+                    class="w-16 h-16 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center shadow-inner border border-white/30">
+                    <x-lucide-settings class="w-8 h-8 text-white" />
+                </div>
+                <div>
+                    <h1 class="text-3xl font-black tracking-tight text-white mb-1">Update Akses</h1>
+                    <p class="text-emerald-100 font-medium">Pengaturan hak akses pengguna</p>
+                </div>
+            </div>
+        </x-slot:header>
+
+        <div class="p-8 md:p-10 space-y-10">
+            <div class="space-y-8">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                    <span
+                        class="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 font-bold text-sm">01</span>
+                    <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">Informasi Akun</h2>
+                </div>
+
+                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                    <x-ui.form.label label="Email Pengguna" class="mb-2" />
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-slate-200 shadow-sm text-slate-500">
+                            <x-lucide-mail class="w-5 h-5" />
+                        </div>
+                        <p class="text-lg font-bold text-slate-800 break-all">{{ $admin->email }}</p>
                     </div>
+                </div>
+            </div>
+
+            <div class="space-y-8">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-100">
+                    <span
+                        class="flex items-center justify-center w-8 h-8 rounded-full bg-emerald-50 text-emerald-600 font-bold text-sm">02</span>
+                    <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">Pengaturan Role</h2>
+                </div>
+
+                @if ($admin->role === 'superadmin')
+                    <div class="bg-amber-50 border-l-4 border-amber-400 p-5 rounded-r-xl">
+                        <div class="flex items-start gap-4">
+                            <x-lucide-shield-alert class="w-6 h-6 text-amber-500 shrink-0" />
+                            <div>
+                                <h3 class="font-bold text-amber-800">Akses Terkunci</h3>
+                                <p class="text-sm text-amber-700 mt-1">Role <strong>SUPERADMIN</strong> tidak dapat diubah
+                                    demi keamanan sistem.</p>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div>
+                        <x-ui.form.label label="Pilih Role Baru" />
+                        <x-ui.form.select wire:model="role" class="w-full">
+                            <option value="admin">ADMIN</option>
+                            <option value="user">USER</option>
+                        </x-ui.form.select>
+
+                    </div>
+                @endif
+            </div>
+
+            @if ($admin->role !== 'superadmin')
+                <div class="flex items-center justify-end pt-6 border-t border-slate-100">
+                    <x-ui.button wire:click="update" variant="update" size="lg" label="Simpan Perubahan"
+                        class="px-10 shadow-emerald-200 shadow-xl" />
                 </div>
             @endif
         </div>
 
-        <div class="flex gap-2 md:gap-3 items-center">
-            @if ($admin->role !== 'superadmin')
-                <button wire:click="update"
-                    class="flex-[2] bg-gray-900 text-white border-none py-2.5 md:py-4 rounded-xl font-extrabold cursor-pointer uppercase text-[11px] md:text-sm transition-all hover:bg-black active:scale-95">
-                    Simpan
-                </button>
-            @endif
-            <x-ui.back-link href="{{ route('admin.users.index') }}"  />
+        <div class="bg-slate-50 px-8 py-6 flex items-center border-t border-slate-100">
+            <x-ui.back-link href="{{ route('admin.users.index') }}" />
         </div>
-    </div>
+    </x-ui.card-item>
 </div>

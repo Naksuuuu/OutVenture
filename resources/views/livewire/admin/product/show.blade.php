@@ -1,125 +1,191 @@
-<div class="">
-    <div class="mx-auto">
+<div class="py-8 px-4 sm:px-6">
+    <div class="flex items-center justify-between mb-12">
+        <x-ui.back-link href="{{ route('admin.products.index') }}" wire:navigate label="Kembali ke Daftar"
+            class="text-slate-500 hover:text-slate-800 text-[11px] font-bold uppercase tracking-widest transition-colors flex items-center group" />
+    </div>
 
-        <div
-            class="bg-white rounded-3xl shadow-[0_10px_40px_-15px_rgba(0,0,0,0.08)] border border-slate-100 overflow-hidden">
+    <div class="mx-auto space-y-10">
 
-            <div
-                class="glass-header px-8 py-8 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                <div class="flex items-center space-x-4">
+        {{-- Product Information Card --}}
+        <x-ui.card-item class="overflow-hidden" rounded="rounded-[2.5rem]" shadow="shadow-xl shadow-slate-200/50"
+            border="border border-slate-100">
+
+            <x-slot:header class="px-10 py-10 ">
+                <div class="relative z-10 flex items-center gap-6">
                     <div
-                        class="w-12 h-12 bg-black rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-200">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M3 7h18M6 12h12M10 17h4"></path>
-                        </svg>
+                        class="w-16 h-16 bg-black rounded-2xl flex items-center justify-center shadow-lg  rotate-3 transition-transform hover:rotate-0">
+                        <x-lucide-eye class="w-8 h-8 text-white" />
                     </div>
                     <div>
-                        <h1 class="text-2xl font-bold tracking-tight text-slate-800">Detail Produk</h1>
-                        <p class="text-sm text-slate-500 mt-1">{{ $product->nama_product }}</p>
+                        <h1 class="text-3xl font-black tracking-tight uppercase italic">Detail Produk</h1>
+                        <p class="text-slate-400 font-bold mt-1 tracking-wider uppercase text-xs">
+                            {{ $product->nama_product }}
+                        </p>
                     </div>
                 </div>
-            </div>
+            </x-slot:header>
 
-            <div class="p-8 md:p-10 space-y-10">
-
-                <section>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        <div class="md:col-span-2 space-y-3">
-                            <p class="text-[13px] font-bold text-slate-600 uppercase tracking-wider">Deskripsi</p>
-                            <div class="bg-slate-50 rounded-2xl px-5 py-4 text-slate-800 shadow-inner">
-                                {{ $product->deskripsi ?? 'Tidak ada deskripsi.' }}
+            <x-slot>
+                <div class="p-8 md:p-12">
+                    <div class="flex flex-col gap-12">
+                        <div class="space-y-8">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span
+                                    class="size-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-black text-sm">01</span>
+                                <h2 class="font-extrabold uppercase tracking-wide">Informasi Dasar</h2>
                             </div>
-                        </div>
-                        <div class="space-y-3">
-                            <p class="text-[13px] font-bold text-slate-600 uppercase tracking-wider">Informasi</p>
-                            <div class="bg-slate-50 rounded-2xl px-5 py-4 text-slate-800 shadow-inner space-y-2">
-                                <div class="flex items-center justify-between"><span
-                                        class="text-slate-500 text-sm">Kategori</span><span
-                                        class="font-medium text-sm">{{ $product->category->nama_category ?? '-' }}</span>
-                                </div>
-                                <div class="flex items-center justify-between"><span
-                                        class="text-slate-500 text-sm">Brand</span><span
-                                        class="font-medium text-sm">{{ $product->brand->nama_brand ?? '-' }}</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
 
-                <section>
-                    <div class="flex items-center space-x-2 mb-6">
-                        <span class="text-indigo-600 font-bold text-lg">01</span>
-                        <h2 class="text-lg font-bold text-slate-800 uppercase tracking-wide">Varian</h2>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        @forelse ($product->variants as $variant)
-                            <div class="rounded-2xl border border-slate-200 shadow-sm overflow-hidden bg-white">
-                                <div class="p-4 border-b border-slate-100 flex items-center justify-between">
-                                    <span
-                                        class="text-[12px] font-bold text-slate-600 uppercase tracking-wider">Warna</span>
-                                    <span
-                                        class="text-sm font-medium">{{ $variant->color->nama_warna ?? 'Tidak ada' }}</span>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="group md:col-span-2">
+                                    <x-ui.form.label label="Nama Produk" />
+                                    <h3 class="text-lg font-bold text-slate-800">{{ $product->nama_product }}</h3>
                                 </div>
-                                <div class="p-4 space-y-4">
-                                    <div>
-                                        @if ($variant->image)
-                                            <img src="{{ asset('storage/' . $variant->image) }}"
-                                                alt="{{ $product->nama_product }}"
-                                                class="w-full rounded-xl object-cover">
-                                        @else
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor"
-                                                class="w-full h-40 bg-slate-50 rounded-xl text-slate-300">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                                            </svg>
-                                        @endif
+
+                                <div class="group">
+                                    <x-ui.form.label label="Brand" />
+                                    <div class="flex items-center gap-2">
+                                        <div class="px-3 py-1 bg-slate-50 rounded-lg border border-slate-100">
+                                            <span
+                                                class="font-bold text-slate-700">{{ $product->brand->nama_brand ?? '-' }}</span>
+                                        </div>
                                     </div>
+                                </div>
 
-                                    <div class="space-y-3">
-                                        <p class="text-[13px] font-bold text-slate-600 uppercase tracking-wider">
-                                            Spesifikasi</p>
-                                        <div class="space-y-2">
-                                            @forelse ($variant->specs as $spec)
-                                                <div
-                                                    class="flex items-center justify-between bg-slate-50 rounded-xl px-4 py-3">
-                                                    <div class="flex items-center gap-4">
-                                                        <span
-                                                            class="text-sm font-medium">{{ $spec->size->label_size ?? '-' }}</span>
-                                                        <span class="text-xs text-slate-500">SKU:
-                                                            {{ $spec->sku }}</span>
-                                                    </div>
-                                                    <div class="text-right">
-                                                        <div class="text-sm font-bold">Rp
-                                                            {{ number_format($spec->harga, 0, ',', '.') }}</div>
-                                                        <div class="text-[11px] text-slate-500">Stok:
-                                                            {{ $spec->stok }}</div>
-                                                    </div>
-                                                </div>
-                                            @empty
-                                                <div class="text-sm text-slate-500">Belum ada spesifikasi.</div>
-                                            @endforelse
+                                <div class="group">
+                                    <x-ui.form.label label="Kategori" />
+                                    <div class="flex items-center gap-2">
+                                        <div class="px-3 py-1 bg-indigo-50 rounded-lg border border-indigo-100">
+                                            <span
+                                                class="font-bold text-indigo-700">{{ $product->category->nama_category ?? '-' }}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="space-y-8">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span
+                                    class="size-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-black text-sm">02</span>
+                                <h2 class="font-extrabold uppercase tracking-wide">Deskripsi & Metadata</h2>
+                            </div>
+
+                            <div class="group">
+                                <x-ui.form.label label="Deskripsi Lengkap" />
+                                <div
+                                    class="p-6 bg-slate-50 rounded-2xl border border-slate-100 text-slate-600 leading-relaxed text-sm">
+                                    {{ $product->deskripsi ?: 'Tidak ada deskripsi.' }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </x-slot>
+        </x-ui.card-item>
+
+        {{-- Variant & Spec (Read Only) --}}
+        <x-ui.card-item class="overflow-hidden" rounded="rounded-[2.5rem]" shadow="shadow-xl shadow-slate-200/50"
+            border="border border-slate-100">
+            <x-slot:header class="px-10 py-8 bg-slate-50/50 border-b border-slate-100">
+                <div class="flex items-center gap-4">
+                    <x-lucide-layers class="w-6 h-6 text-slate-400" />
+                    <h2 class="text-lg font-black uppercase tracking-wide text-slate-700">Varian & Spesifikasi</h2>
+                </div>
+            </x-slot:header>
+
+            <x-slot>
+                <div class="p-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        @forelse ($product->variants as $variant)
+                            <x-ui.card-item rounded="rounded-3xl"
+                                class="border border-slate-100 shadow-sm overflow-hidden flex flex-col group hover:border-slate-300 transition-all duration-300">
+                                <x-slot:header
+                                    class="px-6 py-4 bg-white border-b border-slate-100 flex justify-between items-center">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-8 h-8 rounded-full shadow-sm ring-1 ring-slate-100"
+                                            style="background-color: {{ $variant->color->hex_code ?? '#000000' }}"></div>
+                                        <div>
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Warna
+                                            </p>
+                                            <h3 class="font-bold text-slate-800">{{ $variant->color->nama_warna }}</h3>
+                                        </div>
+                                    </div>
+                                </x-slot:header>
+                                <x-slot>
+                                    <div class="p-6 space-y-6">
+                                        @if ($variant->image)
+                                            <div
+                                                class="aspect-video w-full rounded-2xl overflow-hidden border border-slate-100 shadow-inner">
+                                                <img src="{{ asset('storage/' . $variant->image) }}"
+                                                    class="w-full h-full object-cover">
+                                            </div>
+                                        @endif
+
+                                        <div class="space-y-3">
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Daftar
+                                                Spesifikasi</p>
+                                            <div class="w-full">
+                                                <x-ui.table class="!border-none">
+                                                    <x-ui.table.body class="!divide-y !divide-dashed !divide-slate-200">
+                                                        @forelse ($variant->specs as $spec)
+                                                            <x-ui.table.row class="hover:bg-transparent">
+                                                                <x-ui.table.cell class="py-2 pl-0">
+                                                                    <span
+                                                                        class="font-mono font-bold text-slate-700 text-sm bg-slate-100 px-2 py-1 rounded">{{ $spec->size->label_size ?? 'ALL' }}</span>
+                                                                </x-ui.table.cell>
+                                                                <x-ui.table.cell class="py-2">
+                                                                    <div class="flex flex-col">
+                                                                        <span
+                                                                            class="text-[10px] text-slate-400 uppercase">SKU</span>
+                                                                        <span
+                                                                            class="font-mono text-xs font-bold text-slate-600">{{ $spec->sku }}</span>
+                                                                    </div>
+                                                                </x-ui.table.cell>
+                                                                <x-ui.table.cell class="py-2 font-bold text-slate-700">
+                                                                    {{ Number::currency($spec->harga, 'IDR', precision: 0) }}
+                                                                </x-ui.table.cell>
+                                                                <x-ui.table.cell class="py-2 text-right pr-0">
+                                                                    <span
+                                                                        class="text-xs font-bold {{ $spec->stok > 10 ? 'text-emerald-600 bg-emerald-50' : 'text-amber-600 bg-amber-50' }} px-2 py-1 rounded-lg border {{ $spec->stok > 10 ? 'border-emerald-100' : 'border-amber-100' }}">
+                                                                        Stok: {{ $spec->stok }}
+                                                                    </span>
+                                                                </x-ui.table.cell>
+                                                            </x-ui.table.row>
+                                                        @empty
+                                                            <x-ui.table.row>
+                                                                <x-ui.table.cell colspan="4">
+                                                                    <x-ui.empty-state icon="clipboard-list"
+                                                                        title="Belum Ada Spesifikasi"
+                                                                        message="Varian ini belum memiliki spesifikasi ukuran/stok"
+                                                                        class="py-4" />
+                                                                </x-ui.table.cell>
+                                                            </x-ui.table.row>
+                                                        @endforelse
+                                                    </x-ui.table.body>
+                                                </x-ui.table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </x-slot>
+                            </x-ui.card-item>
                         @empty
-                            <div class="md:col-span-3 text-sm text-slate-500">Belum ada varian.</div>
+                            <x-ui.empty-state full icon="layers" title="Belum Ada Varian"
+                                message="Produk ini belum memiliki varian warna atau spesifikasi." />
                         @endforelse
                     </div>
-                </section>
-            </div>
+                </div>
+            </x-slot>
+        </x-ui.card-item>
 
-            <div class="bg-slate-50/80 px-8 py-6 flex items-center border-t border-slate-100">
-                <x-ui.back-link href="{{ route('admin.products.index') }}" wire:navigate label="Kembali"
-                    class="text-slate-500 hover:text-slate-800 text-sm font-bold uppercase tracking-widest transition-colors flex items-center group" />
-            </div>
+    </div>
+
+    <div class="flex items-center justify-between mt-12">
+        <x-ui.back-link href="{{ route('admin.products.index') }}" wire:navigate label="Kembali ke Daftar"
+            class="text-slate-500 hover:text-slate-800 text-[11px] font-bold uppercase tracking-widest transition-colors flex items-center group" />
+
+        <div class="flex gap-4">
+            <x-ui.link href="{{ route('admin.products.edit', $product->slug) }}" label="Edit Produk" size="md"
+                variant="update" icon="square-pen" />
         </div>
-
-        <p class="mt-8 text-center text-slate-400 text-xs tracking-wide uppercase">
-            &copy; 2025 Praktikum Web &bull; Management System
-        </p>
     </div>
 </div>

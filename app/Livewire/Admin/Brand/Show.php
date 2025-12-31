@@ -10,11 +10,17 @@ class Show extends Component
 
   public $brand;
 
-  public function mount($brandId)
+  /**
+   * Menyiapkan data brands detail.
+   */
+  public function mount(Brand $brand)
   {
-    $this->brand = Brand::findOrFail($brandId);
+    $this->brand = $brand;
   }
 
+  /**
+   * Merender tampilan detail merek.
+   */
   public function render()
   {
     return view('livewire.admin.brand.show', ['brand' => $this->brand])->layout('components.layouts.admin', ['title' => 'Brand Details']);

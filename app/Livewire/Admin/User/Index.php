@@ -10,27 +10,39 @@ class Index extends Component
 {
     use WithPagination;
 
-    public  $search = '';
-    public  $roleFilter = '';
+    public $search = '';
+    public $roleFilter = '';
     public $sort = '';
 
     protected $queryString = ['search', 'roleFilter', 'sort'];
 
+    /**
+     * Mereset halaman pagination saat kata kunci pencarian berubah.
+     */
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
+    /**
+     * Mereset halaman pagination saat filter peran berubah.
+     */
     public function updatingRoleFilter()
     {
         $this->resetPage();
     }
 
+    /**
+     * Mereset halaman pagination saat sorting berubah.
+     */
     public function updatingSort()
     {
         $this->resetPage();
     }
 
+    /**
+     * Merender daftar pengguna dengan filter dan pagination.
+     */
     public function render()
     {
         $query = User::query();

@@ -22,6 +22,9 @@ class Create extends Component
     'image' => 'nullable|image|max:2048',
   ];
 
+  /**
+   * Menyimpan kategori baru ke database.
+   */
   public function save()
   {
     $this->validate();
@@ -45,6 +48,9 @@ class Create extends Component
     return redirect()->route('admin.categories.index')->with('notifySuccess', 'Category Berhasil Dibuat!');
   }
 
+  /**
+   * Merender tampilan halaman pembuatan kategori.
+   */
   public function render()
   {
     return view('livewire.admin.category.create', ['sizes' => SizeGroup::all()])

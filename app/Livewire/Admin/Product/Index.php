@@ -15,24 +15,61 @@ class Index extends Component
   public $search = '';
   public $category = '';
   public $sort = 'latest';
+  public $errorMessage = '';
 
   protected $queryString = ['search', 'category', 'sort'];
 
+  /**
+   * Mereset halaman pagination saat kata kunci pencarian berubah.
+   */
   public function updatingSearch()
   {
     $this->resetPage();
   }
 
+  /**
+   * Mereset halaman pagination saat filter kategori berubah.
+   */
   public function updatingCategory()
   {
     $this->resetPage();
   }
 
+  /**
+   * Mereset halaman pagination saat sorting berubah.
+   */
   public function updatingSort()
   {
     $this->resetPage();
   }
 
+  /**
+   * Menghapus produk dari database.
+   */
+  public function delete($id)
+  {
+    $this->errorMessage = '';
+    $product = Product::find($id);
+
+    if (!$product) {
+      $this->errorMessage = 'Produk tidak ditemukan.';
+      return;
+    }
+
+    if ($product->variants()->exists()) {
+      $this->errorMessage = 'Produk tidak dapat dihapus karena masih memiliki varian.';
+      return;
+    }
+
+    $product->delete();
+
+    $this->dispatch('delete-success');
+    $this->dispatch('notify', type: 'success', message: 'Produk berhasil dihapus!');
+  }
+
+  /**
+   * Merender daftar produk dengan filter, pencarian, dan pagination.
+   */
   public function render()
   {
     $allCategories = Category::pluck('nama_category', 'nama_category')->prepend('Kategori', '')->toArray();

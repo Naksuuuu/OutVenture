@@ -48,10 +48,10 @@ use Illuminate\Auth\Events\Verified;
 // Public Routes - Livewire
 Route::get('/', App\Livewire\Public\Home::class)->name('home');
 Route::get('products', PublicProductIndex::class)->name('products.index');
-Route::get('products/{id}', PublicProductShow::class)->name('products.show');
+Route::get('products/{product:slug}', PublicProductShow::class)->name('products.show');
 
 Route::get('brands', PublicBrandIndex::class)->name('brands.index');
-Route::get('brands/{id}', PublicBrandShow::class)->name('brands.show');
+Route::get('brands/{brand:slug}', PublicBrandShow::class)->name('brands.show');
 
 // User Profile
 Route::middleware('auth')->group(function () {
@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
 Route::name('auth.')->middleware('guest')->group(function () {
     Route::get('/login', App\Livewire\Auth\Login::class)->name('login');
     Route::get('/register', App\Livewire\Auth\Register::class)->name('register');
+    Route::get('/google/set-password', App\Livewire\Auth\GoogleSetPassword::class)->name('google-set-password');
 });
 
 Route::post('/logout', function () {
@@ -82,20 +83,20 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group
     // Products Management
     Route::get('products', DashboardProductIndex::class)->name('products.index');
     Route::get('products/create', DashboardProductCreate::class)->name('products.create');
-    Route::get('products/{productId}/edit', DashboardProductEdit::class)->name('products.edit');
-    Route::get('products/{productId}/show', DashboardProductShow::class)->name('products.show');
+    Route::get('products/{product:slug}/edit', DashboardProductEdit::class)->name('products.edit');
+    Route::get('products/{product:slug}/show', DashboardProductShow::class)->name('products.show');
 
     // Categories Management
     Route::get('categories', DashboardCategoryIndex::class)->name('categories.index');
     Route::get('categories/create', DashboardCategoryCreate::class)->name('categories.create');
-    Route::get('categories/{categoryId}/edit', DashboardCategoryEdit::class)->name('categories.edit');
-    Route::get('categories/{categoryId}/show', DashboardCategoryShow::class)->name('categories.show');
+    Route::get('categories/{category:slug}/edit', DashboardCategoryEdit::class)->name('categories.edit');
+    Route::get('categories/{category:slug}/show', DashboardCategoryShow::class)->name('categories.show');
 
     // Brands Management
     Route::get('brands', DashboardBrandIndex::class)->name('brands.index');
     Route::get('brands/create', DashboardBrandCreate::class)->name('brands.create');
-    Route::get('brands/{brandId}/edit', DashboardBrandEdit::class)->name('brands.edit');
-    Route::get('brands/{brandId}/show', DashboardBrandShow::class)->name('brands.show');
+    Route::get('brands/{brand:slug}/edit', DashboardBrandEdit::class)->name('brands.edit');
+    Route::get('brands/{brand:slug}/show', DashboardBrandShow::class)->name('brands.show');
 
     // Size Management
     Route::get('sizes', DashboardSizeIndex::class)->name('sizes.index');
@@ -110,7 +111,7 @@ Route::middleware(['auth', 'admin'])->prefix('dashboard')->name('admin.')->group
     // Colors Management
     Route::get('colors', DashboardColorIndex::class)->name('colors.index');
     Route::get('colors/create', DashboardColorCreate::class)->name('colors.create');
-    Route::get('colors/{colorId}/edit', DashboardColorEdit::class)->name('colors.edit');
+    Route::get('colors/{color:slug}/edit', DashboardColorEdit::class)->name('colors.edit');
 
     // Admin User Management (Only SuperAdmin)
     Route::middleware('superadmin')->group(function () {
@@ -135,7 +136,7 @@ Route::get('auth/google/logout', [GoogleController::class, 'logout'])->name('goo
 // Email Verification Routes
 Route::get('/email/verify/{id}/{hash}', function (Request $request) {
     $user = User::findOrFail($request->route('id'));
-    if (! hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
+    if (!hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
         return redirect()->route('auth.login')->with('error', 'Link verifikasi tidak valid.');
     }
     if ($user->hasVerifiedEmail()) {

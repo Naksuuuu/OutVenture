@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 
 class Product extends Model
@@ -17,8 +18,44 @@ class Product extends Model
     'nama_product',
     'id_brand',
     'deskripsi',
-
+    'slug',
   ];
+
+  protected static function boot()
+  {
+    parent::boot();
+
+    static::creating(function ($product) {
+      if (empty($product->slug)) {
+        $product->slug = $product->generateSlug();
+      }
+    });
+
+    static::updating(function ($product) {
+      if ($product->isDirty('nama_product') && empty($product->slug)) {
+        $product->slug = $product->generateSlug();
+      }
+    });
+  }
+
+  protected function generateSlug(): string
+  {
+    $baseSlug = Str::slug($this->nama_product);
+    $slug = $baseSlug;
+    $counter = 1;
+
+    while (static::where('slug', $slug)->where('id', '!=', $this->id ?? 0)->exists()) {
+      $slug = $baseSlug . '-' . $counter;
+      $counter++;
+    }
+
+    return $slug;
+  }
+
+  public function getRouteKeyName(): string
+  {
+    return 'slug';
+  }
 
   public function category()
   {

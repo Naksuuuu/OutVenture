@@ -20,6 +20,9 @@ class Register extends Component
     'password' => 'required|string|min:8|confirmed',
   ];
 
+  /**
+   * Mendaftarkan pengguna baru.
+   */
   public function register()
   {
     $this->validate();
@@ -37,6 +40,9 @@ class Register extends Component
     return redirect()->route('auth.login');
   }
 
+  /**
+   * Merender tampilan halaman registrasi.
+   */
   public function render()
   {
     return view('livewire.auth.register')
