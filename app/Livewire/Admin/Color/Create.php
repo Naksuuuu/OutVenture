@@ -18,7 +18,11 @@ class Create extends Component
     ];
 
     protected $messages = [
+        'nama_warna.required' => 'Nama warna wajib diisi.',
+        'nama_warna.max' => 'Nama warna maksimal 50 karakter.',
         'nama_warna.unique' => 'Warna dengan nama ini sudah ada!',
+        'hex_code.required' => 'Kode hex wajib diisi.',
+        'hex_code.regex' => 'Format kode hex tidak valid (contoh: #FF0000).',
         'hex_code.unique' => 'Warna dengan kode hex ini sudah ada!',
     ];
 

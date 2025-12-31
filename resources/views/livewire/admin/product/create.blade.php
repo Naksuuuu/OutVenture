@@ -38,7 +38,7 @@
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                                     <div class="group md:col-span-2">
                                         <x-ui.form.label label="Nama Produk" />
-                                        <x-ui.form.input wire:model.live="nama_product" type="text"
+                                        <x-ui.form.input wire:model="nama_product" type="text"
                                             placeholder="Contoh: Tenda Camping Dome" />
                                     </div>
 

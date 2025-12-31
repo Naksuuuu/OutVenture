@@ -30,6 +30,17 @@ class Edit extends Component
     'is_trusted' => 'boolean',
   ];
 
+  protected $messages = [
+    'nama_brand.required' => 'Nama brand wajib diisi.',
+    'nama_brand.max' => 'Nama brand maksimal 255 karakter.',
+    'new_image.image' => 'Thumbnail harus berupa gambar.',
+    'new_image.max' => 'Ukuran thumbnail maksimal 2MB.',
+    'new_wide_image.image' => 'Banner harus berupa gambar.',
+    'new_wide_image.max' => 'Ukuran banner maksimal 2MB.',
+    'new_logo.image' => 'Logo harus berupa gambar.',
+    'new_logo.max' => 'Ukuran logo maksimal 2MB.',
+  ];
+
   /**
    * Menyiapkan data awal merek yang akan diedit.
    */

@@ -20,6 +20,13 @@ class Edit extends Component
     'sizeValues.*.sort_order' => 'nullable|integer',
   ];
 
+  protected $messages = [
+    'nama_group.required' => 'Nama grup ukuran wajib diisi.',
+    'nama_group.max' => 'Nama grup ukuran maksimal 255 karakter.',
+    'sizeValues.*.label_size.required' => 'Label ukuran wajib diisi.',
+    'sizeValues.*.label_size.max' => 'Label ukuran maksimal 50 karakter.',
+  ];
+
   /**
    * Menyiapkan data grup ukuran yang akan diedit.
    */

@@ -25,6 +25,13 @@ class Edit extends Component
     'image' => 'nullable|image|max:2048',
   ];
 
+  protected $messages = [
+    'id_color.required' => 'Warna wajib dipilih.',
+    'id_color.exists' => 'Warna tidak valid.',
+    'image.image' => 'File harus berupa gambar.',
+    'image.max' => 'Ukuran gambar maksimal 2MB.',
+  ];
+
   public function mount(ProductVariant $variant, Product $product)
   {
     $this->variant = $variant;

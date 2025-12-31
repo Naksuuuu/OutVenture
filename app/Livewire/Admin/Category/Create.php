@@ -22,6 +22,15 @@ class Create extends Component
     'image' => 'nullable|image|max:2048',
   ];
 
+  protected $messages = [
+    'nama_category.required' => 'Nama kategori wajib diisi.',
+    'nama_category.max' => 'Nama kategori maksimal 255 karakter.',
+    'id_size_group.required' => 'Kelompok ukuran wajib dipilih.',
+    'id_size_group.exists' => 'Kelompok ukuran tidak valid.',
+    'image.image' => 'File harus berupa gambar.',
+    'image.max' => 'Ukuran gambar maksimal 2MB.',
+  ];
+
   /**
    * Menyimpan kategori baru ke database.
    */
