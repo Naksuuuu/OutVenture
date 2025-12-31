@@ -19,21 +19,33 @@ class Index extends Component
 
   protected $queryString = ['search', 'category', 'sort'];
 
+  /**
+   * Mereset halaman pagination saat kata kunci pencarian berubah.
+   */
   public function updatingSearch()
   {
     $this->resetPage();
   }
 
+  /**
+   * Mereset halaman pagination saat filter kategori berubah.
+   */
   public function updatingCategory()
   {
     $this->resetPage();
   }
 
+  /**
+   * Mereset halaman pagination saat sorting berubah.
+   */
   public function updatingSort()
   {
     $this->resetPage();
   }
 
+  /**
+   * Menghapus produk dari database.
+   */
   public function delete($id)
   {
     $this->errorMessage = '';
@@ -55,6 +67,9 @@ class Index extends Component
     $this->dispatch('notify', type: 'success', message: 'Produk berhasil dihapus!');
   }
 
+  /**
+   * Merender daftar produk dengan filter, pencarian, dan pagination.
+   */
   public function render()
   {
     $allCategories = Category::pluck('nama_category', 'nama_category')->prepend('Kategori', '')->toArray();

@@ -13,99 +13,128 @@
         </x-slot:actions>
     </x-ui.page-header>
 
-    <x-ui.card-item rounded="rounded-xl" class="overflow-hidden">
+
+    <x-ui.card-item class="rounded-[2.5rem] shadow-xl shadow-slate-200/50 border border-slate-100 overflow-hidden">
+        <div class="px-6 py-4 bg-slate-50/50 border-t border-slate-100 {{ $products->hasPages() ? '' : 'hidden' }}">
+            {{ $products->links('components.ui.pagination') }}
+        </div>
+
         <!-- Mobile Card View -->
         <div class="block md:hidden">
             <div class="divide-y divide-gray-100">
                 @forelse ($products as $product)
-                    <div class="p-4 hover:bg-gray-50/50 transition-all">
-                        <div class="flex justify-between items-start mb-2">
-                            <div class="flex-1">
-                                <span
-                                    class="text-sm font-bold text-gray-800 tracking-tight leading-tight">{{ $product->nama_product }}</span>
-                                <div class="text-xs text-gray-500 mt-1">
-                                    Merek: {{ $product->brand->nama_brand ?? 'No Brand' }}
+                    <div class="p-5 hover:bg-gray-50/50 transition-all group">
+                        <div class="flex justify-between items-start mb-3">
+                            <div class="flex-1 min-w-0 pr-4">
+                                <h3 class="text-sm font-bold text-slate-800 line-clamp-2 leading-snug mb-1">
+                                    {{ $product->nama_product }}
+                                </h3>
+                                <div class="flex flex-wrap gap-2 mt-2">
+                                    <span
+                                        class="inline-flex items-center px-2 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide bg-slate-100 text-slate-500 border border-slate-200">
+                                        {{ $product->brand->nama_brand ?? 'No Brand' }}
+                                    </span>
+                                    <span
+                                        class="inline-flex items-center px-2 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide {{ $product->category ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-slate-50 text-slate-400 border border-slate-100' }}">
+                                        {{ $product->category->nama_category ?? 'No Category' }}
+                                    </span>
                                 </div>
-                                <div class="text-xs text-gray-500">
-                                    Kategori: {{ $product->category->nama_category ?? 'NO CATEGORY' }}
+                                <div class="mt-2 flex items-center gap-1">
+                                    <span class="text-xs text-slate-400 font-bold uppercase tracking-wider">Total
+                                        Variant:</span>
+                                    <span class="text-xs font-bold text-slate-700">{{ $product->variants->count() }}</span>
                                 </div>
                             </div>
-                            <div class="flex gap-1 ml-2">
-                                <x-ui.link href="{{ route('admin.products.show', $product) }}" icon="eye" variant="show"
-                                    size="sm" title="Lihat" />
-                                <x-ui.link href="{{ route('admin.products.edit', $product) }}" icon="square-pen" size="sm"
-                                    variant="edit" />
-                                <x-ui.button variant="delete" size="icon-sm" icon="trash"
-                                    @click="$dispatch('open-delete-modal', { id: {{ $product->id }} })" />
-                            </div>
+                        </div>
+
+                        <div class="flex justify-end gap-2 pt-3 border-t border-dashed border-slate-100 mt-3">
+                            <x-ui.link href="{{ route('admin.products.show', $product) }}" icon="eye" variant="show"
+                                size="md" />
+                            <x-ui.link href="{{ route('admin.products.edit', $product) }}" icon="square-pen" size="md"
+                                variant="edit" />
+                            <x-ui.button variant="delete" size="icon-md" icon="trash"
+                                @click="$dispatch('open-delete-modal', { id: {{ $product->id }} })" />
                         </div>
                     </div>
                 @empty
-                    <div class="p-12 text-center text-gray-400 text-sm italic">Tidak ada produk.</div>
+                    <x-ui.empty-state icon="package-open" title="Produk Kosong"
+                        message="Belum ada produk yang sesuai filter" />
                 @endforelse
             </div>
         </div>
 
         <!-- Desktop Table View -->
         <div class="hidden md:block overflow-x-auto">
-            <table class="w-full text-left table-fixed border-collapse min-w-[600px]">
-                <thead>
-                    <tr class="bg-gray-50 border-b border-gray-200">
-                        <th class="w-[40%] px-4 md:px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                            Informasi
-                            Produk</th>
-                        <th class="w-[20%] px-4 md:px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                            Merek
-                        </th>
-                        <th
-                            class="w-[20%] px-4 md:px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider text-center">
-                            Kategori</th>
-                        <th
-                            class="w-[20%] px-4 md:px-6 py-4 text-xs font-bold text-gray-400 uppercase tracking-wider text-center">
-                            Aksi</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-gray-100">
+            <x-ui.table>
+                <x-ui.table.head>
+                    <x-ui.table.row>
+                        <x-ui.table.heading class="w-fit">No</x-ui.table.heading>
+                        <x-ui.table.heading class="w-[30%]">Nama Produk</x-ui.table.heading>
+                        <x-ui.table.heading class="text-center w-[15%]">Brand</x-ui.table.heading>
+                        <x-ui.table.heading class="text-center w-[15%]">Kategori</x-ui.table.heading>
+                        <x-ui.table.heading class="text-center w-[15%]">Total Variant</x-ui.table.heading>
+                        <x-ui.table.heading class="text-center w-[15%]">Aksi</x-ui.table.heading>
+                    </x-ui.table.row>
+                </x-ui.table.head>
+                <x-ui.table.body>
                     @forelse ($products as $product)
-                        <tr class="hover:bg-gray-50/50 transition-all">
-                            <td class="px-4 md:px-6 py-4">
-                                <div class="flex flex-col">
-                                    <span
-                                        class="text-sm font-bold text-gray-800 tracking-tight leading-tight">{{ $product->nama_product }}</span>
+                        <x-ui.table.row>
+                            <x-ui.table.cell>{{ $loop->iteration }}</x-ui.table.cell>
+                            <x-ui.table.cell>
+                                <div class="flex items-start gap-4">
+                                    <div>
+                                        <h3
+                                            class="text-sm font-bold text-slate-800 line-clamp-2 mb-0.5 group-hover:text-rose-600 transition-colors">
+                                            {{ $product->nama_product }}
+                                        </h3>
+                                    </div>
                                 </div>
-                            </td>
-                            <td class="px-4 md:px-6 py-4">
-                                <span class="text-sm text-gray-600">{{ $product->brand->nama_brand ?? 'No Brand' }}</span>
-                            </td>
-                            <td class="px-4 md:px-6 py-4 text-center">
+                            </x-ui.table.cell>
+                            <x-ui.table.cell class="text-center">
                                 <span
-                                    class="inline-flex items-center px-2.5 py-1 rounded-md text-[11px] font-bold {{ $product->category ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' : 'bg-gray-50 text-gray-400 border border-gray-100' }}">
-                                    {{ $product->category->nama_category ?? 'NO CATEGORY' }}
+                                    class="text-xs font-bold text-slate-600 bg-slate-100 px-3 py-1 rounded-lg border border-slate-200">
+                                    {{ $product->brand->nama_brand ?? '-' }}
                                 </span>
-                            </td>
-                            <td class="px-4 md:px-6 py-4">
-                                <div class="flex justify-center items-center gap-1 md:gap-2">
-                                    <x-ui.link href="{{ route('admin.products.show', $product) }}" icon="eye" variant="show"
-                                        size="md" title="Lihat" />
-                                    <x-ui.link href="{{ route('admin.products.edit', $product) }}" icon="square-pen"
-                                        size="md" variant="edit" />
-                                    <x-ui.button variant="delete" size="md" icon="trash"
-                                        @click="$dispatch('open-delete-modal', { id: {{ $product->id }} })" />
+                            </x-ui.table.cell>
+                            <x-ui.table.cell class="text-center">
+                                <span
+                                    class="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide {{ $product->category ? 'bg-emerald-50 text-emerald-600 border border-emerald-100' : 'bg-slate-50 text-slate-400 border border-slate-100' }}">
+                                    {{ $product->category->nama_category ?? 'Uncategorized' }}
+                                </span>
+                            </x-ui.table.cell>
+                            <x-ui.table.cell class="text-center">
+                                <div class="flex flex-col items-center gap-1">
+                                    <span class="text-xs font-bold text-slate-700">{{ $product->variants->count() }}</span>
                                 </div>
-                            </td>
-                        </tr>
+                            </x-ui.table.cell>
+                            <x-ui.table.cell class="text-right">
+                                <div class="flex justify-end gap-2">
+                                    <x-ui.link href="{{ route('admin.products.show', $product) }}" icon="eye" variant="show"
+                                        size="sm" class="!p-2.5" />
+                                    <x-ui.link href="{{ route('admin.products.edit', $product) }}" icon="square-pen"
+                                        size="sm" variant="edit" class="!p-2.5" />
+                                    <x-ui.button variant="delete" size="icon-sm" icon="trash"
+                                        @click="$dispatch('open-delete-modal', { id: {{ $product->id }} })"
+                                        class="!p-2.5" />
+                                </div>
+                            </x-ui.table.cell>
+                        </x-ui.table.row>
                     @empty
-                        <tr>
-                            <td colspan="4" class="px-4 md:px-6 py-12 text-center text-gray-400 text-sm italic">
-                                Tidak ada produk Tersedia</td>
-                        </tr>
+                        <x-ui.table.row>
+                            <x-ui.table.cell colspan="6">
+                                <x-ui.empty-state full icon="package-open" title="Tidak ada Produk"
+                                    message="Belum ada produk. Tambahkan produk baru untuk mengatur produk."
+                                    shadow="shadow-none" border="border-0" rounded="rounded-2xl" buttonText="Buat Produk"
+                                    buttonUrl="{{ route('admin.products.create') }}" />
+                            </x-ui.table.cell>
+                        </x-ui.table.row>
                     @endforelse
-                </tbody>
-            </table>
+                </x-ui.table.body>
+            </x-ui.table>
         </div>
 
-        <div class="px-4 md:px-6 py-4 bg-gray-50 border-t border-gray-100 overflow-x-hidden">
-            {{ $products->links() }}
+        <div class="px-6 py-4 bg-slate-50/50 border-t border-slate-100">
+            {{ $products->links('components.ui.pagination') }}
         </div>
     </x-ui.card-item>
 

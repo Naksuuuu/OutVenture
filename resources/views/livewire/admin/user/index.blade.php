@@ -12,7 +12,94 @@
         </x-slot:actions>
     </x-ui.page-header>
 
-    <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,350px),1fr))] gap-3 md:gap-5">
+    {{-- Desktop Table --}}
+    <x-ui.card-item class="hidden md:block overflow-hidden">
+        <div class=" px-6 py-4 bg-slate-50/50 border-t border-slate-100 {{ $admins->hasPages() ? '' : 'hidden' }}">
+            {{ $admins->links('components.ui.pagination') }}
+        </div>
+
+        <x-ui.table>
+            <x-ui.table.head>
+                <x-ui.table.row>
+                    <x-ui.table.heading class="w-fit">No</x-ui.table.heading>
+                    <x-ui.table.heading class="w-[35%]">Pengguna</x-ui.table.heading>
+                    <x-ui.table.heading class="text-center">Role</x-ui.table.heading>
+                    <x-ui.table.heading>Alamat</x-ui.table.heading>
+                    <x-ui.table.heading class="text-center">Aksi</x-ui.table.heading>
+                </x-ui.table.row>
+            </x-ui.table.head>
+            <x-ui.table.body>
+                @forelse ($admins as $admin)
+                    <x-ui.table.row>
+                        <x-ui.table.cell>{{ $loop->iteration }}</x-ui.table.cell>
+                        <x-ui.table.cell>
+                            <div class="flex items-center gap-3">
+                                <div
+                                    class="w-10 h-10 rounded-xl bg-indigo-50 flex items-center justify-center text-sm font-bold text-indigo-600 shrink-0 border border-indigo-100">
+                                    {{ substr($admin->nama_lengkap ?? '?', 0, 1) }}
+                                </div>
+                                <div>
+                                    <h4
+                                        class="text-sm font-bold text-slate-800 line-clamp-1 hover:text-indigo-600 transition-colors">
+                                        {{ $admin->nama_lengkap ?? 'User System' }}
+                                    </h4>
+                                    <p class="text-xs text-slate-500 line-clamp-1">{{ $admin->email }}</p>
+                                </div>
+                            </div>
+                        </x-ui.table.cell>
+                        <x-ui.table.cell class="text-center">
+                            @if ($admin->role == 'admin')
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide bg-emerald-50 text-emerald-600 border border-emerald-100">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    Admin
+                                </span>
+                            @elseif ($admin->role == 'superadmin')
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide bg-slate-900 text-white border border-slate-700">
+                                    <x-lucide-shield-check class="w-3 h-3" />
+                                    Super
+                                </span>
+                            @else
+                                <span
+                                    class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wide bg-slate-100 text-slate-500 border border-slate-200">
+                                    <x-lucide-user class="w-3 h-3" />
+                                    User
+                                </span>
+                            @endif
+                        </x-ui.table.cell>
+                        <x-ui.table.cell>
+                            <span class="text-sm text-slate-600">{{ $admin->alamat ?: '-' }}</span>
+                        </x-ui.table.cell>
+                        <x-ui.table.cell class="text-center">
+                            <div class="flex justify-center gap-2">
+                                <x-ui.link href="{{ route('admin.users.show', $admin->id) }}" icon="eye" variant="show"
+                                    size="md" class="!p-2" />
+                                <x-ui.link href="{{ route('admin.users.edit', $admin->id) }}" icon="settings-2" size="md"
+                                    variant="update" class="!p-2" />
+                            </div>
+                        </x-ui.table.cell>
+                    </x-ui.table.row>
+                @empty
+                    <x-ui.table.row>
+                        <x-ui.table.cell colspan="5" class="py-12 text-center">
+                            <div class="flex flex-col items-center justify-center">
+                                <x-lucide-users class="w-12 h-12 text-slate-300 mb-2" />
+                                <p class="text-slate-500 text-sm">Data tidak ditemukan</p>
+                            </div>
+                        </x-ui.table.cell>
+                    </x-ui.table.row>
+                @endforelse
+            </x-ui.table.body>
+        </x-ui.table>
+
+        <div class="px-6 py-4 bg-slate-50/50 border-t border-slate-100">
+            {{ $admins->links('components.ui.pagination') }}
+        </div>
+    </x-ui.card-item>
+
+    {{-- Mobile Grid --}}
+    <div class="grid grid-cols-[repeat(auto-fill,minmax(min(100%,350px),1fr))] gap-3 md:gap-5 md:hidden">
         @forelse ($admins as $admin)
             <x-ui.card-item
                 class="rounded-2xl hover:shadow-lg hover:-translate-y-2 transition-all duration-300 group border-slate-200">
@@ -75,5 +162,9 @@
                 <p class="text-gray-400 font-semibold">Data tidak ditemukan.</p>
             </div>
         @endforelse
+
+        <div class="col-span-full mt-4">
+            {{ $admins->links('components.ui.pagination') }}
+        </div>
     </div>
 </div>

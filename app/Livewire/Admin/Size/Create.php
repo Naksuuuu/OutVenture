@@ -17,6 +17,9 @@ class Create extends Component
     'sizeValues.*.sort_order' => 'nullable|integer',
   ];
 
+  /**
+   * Menyiapkan data awal dengan satu nilai ukuran kosong.
+   */
   public function mount()
   {
     $this->sizeValues = [
@@ -24,6 +27,9 @@ class Create extends Component
     ];
   }
 
+  /**
+   * Menambahkan form input untuk nilai ukuran baru.
+   */
   public function addSizeValue()
   {
     $this->sizeValues[] = [
@@ -32,6 +38,9 @@ class Create extends Component
     ];
   }
 
+  /**
+   * Menghapus nilai ukuran dari daftar input.
+   */
   public function removeSizeValue($index)
   {
     unset($this->sizeValues[$index]);
@@ -42,6 +51,9 @@ class Create extends Component
     }
   }
 
+  /**
+   * Menyimpan grup ukuran beserta nilai-nilainya ke database.
+   */
   public function save()
   {
     $this->validate();
@@ -63,6 +75,9 @@ class Create extends Component
     return redirect()->route('admin.sizes.index')->with('notifySuccess', 'Size Grup Berhasil di Tambahkan!');
   }
 
+  /**
+   * Merender tampilan halaman pembuatan grup ukuran.
+   */
   public function render()
   {
     return view('livewire.admin.size.create')

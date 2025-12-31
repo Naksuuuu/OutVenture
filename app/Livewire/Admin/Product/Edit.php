@@ -30,6 +30,9 @@ class Edit extends Component
     'spec-events' => 'refreshProduct',
   ];
 
+  /**
+   * Menyiapkan data awal produk yang akan diedit.
+   */
   public function mount(Product $product)
   {
     $this->product = $product->load(['category', 'brand']);
@@ -39,6 +42,9 @@ class Edit extends Component
     $this->deskripsi = $this->product->deskripsi;
   }
 
+  /**
+   * Memperbarui data produk utama ke database.
+   */
   public function updateProduct()
   {
     $this->successMessage = '';
@@ -68,11 +74,17 @@ class Edit extends Component
     }
   }
 
+  /**
+   * Memuat ulang data produk.
+   */
   public function refreshProduct()
   {
     $this->product = Product::with(['category', 'brand'])->findOrFail($this->product->id);
   }
 
+  /**
+   * Menghapus spesifikasi atau varian produk.
+   */
   public function delete($id)
   {
     $this->errorMessage = '';
@@ -121,6 +133,9 @@ class Edit extends Component
     $this->errorMessage = 'Data tidak ditemukan.';
   }
 
+  /**
+   * Merender tampilan halaman edit produk.
+   */
   public function render()
   {
     $categories = Category::all();

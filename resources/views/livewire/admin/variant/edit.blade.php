@@ -54,10 +54,7 @@
       <img src="{{ asset('storage/' . $old_image) }}" class="w-full h-44 object-cover rounded-xl shadow-sm"
         alt="Current Image">
     @else
-      <div class="w-full h-44 flex flex-col items-center justify-center text-slate-400">
-        <x-lucide-image class="w-8 h-8 mb-2 opacity-50" />
-        <span class="text-[10px] font-bold uppercase">Belum ada gambar</span>
-      </div>
+      <x-ui.empty-state icon="image" title="Gambar Kosong" message="Belum ada gambar yang diunggah" class="h-44" />
     @endif
   </div>
 </x-ui.modal.form>

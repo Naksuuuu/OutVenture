@@ -77,14 +77,17 @@ class Create extends Component
     'kursi lipat' => 'Furniture',
   ];
 
+  /**
+   * Mendeteksi kategori secara otomatis berdasarkan kata kunci dalam nama produk.
+   */
   public function updatedNamaProduct()
   {
     $namaLower = strtolower(trim($this->nama_product));
-    
+
     if (empty($namaLower)) {
       return;
     }
-    
+
     foreach ($this->categoryKeywords as $keyword => $categoryName) {
       if (strpos($namaLower, strtolower($keyword)) !== false) {
         $category = Category::whereRaw('LOWER(nama_category) LIKE ?', ['%' . strtolower($categoryName) . '%'])->first();
@@ -96,6 +99,9 @@ class Create extends Component
     }
   }
 
+  /**
+   * Menyimpan produk baru ke database.
+   */
   public function saveProduct()
   {
     $this->validate();
@@ -110,6 +116,9 @@ class Create extends Component
     return redirect()->route('admin.products.index')->with('notifySuccess', 'Product Berhasil Dibuat!');
   }
 
+  /**
+   * Merender tampilan halaman pembuatan produk.
+   */
   public function render()
   {
     $categories = Category::all();

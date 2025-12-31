@@ -66,6 +66,7 @@ Route::middleware('auth')->group(function () {
 Route::name('auth.')->middleware('guest')->group(function () {
     Route::get('/login', App\Livewire\Auth\Login::class)->name('login');
     Route::get('/register', App\Livewire\Auth\Register::class)->name('register');
+    Route::get('/google/set-password', App\Livewire\Auth\GoogleSetPassword::class)->name('google-set-password');
 });
 
 Route::post('/logout', function () {
@@ -135,7 +136,7 @@ Route::get('auth/google/logout', [GoogleController::class, 'logout'])->name('goo
 // Email Verification Routes
 Route::get('/email/verify/{id}/{hash}', function (Request $request) {
     $user = User::findOrFail($request->route('id'));
-    if (! hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
+    if (!hash_equals((string) $request->route('hash'), sha1($user->getEmailForVerification()))) {
         return redirect()->route('auth.login')->with('error', 'Link verifikasi tidak valid.');
     }
     if ($user->hasVerifiedEmail()) {

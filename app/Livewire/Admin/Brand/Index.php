@@ -19,11 +19,17 @@ class Index extends Component
     #[Url(history: true, keep: true)]
     public $sort = 'latest';
 
+    /**
+     * Mereset halaman pagination saat kata kunci pencarian berubah.
+     */
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
+    /**
+     * Mereset halaman pagination saat urutan sorting berubah.
+     */
     public function updatingSort()
     {
         $this->resetPage();
@@ -31,6 +37,9 @@ class Index extends Component
 
 
 
+    /**
+     * Menghapus data merek dari database.
+     */
     public function delete($id)
     {
         $this->errorMessage = '';
@@ -53,6 +62,9 @@ class Index extends Component
         $this->dispatch('notify', type: 'success', message: 'Brand berhasil dihapus!');
     }
 
+    /**
+     * Merender tampilan daftar merek dengan fitur pencarian dan sorting.
+     */
     public function render()
     {
         $brands = Brand::query()
@@ -65,7 +77,7 @@ class Index extends Component
             }, function ($query) {
                 $query->oldest();
             })
-            ->simplePaginate(10);
+            ->paginate(8);
 
         return view('livewire.admin.brand.index', [
             'brands' => $brands

@@ -30,6 +30,9 @@ class Edit extends Component
     'is_trusted' => 'boolean',
   ];
 
+  /**
+   * Menyiapkan data awal merek yang akan diedit.
+   */
   public function mount(Brand $brand)
   {
     $this->brand = $brand;
@@ -40,6 +43,9 @@ class Edit extends Component
     $this->is_trusted = $this->brand->is_trusted;
   }
 
+  /**
+   * Memperbarui data merek ke database.
+   */
   public function update()
   {
     $this->validate();
@@ -86,11 +92,17 @@ class Edit extends Component
   }
 
 
+  /**
+   * Memuat ulang data merek dari database.
+   */
   public function refreshBrand()
   {
     $this->brand->refresh();
   }
 
+  /**
+   * Menghapus file gambar dari penyimpanan publik.
+   */
   protected function deletePublicFile(?string $path): void
   {
     if (!$path)
@@ -107,6 +119,9 @@ class Edit extends Component
     }
   }
 
+  /**
+   * Merender tampilan halaman edit merek.
+   */
   public function render()
   {
     return view('livewire.admin.brand.edit')

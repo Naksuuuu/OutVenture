@@ -10,6 +10,9 @@
         </x-slot:actions>
     </x-ui.page-header>
 
+    <div class="px-6 py-4 ">
+        {{ $colors->links('components.ui.pagination') }}
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
         @forelse ($colors as $color)
             <x-ui.card-item
@@ -43,7 +46,8 @@
                         <div>
                             <h4
                                 class="text-xl font-extrabold text-slate-800 text-center mb-1 group-hover:text-indigo-600 transition-colors">
-                                {{ $color->nama_warna }}</h4>
+                                {{ $color->nama_warna }}
+                            </h4>
                         </div>
 
                         <div class="flex items-center gap-2 mt-auto">
@@ -56,23 +60,15 @@
                 </x-slot>
             </x-ui.card-item>
         @empty
-            <div class="col-span-full bg-white rounded-2xl p-16 text-center border-2 border-dashed border-slate-200">
-                <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <x-lucide-palette class="w-8 h-8 text-slate-300" />
-                </div>
-                <p class="text-slate-800 font-bold text-lg">Belum ada warna</p>
-                <p class="text-sm text-slate-400 mt-1">Tambahkan warna baru untuk varian produk</p>
-                <div class="mt-6">
-                    <x-ui.link href="{{ route('admin.colors.create') }}" label="Buat Warna Baru" icon="plus"
-                        variant="create" />
-                </div>
-            </div>
+            <x-ui.empty-state full icon="palette" title="Warna Kosong"
+                message="Belum ada warna yang ditambahkan. Tambahkan warna baru untuk varian produk."
+                buttonText="Buat Warna Baru" buttonUrl="{{ route('admin.colors.create') }}" />
         @endforelse
     </div>
 
     <x-ui.modal.delete title="Hapus Warna?" message="Yakin ingin menghapus warna ini?" :errorMessage="$errorMessage" />
 
-    <div class="mt-8 px-6 py-4">
-        {{ $colors->links() }}
+    <div class="px-6 py-4">
+        {{ $colors->links('components.ui.pagination') }}
     </div>
 </div>

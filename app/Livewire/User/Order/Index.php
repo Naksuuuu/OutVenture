@@ -14,11 +14,17 @@ class Index extends Component
 
     public $statusFilter = 'all'; // Filter: all, unpaid (0), paid (1)
 
+    /**
+     * Mereset halaman pagination saat filter status berubah.
+     */
     public function updatingStatusFilter()
     {
         $this->resetPage();
     }
 
+    /**
+     * Mengambil daftar pesanan pengguna dengan filter status dan pagination.
+     */
     public function getOrdersProperty()
     {
         $query = Order::where('id_user', auth()->id())
@@ -39,6 +45,9 @@ class Index extends Component
         return $query->paginate(10);
     }
 
+    /**
+     * Mengunduh invoice pesanan dalam format PDF.
+     */
     public function downloadInvoice($orderId)
     {
         $order = Order::with([
@@ -66,6 +75,9 @@ class Index extends Component
         }, 'invoice-' . str_pad($order->id, 6, '0', STR_PAD_LEFT) . '.pdf');
     }
 
+    /**
+     * Memproses pembayaran pesanan menggunakan Midtrans.
+     */
     public function payNow($orderId)
     {
         try {
@@ -99,6 +111,9 @@ class Index extends Component
         }
     }
 
+    /**
+     * Merender tampilan halaman daftar pesanan pengguna.
+     */
     public function render()
     {
         return view('livewire.user.order.index', [

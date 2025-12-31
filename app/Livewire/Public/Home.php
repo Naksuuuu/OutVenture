@@ -10,6 +10,9 @@ use Livewire\Component;
 
 class Home extends Component
 {
+  /**
+   * Merender halaman beranda dengan data pendukung.
+   */
   public function render()
   {
     $brands = Brand::withCount('products')

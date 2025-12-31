@@ -16,6 +16,9 @@ class Login extends Component
     'password' => 'required|string',
   ];
 
+  /**
+   * Memproses login pengguna.
+   */
   public function login()
   {
     $this->validate();
@@ -42,6 +45,9 @@ class Login extends Component
     $this->addError('email', 'Email atau password salah.');
   }
 
+  /**
+   * Merender tampilan halaman login.
+   */
   public function render()
   {
     return view('livewire.auth.login')

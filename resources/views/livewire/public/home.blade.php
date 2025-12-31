@@ -1,7 +1,7 @@
 <div id="hero-section" class="w-full flex flex-col items-center gap-20">
 
 
-    <livewire:public.hero.index />
+    <x-ui.hero :brands="$brands" />
 
 
 
@@ -25,11 +25,16 @@
                     @endif
 
                     <p class="uppercase font-medium tracking-tight text-center">
-                        {{ $category->nama_category }}</p>
+                        {{ $category->nama_category }}
+                    </p>
 
                 </div>
             @empty
-                <x-ui.empty-state message="Belum ada kategori" class="w-full" />
+                <div class="w-full flex items-center justify-center">
+                    <x-ui.empty-state full icon="package-open" title="Belum Ada Kategori" padding="p-2" class="py-2!"
+                        message="Tunggu Admin Menambahkan Kategori!" shadow="shadow-none" border="border-0"
+                        rounded="rounded-2xl" />
+                </div>
             @endforelse
 
         </div>
@@ -39,14 +44,9 @@
 
 
     <div class="w-full px-4 md:px-10">
-        <x-ui.section-header title="BRAND PILIHAN" cta-text="LIHAT SEMUA BRAND"
-            cta-url="{{ route('products.index') }}" />
+        <x-ui.section-header title="BRAND PILIHAN" cta-text="LIHAT SEMUA BRAND" cta-url="{{ route('brands.index') }}" />
 
         <div class="flex flex-wrap group/brands">
-
-
-
-
             @forelse ($brands as $brand)
                 <div
                     class="w-full lg:w-1/4 md:w-1/2 px-2 mb-6 lg:mb-0 transition-all duration-300 delay-150 lg:group-hover/brands:w-[22%] lg:hover:!w-[34%]">
@@ -64,7 +64,8 @@
                         <div
                             class="absolute inset-0 p-6 bg-gradient-to-t from-black/60 to-black/10 flex flex-col justify-end">
                             <h5 class="text-2xl font-bold uppercase text-white mb-3">
-                                {{ $brand->nama_brand }}</h5>
+                                {{ $brand->nama_brand }}
+                            </h5>
                             <a href="{{ route('brands.show', $brand) }}"
                                 class="inline-block border border-white text-white text-sm font-medium px-4 py-2 w-fit hover:bg-white hover:text-black transition duration-300">
                                 BELI SEKARANG &rarr;
@@ -73,7 +74,11 @@
                     </div>
                 </div>
             @empty
-                <x-ui.empty-state message="Belum ada brand pilihan" class="w-full" />
+                <div class="w-full flex items-center justify-center">
+                    <x-ui.empty-state full icon="package-open" title="Belum Ada Brand Pilihan" padding="p-2" class="py-2!"
+                        message="Tunggu Admin Menambahkan Brand Pilihan!" shadow="shadow-none" border="border-0"
+                        rounded="rounded-2xl" />
+                </div>
             @endforelse
         </div>
     </div>
@@ -126,7 +131,11 @@
             @forelse ($latestProducts as $product)
                 <x-product-card :product="$product" />
             @empty
-                <x-ui.empty-state message="Belum ada produk tersedia" />
+                <div class="w-full col-span-5">
+                    <x-ui.empty-state full icon="package-open" title="Belum Ada Produk Tersedia" padding="p-2"
+                        class="mx-auto py-2!" message="Tunggu Admin Menambahkan Produk!" shadow="shadow-none"
+                        border="border-0" rounded="rounded-2xl" />
+                </div>
             @endforelse
         </div>
     </div>
@@ -138,7 +147,7 @@
         </div>
 
         <div class="bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100">
-            <div id="map" class="w-full h-[400px]"></div>
+            <div id="map" class="w-full h-[400px]" wire:ignore></div>
             <div class="p-6 bg-gray-50 border-t border-gray-100">
                 <div class="flex items-start gap-3">
                     <x-lucide-map-pin class="w-5 h-5 text-gray-600 mt-1 flex-shrink-0" />
@@ -153,23 +162,27 @@
 
     @push('scripts')
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Koordinat Gegerkalong, Bandung (Plus Code: 4HMV+G2)
-                const lat = -6.8663;
-                const lng = 107.5926;
+            document.addEventListener('livewire:navigated', function () {
+                const mapElement = document.getElementById('map');
 
-                // Initialize map
-                const map = L.map('map').setView([lat, lng], 15);
+                if (mapElement && !mapElement._leaflet_id) {
+                    // Koordinat Gegerkalong, Bandung (Plus Code: 4HMV+G2)
+                    const lat = -6.8663;
+                    const lng = 107.5926;
 
-                // Add OpenStreetMap tiles
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-                    maxZoom: 19
-                }).addTo(map);
+                    // Initialize map
+                    const map = L.map('map').setView([lat, lng], 15);
 
-                // Add marker
-                const marker = L.marker([lat, lng]).addTo(map);
-                marker.bindPopup('<b>Outventure Store</b><br>Gegerkalong, Bandung').openPopup();
+                    // Add OpenStreetMap tiles
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                        maxZoom: 19
+                    }).addTo(map);
+
+                    // Add marker
+                    const marker = L.marker([lat, lng]).addTo(map);
+                    marker.bindPopup('<b>Outventure Store</b><br>Gegerkalong, Bandung').openPopup();
+                }
             });
         </script>
     @endpush

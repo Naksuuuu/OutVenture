@@ -17,7 +17,7 @@
             <x-ui.card-item
                 class="group justify-self-center flex flex-col justify-between h-[550px] w-full max-w-xl p-3 transition-all duration-300"
                 rounded="rounded-2xl" hover="hover:shadow-lg hover:-translate-y-2">
-                <x-slot:header class="w-full h-3/4 bg-black/10 rounded-2xl overflow-hidden">
+                <x-slot:header class="w-full aspect-square h-3/4 bg-black/10 rounded-2xl overflow-hidden">
                     @if ($category->image)
                         <img src="{{ asset('storage/' . $category->image) }}"
                             class="h-full w-full object-cover object-center transition duration-700 group-hover:scale-110"
@@ -63,13 +63,15 @@
 
                 </x-slot>
             </x-ui.card-item>
+
         @empty
-            <div class="col-span-full bg-white rounded-2xl p-16 text-center border border-dashed border-gray-300">
-                <x-lucide-folder-open class="w-16 h-16 mx-auto text-gray-300 mb-4" />
-                <p class="text-gray-500 font-medium">Belum ada kategori</p>
-                <p class="text-sm text-gray-400 mt-2">Klik tombol "Tambah Kategori" untuk membuat kategori baru</p>
-            </div>
+            <x-ui.empty-state full icon="package-open" title="Tidak ada Kategori"
+                message="Belum ada kategori. Tambahkan kategori baru untuk mengatur produk." buttonText="Buat Kategori"
+                buttonUrl="{{ route('admin.categories.create') }}" />
         @endforelse
+    </div>
+    <div class="px-6 py-4 ">
+        {{ $categories->links('components.ui.pagination') }}
     </div>
 
     <x-ui.modal.delete title="Hapus Kategori?" message="Yakin ingin menghapus kategori ini?"

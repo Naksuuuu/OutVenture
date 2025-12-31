@@ -12,12 +12,15 @@
         </x-slot:actions>
     </x-ui.page-header>
 
+    <div class="px-6 py-4 ">
+        {{ $brands->links('components.ui.pagination') }}
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4  gap-4 ">
         @forelse ($brands as $brand)
             <x-ui.card-item
                 class="group justify-self-center flex flex-col justify-between h-[550px] w-full max-w-xl p-3 transition-all duration-300"
                 rounded="rounded-2xl" hover="hover:shadow-lg hover:-translate-y-2">
-                <x-slot:header class="w-full h-3/4 bg-black/10 rounded-2xl overflow-hidden relative">
+                <x-slot:header class="w-full aspect-square h-3/4 bg-black/10 rounded-2xl overflow-hidden relative">
                     @if ($brand->is_trusted)
                         <div
                             class="absolute top-4 right-4 bg-emerald-100/90 text-emerald-600  p-1 rounded-full flex items-center shadow-lg  z-10">
@@ -71,13 +74,15 @@
                 </x-slot>
             </x-ui.card-item>
 
+
         @empty
-            <div class="col-span-full bg-white rounded-2xl p-16 text-center border border-dashed border-gray-300">
-                <x-lucide-package-open class="w-16 h-16 mx-auto text-gray-300 mb-4" />
-                <p class="text-gray-500 font-medium">Belum ada brand</p>
-                <p class="text-sm text-gray-400 mt-2">Klik tombol "Tambah Brand" untuk membuat brand baru</p>
-            </div>
+            <x-ui.empty-state full icon="package-open" title="Tidak ada Brand "
+                message="Belum ada brand. Tambahkan brand baru untuk mengatur brand." shadow="shadow-none" border="border-0"
+                rounded="rounded-2xl" buttonText="Buat Brand" buttonUrl="{{ route('admin.brands.create') }}" />
         @endforelse
+    </div>
+    <div class="px-6 py-4 ">
+        {{ $brands->links('components.ui.pagination') }}
     </div>
 
     <x-ui.modal.delete title="Hapus Brand?" message="Yakin ingin menghapus brand ini?" :errorMessage="$errorMessage" />

@@ -1,7 +1,7 @@
 <div class=" min-h-screen font-sans">
     <div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
-            <h2 class="text-2xl font-bold text-gray-900">Dasbor</h2>
+            <h2 class="text-2xl font-bold text-gray-900">Dashboard</h2>
             <p class="text-slate-500 mt-2 font-medium text-lg">
                 Selamat datang kembali, <span
                     class="text-slate-900 font-bold underline decoration-emerald-400 decoration-2">{{ Auth::user()->nama_lengkap }}</span>.
@@ -88,7 +88,7 @@
                             <div
                                 class="w-14 h-14 rounded-2xl bg-slate-100 flex items-center justify-center border border-slate-100 group-hover:bg-emerald-50 group-hover:border-emerald-100 transition-all overflow-hidden mr-4 shadow-sm">
                                 @if ($productVariant->image)
-                                    <img src="{{ asset('storage/tenda.jpg') }}"
+                                    <img src="{{ asset('storage/' . $productVariant->image) }}"
                                         class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                                 @else
                                     <x-lucide-image class="text-slate-300" />
@@ -108,8 +108,12 @@
                             </div>
                         </div>
                     @empty
-                        <div class="p-4 bg-slate-50 rounded-xl text-center italic text-slate-400 text-sm">Belum ada data
-                        </div>
+                        <x-ui.empty-state
+                            icon="trending-up"
+                            title="Belum Ada Data"
+                            message="Data penjualan belum tersedia"
+                            class="py-8 bg-slate-50 border border-dashed border-slate-100 rounded-xl"
+                        />
                     @endforelse
                 </div>
             </x-ui.card-item>
@@ -150,8 +154,9 @@
                                     </div>
                                 </div>
                             @empty
-                                <div class="px-3 py-2 rounded-xl bg-slate-50 text-center text-slate-400 text-sm">Tidak
-                                    ada stok rendah.</div>
+                                <div class="px-3 py-4 rounded-xl bg-slate-50 text-center text-slate-400 text-sm border border-slate-100">
+                                    <p class="font-medium italic">Tidak ada stok rendah.</p>
+                                </div>
                             @endforelse
                         </div>
                     </div>
