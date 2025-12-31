@@ -65,7 +65,7 @@ class Index extends Component
             }, function ($query) {
                 $query->oldest();
             })
-            ->simplePaginate(10);
+            ->paginate(8);
 
         return view('livewire.admin.brand.index', [
             'brands' => $brands

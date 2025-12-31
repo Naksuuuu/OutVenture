@@ -57,7 +57,7 @@ class Index extends Component
             });
         }
 
-        $colors = $query->paginate(12);
+        $colors = $query->paginate(8);
 
         return view('livewire.admin.color.index', [
             'colors' => $colors,

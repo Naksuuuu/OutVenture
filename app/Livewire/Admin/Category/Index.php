@@ -69,7 +69,7 @@ class Index extends Component
       ->when($this->sortBy === 'oldest', function ($query) {
         $query->oldest();
       })
-      ->simplePaginate(10);
+      ->paginate(8);
 
     return view('livewire.admin.category.index', [
       'categories' => $categories

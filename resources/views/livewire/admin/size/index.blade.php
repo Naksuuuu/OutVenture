@@ -15,6 +15,9 @@
     </x-ui.page-header>
 
 
+    <div class="px-6 py-4 ">
+        {{ $sizeGroups->links('components.ui.pagination') }}
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
         @forelse ($sizeGroups as $sizeGroup)
             <x-ui.card-item
@@ -88,9 +91,7 @@
     <x-ui.modal.delete title="Hapus Grup Ukuran?" message="Yakin ingin menghapus grup ukuran ini?"
         :errorMessage="$errorMessage" />
 
-    <div class="mt-8">
-        <div class="px-6 py-4">
-            {{ $sizeGroups->links() }}
-        </div>
+    <div class="px-6 py-4 ">
+        {{ $sizeGroups->links('components.ui.pagination') }}
     </div>
 </div>
