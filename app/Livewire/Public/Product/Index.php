@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Color;
+use App\Models\Brand;
 
 class Index extends Component
 {
@@ -114,7 +115,14 @@ class Index extends Component
       }
     }
 
+    // Get featured brands for hero
+    $brands = Brand::where('is_trusted', true)
+      ->orderBy('is_trusted', 'desc')
+      ->limit(4)
+      ->get();
+
     return view('livewire.public.product.index', [
+      'brands' => $brands,
       'products' => $products,
       'categories' => $categories,
       'colors' => $colors,

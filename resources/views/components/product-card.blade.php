@@ -45,9 +45,10 @@
             {{ $product->nama_product }}
         </h4>
 
-        <p class="text-[11px] text-gray-500 mb-1">Available in
+        <p class="text-[11px] text-gray-500 mb-1">Tersedia
             {{ $product->variants_count ?? $product->variants->count() }}
-            Variants</p>
+            Variants
+        </p>
 
         <div class="text-[13px] font-bold">
             <span class="text-gray-500 mr-1 font-normal">From</span>

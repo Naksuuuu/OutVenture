@@ -1,7 +1,7 @@
 <div class="w-full flex flex-col items-center">
 
 
-    <livewire:public.hero.index />
+    <x-ui.hero :brands="$brands" />
 
 
     <div class="w-full shadow-sm  mb-20 border-gray-400 bg-white">
