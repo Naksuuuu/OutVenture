@@ -29,6 +29,19 @@ class Create extends Component
         ];
     }
 
+    protected $messages = [
+        'id_size_value.required' => 'Ukuran wajib dipilih.',
+        'id_size_value.exists' => 'Ukuran tidak valid.',
+        'harga.required' => 'Harga wajib diisi.',
+        'harga.numeric' => 'Harga harus berupa angka.',
+        'harga.min' => 'Harga tidak boleh kurang dari 0.',
+        'sku.required' => 'SKU wajib diisi.',
+        'sku.unique' => 'SKU sudah digunakan.',
+        'stok.required' => 'Stok wajib diisi.',
+        'stok.integer' => 'Stok harus berupa angka bulat.',
+        'stok.min' => 'Stok tidak boleh kurang dari 0.',
+    ];
+
     public function mount(Product $product, ProductVariant $variant)
     {
         $this->isOpen = false;

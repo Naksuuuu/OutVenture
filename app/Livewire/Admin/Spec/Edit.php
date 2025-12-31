@@ -27,6 +27,19 @@ class Edit extends Component
         'stok' => 'required|integer|min:0',
     ];
 
+    protected $messages = [
+        'id_size_value.required' => 'Ukuran wajib dipilih.',
+        'id_size_value.exists' => 'Ukuran tidak valid.',
+        'harga.required' => 'Harga wajib diisi.',
+        'harga.numeric' => 'Harga harus berupa angka.',
+        'harga.min' => 'Harga tidak boleh kurang dari 0.',
+        'sku.required' => 'SKU wajib diisi.',
+        'sku.max' => 'SKU maksimal 100 karakter.',
+        'stok.required' => 'Stok wajib diisi.',
+        'stok.integer' => 'Stok harus berupa angka bulat.',
+        'stok.min' => 'Stok tidak boleh kurang dari 0.',
+    ];
+
     public function mount(ProductVariantSpec $spec, Product $product, ProductVariant $variant)
     {
         $this->isOpen = false;

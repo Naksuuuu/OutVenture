@@ -5,13 +5,6 @@
         </h1>
     </div>
 
-
-    @if (session('success'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <form wire:submit.prevent="register">
         <div class="space-y-4">
 
