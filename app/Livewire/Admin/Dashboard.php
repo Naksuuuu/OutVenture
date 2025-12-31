@@ -32,6 +32,9 @@ class Dashboard extends Component
 
 
 
+  /**
+   * Merender tampilan dashboard admin dengan statistik dan grafik.
+   */
   public function render()
   {
     $stats = Cache::remember('admin_dashboard_stats', 10, function () {
@@ -42,20 +45,22 @@ class Dashboard extends Component
         'totalPendapatan' => Order::where('status_pembayaran', true)->sum('total_harga'),
         'lowStockCount' => \App\Models\ProductVariantSpec::where('stok', '<=', 3)->count(),
         'lowStockItems' => \App\Models\ProductVariantSpec::with([
-            'variant.product.brand',
-            'variant.color',
-            'size'
-          ])
+          'variant.product.brand',
+          'variant.color',
+          'size'
+        ])
           ->where('stok', '<=', 3)
           ->orderBy('stok')
           ->take(5)
           ->get(),
         'bestSellingProducts' => ProductVariant::with(['product.brand', 'color'])
-          ->withSum(['specs as total_terjual' => function ($query) {
-            $query->join('order_items', 'product_variant_specs.id', '=', 'order_items.id_variant_spec')
-              ->join('orders', 'orders.id', '=', 'order_items.id_order')
-              ->where('orders.status_pembayaran', true);
-          }], 'order_items.quantity') 
+          ->withSum([
+            'specs as total_terjual' => function ($query) {
+              $query->join('order_items', 'product_variant_specs.id', '=', 'order_items.id_variant_spec')
+                ->join('orders', 'orders.id', '=', 'order_items.id_order')
+                ->where('orders.status_pembayaran', true);
+            }
+          ], 'order_items.quantity')
           ->orderByDesc('total_terjual')
           ->take(5)
           ->get(),
@@ -82,6 +87,9 @@ class Dashboard extends Component
       ->layout('components.layouts.admin', ['title' => 'Dashboard']);
   }
 
+  /**
+   * Mengambil data penjualan dan pendapatan bulanan untuk grafik.
+   */
   private function getMonthlyChartsData(): array
   {
     $start = Carbon::now()->startOfMonth()->subMonths(5);
@@ -117,6 +125,9 @@ class Dashboard extends Component
     ];
   }
 
+  /**
+   * Mendapatkan ekspresi SQL untuk grouping per bulan berdasarkan driver database.
+   */
   private function monthGroupExpression(): string
   {
     $driver = OrderItem::query()->getModel()->getConnection()->getDriverName();

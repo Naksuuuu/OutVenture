@@ -12,11 +12,17 @@ class Show extends Component
 
 
 
-    public function mount($categoryId)
+    /**
+     * Menyiapkan data detail kategori.
+     */
+    public function mount(Category $category)
     {
-        $this->category = Category::findOrFail($categoryId);
+        $this->category = $category;
     }
 
+    /**
+     * Merender tampilan detail kategori.
+     */
     public function render()
     {
         return view('livewire.admin.category.show', ['category' => $this->category])->layout('components.layouts.admin', ['title' => 'Category Details']);

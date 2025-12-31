@@ -11,6 +11,9 @@ class ResetPassword extends Component
 {
     public $token, $email, $password, $password_confirmation;
 
+    /**
+     * Menyiapkan data token dan email dari URL saat komponen dimuat.
+     */
     public function mount($token)
     {
         $this->token = $token;
@@ -18,6 +21,9 @@ class ResetPassword extends Component
         $this->email = request()->query('email');
     }
 
+    /**
+     * Memproses penggantian password dengan token yang valid.
+     */
     public function resetPassword()
     {
         $this->validate([
@@ -42,6 +48,9 @@ class ResetPassword extends Component
         $this->addError('email', 'Token atau email tidak valid (mungkin sudah kedaluwarsa).');
     }
 
+    /**
+     * Merender tampilan halaman reset password.
+     */
     public function render()
     {
         return view('livewire.auth.reset-password')

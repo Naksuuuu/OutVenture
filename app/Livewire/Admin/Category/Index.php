@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Url; // Tambahkan ini
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 
 class Index extends Component
 {
@@ -19,16 +20,25 @@ class Index extends Component
   #[Url(history: true, keep: true)]
   public $sortBy = 'latest';
 
+  /**
+   * Mereset halaman pagination saat kata kunci pencarian berubah.
+   */
   public function updatingSearch()
   {
     $this->resetPage();
   }
 
+  /**
+   * Mereset halaman pagination saat kriteria sorting berubah.
+   */
   public function updatingSortBy()
   {
     $this->resetPage();
   }
 
+  /**
+   * Menghapus kategori dari database.
+   */
   public function delete($id)
   {
     $this->errorMessage = '';
@@ -45,12 +55,19 @@ class Index extends Component
       return;
     }
 
+    if ($category->image) {
+      Storage::disk('public')->delete($category->image);
+    }
+
     $category->delete();
 
     $this->dispatch('delete-success');
     $this->dispatch('notify', type: 'success', message: 'Kategori berhasil dihapus!');
   }
 
+  /**
+   * Merender tampilan daftar kategori dengan fitur pencarian dan sorting.
+   */
   public function render()
   {
     $categories = Category::query()
@@ -64,7 +81,7 @@ class Index extends Component
       ->when($this->sortBy === 'oldest', function ($query) {
         $query->oldest();
       })
-      ->simplePaginate(10);
+      ->paginate(8);
 
     return view('livewire.admin.category.index', [
       'categories' => $categories

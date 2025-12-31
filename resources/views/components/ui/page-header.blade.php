@@ -7,7 +7,7 @@
 
 <div
     {{ $attributes->merge(['class' => "flex flex-col xl:flex-row justify-between items-start lg:items-center $gap $margin"]) }}>
-    <div class="w-full xl:w-fit">
+    <div class="w-full xl:w-[40%]">
         @if ($title !== '')
             <h2 class="text-2xl font-bold text-gray-900">{{ $title }}</h2>
         @endif

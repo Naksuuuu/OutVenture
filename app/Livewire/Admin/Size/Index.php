@@ -20,17 +20,26 @@ class Index extends Component
     #[Url(history: true, keep: true)]
     public $sortBy = 'latest';
 
+    /**
+     * Mereset halaman pagination saat kata kunci pencarian berubah.
+     */
     public function updatingSearch()
     {
         $this->resetPage();
     }
 
+    /**
+     * Mereset halaman pagination saat sorting berubah.
+     */
     public function updatingSortBy()
     {
         $this->resetPage();
     }
 
 
+    /**
+     * Menghapus grup ukuran dari database.
+     */
     public function delete($id)
     {
         $sizeGroup = SizeGroup::find($id);
@@ -40,10 +49,15 @@ class Index extends Component
             return;
         }
 
-        // if ($sizeGroup->values()->exists()) {
-        //     $this->errorMessage = 'Grup ukuran masih memiliki nilai ukuran, hapus atau pindahkan nilai ukuran terlebih dahulu.';
-        //     return;
-        // }
+        if ($sizeGroup->values()->exists()) {
+            $this->errorMessage = 'Grup ukuran masih memiliki nilai ukuran, hapus atau pindahkan nilai ukuran terlebih dahulu.';
+            return;
+        }
+
+        if ($sizeGroup->categories()->exists()) {
+            $this->errorMessage = 'Grup ukuran masih digunakan pada kategori, hapus atau pindahkan kategori terlebih dahulu.';
+            return;
+        }
 
         $sizeGroup->delete();
 
@@ -51,6 +65,9 @@ class Index extends Component
         $this->dispatch('notify', type: 'success', message: 'Grup ukuran berhasil dihapus!');
     }
 
+    /**
+     * Merender daftar grup ukuran dengan pencarian dan pagination.
+     */
     public function render()
     {
         $sizeGroups = SizeGroup::query()

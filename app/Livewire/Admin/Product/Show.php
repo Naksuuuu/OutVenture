@@ -9,12 +9,17 @@ class Show extends Component
 {
     public $product;
 
-    public function mount($productId)
+    /**
+     * Menyiapkan detail produk beserta relasinya.
+     */
+    public function mount(Product $product)
     {
-        $this->product = Product::with(['category', 'brand', 'variants.specs.size', 'variants.color'])
-            ->findOrFail($productId);
+        $this->product = $product->load(['category', 'brand', 'variants.specs.size', 'variants.color']);
     }
 
+    /**
+     * Merender tampilan detail produk.
+     */
     public function render()
     {
         return view('livewire.admin.product.show', [

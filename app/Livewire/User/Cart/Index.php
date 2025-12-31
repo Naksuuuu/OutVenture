@@ -17,11 +17,17 @@ class Index extends Component
     public $total = 0;
 
 
+    /**
+     * Memuat data keranjang saat komponen diinisialisasi.
+     */
     public function mount()
     {
         $this->loadCart();
     }
 
+    /**
+     * Mengambil data keranjang pengguna dari database beserta relasinya.
+     */
     public function loadCart()
     {
         $cart = Cart::where('id_user', Auth::id())->with([
@@ -34,6 +40,9 @@ class Index extends Component
         $this->calculateTotals();
     }
 
+    /**
+     * Menghitung subtotal dan total harga belanjaan.
+     */
     public function calculateTotals()
     {
         $this->subtotal = $this->cartItems->sum(function ($item) {
@@ -43,6 +52,9 @@ class Index extends Component
         $this->total = $this->subtotal;
     }
 
+    /**
+     * Menambahkan jumlah item dalam keranjang.
+     */
     public function incrementQuantity($itemId)
     {
         $item = CartItem::find($itemId);
@@ -57,6 +69,9 @@ class Index extends Component
         }
     }
 
+    /**
+     * Mengurangi jumlah item dalam keranjang.
+     */
     public function decrementQuantity($itemId)
     {
         $item = CartItem::find($itemId);
@@ -69,6 +84,9 @@ class Index extends Component
         }
     }
 
+    /**
+     * Menghapus item dari keranjang belanja.
+     */
     public function removeItem($itemId)
     {
         $item = CartItem::find($itemId);
@@ -81,6 +99,9 @@ class Index extends Component
         }
     }
 
+    /**
+     * Memproses pesanan dari keranjang belanja (checkout).
+     */
     public function checkout()
     {
         if ($this->cartItems->isEmpty()) {
@@ -137,6 +158,9 @@ class Index extends Component
         }
     }
 
+    /**
+     * Merender tampilan halaman keranjang belanja.
+     */
     public function render()
     {
         return view('livewire.user.cart.index')->layout('components.layouts.app', ['title' => 'My Cart']);

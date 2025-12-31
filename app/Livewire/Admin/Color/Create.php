@@ -22,14 +22,17 @@ class Create extends Component
         'hex_code.unique' => 'Warna dengan kode hex ini sudah ada!',
     ];
 
+    /**
+     * Memperbarui kode hex secara otomatis jika nama warna yang dimasukkan dikenali.
+     */
     public function updatedNamaWarna($value)
     {
         $this->existingColorName = Color::where('nama_warna', $value)->first();
-        
+
         if (!$this->existingColorName) {
             $this->resetErrorBag('nama_warna');
         }
-        
+
         $colorMap = [
             'merah' => '#DC2626',
             'biru' => '#2563EB',
@@ -50,22 +53,28 @@ class Create extends Component
             'tosca' => '#40E0D0',
             'cream' => '#FFFDD0',
         ];
-        
+
         $key = strtolower(trim($value));
         if (isset($colorMap[$key])) {
             $this->hex_code = $colorMap[$key];
         }
     }
 
+    /**
+     * Memvalidasi kode hex secara real-time saat mengetik.
+     */
     public function updatedHexCode($value)
     {
         $this->existingColorHex = Color::where('hex_code', $value)->first();
-        
+
         if (!$this->existingColorHex) {
             $this->resetErrorBag('hex_code');
         }
     }
 
+    /**
+     * Menyimpan warna baru ke database.
+     */
     public function save()
     {
         $this->validate();
@@ -78,6 +87,9 @@ class Create extends Component
         return redirect()->route('admin.colors.index')->with('notifySuccess', 'Warna berhasil ditambahkan!');
     }
 
+    /**
+     * Merender tampilan halaman tambah warna.
+     */
     public function render()
     {
         return view('livewire.admin.color.create')->layout('components.layouts.admin', ['title' => 'Tambah Warna']);

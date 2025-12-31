@@ -30,9 +30,12 @@ class Edit extends Component
     'is_trusted' => 'boolean',
   ];
 
-  public function mount($brandId)
+  /**
+   * Menyiapkan data awal merek yang akan diedit.
+   */
+  public function mount(Brand $brand)
   {
-    $this->brand = Brand::findOrFail($brandId);
+    $this->brand = $brand;
     $this->nama_brand = $this->brand->nama_brand;
     $this->oldImage = $this->brand->image;
     $this->oldWideImage = $this->brand->wide_image;
@@ -40,6 +43,9 @@ class Edit extends Component
     $this->is_trusted = $this->brand->is_trusted;
   }
 
+  /**
+   * Memperbarui data merek ke database.
+   */
   public function update()
   {
     $this->validate();
@@ -79,12 +85,28 @@ class Edit extends Component
       'is_trusted' => (bool) $this->is_trusted,
     ]);
 
-    return redirect()->route('admin.brands.index')->with('notifySuccess', 'Merek Berhasil Diperbarui!');
+    $this->reset(['new_image', 'new_wide_image', 'new_logo']);
+
+    $this->dispatch('notify', type: 'success', message: 'Merek berhasil diperbarui!');
+    $this->refreshBrand();
   }
 
+
+  /**
+   * Memuat ulang data merek dari database.
+   */
+  public function refreshBrand()
+  {
+    $this->brand->refresh();
+  }
+
+  /**
+   * Menghapus file gambar dari penyimpanan publik.
+   */
   protected function deletePublicFile(?string $path): void
   {
-    if (!$path) return;
+    if (!$path)
+      return;
     try {
       if (Storage::disk('public')->exists($path)) {
         Storage::disk('public')->delete($path);
@@ -97,6 +119,9 @@ class Edit extends Component
     }
   }
 
+  /**
+   * Merender tampilan halaman edit merek.
+   */
   public function render()
   {
     return view('livewire.admin.brand.edit')

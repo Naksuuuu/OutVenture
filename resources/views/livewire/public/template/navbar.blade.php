@@ -1,9 +1,10 @@
 <nav class="p-4 fixed w-full z-[9999] bg-white" x-data="{ mobileMenuOpen: false }">
+    <!-- mobile menu -->
     <div x-show="mobileMenuOpen"
         class="absolute  md:hidden left-0 w-full h-screen flex flex-col items-center justify-center bg-white text-2xl font-semibold gap-4">
         <a href="{{ route('home') }}" wire:navigate class="hover:text-black uppercase">home</a>
         <a href="{{ route('products.index') }}" wire:navigate class="hover:text-black uppercase">PRODUK</a>
-        <a href="{{ route('brands.index') }}" wire:navigate class="hover:text-black uppercase">BRAND PILIHAN</a>
+        <a href="{{ route('brands.index') }}" wire:navigate class="hover:text-black uppercase">BRAND </a>
     </div>
 
     <div x-data="{ open: false }" x-effect="if (open) { $nextTick(() => { $refs.searchInput.focus() }) }"
@@ -17,8 +18,7 @@
                     <span class="absolute inset-y-0 left-0 pl-4 flex items-center text-black ">
                         <x-lucide-search class="w-4 h-4" />
                     </span>
-                    <input type="text" x-ref="searchInput" wire:model.live.debounce="search"
-                        placeholder="Cari merek..."
+                    <input type="text" x-ref="searchInput" wire:model.live.debounce="search" placeholder="Cari merek..."
                         class="w-full pl-11 pr-4 py-2 text-sm border-none rounded-2xl bg-gray-100 shadow-md shadow-slate-200/50 focus:ring-2 focus:ring-emerald-500/20 transition-all font-medium">
                 </div>
                 <x-lucide-x class="cursor-pointer" @click="open = false" />
@@ -28,7 +28,7 @@
                     <div
                         class="w-full md:w-[60%] absolute bg-white border border-gray-200 rounded-md shadow-lg max-h-96 overflow-y-auto mb-4">
                         @forelse ($this->products as $product)
-                            <a href="{{ route('products.show', $product->id) }}" wire:navigate
+                            <a href="{{ route('products.show', $product) }}" wire:navigate
                                 class="flex items-center gap-4 p-4 hover:bg-gray-50 border-b border-gray-100 last:border-b-0">
                                 <div class="w-20 h-24 bg-[#f2f2ed] rounded flex-shrink-0 overflow-hidden">
                                     @if ($product->variants->first() && $product->variants->first()->image)
@@ -37,8 +37,7 @@
                                     @endif
                                 </div>
                                 <div class="flex-1 min-w-0">
-                                    <span
-                                        class="text-[10px] font-bold text-black tracking-tight uppercase block mb-0.5">
+                                    <span class="text-[10px] font-bold text-black tracking-tight uppercase block mb-0.5">
                                         {{ $product->brand->nama_brand ?? 'Brand' }}
                                     </span>
                                     <h4
@@ -85,11 +84,13 @@
                 <a href="{{ route('home') }}" wire:navigate
                     class="text-2xl md:text-3xl font-bold uppercase tracking-widest text-gray-800">OUTVENTURE</a>
             </div>
-            <div class="hidden md:flex items-center justify-center gap-5 ">
+
+            <!-- desktop menu -->
+            <div class="hidden md:flex items-center justify-center gap-5 font-semibold ">
                 <a href="{{ route('home') }}" wire:navigate class="hover:text-black uppercase">home</a>
                 <a href="{{ route('products.index') }}" wire:navigate class="hover:text-black uppercase">PRODUK</a>
                 <a href="{{ route('brands.index') }}" wire:navigate class="hover:text-black uppercase">BRAND
-                    PILIHAN</a>
+                </a>
             </div>
         </div>
         <div class="md:w-[20%] flex items-end justify-end gap-2">

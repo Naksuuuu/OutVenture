@@ -15,8 +15,7 @@
     showNotification: false,
     notificationType: 'success',
     notificationMessage: ''
-}"
-    @notify.window="
+}" @notify.window="
         showNotification = true; 
         notificationType = $event.detail.type; 
         notificationMessage = $event.detail.message; 
@@ -33,7 +32,7 @@
 
         <livewire:admin.template.navbar />
 
-        <main class="p-4">
+        <main class="p-2 md:p-4">
             {{ $slot }}
         </main>
     </div>
@@ -43,7 +42,7 @@
     {{-- Trigger notify dari session redirect --}}
     @if (session('notifySuccess'))
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 window.dispatchEvent(new CustomEvent('notify', {
                     detail: {
                         type: 'success',
@@ -56,7 +55,7 @@
 
     @if (session('notifyError'))
         <script>
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 window.dispatchEvent(new CustomEvent('notify', {
                     detail: {
                         type: 'error',

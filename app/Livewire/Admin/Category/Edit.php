@@ -26,14 +26,20 @@ class Edit extends Component
 
   ];
 
-  public function mount($categoryId)
+  /**
+   * Menyiapkan data awal kategori yang akan diedit.
+   */
+  public function mount(Category $category)
   {
-    $this->category = Category::findOrFail($categoryId);
+    $this->category = $category;
     $this->nama_category = $this->category->nama_category;
     $this->id_size_group = $this->category->id_size_group;
     $this->oldImage = $this->category->image;
   }
 
+  /**
+   * Memperbarui data kategori ke database.
+   */
   public function update()
   {
     $this->validate();
@@ -42,7 +48,7 @@ class Edit extends Component
     if ($this->new_image) {
       $newPath = $this->new_image->store('categories', 'public');
       $imagePath = $newPath;
-      
+
       if ($this->oldImage && $this->oldImage !== $newPath) {
         $this->deletePublicFile($this->oldImage);
       }
@@ -54,12 +60,24 @@ class Edit extends Component
       'image' => $imagePath,
     ]);
 
-    return redirect()->route('admin.categories.index')->with('notifySuccess', 'Category Berhasil Diperbarui!');
+    $this->dispatch('notify', type: 'success', message: 'Category berhasil diperbarui!');
   }
 
+  /**
+   * Memuat ulang data kategori dari database.
+   */
+  public function refreshCategory()
+  {
+    $this->category->refresh();
+  }
+
+  /**
+   * Menghapus file gambar dari penyimpanan publik.
+   */
   protected function deletePublicFile(?string $path): void
   {
-    if (!$path) return;
+    if (!$path)
+      return;
     try {
       if (Storage::disk('public')->exists($path)) {
         Storage::disk('public')->delete($path);
@@ -72,6 +90,9 @@ class Edit extends Component
     }
   }
 
+  /**
+   * Merender tampilan halaman edit kategori.
+   */
   public function render()
   {
     return view('livewire.admin.category.edit', ['sizes' => SizeGroup::all()])
