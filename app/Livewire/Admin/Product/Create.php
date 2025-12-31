@@ -21,6 +21,15 @@ class Create extends Component
     'id_category' => 'required|exists:categories,id',
   ];
 
+  protected $messages = [
+    'nama_product.required' => 'Nama produk wajib diisi.',
+    'nama_product.max' => 'Nama produk maksimal 255 karakter.',
+    'id_brand.required' => 'Brand wajib dipilih.',
+    'id_brand.exists' => 'Brand yang dipilih tidak valid.',
+    'id_category.required' => 'Kategori wajib dipilih.',
+    'id_category.exists' => 'Kategori yang dipilih tidak valid.',
+  ];
+
   private $categoryKeywords = [
     // Tenda keywords
     'Tenda' => 'Tenda',

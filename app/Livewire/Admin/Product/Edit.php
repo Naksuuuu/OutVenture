@@ -24,6 +24,14 @@ class Edit extends Component
     'deskripsi' => 'nullable|string',
   ];
 
+  protected $messages = [
+    'nama_product.required' => 'Nama produk wajib diisi.',
+    'nama_product.min' => 'Nama produk minimal 2 karakter.',
+    'nama_product.max' => 'Nama produk maksimal 255 karakter.',
+    'id_brand.required' => 'Brand wajib dipilih.',
+    'id_category.required' => 'Kategori wajib dipilih.',
+  ];
+
   protected $listeners = [
     'variant-created' => 'refreshProduct',
     'variant-deleted' => 'refreshProduct',

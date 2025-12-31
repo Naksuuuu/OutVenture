@@ -26,6 +26,15 @@ class Edit extends Component
 
   ];
 
+  protected $messages = [
+    'nama_category.required' => 'Nama kategori wajib diisi.',
+    'nama_category.max' => 'Nama kategori maksimal 255 karakter.',
+    'id_size_group.required' => 'Kelompok ukuran wajib dipilih.',
+    'id_size_group.exists' => 'Kelompok ukuran tidak valid.',
+    'new_image.image' => 'File harus berupa gambar.',
+    'new_image.max' => 'Ukuran gambar maksimal 2MB.',
+  ];
+
   /**
    * Menyiapkan data awal kategori yang akan diedit.
    */

@@ -14,6 +14,11 @@ class Edit extends Component
         'role' => 'required|in:admin,user',
     ];
 
+    protected $messages = [
+        'role.required' => 'Role wajib dipilih.',
+        'role.in' => 'Role tidak valid.',
+    ];
+
     public function mount(string $id)
     {
         $this->admin = User::findOrFail($id);
@@ -33,9 +38,7 @@ class Edit extends Component
         $this->admin->role = $this->role;
         $this->admin->save();
 
-        session()->flash('notifySuccess', 'Hak akses diperbarui menjadi '.strtoupper($this->role).'.');
-
-        $this->redirect(route('admin.users.index'));
+        $this->dispatch('notify', type: 'success', message: 'Hak akses diperbarui menjadi ' . strtoupper($this->role) . '.');
     }
 
     public function render()
