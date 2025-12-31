@@ -22,28 +22,34 @@ class GoogleController extends Controller
     {
         $userFromGoogle = Socialite::driver('google')->stateless()->user();
 
-        // 1. Jika user belum ada, buat baru & simpan
-        $user = User::updateOrCreate(
-            [
-                'email' => $userFromGoogle->getEmail()
-            ],
-            [
-                'nama_lengkap' => $userFromGoogle->getName(),
-                'google_id' => $userFromGoogle->getId(),
-                'email_verified_at' => now(),
-                'password' => bcrypt('12345678'),
-                'no_telepon' => null,
-            ]
-        );
+        // 1. Cek apakah user sudah ada berdasarkan email atau google_id
+        $existingUser = User::where('email', $userFromGoogle->getEmail())->first();
 
+        if ($existingUser) {
+            // Jika user ada, pastikan google_id terupdate (jika sebelumnya null)
+            if (!$existingUser->google_id) {
+                $existingUser->update([
+                    'google_id' => $userFromGoogle->getId(),
+                    'email_verified_at' => now(), // Assume verified if login via Google
+                ]);
+            }
 
+            // Login user
+            Auth::login($existingUser);
+            session()->regenerate();
+            return redirect()->route('home');
+        } else {
+            // 2. Jika user BELUM ada, simpan data sementara di session dan redirect ke halaman set password
+            session([
+                'google_user_data' => [
+                    'name' => $userFromGoogle->getName(),
+                    'email' => $userFromGoogle->getEmail(),
+                    'google_id' => $userFromGoogle->getId(),
+                ]
+            ]);
 
-        // 2. Login user
-        Auth::login($user);
-        session()->regenerate();
-
-        // 3. Redirect
-        return redirect()->route('home');
+            return redirect()->route('auth.google-set-password');
+        }
     }
 
     public function logout(Request $request)
