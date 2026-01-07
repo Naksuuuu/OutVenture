@@ -3,7 +3,7 @@
     'message' => 'Yakin ingin menghapus data ini?',
     'errorMessage' => null,
     'action' => 'delete',
-    'trigger' => 'open-delete-modal'
+    'trigger' => 'open-delete-modal',
 ])
 
 <div x-data="{
@@ -16,12 +16,8 @@
         this.itemId = id;
         this.openDelete = true;
     },
-    init() {
-        console.log('Delete Modal Initialized. Trigger:', '{{ $trigger }}');
-    }
-}" 
-x-on:{{ $trigger }}.window="openModal($event.detail.id)" 
-@delete-success.window="openDelete = false">
+}" x-on:{{ $trigger }}.window="openModal($event.detail.id)"
+    @delete-success.window="openDelete = false">
 
 
 
@@ -64,8 +60,8 @@ x-on:{{ $trigger }}.window="openModal($event.detail.id)"
                     </button>
 
                     @if (!$errorMessage)
-                        <x-ui.button type="button" wire:click="{{ $action }}(itemId)" label="Hapus" variant="delete" icon="trash"
-                            :loading-target="$action" />
+                        <x-ui.button type="button" wire:click="{{ $action }}(itemId)" label="Hapus"
+                            variant="delete" icon="trash" :loading-target="$action" />
                     @endif
                 </div>
             </div>

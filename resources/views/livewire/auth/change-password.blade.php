@@ -49,7 +49,7 @@
 
     <div class="mt-8 text-center border-t border-gray-100 pt-6">
         <p class="text-gray-500 text-xs uppercase tracking-tight">
-            Belum punya akun?
+            Belum ingin ganti password?
             <a href="{{ route('user.profile') }}" wire:navigate
                 class="text-blue-500 font-black hover:underline ml-1">Kembali</a>
         </p>
