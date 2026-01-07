@@ -111,7 +111,7 @@ class Index extends Component
 
 
     $products = $query->orderBy('created_at', $direction)
-      ->paginate(12);
+      ->paginate(15);
 
     // Load specs untuk produk yang sudah di-paginate saja
     $products->load(['variants.specs:id,id_variant,harga,stok']);
